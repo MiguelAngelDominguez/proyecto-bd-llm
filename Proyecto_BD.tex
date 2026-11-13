@@ -1,0 +1,934 @@
+% =====================================================================
+%  PROYECTO DE BASE DE DATOS I  --  LABORATORIO 12
+%  Conversion fiel de 'Proyecto BD.docx'
+%
+%  COMPILADOR: funciona con pdfLaTeX, XeLaTeX y LuaLaTeX.
+%    - XeLaTeX/LuaLaTeX -> Times New Roman real del sistema
+%    - pdfLaTeX        -> Times equivalente via newtxtext (o mathptmx)
+%  En Overleaf: Menu -> Configuracion -> Compilador (cualquiera de los 3).
+%
+%  Fuente: Times New Roman | Cuerpo 12pt justificado | A4 margenes 2.54cm
+%  Titulos 12pt NO negrita con numeracion multinivel (1. / 1.1. / 1.1.1.)
+%  UNICA omision: el parrafo "En el contexto del modelado de datos..."
+%  (pedido expresamente). Todo lo demas es identico al .docx
+% =====================================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[margin=2.54cm]{geometry}
+
+% --- fuente: igual en los tres motores ---------------------------------
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \IfFileExists{newtxtext.sty}{\usepackage{newtxtext}}{\usepackage{mathptmx}}
+\else
+  \usepackage{fontspec}
+  \setmainfont{Times New Roman}
+\fi
+
+\usepackage[spanish,es-noshorthands]{babel}
+
+% babel-spanish convierte "1." en "1.o" (ordinal masculino). Eso corromperia
+% los 33 numeros de titulo ("1.", "1.1.", "3.2.4.1.") y las 10 listas
+% numeradas. Se neutraliza solo si el comando existe (no rompe si no hay).
+\makeatletter
+\@ifundefined{spanishordinal}{}{\renewcommand{\spanishordinal}{}}
+\@ifundefined{spanishsuperordinal}{}{\renewcommand{\spanishsuperordinal}{}}
+\makeatother
+
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+
+% --- cuerpo: 12pt, justificado, sangria 1.27cm, interlinea 1.15 -------
+\setlength{\parindent}{1.27cm}
+\setlength{\parskip}{0pt}
+\setstretch{1.15}
+
+% --- paginacion: el .docx NO tiene header/footer (no hay header1.xml ni
+% footer1.xml en el ZIP), asi que no muestra numeros de pagina.
+% Para verlos: cambia \pagestyle{empty} por \pagestyle{plain}.
+\pagestyle{empty}
+
+% --- titulos: 12pt, NO negrita, negro, con punto final ----------------
+% Word: Heading2/H3 declaran bold y 16/14pt, pero cada run sobrescribe
+% sz=24 (12pt) y los estilos llevan <w:b w:val="0"/> => 12pt normal.
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\makeatletter
+\renewcommand{\theparagraph}{\thesubsubsection.\@arabic\c@paragraph}
+\makeatother
+\setcounter{secnumdepth}{4}
+
+% Word usa sangria francesa: numero a 0.635cm, texto a 1.27cm (izq) /
+% 2.54cm / 3.81cm / 5.08cm segun el nivel. Con shape 'hang' el numero queda
+% a la izquierda del margen del bloque y el texto arranca en el margen.
+\titleformat{\section}[hang]{\normalfont\normalsize}
+{\thesection.}{0pt}{}
+\titleformat{\subsection}[hang]{\normalfont\normalsize}
+{\thesubsection.}{0pt}{}
+\titleformat{\subsubsection}[hang]{\normalfont\normalsize}
+{\thesubsubsection.}{0pt}{}
+\titleformat{\paragraph}[hang]{\normalfont\normalsize}
+{\theparagraph.}{0pt}{}
+
+\titlespacing*{\section}{1.27cm}{0pt}{0pt}
+\titlespacing*{\subsection}{2.54cm}{0pt}{0pt}
+\titlespacing*{\subsubsection}{3.81cm}{0pt}{0pt}
+\titlespacing*{\paragraph}{5.08cm}{0pt}{0pt}
+
+% --- listas: vinetas nivel 0/1/2 y numeros 1. -------------------------
+% Word usa discinto (nivel 0), circulo (nivel 1) y cuadrado (nivel 2).
+% El cuadrado se dibuja con \rule para no depender de amssymb.
+\setlist[itemize,1]{label=\textbullet,leftmargin=1.27cm,nosep}
+\setlist[itemize,2]{label=$\circ$,leftmargin=1.27cm,nosep}
+\setlist[itemize,3]{label=\raisebox{0.15ex}{\rule{0.55ex}{0.55ex}},leftmargin=1.27cm,nosep}
+\setlist[enumerate,1]{label=\arabic*.,leftmargin=1.27cm,nosep}
+\setlist[enumerate,2]{label=\alph*.,leftmargin=1.27cm,nosep}
+
+% --- tablas: rejilla completa como Word (single sz=8) ----------------
+\setlength{\tabcolsep}{5pt}
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{0pt}
+\renewcommand{\arraystretch}{1.0}
+
+% --- indice ----------------------------------------------------------
+\setcounter{tocdepth}{3}
+
+\begin{document}
+
+% ---- PORTADA (14pt, centrado, no negrita) -------------------------------------
+\begin{titlepage}
+\centering\fontsize{14}{18}\selectfont
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+PROYECTO DE BASE DE DATOS I \\
+LABORATORIO 12 \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+PROFESOR: \\
+Wilder Nina Choquehuayta \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+TEMA: \\
+Entrenamiento de Modelos LLM/IA Generativa: \\
+Modelos LLM, Datasets de entrenamiento, Experimentos/runs, Consumo de GPUs y Evaluaciones de benchmark \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+INTEGRANTES: \\
+Dominguez Valentin, Miguel Angel \\
+Calsina Gutierrez, Treicy Rubi \\
+Talavera Pinto, Martin Gabriel \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}
+\end{titlepage}
+
+% ---- INDICE --------------------------------------------------------------
+\begin{center}\textbf{INDICE}\end{center}
+\vspace{0.5\baselineskip}
+\tableofcontents
+\newpage
+
+\addcontentsline{toc}{section}{Requisitos}
+\section{Requisitos}
+
+\addcontentsline{toc}{subsection}{Introducción}
+\subsection{Introducción}
+
+Una base de datos es un sistema destinado al almacenamiento y la gestión de datos, que comprende tanto el hardware físico en el que se almacenan los datos como el software que los organiza y controla el acceso a los mismos.
+
+Los modelos de lenguaje grande (LLM) son una categoría de modelos de aprendizaje profundo entrenados con inmensas cantidades de datos, lo que los hace capaces de comprender y generar lenguaje natural y otros tipos de contenido para realizar una amplia gama de tareas. Los LLM se basan en un tipo de arquitectura de redes neuronales llamada transformador que se destaca en el manejo de secuencias de palabras y la captura de patrones en el texto.
+
+El entrenamiento comienza con una gran cantidad de datos: miles de millones o billones de palabras de libros, artículos, sitios web, código y otras fuentes de texto. Los científicos de datos supervisan la limpieza y el preprocesamiento para eliminar errores, duplicaciones y contenido no deseado.
+
+
+\addcontentsline{toc}{subsection}{Descripción general del problema/organización/empresa}
+\subsection{Descripción general del problema/organización/empresa}
+
+\noindent Los datos de entrenamiento es un conjunto de datos de información que se utiliza para enseñar a un modelo de aprendizaje automático a realizar predicciones, reconocer patrones o generar contenido. Mediante el procesamiento de una gran cantidad de datos, se considera que un modelo está ``entrenado'' cuando consigue reconocer relaciones y características relevantes, hasta alcanzar un nivel de entrenamiento listo para utilizarse en numerosas aplicaciones.
+
+El mayor desafío al que nos enfrentamos está relacionado con el uso de modelos basados en un lenguaje no supervisado. Mientras que el aprendizaje supervisado resulta útil para establecer correspondencias entre entradas y salidas, el aprendizaje no supervisado es más adecuado para encontrar patrones, estructuras y relaciones dentro de los propios datos, sin ninguna orientación sobre qué buscar. Esto permite identificar patrones, estructuras y relaciones que pueden no ser evidentes a simple vista. Por el contrario, su funcionamiento autónomo también representa un desafío, al necesitar los resultados obtenidos una correcta interpretación y supervisión para garantizar que sean relevantes y confiables.
+
+
+\addcontentsline{toc}{subsection}{Necesidad/usos de la base de datos}
+\subsection{Necesidad/usos de la base de datos}
+
+Cuando un LLM recibe una consulta de un usuario, utiliza representaciones codificadas para buscar documentos o fragmentos relevantes en una base de datos vectorial. Estos resultados, seleccionados por su similitud vectorial con la entrada, se devuelven al LLM, que los sintetiza en una respuesta bien fundamentada y contextualmente precisa.
+
+Las bases de datos vectoriales permiten a los modelos de lenguaje grande (LLM) realizar búsquedas semánticas, en las que tanto las consultas como el contenido se transforman en representaciones vectoriales. El LLM codifica la solicitud del usuario y la base de datos vectorial encuentra los elementos con las representaciones vectoriales que más se ajustan a ella, independientemente de las palabras clave, lo que permite el descubrimiento basado en el significado y la intención reales.
+
+\addcontentsline{toc}{subsection}{¿Cómo resuelve el problema hoy?}
+\subsection{¿Cómo resuelve el problema hoy?}
+
+\addcontentsline{toc}{subsubsection}{¿Cómo se almacenan/procesan los datos hoy?}
+\subsubsection{¿Cómo se almacenan/procesan los datos hoy?}
+
+Actualmente, la información asociada a los experimentos de entrenamiento puede encontrarse distribuida entre diferentes archivos y registros generados durante las ejecuciones. Por ejemplo, la información de los modelos y datasets puede mantenerse en archivos estructurados, mientras que los datos relacionados con el consumo de GPUs y los resultados de evaluación pueden encontrarse en registros independientes.
+
+Este enfoque dificulta relacionar de manera eficiente un experimento con el modelo utilizado, los datasets empleados, las GPUs consumidas y los resultados obtenidos en los benchmarks.
+
+La base de datos propuesta permitirá integrar esta información mediante relaciones entre entidades, facilitando su consulta, actualización y análisis.
+
+\addcontentsline{toc}{subsubsection}{Flujo de datos}
+\subsubsection{Flujo de datos}
+
+El flujo de datos comienza con la disponibilidad de los datasets que serán utilizados para entrenar un modelo LLM. El investigador elige un dataset, almacenado como archivo local o en un repositorio como Hugging Face, y define la configuración del experimento en un archivo de configuración (YAML/JSON) que no queda formalmente registrado.
+
+Durante el run de entrenamiento, el consumo de GPU se observa mediante herramientas como nvidia-smi o paneles de proveedores cloud, y estas métricas rara vez se guardan junto con los demás metadatos del experimento.
+
+Al finalizar, el modelo entrenado se guarda como checkpoint en disco, y su evaluación mediante benchmarks se ejecuta con scripts independientes (p. ej. lm-eval-harness), cuyos resultados suelen consolidarse manualmente en hojas de cálculo para poder compararlos entre runs.
+
+\addcontentsline{toc}{subsection}{Descripción detallada del sistema}
+\subsection{Descripción detallada del sistema}
+
+\addcontentsline{toc}{subsubsection}{Objetos de información actuales}
+\subsubsection{Objetos de información actuales}
+
+La información relacionada con el entrenamiento y evaluación de modelos LLM se encuentra actualmente distribuida en diferentes archivos y registros, como archivos de configuración, registros de ejecuciones, información sobre el consumo de GPU y hojas de cálculo utilizadas para consolidar los resultados de los benchmarks. Esta información será recopilada y organizada para ser incorporada a la base de datos propuesta.
+
+
+Adicionalmente, como parte del desarrollo del proyecto, se generarán datos mediante scripts para realizar pruebas de consultas y evaluar el comportamiento de la base de datos en diferentes volúmenes. Los escenarios considerados serán de 1\,000 (mil) datos, 10\,000 (diez mil) datos, 100\,000 (cien mil) datos y 1\,000\,000 (un millón) de datos almacenados en la base de datos.
+
+\addcontentsline{toc}{subsubsection}{Características y funcionalidades esperadas}
+\subsubsection{Características y funcionalidades esperadas}
+
+{\begin{itemize}
+  \item Registrar modelos LLM: Guardar en el sistema de información: la información, el nombre, la arquitectura, la versión, los parámetros, etc.
+  \item Registrar datasets: Registra conjuntos de datos en lugar de datos sueltos.
+  \item Registrar experimentos de entrenamiento: Cada vez que se entrena un modelo. Este queda registrado con hiperparametros, configuración, fecha; entre otros.
+  \item Asociar datasets con experimentos: Se vinculan que datasets se usaron para cada experimento.
+  \item Registrar el uso de GPUs: Se mapea los GPUs usados para determinar si se están desperdiciando recursos.
+  \item Registrar resultados de benchmarks: Guardar las métricas de evaluación de cada modelo o experimento para compararlos objetivamente.
+  \item Consultar el rendimiento de los modelos: Poder hacer búsquedas y consultar su rendimiento dependiendo de los benchmarks, latencia u otro parámetro.
+  \item Comparar diferentes runs: Vista comparativa lado a lado de varios entrenamientos para notar los cambios, mejoras y deficiencias.
+  \item Analizar el consumo de recursos: Reportes de uso para identificar las ineficiencias.
+  \item Consultar costos estimados de entrenamiento: Plantear un presupuesto y costo estimado óptimo para el desarrollo de un modelo
+\end{itemize}
+}
+
+\addcontentsline{toc}{subsubsection}{Tipos de usuarios existentes/necesarios}
+\subsubsection{Tipos de usuarios existentes/necesarios}
+
+\noindent Las consultas a analizar están relacionadas con las necesidades de investigadores y analistas que utilizan la plataforma de entrenamiento. Las principales consultas identificadas son las siguientes:
+{\begin{enumerate}
+  \item \textbf{Administrador:} gestiona toda la información de la base de datos.
+  \item \textbf{Investigador:} registra y consulta experimentos y resultados.
+  \item \textbf{Analista:} consulta y analiza el rendimiento de los modelos.
+\end{enumerate}
+}
+
+\addcontentsline{toc}{subsubsection}{Tipos de consulta, actualizaciones}
+\subsubsection{Tipos de consulta, actualizaciones}
+
+La base de datos deberá permitir realizar diferentes tipos de consultas relacionadas con el entrenamiento y evaluación de modelos LLM.
+
+\textbf{Consultas sobre Organización}
+{\begin{enumerate}
+  \item ¿Cuáles son los costos estimados que debe asumir una organización que desea desarrollar, entrenar y probar un modelo LLM?
+  \item ¿En qué medida el rendimiento de un modelo LLM está determinado por la organización que lo desarrolla?
+  \item ¿Qué diferencias metodológicas existen entre las evaluaciones que realizan las propias organizaciones desarrolladoras y las que realizan terceros independientes?
+\end{enumerate}
+}
+
+\textbf{Consultas sobre los Modelos}
+{\begin{enumerate}
+  \item ¿Qué modelos LLM se encuentran registrados y cuáles son sus características principales?
+  \item ¿Qué modelo tiene la mayor cantidad de parámetros dentro de una misma arquitectura?
+  \item ¿Qué modelos fueron utilizados en un conjunto determinado de experimentos?
+\end{enumerate}
+}
+
+\textbf{Consultas sobre los Datasets}
+{\begin{enumerate}
+  \item ¿Qué datasets están disponibles y cuáles son sus características (dominio, tamaño, número de registros)?
+  \item ¿Qué datasets fueron utilizados en un experimento o conjunto de experimentos determinado?
+  \item ¿Cuál es el dataset con mayor número de registros por dominio temático?
+\end{enumerate}
+}
+
+\textbf{Consultas sobre los Entrenamientos}
+{\begin{enumerate}
+  \item ¿Cuáles son los experimentos que se encuentran actualmente en ejecución o que finalizaron con error?
+  \item ¿Cuál fue la duración promedio de los experimentos realizados sobre un modelo determinado?
+  \item ¿Qué experimentos, ejecutados con distintos hiperparámetros sobre el mismo modelo, obtuvieron el menor loss final?
+\end{enumerate}
+}
+
+\textbf{Consultas sobre los recursos del GPU}
+{\begin{enumerate}
+  \item ¿Qué GPUs fueron utilizadas en un experimento determinado?
+  \item ¿Cuál es el consumo total de horas de GPU y el costo asociado por experimento?
+  \item ¿Qué GPU presenta el mayor costo por hora de uso acumulado en todos los experimentos?
+\end{enumerate}
+}
+
+\textbf{Consultas sobre }\textbf{Benchmarks}
+{\begin{enumerate}
+  \item ¿Qué resultados de benchmark obtuvo un modelo determinado?
+  \item ¿Qué modelo obtuvo el mejor puntaje (score) en un benchmark específico?
+  \item ¿Qué experimentos, evaluados sobre el mismo benchmark, muestran mejoras respecto a ejecuciones anteriores del mismo modelo?
+\end{enumerate}
+}
+
+\noindent \textbf{Consultas sobre Evaluación}
+{\begin{enumerate}
+  \item ¿Qué modelo obtuvo la mayor tasa de acierto en cada uno de los benchmarks considerados?
+  \item ¿Qué diferencias metodológicas existen entre las evaluaciones publicadas por diferentes organizaciones en sus leaderboards?
+  \item ¿Qué diferencias se observan en las cadenas de razonamiento entre modelos de distintas organizaciones al resolver el mismo conjunto de preguntas?
+\end{enumerate}
+}
+
+\noindent \textbf{Consultas sobre ItemBenchmark}
+{\begin{enumerate}
+  \item ¿Cuál es la distancia semántica promedio entre la respuesta generada y la respuesta de referencia, y cómo se distribuye esa distancia en preguntas correctas vs. incorrectas?
+  \item ¿Cómo varía la longitud, el tono afectivo y la tasa de acierto de la respuesta según el tipo de pregunta (abierta vs. opción múltiple vs. sí/no)?
+  \item ¿Cómo se distribuye la dificultad de las preguntas según la tasa de acierto promedio de los modelos evaluados, el número de opciones, y la necesidad de razonamiento?
+\end{enumerate}
+}
+
+\noindent \textbf{Consultas sobre RespuestaModelo}
+{\begin{enumerate}
+  \item ¿Qué preguntas registraron el mayor tiempo de respuesta para cada modelo evaluado, y qué características comparten?
+  \item ¿Cuántos tokens de entrada y de salida consumió un modelo LLM al responder una pregunta de un benchmark establecido, comprando los tokens de razonamiento vs. tokens de respuesta final?
+  \item ¿Qué relación existe entre la formulación de la pregunta y el tono de la respuesta generada, controlando por modelo?
+\end{enumerate}
+}
+
+\addcontentsline{toc}{subsubsection}{Tamaño estimado de la base de datos}
+\subsubsection{Tamaño estimado de la base de datos}
+
+Se considera que la etapa de ``experimentación y optimización'' debe realizarse utilizando 5 consultas de nivel intermedio no triviales previamente propuestas. Dichas consultas se deben realizar en cuatro contextos de:
+{\begin{itemize}
+  \item 1\,000 datos (mil)
+  \item 10\,000 datos (diez mil)
+  \item 100\,000 datos (cien mil)
+  \item 1\,000\,000 datos (un millón)
+\end{itemize}
+}
+
+\noindent Para cada escenario se deberá contar con una versión de la base de datos correspondiente al tamaño indicado. Por ende, al final de cada etapa, se deberán disponer de 4 dumps de la base de datos, uno por cada volumen de registros, con la finalidad de realizar pruebas y comparar el comportamiento y rendimiento de las consultas a medida que aumenta el tamaño de registros almacenados.
+
+
+\addcontentsline{toc}{subsection}{Objetivos del proyecto}
+\subsection{Objetivos del proyecto}
+
+Diseñar e implementar una base de datos relacional en PostgreSQL que permita gestionar de manera estructurada el proceso de entrenamiento y evaluación de modelos de lenguaje grande (LLM) y sistemas de inteligencia artificial generativa, registrando información relacionada con modelos, datasets, experimentos de entrenamiento, recursos de cómputo GPU y evaluaciones de rendimiento mediante benchmarks. Tomando como medidas de progreso:
+
+{\begin{itemize}
+  \item Modelar la información de los modelos LLM y sus características.
+  \item Registrar los datasets utilizados en los entrenamientos.
+  \item Registrar los experimentos, hiper parámetros y estados de entrenamiento.
+  \item Registrar el consumo de GPU y otros recursos utilizados.
+  \item Registrar las evaluaciones de los modelos mediante benchmarks.
+\end{itemize}
+}
+
+\addcontentsline{toc}{subsection}{Referencias del Proyecto}
+\subsection{Referencias del Proyecto}
+{\begin{itemize}
+  \item PostgreSQL Guide: Documentación y guía de referencia utilizada para la implementación y gestión de la base de datos en PostgreSQL.
+  \item Ramakrishnan, R., \& Gehrke, J. (2003). Database Management Systems (3rd ed.). McGraw-Hill Companies.
+\end{itemize}
+}
+
+\addcontentsline{toc}{subsection}{Eventualidades}
+\subsection{Eventualidades}
+
+\addcontentsline{toc}{subsubsection}{Problemas que pudieran encontrarse en el proyecto}
+\subsubsection{Problemas que pudieran encontrarse en el proyecto}
+
+Durante el desarrollo pueden presentarse problemas como datos incompletos, inconsistencias en los registros y tiempos elevados de respuesta al trabajar con grandes volúmenes de información. También puede ser necesario generar datos sintéticos para realizar las pruebas de rendimiento. Además se tiene que tomar en cuenta la capacidad de procesamiento del hardware en el que se almacena el LLM.
+
+\addcontentsline{toc}{subsubsection}{Límites y alcances del proyecto}
+\subsubsection{Límites y alcances del proyecto}
+
+El proyecto se enfocará en registrar y analizar información sobre modelos LLM, datasets, ejecuciones de entrenamiento, consumo de GPU y evaluaciones de benchmarks. No se almacenarán los modelos ni datasets completos, sino sus principales metadatos.
+
+\addcontentsline{toc}{section}{Modelo Entidad-Relación}
+\section{Modelo Entidad-Relación}
+
+%% --- diagrama Entidad-Relacion (2048x1204 px) ---
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{Modelo E-R.png}
+    \caption{Modelo ER}
+    \label{fig:placeholder}
+\end{figure}
+
+\addcontentsline{toc}{subsection}{Reglas semánticas}
+\subsection{Reglas semánticas}
+{\begin{itemize}
+  \item Un Modelo LLM es entrenado en el contexto de uno o más Experimentos; cada Experimento entrena exactamente un Modelo LLM.
+  \item Un Experimento utiliza uno o más Datasets; un Dataset puede ser utilizado por cero o más Experimentos.
+  \item Un Experimento consume una o más GPUs; una GPU puede ser utilizada en cero o más Experimentos. Por cada uso, se debe registrar la cantidad de horas de utilización y el consumo energético estimado de esa asignación particular (no de la GPU en general, ya que una misma GPU puede usarse en múltiples experimentos con duraciones distintas).
+  \item Un Experimento, al finalizar, es evaluado mediante uno o más Benchmarks; un Benchmark puede evaluar a cero o más Experimentos. Cada evaluación produce un resultado (valor, métrica y fecha) propio de ese par Experimento--Benchmark, ya que el mismo benchmark aplicado a experimentos distintos produce valores distintos.
+  \item Cada entidad se identifica de forma única mediante su llave primaria (idModelo, idDataset, idRun, idGpu, idBenchmark).
+\end{itemize}
+}
+
+% --- tabla 171: 10 filas x 3 cols, 11pt ---
+\fontsize{11}{12}\selectfont
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.55cm}|>{\raggedright\arraybackslash}p{6.88cm}|>{\raggedright\arraybackslash}p{4.43cm}|}
+\hline
+Entidad & Atributos & Descripción y Rol \\
+\hline
+Organización & idOrganizacion (PK), nombre, pais, tipo \newline (Creador/Evaluador/Ambos), fechaFundacion & Especificar la empresa encargada del desarrollo, entrenamiento y testeo de los modelo LLM \\
+\hline
+Modelo LLM & idModelo (PK), nombre, version, arquitectura, tipoModelo, numParam, longitudToken, tipoToken, estado, idOrganizaion, idModeloBase & Es un modelo de language diseñado para realizar tareas basado en texto \\
+\hline
+Dataset & idDataset (PK), idModelo (FK), nombre, version, faseUso, dominio, formatoDatos, tamanio, numRegistros, licencia, fuenteOrigen & Un conjunto de Datos ordenado y agrupado para entrenar a un modelo computacional \\
+\hline
+Experimento / Run & idRun (PK), nombre, idModelo, tipoEntrenamiento, optimizador, precisionCalculo, numEpocas, tamBatch, tasaAprendizaje, estadoEjecucion, fechaInicio, fechaFin, segundos, lossFinal & Es un conjunto de pruebas que se le plantea a un modelo LLM en base a un Dataset. \\
+\hline
+GPU & idGpu (PK), modeloGpu, fabricante, proveedorCloud, memoriaVRAM, numNucleos, costoPorHora & Componente físico del hardware donde se entrena el modelo LLM. \\
+\hline
+Benchmark & idBenchmark (PK), nombre, version, categoria, metodo, numItems, descripcion & Logros obtenidos por el modelo LLM durante la fase de prueba y entrenamiento. \\
+\hline
+Evaluación & idEvaluacion (PK), idModelo (FK), idBenchmark (FK), idOrganizacionEvaluadora (FK), fechaEvaluacion, resultadoMetrica & Un exámen designado para evaluar a un modelo su tasa de aprendizaje. \\
+\hline
+ItemBenchmark & idItem (PK), idBenchmark (FK), promptPregunta, respuestaEsperada & Pregunta planteada dentro de una evaluación \\
+\hline
+RespuestaModelo & idRespuesta (PK), idEvaluacion (FK), idItem (FK), outputGenerado, esCorrecta, \newline tokensOutput, latencia & Comparativa entre la respuesta del modelo y la esperada por los evaluadores \\
+\hline
+\end{longtable}
+\normalsize
+
+
+
+
+\addcontentsline{toc}{subsection}{Modelo Entidad-Relación}
+\subsection{Modelo Entidad-Relación}
+
+\addcontentsline{toc}{subsection}{Especificaciones y consideraciones sobre el modelo}
+\subsection{Especificaciones y consideraciones sobre el modelo}
+
+\noindent 2.3.1 Entidad Organización
+{\begin{itemize}
+  \item Especificaciones: Grupo de investigadores que se encargan de investigar, desarrollar y entrenar un Modelo LLM
+  \item Consideraciones: La llave primaria seleccionada es el id.
+\end{itemize}
+}
+
+\noindent 2.3.2. Entidad Modelo LLM
+{\begin{itemize}
+  \item Especificaciones: Representa los metadatos de los modelos de lenguaje entrenados.
+  \item Consideraciones: La llave principal es el id del modelo, si bien es cierto que pueden diferentes modelos todos tienen un procesamiento distinto.
+\end{itemize}
+}
+
+\noindent 2.3.3. Entidad Dataset
+{\begin{itemize}
+  \item Especificaciones: Almacena los metadatos de los conjuntos de datos empleados
+  \item Consideraciones: La llave principal es el id del Dataset. Se pueden usar varios Dataset para un Experimento.
+\end{itemize}
+}
+
+\noindent 2.3.4. Entidad Experimento
+{\begin{itemize}
+  \item Especificaciones: Almacena las ejecuciones (runs) de entrenamiento realizadas
+  \item Consideraciones: La llave principal es el código de id del experimento
+\end{itemize}
+}
+
+\noindent 2.3.5. Entidad GPU
+{\begin{itemize}
+  \item Especificaciones: Representa la infraestructura de cómputo gráfico utilizada
+  \item Consideraciones: La llave principal es el id del GPU. Se puede usar mas de un GPU en un experimento
+\end{itemize}
+}
+
+\noindent 2.3.6. Entidad Benchmark
+{\begin{itemize}
+  \item Especificaciones: Comparación entre las pruebas estandarizadas de evaluación de rendimiento.
+  \item Consideraciones: La llave principal es el id del Benchmark. Hay diferentes Benchmarks pedendiendo del modelo y los objetivos
+\end{itemize}
+}
+
+\noindent 2.3.7. Entidad Evaluación
+{\begin{itemize}
+  \item Especificaciones: Evaluzaicon que se le hace a un modelo LLM
+  \item Consideraciones: La llave principal es el id de la evaluacion. Puede haber mas de una evaluzaicon a la vez
+\end{itemize}
+}
+
+\noindent 2.3.8. Entidad ItemBenchmark
+{\begin{itemize}
+  \item Especificaciones: Es una pregunta del examen de Evaluacion
+  \item Consideraciones: La llave principal es el id del Item. Las preguntas pueden llegar a ser similares despues de varios experimentos
+\end{itemize}
+}
+
+\noindent 2.3.9. Entidad RespuestaModelo
+{\begin{itemize}
+  \item Especificaciones: Respuesta concreta de un Modelo LLM a una o varias preguntas de ItemBenchmark dentro de evaluacion.
+  \item Consideraciones: La llave principal es el id de la Respuesta. El modelo puede devolver diferentes respuestas a una sola pregunta
+\end{itemize}
+}
+
+El modelo entidad-relación representa los principales elementos del proceso de entrenamiento y evaluación de modelos LLM: modelos, ejecuciones, datasets, GPU y benchmarks, junto con sus respectivos atributos.
+
+La entidad Modelo LLM almacena características como nombre, versión, arquitectura y cantidad de parámetros. Run representa cada ejecución de entrenamiento y registra sus parámetros, fechas y estado. Dataset contiene información sobre los datos utilizados, mientras que GPU representa los recursos computacionales empleados. Finalmente, Benchmark permite registrar información relacionada con la evaluación de los modelos.
+
+Las relaciones del modelo representan cómo estos elementos interactúan durante el proceso de entrenamiento. Además, se consideran restricciones para mantener la consistencia de los datos, como identificadores únicos, valores numéricos válidos y fechas coherentes entre el inicio y finalización de los entrenamientos.
+
+Esto encaja con lo que pide el proyecto para el modelo E/R: contextualizar la base, indicar las llaves y considerar multiplicidad, participación y restricciones.
+
+\addcontentsline{toc}{section}{Modelo Relacional}
+\section{Modelo Relacional}
+
+\addcontentsline{toc}{subsection}{Modelo Relacional}
+\subsection{Modelo Relacional}
+{\begin{itemize}
+  \item Modelo LLM(idModelo, nombre, version, arquitectura, tipoModelo, numParam, longitudToken, tipoToken, estado)
+  \item Dataset(idDataset, nombre, version, faseUso, dominio, formatoDatos, tamanio, numRegistros, licencia, fuenteOrigen)
+  \item Experimento(idRun, nombre, idModelo, tipoEntrenamiento, optimizador, precisionCalculo, numEpocas, tamBatch, tasaAprendizaje, estadoEjecucion, fechaInicio, fechaFin, segundos, lossFinal)
+  \item GPU(idGPU, modeloGPU, fabricante, proveedorCloud, memoriaVRAM, numNucleos, costoPorHora)
+  \item Benchmark(idBenchmark, nombre, version, categoria, metodo, numItems, descripcion)
+  \item Evaluación(idEvaluacion, ModeloLLM.idModelo, Benchmark.idBenchmark, idOrganizacionEvaluadora FK, fechaEvaluacion, resultadoMetrica)
+  \item ItemBenchmark(idItem, Benchmark.idBenchmark, promptPregunta, respuestaEsperada)
+  \item RespuestaModelo(idRespuesta, Evaluacion.idEvaluacion, ItemBenchmark.idItem, outputGenerado, esCorrecta, tokensOutput, latencia)
+\end{itemize}
+}
+
+\addcontentsline{toc}{subsection}{Especificaciones de transformación}
+\subsection{Especificaciones de transformación}
+
+\addcontentsline{toc}{subsubsection}{Entidades}
+\subsubsection{Entidades}
+
+Cada entidad fuerte del Modelo Entidad-Relación se convierte en una tabla (relación) independiente dentro del Modelo Relacional. Los atributos simples se transforman en columnas y el atributo identificador único se define como la Clave Primaria (PK):
+{\begin{itemize}
+  \item Organización
+  \item Modelo LLM:
+  \begin{itemize}
+  \item Clave Primaria (PK): idModelo
+  \item Atributos: nombre, version, arquitectura, tipoModelo, numParam, longitudToken, tipoToken, estado
+  \end{itemize}
+  \item Experimento:
+  \begin{itemize}
+  \item Clave Primaria (PK): idRun
+  \item Atributos: nombre, tipoEntrenamiento, optimizador, precisionCalculo, numEpocas, tamBatch, tasaAprendizaje, estadoEjecucion, fechaInicio, fechaFin, segundos, lossFinal
+  \end{itemize}
+  \item Dataset:
+  \begin{itemize}
+  \item Clave Primaria (PK): idDataset
+  \item Atributos: nombre, version, faseUso, dominio, formatoDatos, tamanio, numRegistros, licencia, fuenteOrigen
+  \end{itemize}
+  \item GPU:
+  \begin{itemize}
+  \item Clave Primaria (PK): idGPU
+  \item Atributos: modeloGPU, fabricante, proveedorCloud, memoriaVRAM, numNucleos, costoPorHora
+  \end{itemize}
+  \item Benchmark:
+  \begin{itemize}
+  \item Clave Primaria (PK): idBenchmark
+  \item Atributos: nombre, version, categoria, metodo, numItems, descripcion
+  \end{itemize}
+  \item Evaluacion: Un examen entre las preguntas del Benchmark a un modelo LLM específico.
+  \begin{itemize}
+  \item Clave Primaria (PK): idEvaluacion
+  \item Atributos: ModeloLLM.idModelo, Benchmark.idBenchmark, idOrganizacionEvaluadora FK, fechaEvaluacion, resultadoMetrica
+  \end{itemize}
+  \item ItemBenchmark:
+  \begin{itemize}
+  \item Clave Primaria (PK): idItem
+  \item Atributos: Benchmark.idBenchmark, promptPregunta, respuestaEsperada
+  \end{itemize}
+  \item RespuestaModelo:
+  \begin{itemize}
+  \item Clave Primaria (PK): idRespuesta
+  \item Atribautos: Evaluacion.idEvaluacion, ItemBenchmark.idItem, outputGenerado, esCorrecta, tokensOutput, latencia
+\end{itemize}
+\end{itemize}
+}
+
+\addcontentsline{toc}{subsubsection}{Entidades débiles}
+\subsubsection{Entidades débiles}
+
+Ninguna: No existen entidades débiles en el modelo conceptual que requieran dependencia de existencia respecto a otra entidad.
+
+\addcontentsline{toc}{subsubsection}{Entidades superclase/subclases}
+\subsubsection{Entidades superclase/subclases}
+
+Ninguna: El dominio del problema no contempla relaciones de herencia, especialización ni generalización.
+
+\addcontentsline{toc}{subsubsection}{Relaciones binarias}
+\subsubsection{Relaciones binarias}
+
+\paragraph{Relaciones 1:N (Uno a Muchos):}
+
+Modelo LLM $\rightarrow$ Dataset (""): La clave primaria del lado 1 (idModelo en Modelo\_LLM) se propaga como Clave Foránea (FK) hacia la tabla del lado N (Dataset).
+
+Resultado: Dataset añade el atributo idModelo (FK) que referencia a Modelo\_LLM(idModelo).
+
+Modelo LLM $\rightarrow$ Evaluacion (``evalua''): La clave primaria del lado 1 (idModelo en Modelo LLM) se propaga como Clave Foránea (FK) hacia la tabla del lado N (Evaluación)
+
+Resultado: Evaluación añade el atributo idModelo (FK) que referencia a Modelo\_LLM(idModelo).
+
+Benchmark $\rightarrow$ Evaluacion (``usa''): La clave primaria del lado 1 (idBenchmark en Benchmark) se propaga como Clave Foránea (FK) hacia la tabla del lado N (Evaluación)
+
+Resultado: Evaluacion añade el atributo idBnechmark (FK) que referencia a Benchmark(idBenchmark).
+
+Benchmark $\rightarrow$ ItemBenchmark (``contiene''): La clave primaria del lado 1 (idBenchmark en Benchmark) se propaga como Clave Foránea (FK) hacia la tabla del lado N (ItemBenchmark)
+
+Resultado: ItemBenchmark añade el atributo idBenchmark (FK) que referencia Benchmark(idBenchmark).
+
+Evaluacion $\rightarrow$ RespuestaModelo(``genera''): La llave primaria del lado 1 (idEvaluacion en Evaluación) se propaga como Clave Foránea (FK) hacia la tabla del lado N (RespuestaModelo)
+
+Resultado: RespuestaModelo añade el atributo idEvaluacion (FK) que referencia a Evaluacion(idEvaluacion).
+
+ItemBenchmark $\rightarrow$ RespuestaModelo (``''): La clave primaria del lado 1 (idItem en ItemBenchmark) se propaga como Clave Foránea (FK) hacia la tabla del lado N (RespuestaModelo)
+
+Resultado: RespuestaModelo añade el atributo idItem (FK) que referencia a ItemBenchmark(idItemBenchmark).
+
+\addcontentsline{toc}{paragraph}{Relaciones M:N (Muchos a Muchos)}
+\paragraph{Relaciones M:N (Muchos a Muchos)}
+
+Las relaciones M:N se transforman en tablas intermedias o asociativas. Su clave primaria estará formada por la combinación de las claves primarias de las entidades asociadas, actuando a su vez como claves foráneas (FK).
+{\begin{itemize}
+  \item Experimento $\rightarrow$ Dataset ("utiliza"):
+\end{itemize}
+}
+{\begin{itemize}
+  \item Tabla intermedia: Experimento\_Dataset
+  \item Atributos: idRun (FK a Experimento), idDataset (FK a Dataset)
+  \item Clave Primaria Compuesta (PK): (idRun, idDataset)
+\end{itemize}
+}
+{\begin{itemize}
+  \item Experimento $\rightarrow$ GPU ("procesa"):
+\end{itemize}
+}
+{\begin{itemize}
+  \item Tabla intermedia: Consumo\_GPU
+  \item Atributos: idRun (FK a Experimento), idGPU (FK a GPU)
+  \item Clave Primaria Compuesta (PK): (idRun, idGPU)
+\end{itemize}
+}
+{\begin{itemize}
+  \item Experimento / Modelo $\rightarrow$ Benchmark ("produce"):
+\end{itemize}
+}
+{\begin{itemize}
+  \item Tabla intermedia: Resultado\_Benchmark
+  \item Atributos: idRun (FK a Experimento), idBenchmark (FK a Benchmark)
+  \item Clave Primaria Compuesta (PK): (idRun, idBenchmark)
+\end{itemize}
+}
+
+\addcontentsline{toc}{subsubsection}{Relaciones ternarias}
+\subsubsection{Relaciones ternarias}
+
+Ninguna: No se definen relaciones que vinculen de forma directa y simultánea a tres entidades en el modelo
+
+\addcontentsline{toc}{subsection}{Diccionario de Datos}
+\subsection{Diccionario de Datos}
+
+
+\textbf{Tabla: Organización}
+
+% --- tabla 286: 6 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idOrganizacion & INEGER & PK, NOT NULL & Identificador único de la organización \\
+\hline
+nombre & VARCHAR(50) & NOT NULL & Nombre de la organización \\
+\hline
+pais & VARCHAR(50) & NOT NULL & País de origen \\
+\hline
+tipo & VARCHAR(20) & NOT NULL & Rol de la organización \\
+\hline
+fechaFundacion & DATE & NOT NULL & Fecha de fundación \\
+\hline
+\end{longtable}
+
+
+\textbf{Tabla: Modelo LLM}
+
+% --- tabla 289: 12 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idModelo & INEGER & PK, NOT NULL & Identificador único del modelo \\
+\hline
+nombre & VARCHAR(100) & NOT NULL & Nombre del modelo \\
+\hline
+version & VARCHAR(50) & NOT NULL & Versión del modelo \\
+\hline
+arquitectura & VARCHAR(100) & NOT NULL & Tipo de arquitectura \\
+\hline
+tipoModelo & VARCHAR(50) & NOT NULL & Categoría del modelo \\
+\hline
+numParam & BIGINT & NOT NULL, CHECK (numParam > 0) & Número de parámetros \\
+\hline
+longitudToken & INTEGER & NOT NULL, CHECK (longitudToken > 0) & Longitud máxima de tokens \\
+\hline
+tipoToken & VARCHAR(50) & NOT NULL & Tipo de tokenizador \\
+\hline
+estado & VARCHAR(50) & NOT NULL, CHECK (estado IN ('Activo','Inactivo','En Pruebas','Obsoleto')) & Estado actual \\
+\hline
+idOrganizacion & INTEGER & FK, NOT NULL & Organización creadora \\
+\hline
+idModeloBase & INTEGER & FK, NOT NULL & Modelo base \\
+\hline
+\end{longtable}
+
+
+\textbf{Tabla: Dataset}
+
+% --- tabla 292: 12 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idDataset & INEGER & PK, NOT NULL & Identificador único del dataset \\
+\hline
+idModelo & INTEGER & FK, NOT NULL & Modelo asociado \\
+\hline
+nombre & VARCHAR(100) & NOT NULL & Nombre del dataset \\
+\hline
+version & VARCHAR(50) & NOT NULL & Version del dataset \\
+\hline
+faseUso & VARCHAR(50) & NOT NULL, CHECK (faseUso IN ('Entrenamiento','Validación','Prueba','Fine-tuning')) & Fase de Uso \\
+\hline
+dominio & VARCHAR(100) & NOT NULL, CHECK (numParam > 0) & Dominio tematico \\
+\hline
+formatoDatos & VARCHAR(50) & NOT NULL, CHECK (longitudToken > 0) & Formato de los datos \\
+\hline
+tamanio & VARCHAR(50) & NOT NULL, CHECK (tamanio > 0) & Tamaño en GB \\
+\hline
+numRegistros & BIGINT & NOT NULL, CHECK (numRegistros > 0) & Número de registros \\
+\hline
+licencia & VARCHAR(50) & NOT NULL & Tipo de Licencia \\
+\hline
+fuenteOrigen & VARCHAR(200) & NOT NULL & Fuente de Origen \\
+\hline
+\end{longtable}
+
+
+\textbf{Tabla: Experimento}
+
+% --- tabla 295: 15 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idRun & INEGER & PK, NOT NULL & Identificador único del experimento \\
+\hline
+nombre & VARCHAR(100) & NOT NULL & Nombre del experimento \\
+\hline
+idModelo & INTEGER & FK, NOT NULL & Modelo entrenado \\
+\hline
+tipoEntrenamiento & VARCHAR(50) & NOT NULL, CHECK (tipoEntrenamiento IN ('Preentrenamiento','Fine-tuning','RLHF','Destilación')) & Tipo de experimento \\
+\hline
+optimizador & VARCHAR(50) & NOT NULL & Optimizador usado \\
+\hline
+precisionCalculo & VARCHAR(50) & NOT NULL, CHECK (precisionCalculo IN ('FP32','FP16','BF16','INT8')) & Precisión numérica \\
+\hline
+numEpocas & INTEGER & NOT NULL, CHECK (numEpocas > 0) & Número de épocas \\
+\hline
+tamBatch & INTEGER & NOT NULL, CHECK (tamBatch > 0) & Tamaño del batch \\
+\hline
+tasaAprendizaje & NUMERIC(10,8) & NOT NULL, CHECK (tasaAprendizaje > 0) & Tasa de Aprendizaje \\
+\hline
+estadoEjecucion & VARCHAR(50) & NOT NULL, CHECK (estadoEjecucion IN ('En ejecución','Finalizado','Error','Cancelado')) & Estado actual \\
+\hline
+fechaInicio & TIMESTAMP & NOT NULL & Fecha/hora de inicio \\
+\hline
+fechaFin & TIMESTAMP & NULL & Fecha/hora de fin \\
+\hline
+segundos & BIGINT & NULL, CHECK (segundos >= 0) & Duración en Segundos \\
+\hline
+lossFinal & NUMERIC(10,6) & NULL, CHECK (lossFinal >= 0) & Loss final \\
+\hline
+\end{longtable}
+
+\textbf{Tabla: GPU}
+
+% --- tabla 297: 8 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idGPU & INEGER & PK, NOT NULL & Identificador único de GPU \\
+\hline
+modeloGPU & VARCHAR(100) & NOT NULL & Modelo de GPU \\
+\hline
+fabricante & VARCHAR(100) & NOT NULL & Fabricante de GPU \\
+\hline
+proveedorCloud & VARCHAR(100) & NULL & Proveedor de Cloud \\
+\hline
+memoriaVRAM & INTEGER & NOT NULL, CHECK (memoriaVRAM > 0) & Memoria VRAM en GB \\
+\hline
+numNucleos & INTEGER & NOT NULL, CHECK (numNucleos > 0) & Número de núcleos \\
+\hline
+numNucleos & NUMERIC(10,4) & NOT NULL, CHECK (numNucleos > 0) & Costo por hora en USD \\
+\hline
+\end{longtable}
+
+
+\textbf{Tabla: Benchmark}
+
+% --- tabla 300: 8 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idBenchmark & INEGER & PK, NOT NULL & Identificador único del benchmark \\
+\hline
+nombre & VARCHAR(100) & NOT NULL & Nombre del benchmark \\
+\hline
+version & VARCHAR(50) & NOT NULL & Version del benchmark \\
+\hline
+categoria & VARCHAR(100) & NOT NULL & Categoria del benchmark \\
+\hline
+metodo & VARCHAR(100) & NOT NULL & Metodo de Evaluacion \\
+\hline
+numItems & INTEGER & NOT NULL, CHECK (numItems > 0) & Número de ítems \\
+\hline
+descripcion & TEXT & NULL & Descripción detallada \\
+\hline
+\end{longtable}
+
+
+\textbf{Tabla: Evaluacion}
+
+% --- tabla 303: 7 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idBenchmark & INEGER & PK, NOT NULL & Identificador único de la evaluación \\
+\hline
+idModelo & INEGER & FK, NOT NULL & Modelo evaluado \\
+\hline
+idBenchmark & INEGER & FK, NOT NULL & Benchmark aplicado \\
+\hline
+idOrganizacionEvaluadora & INEGER & FK, NOT NULL & Organización evaluadora \\
+\hline
+fechaEvaluacion & DATE & NOT NULL & Fecha de evaluación \\
+\hline
+resultadoMetrico & NUMERIC(10,4) & NOT NULL, CHECK (resultadoMetrica >= 0) & Resultado de la métrica \\
+\hline
+\end{longtable}
+
+
+\textbf{Tabla: ItemBenchmark}
+
+% --- tabla 306: 5 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idItem & INEGER & PK, NOT NULL & Identificador único del ítem \\
+\hline
+idBenchmark & INEGER & FK, NOT NULL & Benchmark al que pertenece \\
+\hline
+promtPregunta & TEXT & NOT NULL & Pregunta planetada \\
+\hline
+respuestaEsperada & TEXT & NOT NULL & Respuesta de referencia \\
+\hline
+\end{longtable}
+
+
+\textbf{Tabla: RespuestaModelo}
+
+% --- tabla 309: 8 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idRespuesta & INEGER & PK, NOT NULL & Identificador único de la respuesta \\
+\hline
+idEvaluacion & INEGER & FK, NOT NULL & Evaluación asociada \\
+\hline
+idItem & INEGER & FK, NOT NULL & Ítem respondido \\
+\hline
+outputGenerado & TEXT & NOT NULL & Respuesta generada por el modelo \\
+\hline
+esCorrecta & BOOLEAN & NOT NULL & Indica si es correcta \\
+\hline
+tokensOutput & INTEGER & NOT NULL, CHECK (tokensOutput >= 0) & Tokens de salida \\
+\hline
+latencia & NUMERIC(10,4) & NOT NULL, CHECK (latencia >= 0) & Latencia en segundos \\
+\hline
+\end{longtable}
+
+
+\textbf{Tabla: ExperimentoDataset}
+
+% --- tabla 312: 3 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idRun & INEGER & PK, FK & Experimento \\
+\hline
+idDataset & INTEGER & PK, FK & Dataset Utilizado \\
+\hline
+\end{longtable}
+
+
+\textbf{Tabla: ExperimentoGPU}
+
+% --- tabla 315: 5 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idRun & INEGER & PK, FK & Experimento \\
+\hline
+idGPU & INTEGER & PK, FK & GPU Utilizada \\
+\hline
+horasUso & NUMERIC(10,2) & NOT NULL. CHECK(horasUso > 0) & Horas de uso en un experimento \\
+\hline
+consumoEnergetico & NUMERIC(10,2) & NOT NULL, CHECK(consumoEnergetico >= 0) & Consumo energetico estimado (kWh) \\
+\hline
+\end{longtable}
+
+
+\textbf{Tabla: ResultadoBenchmark}
+
+% --- tabla 318: 6 filas x 4 cols, 12pt ---
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\hline
+idRun & INEGER & PK, FK & Experimento \\
+\hline
+idBenchmark & INTEGER & PK, FK & Benchmark aplicado \\
+\hline
+valor & NUMERIC(10 4) & NOT NULL, CHECK(valor >= 0) & Valor obtenido \\
+\hline
+metrica & NUMERIC(10,2) & NOT NULL & Matrica utilizada \\
+\hline
+fecha & NUMERIC(10,2) & NOT NULL & Fecha del resultado \\
+\hline
+\end{longtable}
+
+
+
+
+\end{document}

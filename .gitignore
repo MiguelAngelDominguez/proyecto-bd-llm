@@ -1,0 +1,16 @@
+# Datos generados (se regeneran con generate_data.py)
+data_out/dumps_*/csv/
+data_out/dumps_*/dump_*.sql
+*_output.txt
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.cursor/
+.vscode/
+
+# Temporales
+*.tmp
+*.log

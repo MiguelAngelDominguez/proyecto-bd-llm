@@ -1,0 +1,201 @@
+pages 6
+===== PAGE 1 =====
+Proyecto Final
+Curso: CS2041 Base de Datos I
+Profesores: , Wilder Nina, Brenner Ojeda y Henry Arias
+Ciclo 2026-2
+UTEC
+1. Introducci´ on
+El proyecto del curso de Bases de Datos I consiste en construir una base de datos
+de tama˜ no “razonable” para un problema del mundo real a elecci´ on. Se debe dise˜ nar el
+modelo conceptual, el modelo relacional y el modelo f ´ ısico usando PostgreSQL. En la
+base de datos construida se debe ingresar datos reales y/o sint´ eticos, escribir consultas
+interactivas y modificaciones, explorar algunos otros aspectos como restricciones, ´ ındices,
+optimizaci´ on, y crear un programa para manipular dicha base de datos. El punto clave
+inicial es identificar el dominio que se quiere administrar con la base de datos. Se aconseja
+tomar un problema con el que sientan afinidad o les divierta. Recuerde que estar´ an el
+resto del semestre trabajando en ´ el. Ejemplos: un hobby, un sitio Web favorito, materiales
+de otro curso, un proyecto de investigaci´ on, la administraci´ on de un peque˜ no negocio, etc.
+Ojal´ a sea un dominio donde los datos reales est´ en presente. Respecto de las dimensiones: el
+diagrama deE/Rdebiera tener al menos 5 entidades y un n´ umero similar de relaciones.
+Se debe considerar restricciones de multiplicidad y participaci´ on, dominio de atributo
+(enteros, decimales, strings, etc.). Si encuentran dificultad para encontrar su dominio
+de datos, miren cualquier sitio Web de shopping. Ese es un tama˜ no adecuado para su
+proyecto.
+2. Entregables
+Hito 1:Fecha de entrega: de acuerdo a lo estipulado en el s ´ ılabo (aula virtual), se
+penalizar´ a las entregas despu´ es de la fecha indicada (-4 pts por cada d ´ ıa de retraso,
+m´ aximo 1 d ´ ıa de retraso)
+Descripci´ on de requerimientos:Suponga que Ud. es el cliente que necesita la base
+de datos; entonces debe escribir un documento de especificaci´ on de requerimientos que
+Ud. le entregar´ a a la empresa desarrolladora que construir´ a su base de datos. Debe ser
+breve y claro. Indique posibles dificultades. Indique de d´ onde se obtendr´ an los datos.
+Debe indicar qu´ e datos existen, qu´ e significan, qu´ e reglas sem´ anticas se aplican entre
+ellos, posibles restricciones, c´ omo se cargan y modifican (est´ aticamente una vez, se
+===== PAGE 2 =====
+modifica todos los d ´ ıas, etc.), c´ omo se consultan (qu´ e consultas quieren hacer), qu´ e
+vol´ umenes se esperan, qu´ e velocidades de respuesta se esperan para las operaciones
+m´ as comunes.
+ModeloE/R:Contextualizar la base de datos en el modeloE/R(conciso, pero no
+tan conciso). No olvide indicar los atributos de llave para las entidades e incluir las
+flechas indicando la multiplicidad y la doble l ´ ınea indicando la participaci´ on. Si hay
+entidades d´ ebiles o relaciones “Is-A”, aseg´ urese de anotarlas apropiadamente indicando
+la cobertura y participaci´ on.
+Modelo Relacional:Producir el conjunto de relaciones basado en su modeloE/R.
+Especifique llaves para todas las relaciones. Si el modelo no contempla todas las llaves,
+en algunos casos las llaves que Ud. especifique deber´ an estar basadas en la sem´ antica de
+los datos. El modelo debe estar normalizado y las restricciones de integridad si existen
+debidamente especificadas.
+Hito 2:Fecha de entrega: de acuerdo a lo estipulado en el s ´ ılabo (aula virtual), se
+penalizar´ a las entregas despu´ es de la fecha indicada (-4 pts por cada d ´ ıa de retraso,
+m´ aximo 1 d ´ ıa de retraso)
+Implementaci´ on en PostgreSQL:Creaci´ on de la estructura de la base de datos en
+PostgreSQL. Hay algunas decisiones de implementaci´ on que deben tomarse. Registro de
+los datos. Implementaci´ on de consultas en SQL (m ´ ınimo 5 consultas de nivel intermedio
+no triviales), generaci´ on de vistas de usuario, procedimientos almacenados y triggers
+para la automatizaci´ on y reglas de negocio.
+Optimizaci´ on y Experimentaci´ on:Seleccionar un subconjunto de las operaciones
+que se considere m´ as cr ´ ıticas en t´ erminos de eficiencia (las 5 consultas intermedias
+seleccionadas) y trabajar con PostgreSQL para lograr un mejor tiempo de respuesta
+para dichas operaciones. Esto incluye crear los ´ ındices adecuados para los campos
+adecuados. Analizar y estudiar los tiempos de actualizaci´ on y de consulta cuando uno
+usa un ´ ındice u otro. Elaborar cuadros estad ´ ısticos de las consultas elegidas con y sin
+´ ındices.
+Puntos Extra (MVP Web):Aquellos grupos que desarrollen y presenten un MVP
+de aplicaci´ on web funcional conectado a la base de datos de PostgreSQL, que permita
+la interacci´ on con los datos y ejecute las consultas intermedias planteadas, obtendr´ an
+una bonificaci´ on de+2 puntos sobre la nota obtenida en el Hito 2.
+2
+===== PAGE 3 =====
+3. Formato de Informe
+El informe se entregar´ a en formato LaTeX y seguir´ a la siguiente estructura:
+1.Requisitos
+1.1. Introducci´ on
+1.2. Descripci´ on general del problema/organizaci´ on/empresa
+1.3. Necesidad/usos de la base de datos
+1.4. ¿C´ omo resuelve el problema hoy?
+1.4.1. ¿C´ omo se almacenan/procesan los datos hoy?
+1.4.2. Flujo de datos
+1.5. Descripci´ on detallada del sistema
+1.5.1. Objetos de informaci´ on actuales
+1.5.2. Caracter ´ ısticas y funcionalidades esperadas
+1.5.3. Tipos de usuarios existentes/necesarios
+1.5.4. Tipos de consulta, actualizaciones
+1.5.5. Tama˜ no estimado de la base de datos
+1.6. Objetivos del proyecto
+1.7. Referencias del proyecto
+1.8. Eventualidades
+1.8.1. Problemas que pudieran encontrarse en el proyecto
+1.8.2. L ´ ımites y alcances del proyecto
+2.Modelo Entidad-Relaci´ on
+2.1. Reglas sem´ anticas
+2.2. Modelo Entidad-Relaci´ on
+2.3. Especificaciones y consideraciones sobre el modelo
+3.Modelo Relacional
+3.1. Modelo Relacional
+3.2. Especificaciones de transformaci´ on
+3.2.1. Entidades
+3.2.2. Entidades d´ ebiles
+3.2.3. Entidades superclase/subclases
+3.2.4. Relaciones binarias
+3.2.5. Relaciones ternarias
+3.3. Diccionario de datos
+4.Implementaci´ on de la base de datos (Corresponde al Hito 2)
+4.1. Creaci´ on de Tablas en PostgreSQL
+3
+===== PAGE 4 =====
+4.2. Carga de datos
+4.3. Simulaci´ on de Datos Faltantes
+4.4. Views
+4.5. Procedimientos Almacenados
+4.6. Triggers
+5.Optimizaci´ on y Experimentaci´ on
+5.1. Consultas SQL para el experimento
+5.1.1. Descripci´ on de las 5 consultas intermedias seleccionadas (no triviales)
+5.1.2. Implementaci´ on de consultas en SQL
+5.2. Metodolog ´ ıa del experimento
+5.3. Optimizaci´ on de consultas
+5.3.1. Planes de ´ ındices para Consulta 1
+5.3.2. Planes de ´ ındices para Consulta 2
+5.3.3. Planes de ´ ındices para Consulta 3
+5.3.4. Planes de ´ ındices para Consulta 4
+5.3.5. Planes de ´ ındices para Consulta 5
+5.4. Plataforma de Pruebas
+5.5. Medici´ on de tiempos
+5.5.1. Sin ´ ındices
+5.5.2. Con ´ ındices
+5.6. Resultados
+5.6.1. Consulta 1
+5.6.2. Consulta 2
+5.6.3. Consulta 3
+5.6.4. Consulta 4
+5.6.5. Consulta 5
+5.7. An´ alisis y Discusi´ on
+6.Conclusiones
+7.Anexos (Debe anexar un v ´ ıdeo de la experimentaci´ on con 1 mill´ on de
+registros con y sin ´ ındices)
+4
+===== PAGE 5 =====
+4. T´ opicos disponibles
+El proyecto deber´ a desarrollarse exclusivamente en uno de los siguientes t´ opicos. Ca-
+da grupo tendr´ a que seleccionar un ´ unico tema y elaborar su proyecto en torno a este.
+Cada proyecto deber´ a incluir, de manera obligatoria, las tablas especificadas en el t´ opico
+elegido. Asimismo, los grupos podr´ an a˜ nadir tablas adicionales cuando sea necesario para
+cumplir con los requisitos establecidos del proyecto.
+No se permitir´ a bajo ninguna circunstancia que dos o m´ as grupos trabajen
+sobre el mismo t´ opico.
+1.Gesti´ on de Constelaciones y Sat´ elites (SpaceTech)→sat´ elites, ´ orbitas y
+telemetr ´ ıa, basura espacial, estaciones terrenas y eventos de conjunci´ on/colisi´ on.
+2.Redes de Carga para Veh ´ ıculos El´ ectricos→estaciones de carga, conecto-
+res/puntos de carga, sesiones de carga, tarifas por hora y veh ´ ıculos el´ ectricos.
+3.Entrenamiento de Modelos LLM / IA Generativa→modelos LLM, da-
+tasets de entrenamiento, experimentos/runs, consumo de GPUs y evaluaciones de
+benchmark.
+4.Gesti´ on de Drones para Env ´ ıos Urbanos→drones, estaciones nest, rutas de
+vuelo, paquetes delivery y telemetr ´ ıa de bater ´ ıas.
+5.Mapeo y Detecci´ on de Exoplanetas→estrellas anfitrionas, observaciones de
+telescopio, eventos de tr´ ansito, exoplanetas confirmados y misiones espaciales.
+6.Gen´ omica y Variantes Gen´ eticas→genes de referencia, variantes gen´ eticas
+(SNPs), muestras biol´ ogicas, secuenciaciones run y anotaciones cl ´ ınicas.
+7.Log ´ ıstica Cold-Chain y Trazabilidad Farmac´ eutica→lotes de medicamen-
+tos, contenedores IoT, lecturas de temperatura, rutas de transporte y puntos de
+auditor ´ ıa.
+8.Agricultura de Precisi´ on y Sensores IoT Agropecuarios→parcelas de cul-
+tivo, sensores IoT, lecturas de suelo, sistemas de riego y registro de cosechas.
+9.Plataforma de Torneos eSports y Matchmaking→perfiles de jugadores,
+equipos eSports, brackets de torneos, partidas/matches y estad ´ ısticas por jugador.
+10.Monitoreo Sismol´ ogico y Alerta Temprana→estaciones s ´ ısmicas, sensores
+aceler´ ometro, eventos s ´ ısmicos, lecturas de onda y alertas emitidas.
+11.Econom ´ ıa Circular y Bonos de Carbono→empresas emisoras, proyectos
+verdes, cr´ editos de carbono, transacciones de bonos y auditor ´ ıas ambientales.
+12.Smart Traffic y Peajes Electr´ onicos (Free Flow)→p´ orticos de lectura,
+veh ´ ıculos con tag, pasos de peaje, tarifas de congesti´ on e infracciones detectadas.
+13.Subastas y Curadur ´ ıa de Arte Digital→artistas creadores, obras de arte,
+eventos de subasta, pujas (bids) y certificados de propiedad.
+5
+===== PAGE 6 =====
+14.Micro-Grids e Intercambio P2P de Energ ´ ıa Solar→prosumidores, con-
+tadores bidireccionales, producci´ on de excedentes, ofertas P2P y transacciones de
+energ ´ ıa.
+15.Detecci´ on Forense de Fraude en Criptomonedas→wallets identificadas,
+transacciones on-chain, clusters de riesgo, reportes de sospecha y etiquetas/labeling.
+16.Mantenimiento Predictivo de Turbinas E´ olicas→parques e´ olicos, turbinas,
+sensores de vibraci´ on, alertas de mantenimiento y ´ ordenes de trabajo.
+17.Telemetr ´ ıa SOC y Ciberseguridad→dispositivos de red, logs de firewall, ame-
+nazas identificadas, blacklist de IPs e incidentes SOC.
+18.Cadena de Suministro Portuaria y Contenedores→buques de carga, con-
+tenedores, movimientos de patio, inspecciones de aduana y turnos de gr´ ua.
+19.Telemedicina Quir´ urgica y Monitoreo Rob´ otico→robots quir´ urgicos, sesio-
+nes de cirug ´ ıa, telemetr ´ ıa de signos vitales, cirujanos remotos y grabaciones m´ edicas.
+20.Plataforma DeFi y Pr´ estamos Colateralizados→usuarios prestamistas, b´ ove-
+das de colateral, pr´ estamos activos, tasas algor ´ ıtmicas y eventos de liquidaci´ on.
+5. Consideraciones
+Considerar que la “experimentaci´ on y optimizaci´ on” debe realizarse mediante 5 con-
+sultas de nivel intermedio no triviales propuestas. Dichas consultas se deben realizar en
+cuatro contextos de 1 000 (mil) datos, 10 000 (diez mil) datos, 100 000 (cien mil) datos y
+1 000 000 (un mill´ on) de datos almacenados en la base de datos (deber ´ ıan tener 4 dumps
+de su proyecto).
+(Extra) ¿Cu´ al ser ´ ıa la complejidad operacional si escalamos los datos por encima del
+mill´ on?, realice una comparativa respecto a la cantidad de datos del p´ arrafo anterior. ¿Es
+suficiente la arquitectura Cliente-Servidor para procesar millones de datos?
+6
