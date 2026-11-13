@@ -1,0 +1,87 @@
+                                                     QUERY PLAN                                                      
+---------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on ranked  (cost=0.52..17357.08 rows=750 width=44)
+   Filter: (ranked.rnk = 1)
+   ->  WindowAgg  (cost=0.52..15482.08 rows=150000 width=52)
+         Window: w1 AS (PARTITION BY modelo_llm.arquitectura ORDER BY modelo_llm.num_param ROWS UNBOUNDED PRECEDING)
+         Run Condition: (rank() OVER w1 <= 1)
+         ->  Index Scan using idx_modelo_llm_arq_numparam on modelo_llm  (cost=0.42..12857.08 rows=150000 width=44)
+(6 filas)
+
+                                                                             QUERY PLAN                                                                             
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=8921.85..8921.85 rows=1 width=49)
+   ->  Sort  (cost=8921.85..8921.85 rows=1 width=49)
+         Sort Key: (count(ed.id_run)) DESC
+         ->  Finalize GroupAggregate  (cost=8921.57..8921.84 rows=1 width=49)
+               Group Key: d.dominio
+               ->  Gather Merge  (cost=8921.57..8921.81 rows=2 width=49)
+                     Workers Planned: 2
+                     ->  Sort  (cost=7921.55..7921.55 rows=1 width=49)
+                           Sort Key: d.dominio
+                           ->  Partial HashAggregate  (cost=7921.52..7921.54 rows=1 width=49)
+                                 Group Key: d.dominio
+                                 ->  Parallel Hash Join  (cost=4257.71..7452.77 rows=62500 width=21)
+                                       Hash Cond: (ed.id_dataset = d.id_dataset)
+                                       ->  Parallel Index Only Scan using pk_experimento_dataset on experimento_dataset ed  (cost=0.42..3031.42 rows=62500 width=8)
+                                       ->  Parallel Hash  (cost=3154.35..3154.35 rows=88235 width=21)
+                                             ->  Parallel Seq Scan on dataset d  (cost=0.00..3154.35 rows=88235 width=21)
+(16 filas)
+
+                                                        QUERY PLAN                                                         
+---------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on ranked  (cost=0.94..17143.49 rows=74105 width=58)
+   ->  WindowAgg  (cost=0.94..16402.44 rows=74105 width=62)
+         Window: w1 AS (PARTITION BY e.id_modelo ORDER BY e.loss_final ROWS UNBOUNDED PRECEDING)
+         Run Condition: (row_number() OVER w1 <= 3)
+         ->  Merge Join  (cost=0.94..15105.60 rows=74105 width=54)
+               Merge Cond: (e.id_modelo = m.id_modelo)
+               ->  Index Scan using idx_experimento_modelo_loss on experimento e  (cost=0.42..7462.57 rows=74105 width=26)
+               ->  Index Scan using pk_modelo_ll on modelo_llm m  (cost=0.42..6341.93 rows=150000 width=32)
+(8 filas)
+
+                                                  QUERY PLAN                                                   
+---------------------------------------------------------------------------------------------------------------
+ Sort  (cost=65840.83..66215.83 rows=150000 width=128)
+   Sort Key: (sum((cg.horas_uso * g.costo_por_hora))) DESC
+   ->  GroupAggregate  (cost=37950.87..43200.87 rows=150000 width=128)
+         Group Key: e.id_run, m.nombre
+         ->  Sort  (cost=37950.87..38325.87 rows=150000 width=60)
+               Sort Key: e.id_run, m.nombre
+               ->  Hash Join  (cost=12780.48..19412.92 rows=150000 width=60)
+                     Hash Cond: (cg.id_gpu = g.id_gpu)
+                     ->  Hash Join  (cost=12768.00..18991.52 rows=150000 width=48)
+                           Hash Cond: (e.id_modelo = m.id_modelo)
+                           ->  Hash Join  (cost=5935.00..8980.76 rows=150000 width=24)
+                                 Hash Cond: (cg.id_run = e.id_run)
+                                 ->  Seq Scan on consumo_gpu cg  (cost=0.00..2652.00 rows=150000 width=20)
+                                 ->  Hash  (cost=4060.00..4060.00 rows=150000 width=8)
+                                       ->  Seq Scan on experimento e  (cost=0.00..4060.00 rows=150000 width=8)
+                           ->  Hash  (cost=3932.00..3932.00 rows=150000 width=32)
+                                 ->  Seq Scan on modelo_llm m  (cost=0.00..3932.00 rows=150000 width=32)
+                     ->  Hash  (cost=11.10..11.10 rows=110 width=20)
+                           ->  Seq Scan on gpu g  (cost=0.00..11.10 rows=110 width=20)
+(19 filas)
+
+                                                   QUERY PLAN                                                    
+-----------------------------------------------------------------------------------------------------------------
+ Subquery Scan on ranked  (cost=11980.62..23528.72 rows=75000 width=263)
+   ->  WindowAgg  (cost=11980.62..22778.72 rows=75000 width=267)
+         Window: w1 AS (PARTITION BY b.id_benchmark ORDER BY e.resultado_metrica ROWS UNBOUNDED PRECEDING)
+         Run Condition: (rank() OVER w1 <= 3)
+         ->  Merge Join  (cost=11980.48..21466.22 rows=75000 width=259)
+               Merge Cond: (e.id_benchmark = b.id_benchmark)
+               ->  Gather Merge  (cost=11966.66..20514.45 rows=75000 width=41)
+                     Workers Planned: 1
+                     ->  Sort  (cost=10966.65..11076.94 rows=44118 width=41)
+                           Sort Key: e.id_benchmark, e.resultado_metrica DESC
+                           ->  Hash Join  (cost=2263.50..7563.15 rows=44118 width=41)
+                                 Hash Cond: (m.id_modelo = e.id_modelo)
+                                 ->  Parallel Seq Scan on modelo_llm m  (cost=0.00..3314.35 rows=88235 width=32)
+                                 ->  Hash  (cost=1326.00..1326.00 rows=75000 width=17)
+                                       ->  Seq Scan on evaluacion e  (cost=0.00..1326.00 rows=75000 width=17)
+               ->  Sort  (cost=13.82..14.05 rows=90 width=222)
+                     Sort Key: b.id_benchmark
+                     ->  Seq Scan on benchmark b  (cost=0.00..10.90 rows=90 width=222)
+(18 filas)
+

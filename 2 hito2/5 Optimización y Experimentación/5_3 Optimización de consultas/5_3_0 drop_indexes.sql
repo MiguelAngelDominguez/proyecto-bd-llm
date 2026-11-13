@@ -1,0 +1,12 @@
+DROP INDEX IF EXISTS idx_modelo_llm_arq_numparam;
+DROP INDEX IF EXISTS idx_dataset_dominio;
+DROP INDEX IF EXISTS idx_exp_dataset_dataset;
+DROP INDEX IF EXISTS idx_experimento_modelo_loss;
+DROP INDEX IF EXISTS idx_consumo_gpu_run;
+DROP INDEX IF EXISTS idx_consumo_gpu_gpu;
+DROP INDEX IF EXISTS idx_experimento_modelo;
+DROP INDEX IF EXISTS idx_evaluacion_benchmark_score;
+DROP INDEX IF EXISTS idx_evaluacion_modelo;
+DROP INDEX IF EXISTS idx_modelo_llm_org;
+DROP INDEX IF EXISTS idx_dataset_id;
+DROP INDEX IF EXISTS idx_experimento_id_modelo;

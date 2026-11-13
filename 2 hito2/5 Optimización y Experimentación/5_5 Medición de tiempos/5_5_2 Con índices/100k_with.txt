@@ -1,0 +1,167 @@
+                                                                             QUERY PLAN                                                                             
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on ranked  (cost=0.40..1847.29 rows=75 width=444) (actual time=0.066..6.823 rows=11.00 loops=1)
+   Filter: (ranked.rnk = 1)
+   Buffers: shared hit=14329 read=36
+   ->  WindowAgg  (cost=0.40..1659.79 rows=15000 width=452) (actual time=0.065..6.821 rows=11.00 loops=1)
+         Window: w1 AS (PARTITION BY modelo_llm.arquitectura ORDER BY modelo_llm.num_param ROWS UNBOUNDED PRECEDING)
+         Run Condition: (rank() OVER w1 <= 1)
+         Storage: Memory  Maximum Storage: 17kB
+         Buffers: shared hit=14329 read=36
+         ->  Index Scan using idx_modelo_llm_arq_numparam on modelo_llm  (cost=0.29..1397.29 rows=15000 width=444) (actual time=0.046..5.903 rows=15000.00 loops=1)
+               Index Searches: 1
+               Buffers: shared hit=14329 read=36
+ Planning:
+   Buffers: shared hit=142 read=13
+ Planning Time: 4.891 ms
+ Execution Time: 6.897 ms
+(15 filas)
+
+                                                                     QUERY PLAN                                                                      
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=949.21..949.22 rows=5 width=258) (actual time=10.279..10.280 rows=1.00 loops=1)
+   Buffers: shared hit=307
+   ->  Sort  (cost=949.21..949.71 rows=200 width=258) (actual time=10.277..10.278 rows=1.00 loops=1)
+         Sort Key: (count(ed.id_run)) DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=307
+         ->  HashAggregate  (cost=943.39..945.89 rows=200 width=258) (actual time=10.250..10.254 rows=1.00 loops=1)
+               Group Key: d.dominio
+               Batches: 1  Memory Usage: 32kB
+               Buffers: shared hit=304
+               ->  Hash Join  (cost=561.50..830.89 rows=15000 width=230) (actual time=4.068..7.481 rows=15000.00 loops=1)
+                     Hash Cond: (ed.id_dataset = d.id_dataset)
+                     Buffers: shared hit=304
+                     ->  Seq Scan on experimento_dataset ed  (cost=0.00..230.00 rows=15000 width=8) (actual time=0.019..0.858 rows=15000.00 loops=1)
+                           Buffers: shared hit=80
+                     ->  Hash  (cost=374.00..374.00 rows=15000 width=230) (actual time=3.976..3.977 rows=15000.00 loops=1)
+                           Buckets: 16384  Batches: 1  Memory Usage: 1007kB
+                           Buffers: shared hit=224
+                           ->  Seq Scan on dataset d  (cost=0.00..374.00 rows=15000 width=230) (actual time=0.013..2.073 rows=15000.00 loops=1)
+                                 Buffers: shared hit=224
+ Planning:
+   Buffers: shared hit=187 read=10
+ Planning Time: 4.397 ms
+ Execution Time: 10.463 ms
+(24 filas)
+
+                                                                            QUERY PLAN                                                                             
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on ranked  (cost=622.10..624.35 rows=75 width=266) (actual time=13.070..16.053 rows=7557.00 loops=1)
+   Buffers: shared hit=22888 read=72
+   ->  WindowAgg  (cost=622.10..623.60 rows=75 width=270) (actual time=13.069..15.513 rows=7557.00 loops=1)
+         Window: w1 AS (PARTITION BY e.id_modelo ORDER BY e.loss_final ROWS UNBOUNDED PRECEDING)
+         Run Condition: (row_number() OVER w1 <= 3)
+         Storage: Memory  Maximum Storage: 17kB
+         Buffers: shared hit=22888 read=72
+         ->  Sort  (cost=622.10..622.29 rows=75 width=262) (actual time=13.062..13.290 rows=7557.00 loops=1)
+               Sort Key: e.id_modelo, e.loss_final
+               Sort Method: quicksort  Memory: 777kB
+               Buffers: shared hit=22888 read=72
+               ->  Nested Loop  (cost=4.96..619.77 rows=75 width=262) (actual time=0.901..11.671 rows=7557.00 loops=1)
+                     Buffers: shared hit=22882 read=72
+                     ->  Bitmap Heap Scan on experimento e  (cost=4.68..169.08 rows=75 width=44) (actual time=0.864..2.298 rows=7557.00 loops=1)
+                           Recheck Cond: ((estado_ejecucion)::text = 'Finalizado'::text)
+                           Heap Blocks: exact=253
+                           Buffers: shared hit=253 read=30
+                           ->  Bitmap Index Scan on idx_experimento_modelo_loss  (cost=0.00..4.66 rows=75 width=0) (actual time=0.824..0.824 rows=7557.00 loops=1)
+                                 Index Searches: 1
+                                 Buffers: shared read=30
+                     ->  Index Scan using pk_modelo_ll on modelo_llm m  (cost=0.29..6.01 rows=1 width=222) (actual time=0.001..0.001 rows=1.00 loops=7557)
+                           Index Cond: (id_modelo = e.id_modelo)
+                           Index Searches: 7557
+                           Buffers: shared hit=22629 read=42
+ Planning:
+   Buffers: shared hit=113 read=6
+ Planning Time: 3.376 ms
+ Execution Time: 17.690 ms
+(28 filas)
+
+                                                                          QUERY PLAN                                                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=8142.08..8179.58 rows=15000 width=318) (actual time=40.340..41.307 rows=15000.00 loops=1)
+   Sort Key: (sum((cg.horas_uso * g.costo_por_hora))) DESC
+   Sort Method: quicksort  Memory: 1475kB
+   Buffers: shared hit=643 read=1
+   ->  GroupAggregate  (cost=3454.31..4896.63 rows=15000 width=318) (actual time=15.594..35.446 rows=15000.00 loops=1)
+         Group Key: e.id_run, m.nombre
+         Buffers: shared hit=643 read=1
+         ->  Incremental Sort  (cost=3454.31..4409.13 rows=15000 width=270) (actual time=15.571..22.404 rows=15000.00 loops=1)
+               Sort Key: e.id_run, m.nombre
+               Presorted Key: e.id_run
+               Full-sort Groups: 469  Sort Method: quicksort  Average Memory: 27kB  Peak Memory: 27kB
+               Buffers: shared hit=643 read=1
+               ->  Merge Join  (cost=3450.47..3750.47 rows=15000 width=270) (actual time=15.521..20.137 rows=15000.00 loops=1)
+                     Merge Cond: (e.id_run = cg.id_run)
+                     Buffers: shared hit=640 read=1
+                     ->  Sort  (cost=2079.34..2116.84 rows=15000 width=222) (actual time=9.052..9.517 rows=15000.00 loops=1)
+                           Sort Key: e.id_run
+                           Sort Method: quicksort  Memory: 1138kB
+                           Buffers: shared hit=512
+                           ->  Hash Join  (cost=593.50..1038.89 rows=15000 width=222) (actual time=3.283..7.095 rows=15000.00 loops=1)
+                                 Hash Cond: (e.id_modelo = m.id_modelo)
+                                 Buffers: shared hit=512
+                                 ->  Seq Scan on experimento e  (cost=0.00..406.00 rows=15000 width=8) (actual time=0.014..0.991 rows=15000.00 loops=1)
+                                       Buffers: shared hit=256
+                                 ->  Hash  (cost=406.00..406.00 rows=15000 width=222) (actual time=3.217..3.217 rows=15000.00 loops=1)
+                                       Buckets: 16384  Batches: 1  Memory Usage: 1088kB
+                                       Buffers: shared hit=256
+                                       ->  Seq Scan on modelo_llm m  (cost=0.00..406.00 rows=15000 width=222) (actual time=0.009..1.401 rows=15000.00 loops=1)
+                                             Buffers: shared hit=256
+                     ->  Sort  (cost=1371.13..1408.63 rows=15000 width=52) (actual time=6.462..6.899 rows=15000.00 loops=1)
+                           Sort Key: cg.id_run
+                           Sort Method: quicksort  Memory: 1085kB
+                           Buffers: shared hit=128 read=1
+                           ->  Hash Join  (cost=12.47..330.68 rows=15000 width=52) (actual time=0.884..4.500 rows=15000.00 loops=1)
+                                 Hash Cond: (cg.id_gpu = g.id_gpu)
+                                 Buffers: shared hit=128 read=1
+                                 ->  Seq Scan on consumo_gpu cg  (cost=0.00..278.00 rows=15000 width=40) (actual time=0.027..1.129 rows=15000.00 loops=1)
+                                       Buffers: shared hit=128
+                                 ->  Hash  (cost=11.10..11.10 rows=110 width=20) (actual time=0.849..0.849 rows=20.00 loops=1)
+                                       Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                       Buffers: shared read=1
+                                       ->  Seq Scan on gpu g  (cost=0.00..11.10 rows=110 width=20) (actual time=0.837..0.840 rows=20.00 loops=1)
+                                             Buffers: shared read=1
+ Planning:
+   Buffers: shared hit=101 read=5
+ Planning Time: 3.048 ms
+ Execution Time: 42.913 ms
+(47 filas)
+
+                                                                    QUERY PLAN                                                                     
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on ranked  (cost=1267.07..1492.05 rows=7500 width=464) (actual time=12.187..12.954 rows=30.00 loops=1)
+   Buffers: shared hit=320 read=1
+   ->  WindowAgg  (cost=1267.07..1417.05 rows=7500 width=468) (actual time=12.186..12.950 rows=30.00 loops=1)
+         Window: w1 AS (PARTITION BY b.id_benchmark ORDER BY e.resultado_metrica ROWS UNBOUNDED PRECEDING)
+         Run Condition: (rank() OVER w1 <= 3)
+         Storage: Memory  Maximum Storage: 17kB
+         Buffers: shared hit=320 read=1
+         ->  Sort  (cost=1267.05..1285.80 rows=7500 width=460) (actual time=12.175..12.507 rows=7500.00 loops=1)
+               Sort Key: b.id_benchmark, e.resultado_metrica DESC
+               Sort Method: quicksort  Memory: 726kB
+               Buffers: shared hit=320 read=1
+               ->  Hash Join  (cost=605.52..784.32 rows=7500 width=460) (actual time=3.777..7.191 rows=7500.00 loops=1)
+                     Hash Cond: (e.id_modelo = m.id_modelo)
+                     Buffers: shared hit=320 read=1
+                     ->  Hash Join  (cost=12.03..171.14 rows=7500 width=246) (actual time=0.532..2.396 rows=7500.00 loops=1)
+                           Hash Cond: (e.id_benchmark = b.id_benchmark)
+                           Buffers: shared hit=64 read=1
+                           ->  Seq Scan on evaluacion e  (cost=0.00..139.00 rows=7500 width=28) (actual time=0.016..0.537 rows=7500.00 loops=1)
+                                 Buffers: shared hit=64
+                           ->  Hash  (cost=10.90..10.90 rows=90 width=222) (actual time=0.506..0.506 rows=10.00 loops=1)
+                                 Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                 Buffers: shared read=1
+                                 ->  Seq Scan on benchmark b  (cost=0.00..10.90 rows=90 width=222) (actual time=0.497..0.498 rows=10.00 loops=1)
+                                       Buffers: shared read=1
+                     ->  Hash  (cost=406.00..406.00 rows=15000 width=222) (actual time=3.193..3.194 rows=15000.00 loops=1)
+                           Buckets: 16384  Batches: 1  Memory Usage: 1088kB
+                           Buffers: shared hit=256
+                           ->  Seq Scan on modelo_llm m  (cost=0.00..406.00 rows=15000 width=222) (actual time=0.014..1.398 rows=15000.00 loops=1)
+                                 Buffers: shared hit=256
+ Planning:
+   Buffers: shared hit=108 read=5
+ Planning Time: 3.691 ms
+ Execution Time: 13.214 ms
+(33 filas)
+
