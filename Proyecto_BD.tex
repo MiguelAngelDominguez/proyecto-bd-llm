@@ -1441,11 +1441,11 @@ Se utilizó el dataset público de Epoch (\texttt{all\_ai\_models.csv}), que con
 
 \textbf{Problemas encontrados en la fuente:}
 \begin{itemize}
-  \item Muchos campos numéricos vienen como texto (ej. ``1.5B'', ``N/A'').
-  \item ~60\% de los modelos no reportan tamaño del dataset.
-  \item ~57\% no reportan FLOP de entrenamiento.
-  \item Los nombres de hardware son strings libres (``8x NVIDIA A100''), no canónicos.
-  \item No existe una tabla de organizaciones separada (está embebida en el modelo).
+  \item Muchos campos numéricos vienen como texto (ej. ``1.5B'', ``N/A''), lo que obliga a limpiar y convertir antes de cargar.
+  \item ~60\% de los modelos no reportan tamaño del dataset, lo que genera valores NULL en \texttt{num\_registros}.
+  \item ~57\% no reportan FLOP de entrenamiento, lo que impide calcular el costo exacto de entrenamiento.
+  \item Los nombres de hardware son strings libres (``8x NVIDIA A100''), no canónicos, lo que dificulta la normalización.
+  \item No existe una tabla de organizaciones separada: la organización está embebida en el modelo, lo que obliga a deduplicar.
 \end{itemize}
 
 \textbf{Decisiones de diseño:}
@@ -1459,7 +1459,7 @@ Se utilizó el dataset público de Epoch (\texttt{all\_ai\_models.csv}), que con
 
 \subsubsection{Pipeline ETL (pensamiento general)}
 
-El pipeline se diseñó para ser \textbf{determinista}, \textbf{escalable} y \textbf{validable}:
+El pipeline se diseñó para ser \textbf{determinista}, \textbf{escalable} y \textbf{validable}. Cada paso resuelve un problema específico:
 
 \begin{enumerate}
   \item \textbf{Extracción:} lectura del CSV de Epoch con \texttt{csv.DictReader} (sin pandas, solo stdlib).
@@ -1962,4 +1962,12 @@ Los tiempos de ejecución crecen linealmente con el volumen de datos, lo que ind
 Se anexa la guía de grabación para la experimentación con 1.000.000 de registros con y sin índices (archivo \texttt{7\_1 Guia de grabacion del video.md}). El video se grabará siguiendo dicha guía, mostrando los comandos, planes y tiempos de las 5 consultas.
 
 \end{document}
+'''
 
+marker = '\\subsection{Carga de datos}'
+idx = s.find(marker)
+assert idx != -1, "marker not found"
+s = s[:idx].rstrip() + '\n\n' + content.lstrip('\n') + '\n'
+open(path, 'w', encoding='utf-8').write(s)
+print("done")
+PY
