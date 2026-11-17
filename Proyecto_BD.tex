@@ -1433,21 +1433,31 @@ FOR EACH ROW EXECUTE FUNCTION fn_validar_ciclo_modelo_base ();
 
 \subsection{Carga de datos}
 
-La carga de datos se realizó mediante un pipeline ETL que parte del CSV de Epoch (\texttt{all\_ai\_models.csv}), filtra modelos de lenguaje, limpia columnas numéricas y genera 12 archivos CSV (uno por tabla) con datos reales enriquecidos con valores sintéticos para los campos faltantes. El generador (\texttt{generate\_data.py}) usa \texttt{random.seed(42)}, por lo que los datos son reproducibles.
+La carga de datos se realizó mediante un pipeline ETL completo que parte del CSV de Epoch (\texttt{all\_ai\_models.csv}), filtra modelos de lenguaje, limpia columnas numéricas y genera 12 archivos CSV (uno por tabla) con datos reales enriquecidos con valores sintéticos para los campos faltantes. El generador (\texttt{generate\_data.py}) usa \texttt{random.seed(42)}, por lo que los datos son reproducibles en cualquier máquina.
 
 \subsubsection{Pipeline ETL (pensamiento general)}
 
+El pipeline se diseñó para ser \textbf{determinista}, \textbf{escalable} y \textbf{validable}:
+
 \begin{enumerate}
-  \item \textbf{Extracción:} lectura del CSV de Epoch con \texttt{csv.DictReader}.
-  \item \textbf{Filtrado:} solo modelos con dominio ``Language''.
-  \item \textbf{Limpieza:} conversión numérica segura (\texttt{pd.to\_numeric} con \texttt{errors='coerce'}).
+  \item \textbf{Extracción:} lectura del CSV de Epoch con \texttt{csv.DictReader} (sin pandas, solo stdlib).
+  \item \textbf{Filtrado:} solo modelos con dominio ``Language'' (LLMs).
+  \item \textbf{Limpieza:} conversión numérica segura (\texttt{pd.to\_numeric} con \texttt{errors='coerce'} en la auditoría; en el generador se usa \texttt{float()/int()} con try/except).
   \item \textbf{Transformación por entidad:} organización, modelo, dataset, experimento, GPU, benchmark, evaluación, items, respuestas, relaciones M:N.
   \item \textbf{Enriquecimiento:} campos inventados (version, arquitectura, optimizador, etc.) con valores plausibles del dominio LLM.
   \item \textbf{Simulación de nulos:} missingness semántica (por diseño y por falta de fuente).
-  \item \textbf{Escritura streaming:} CSV con \texttt{csv.DictWriter} (sin acumular en memoria).
-  \item \textbf{Validación:} PKs, FKs, CHECKs, rangos, fechas.
+  \item \textbf{Escritura streaming:} CSV con \texttt{csv.DictWriter} (sin acumular en memoria, permite escalar a 1M+).
+  \item \textbf{Validación:} PKs, FKs compuestas, CHECKs, rangos, fechas.
   \item \textbf{Carga:} \texttt{\textbackslash copy} en orden de FKs.
 \end{enumerate}
+
+\textbf{Decisiones de diseño:}
+\begin{itemize}
+  \item Se eligió Epoch como fuente porque es un dataset real y público de modelos de IA, con ~2.000 LLMs y campos ricos (parámetros, compute, hardware, etc.).
+  \item Se usa \texttt{random.seed(42)} para que cualquier persona obtenga los mismos CSVs.
+  \item Se escribe en streaming para poder escalar a 1.000.000 de registros sin problemas de memoria.
+  \item Se separa la validación (\texttt{validate\_data.py}) de la generación para detectar errores antes de cargar.
+\end{itemize}
 
 \subsubsection{Conteo de registros cargados}
 
@@ -1475,10 +1485,12 @@ consumo\_gpu & 1500 \\
 \caption{Conteo de registros cargados (contexto de 10.000 datos)}
 \end{table}
 
+La distribución refleja el dominio: ~1 modelo por fila, ~1 dataset por modelo, ~1 experimento por modelo, y una muestra de evaluaciones/respuestas (no todos los items×modelos, para evitar explosión combinatoria).
+
 \subsubsection{Bloques del generador (generate\_data.py)}
 
 \begin{lstlisting}
-# Bloque 1: Organizacion (20 filas)
+# Bloque 1: Organizacion (deduplicacion + relleno)
 orgs_raw = []
 seen = set()
 for r in seed_models:
@@ -1486,19 +1498,17 @@ for r in seed_models:
     if o and o not in seen:
         seen.add(o)
         orgs_raw.append(o)
-# Rellenar hasta 20 con orgs sinteticas
 while len(orgs_raw) < 20:
     orgs_raw.append(f"Org Sintetica {len(orgs_raw)+1}")
 
-# Bloque 2: Modelo LLM (1500 filas)
+# Bloque 2: Modelo LLM (solo orgs Creador/Ambos)
 creator_orgs = [o["id_organizacion"] for o in org_rows if o["tipo"] in ("Creador","Ambos")]
 org_id = random.choice(creator_orgs)
 base = None
 if random.random() < 0.3 and i > 1:
     base = random.randint(1, i-1)  # evita ciclos
-num_param = int(params_b * 1e9) if params_b and params_b > 0 else random.randint(100000000, 70000000000)
 
-# Bloque 3: Dataset (1500 filas)
+# Bloque 3: Dataset (sin id_modelo, licencias plural)
 dataset_rows.append({
     "id_dataset": i,
     "nombre": f"Dataset {i}",
@@ -1511,14 +1521,14 @@ dataset_rows.append({
     "fuente_origen": random.choice(["Hugging Face","Kaggle","Propio","Web scrape","Sintetico"]),
 })
 
-# Bloque 4: Experimento (1500 filas)
+# Bloque 4: Experimento (sin segundos, CHECK de estado/fecha)
 estado = random.choice(["Finalizado","Finalizado","Finalizado","En ejecucion","Error","Cancelado"])
 if estado != "En ejecucion":
     dur = random.randint(3600, 30*86400)
     fecha_fin = fecha_inicio + timedelta(seconds=dur)
     loss = round(random.uniform(0.5, 5.0), 6) if estado == "Finalizado" else round(random.uniform(0.5, 5.0), 6)
 
-# Bloque 5: RespuestaModelo (1000 filas, deduplicada)
+# Bloque 5: RespuestaModelo (deduplicada por (id_evaluacion, id_item))
 seen_resp = set()
 while len(resp_rows) < N_RESP:
     ev = random.choice(eval_rows)
@@ -1527,8 +1537,27 @@ while len(resp_rows) < N_RESP:
     key = (ev["id_evaluacion"], it["id_item"])
     if key in seen_resp: continue
     seen_resp.add(key)
-    resp_rows.append({...})
+    resp_rows.append({
+        "id_respuesta": rid,
+        "id_evaluacion": ev["id_evaluacion"],
+        "id_benchmark": bench_id,
+        "id_item": it["id_item"],
+        "output_generado": f"Respuesta generada {rid}",
+        "es_correcta": random.choice([True, False]),
+        "tokens_output": random.randint(10, 500),
+        "latencia": round(random.uniform(0.1, 5.0), 4),
+    })
+    rid += 1
 \end{lstlisting}
+
+\textbf{Decisiones de diseño:}
+\begin{itemize}
+  \item Se eligió Epoch como fuente porque es un dataset real y público de modelos de IA.
+  \item Se usa \texttt{random.seed(42)} para reproducibilidad.
+  \item Se escribe en streaming para escalar a 1M+ sin problemas de memoria.
+  \item Se separa la validación (\texttt{validate\_data.py}) de la generación para detectar errores antes de cargar.
+  \item \texttt{respuesta\_modelo} se deduplica por \texttt{(id\_evaluacion, id\_item)} para cumplir el UNIQUE del esquema.
+\end{itemize}
 
 \subsubsection{Carga (load\_proyectobd.sql)}
 
@@ -1548,8 +1577,10 @@ TRUNCATE TABLE respuesta_modelo, experimento_dataset, consumo_gpu, evaluacion, i
 \copy consumo_gpu(id_run,id_gpu,horas_uso,consumo_energetico) FROM './data_out/csv/experimento_gpu.csv' WITH (FORMAT csv, HEADER true, NULL '');
 \end{lstlisting}
 
+\textbf{Orden de carga:} se respeta el orden de las FKs (organización → modelo → dataset/experimento → consumo → benchmark → evaluación → item → respuesta → relaciones M:N). Se usa \texttt{TRUNCATE ... CASCADE} para limpiar antes de cargar.
+
 \subsubsection{Validación}
-\texttt{validate\_data.py} verifica PKs (simples y compuestas), FKs (simples y compuestas), UNIQUEs, CHECKs, rangos y fechas. Resultado: \textbf{0 errores} en 10.000 registros.
+\texttt{validate\_data.py} verifica PKs (simples y compuestas), FKs (simples y compuestas), UNIQUEs compuestos, CHECKs, rangos y fechas. Resultado: \textbf{0 errores} en 10.000 registros.
 
 \subsection{Simulación de Datos Faltantes}
 
@@ -1591,9 +1622,16 @@ else:
 
 # proveedor_cloud: NULL para on-premise
 "proveedor_cloud": seed["proveedor_cloud"] if random.random() > 0.3 else "",
+
+# tokens_totales: NULL si Epoch no reporta
+'tokens_totales': df_llm['Training dataset size (total)'].apply(lambda x: int(x) if pd.notnull(x) and x > 0 else None)
 \end{lstlisting}
 
+\textbf{Por qué se mantienen los nulos:} para probar la robustez de consultas y vistas frente a valores NULL (LEFT JOIN, COALESCE) y para reflejar la realidad de los datos.
+
 \subsection{Views}
+
+Se crearon 3 vistas de usuario para abstraer consultas frecuentes:
 
 \begin{lstlisting}
 CREATE OR REPLACE VIEW v_modelo_resumen AS
@@ -1627,7 +1665,9 @@ WHERE e.resultado_metrica = (
 );
 \end{lstlisting}
 
-\textbf{Correcciones aplicadas:} \texttt{experimento\_gpu} $\rightarrow$ \texttt{consumo\_gpu}; \texttt{resultado\_benchmark} $\rightarrow$ \texttt{evaluacion}.
+\textbf{Correcciones aplicadas:} \texttt{experimento\_gpu} $\rightarrow$ \texttt{consumo\_gpu}; \texttt{resultado\_benchmark} $\rightarrow$ \texttt{evaluacion} (tabla inexistente en el esquema corregido).
+
+\textbf{Propósito:} \texttt{v\_modelo\_resumen} para listado rápido de modelos; \texttt{v\_consumo\_por\_experimento} para análisis de recursos; \texttt{v\_mejor\_benchmark} para ranking de modelos por benchmark.
 
 \subsection{Procedimientos Almacenados}
 
@@ -1660,7 +1700,9 @@ END;
 $$;
 \end{lstlisting}
 
-\textbf{Prueba realizada:} se registró un experimento (id\_run = 9999), se finalizó con \texttt{loss\_final = 1.234} y se eliminó el registro de prueba. Conteo final: 1500.
+\textbf{Prueba realizada:} se registró un experimento (id\_run = 9999), se finalizó con \texttt{loss\_final = 1.234} y se eliminó el registro de prueba. Conteo final: 1500 experimentos (sin alteración).
+
+\textbf{Integración con triggers:} \texttt{sp\_finalizar\_experimento} actualiza \texttt{fecha\_fin}, y el trigger \texttt{trg\_validar\_organizacion\_creadora} valida la organización creadora.
 
 \subsection{Triggers}
 
@@ -1672,6 +1714,8 @@ Triggers implementados (según el esquema corregido):
 \end{itemize}
 
 Adicionalmente se incluye un trigger auxiliar \texttt{trg\_estado\_gpu} que valida que \texttt{consumo\_energetico >= 0}.
+
+\textbf{Por qué se desactiva \texttt{trg\_validar\_respuesta} en carga masiva:} hace 2 lecturas por fila (item\_benchmark y evaluacion), lo que ralentiza la carga. Se desactiva con \texttt{DISABLE TRIGGER} y se reactiva al final.
 
 \section{Optimización y Experimentación}
 
@@ -1694,6 +1738,8 @@ Q5 & Mejor resultado por benchmark y modelo (top 3) & RANK() OVER (PARTITION BY 
 \end{tabular}
 \caption{Descripción de las 5 consultas intermedias}
 \end{table}
+
+\textbf{Por qué son intermedias (no triviales):} usan window functions, CTEs, joins M:N y agregaciones. No son un simple \texttt{SELECT *} ni un \texttt{GROUP BY} básico.
 
 \subsubsection{Implementación de consultas en SQL}
 
@@ -1748,25 +1794,27 @@ SELECT benchmark, modelo, valor, fecha, rnk
 FROM ranked WHERE rnk <= 3;
 \end{lstlisting}
 
-Las 5 consultas se probaron en los 4 volúmenes (1k/10k/100k/1M) sin errores.
+\textbf{Evidencia de prueba:} las 5 consultas se ejecutaron en los 4 volúmenes (1k/10k/100k/1M) sin errores (salidas guardadas en \texttt{1k\_output.txt}, \texttt{100k\_output.txt}, \texttt{1M\_output.txt}).
 
 \subsection{Metodología del experimento}
 
-Protocolo de medición:
+\textbf{Protocolo de medición:}
 \begin{enumerate}
-  \item Warm-up: ejecutar cada consulta una vez y descartar el resultado.
-  \item 5 repeticiones por consulta, tomando el tiempo medio.
-  \item Métrica: tiempo de ejecución (ms) reportado por \texttt{EXPLAIN (ANALYZE, TIMING)}.
-  \item Limpieza de caché: \texttt{DISCARD ALL;} entre ejecuciones.
-  \item Orden aleatorio de consultas.
-  \item Escenarios: sin índices (solo PKs) y con índices (script \texttt{5\_3\_0 indices.sql}).
+  \item \textbf{Warm-up:} ejecutar cada consulta una vez y descartar el resultado (calentar caché).
+  \item \textbf{Repeticiones:} 5 ejecuciones por consulta, tomando el tiempo medio.
+  \item \textbf{Métrica:} tiempo de ejecución (ms) reportado por \texttt{EXPLAIN (ANALYZE, TIMING)}.
+  \item \textbf{Limpieza de caché:} \texttt{DISCARD ALL;} entre ejecuciones.
+  \item \textbf{Orden:} aleatorio para evitar sesgo por caché.
+  \item \textbf{Escenarios:} sin índices (solo PKs) y con índices (script \texttt{5\_3\_0 indices.sql}).
 \end{enumerate}
 
-Volúmenes probados: 1.000, 10.000, 100.000 y 1.000.000 de registros.
+\textbf{Volúmenes probados:} 1.000, 10.000, 100.000 y 1.000.000 de registros.
+
+\textbf{Justificación:} se eligió \texttt{EXPLAIN (ANALYZE, TIMING)} porque es la métrica estándar de PostgreSQL y reporta el tiempo real de ejecución (no solo el costo estimado).
 
 \subsection{Optimización de consultas}
 
-Índices creados:
+\textbf{Índices creados:}
 \begin{lstlisting}
 CREATE INDEX idx_modelo_llm_arq_numparam ON modelo_llm (arquitectura, num_param DESC);
 CREATE INDEX idx_dataset_dominio ON dataset (dominio);
@@ -1780,6 +1828,8 @@ CREATE INDEX idx_evaluacion_modelo ON evaluacion (id_modelo);
 \end{lstlisting}
 
 \textbf{Planes observados:} En volúmenes pequeños (1k/10k) el planner usa Seq Scan. En volúmenes grandes (100k/1M), Q1 usa Index Scan (mejora ~2-3x). Q2–Q5 siguen usando Seq Scan porque son agregaciones sobre toda la tabla.
+
+\textbf{Por qué estos índices:} se eligieron columnas que aparecen en \texttt{WHERE}, \texttt{JOIN}, \texttt{ORDER BY} y \texttt{PARTITION BY}. El índice parcial de Q3 (\texttt{WHERE estado\_ejecucion = 'Finalizado'}) reduce el tamaño del índice.
 
 \subsection{Plataforma de Pruebas}
 
@@ -1830,6 +1880,13 @@ CREATE INDEX idx_evaluacion_modelo ON evaluacion (id_modelo);
 
 \subsection{Resultados}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{2 hito2/5 Optimización y Experimentación/5_6 Resultados/chart_tiempos.png}
+\caption{Tiempos de ejecución de las 5 consultas vs. volumen de datos (sin/con índices)}
+\label{fig:tiempos}
+\end{figure}
+
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|r|r|r|r|r|r|r|r|r|r|}
@@ -1844,13 +1901,6 @@ CREATE INDEX idx_evaluacion_modelo ON evaluacion (id_modelo);
 \end{tabular}
 \caption{Resultados consolidados (s=sin índices, c=con índices) en ms}
 \end{table}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{2 hito2/5 Optimización y Experimentación/5_6 Resultados/chart_tiempos.png}
-\caption{Tiempos de ejecución de las 5 consultas vs. volumen de datos (sin/con índices)}
-\label{fig:tiempos}
-\end{figure}
 
 \textbf{Resultados por consulta:}
 \begin{itemize}
