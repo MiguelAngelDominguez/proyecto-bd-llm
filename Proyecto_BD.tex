@@ -1962,12 +1962,3 @@ Los tiempos de ejecución crecen linealmente con el volumen de datos, lo que ind
 Se anexa la guía de grabación para la experimentación con 1.000.000 de registros con y sin índices (archivo \texttt{7\_1 Guia de grabacion del video.md}). El video se grabará siguiendo dicha guía, mostrando los comandos, planes y tiempos de las 5 consultas.
 
 \end{document}
-'''
-
-marker = '\\subsection{Carga de datos}'
-idx = s.find(marker)
-assert idx != -1, "marker not found"
-s = s[:idx].rstrip() + '\n\n' + content.lstrip('\n') + '\n'
-open(path, 'w', encoding='utf-8').write(s)
-print("done")
-PY
