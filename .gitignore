@@ -1,7 +1,10 @@
 # Datos generados (se regeneran con generate_data.py)
-data_out/dumps_*/csv/
-data_out/dumps_*/dump_*.sql
+data_out/
 *_output.txt
+
+# Archivos de Windows
+desktop.ini
+Thumbs.db
 
 # Python
 __pycache__/

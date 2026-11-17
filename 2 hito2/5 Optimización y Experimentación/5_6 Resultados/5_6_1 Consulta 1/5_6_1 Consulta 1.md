@@ -23,18 +23,18 @@ FROM ranked WHERE rnk = 1;
 
 | Volumen | Sin índices | Con índices | Speedup |
 |---|---|---|---|
-| 1k | 0.274 | 0.283 | 0.97x |
-| 10k | 1.609 | 1.606 | 1.00x |
-| 100k | 18.700 | 6.897 | 2.71x |
-| 1M | 230.178 | 76.805 | 3.00x |
+| 1k | 0.359 | 0.433 | 0.83x |
+| 10k | 3.185 | 1.558 | 2.04x |
+| 100k | 16.385 | 7.238 | 2.26x |
+| 1M | 217.460 | 98.962 | 2.20x |
 
 ## Plan (EXPLAIN)
 - **Sin índices:** Seq Scan + Sort + WindowAgg.
-- **Con índices:** el índice `idx_modelo_llm_arq_numparam (arquitectura, num_param DESC)` permite Index Scan + Sort, reduciendo el tiempo en volúmenes grandes.
+- **Con índices:** Index Scan + Sort + WindowAgg (en 100k/1M).
 
 ## Análisis
 - En 1k/10k el índice no ayuda (Seq Scan más barato).
-- En 100k/1M el índice reduce el tiempo ~3x porque evita ordenar toda la tabla.
+- En 100k/1M el índice reduce el tiempo ~2x porque evita ordenar toda la tabla.
 
 ## Verificación
 ```sql

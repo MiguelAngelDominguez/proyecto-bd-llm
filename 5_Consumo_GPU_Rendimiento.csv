@@ -1,0 +1,2692 @@
+id_consumo,id_experimento,id_gpu,cantidad_gpus,horas_entrenamiento,notas_tiempo_entrenamiento,chip_hours,potencia_watts,consumo_energetico_kwh,costo_total_usd_2023,eficiencia_mfu,eficiencia_hfu,notas_utilizacion
+1,1,-1,1,,,,,,,,,
+2,2,-1,1,,,,,,,,,
+3,3,-1,1,,,,,,,,,
+4,4,-1,1,,,,,,,,,
+5,5,-1,1,,,,,,,,,
+6,6,-1,1,,,,,,,,,
+7,7,-1,1,,,,,,,,,
+8,8,-1,1,,,,,,,,,
+9,9,-1,1,,,,,,,,,
+10,10,-1,1,5760.0,"""GEN-1.5’s initial pretraining began in parallel — it has now been training continuously for over eight months. We left it running [...]""",,,,,,,
+11,11,-1,1,,,,,,,,,
+12,12,-1,1,,,,,,,,,
+13,13,-1,1,,,,,,,,,
+14,14,-1,1,,,,,,,,,
+15,15,-1,1,,,,,,,,,
+16,16,-1,1,,,,,,,,,
+17,17,-1,1,,,,,,,,,
+18,18,-1,1,,,,,,,,,
+19,19,1,768,2400.0,"Developer-reported: approximately 100 days net training time on 768 NVIDIA B200 GPUs (~1.84M GPU-hours). See Training compute notes for an inconsistency between this duration, the reported FLOP figure, and the claimed MFU.",,1489975.79588318,3575941.91,,,,
+20,20,-1,1,,,,,,,,,
+21,21,-1,1,,,,,,,,,
+22,22,-1,1,,,,,,,,,
+23,23,2,1,,,,,,,,,
+24,24,-1,1,1680.0,"Pre-training ran for approximately 70 days (~1,680 hours) on 512 NVIDIA B200 GPUs (64 nodes of 8), i.e. ~860,000 GPU-hours.",,,,12400000.0,,,
+25,25,-1,1,,,,,,,,,
+26,26,-1,1,,,,,,,,,
+27,27,-1,1,,,,,,,,,
+28,28,-1,1,,,,,,,,,
+29,29,-1,1,,,,,,,,,
+30,30,-1,1,,,,,,,,,
+31,31,-1,1,,,,,,,,,
+32,32,2,1,,,,,,,,,
+33,33,-1,1,,,,,,,,,
+34,34,-1,1,,,,,,,,,
+35,35,-1,1,,,,,,,,,
+36,36,-1,1,,,,,,,,,
+37,37,-1,1,,,,,,,,,
+38,38,-1,1,,,,,,,,,
+39,39,-1,1,,,,,,,,,
+40,40,-1,1,,,,,,,,,
+41,41,-1,50000,,,,,,,,,
+42,42,3,1656,1900.0,Approx. 80 days net training time (vendor-reported).,,3215623.4309682944,6109684.52,,,,
+43,43,-1,1,,,,,,,,,
+44,44,-1,1,,,,,,,,,
+45,45,-1,1,,,,,,,,,
+46,46,-1,1,,,,,,,,,
+47,47,-1,1,,,,,,,,,
+48,48,-1,1,,,,,,,,,
+49,49,-1,1,,,,,,,,,
+50,50,-1,1,,,,,,,,,
+51,51,-1,1,,,,,,,,,
+52,52,-1,12288,,,,,,,,,
+53,53,-1,1,,,,,,,,,
+54,54,4,8192,,,,19099741.957474783,,,,,
+55,55,-1,1,,,,,,,,,
+56,56,-1,1,,,,,,,,,
+57,57,-1,1,,,,,,,,,
+58,58,-1,1,,,,,,,,,
+59,59,-1,1,,,,,,,,,
+60,60,-1,1,,,,,,,,,
+61,61,-1,1,,,,,,,,,
+62,62,-1,1,,,,,,,,,
+63,63,5,1,,,,,,,,,
+64,64,-1,1,,,,,,,,,
+65,65,-1,1,,,,,,,,,
+66,66,-1,1,,,,,,,,,
+67,67,-1,1,,,,,,,,,
+68,68,-1,1,,,,,,,,,
+69,69,4,1,,,,,,,,,
+70,70,4,1,,,,,,,,,
+71,71,-1,1,,,,,,,,,
+72,72,-1,1,,,,,,,,,
+73,73,-1,1,,,,,,,,,
+74,74,6,1,,,,,,,,,
+75,75,-1,1,,,,,,,,,
+76,76,-1,1,,,,,,,,,
+77,77,-1,1,,,,,,,,,
+78,78,-1,1,,,,,,,,,
+79,79,-1,1,,,,,,,,,
+80,80,-1,1,,,,,,,,,
+81,81,-1,1,,,,,,,,,
+82,82,-1,1,,,,,,,,,
+83,83,-1,1,,,,,,,,,
+84,84,-1,1,,,,,,,,,
+85,85,-1,1,,,,,,,,,
+86,86,-1,1,,,,,,,,,
+87,87,-1,1,,,,,,,,,
+88,88,4,1,,,,,,,,,
+89,89,-1,1,,,,,,,,,
+90,90,7,64,2304.0,,,87155.59440596371,200806.49,,,,
+91,91,-1,10240,,,,,,,,,
+92,92,-1,6144,,,,,,,,,
+93,93,-1,1,,,,,,,,,
+94,94,-1,1,,,,,,,,,
+95,95,-1,1,,,,,,,,,
+96,96,5,1,,,,,,,,,
+97,97,-1,1,,,,,,,,,
+98,98,-1,1,,,,,,,,,
+99,99,-1,1,,,,,,,,,
+100,100,-1,1,,,,,,,,,
+101,101,-1,1,,,,,,,,,
+102,102,-1,1,,,,,,,,,
+103,103,-1,1,,,,,,,,,
+104,104,-1,1,,,,,,,,,
+105,105,-1,1,,,,,,,,,
+106,106,-1,1,,,,,,,,,
+107,107,-1,1,,,,,,,,,
+108,108,4,2000,,,,4672690.306975335,,,,,
+109,109,-1,1,,,,,,,,,
+110,110,-1,1,,,,,,,,,
+111,111,-1,1,,,,,,,,,
+112,112,-1,1,,,,,,,,,
+113,113,-1,1,,,,,,,,,
+114,114,-1,1,,,,,,,,,
+115,115,-1,1,,,,,,,,,
+116,116,-1,1,,,,,,,,,
+117,117,5,1,,,,,,,,,
+118,118,-1,1,,,,,,,,,
+119,119,-1,1,,,,,,,,,
+120,120,-1,1,,,,,,,,,
+121,121,8,1,,,,,,,,,
+122,122,-1,1,,,,,,,,,
+123,123,-1,1,,,,,,,,,
+124,124,-1,1,,,,,,,,,
+125,125,-1,1,,,,,,,,,
+126,126,-1,1,,,,,,,,,
+127,127,9,1,,,,,,,,,
+128,128,-1,1,,,,,,,,,
+129,129,-1,1,,,,,,,,,
+130,130,-1,1,,,,,,,,,
+131,131,-1,1,,,,,,,,,
+132,132,-1,1,1572.0,"""Approx. 65.5 days (Net training time excluding downtime)"" per email
+",,,,,,,
+133,133,10,512,3240.0,"K-EXAONE was trained using a cloud-based GPU environment. The total training duration was 135 days, utilizing 512 B200 GPUs. This corresponds to a total of 1,658,880 GPU hours, calculated as follows:
+512 GPUs × 135 days × 24 hours = 1,658,880 GPU hours",,,,,,,
+134,134,11,1016,3238.0,"Trained on 1,016 H100 GPUs for 4.5 months",,,,,,,
+135,135,12,1536,1536.0,"GPU hours (1,536 GPUs)",,,,9642947.0,0.283,0.927,
+136,136,-1,1,,,,,,,,,
+137,137,-1,1,,,,,,,,,
+138,138,-1,1,,,,,,,,,
+139,139,-1,1,,,,,,,,,
+140,140,-1,1,,,,,,,,,
+141,141,-1,1,,,,,,,,,
+142,142,7,1,,,,,,,,,
+143,143,-1,1,,,,,,,,,
+144,144,-1,1,,,,,,,,,
+145,145,-1,1,,,,,,,,,
+146,146,-1,1,,,,,,,,,
+147,147,-1,1,,,,,,,,,
+148,148,-1,1,,,,,,,,,
+149,149,-1,1,,,,,,,,,
+150,150,-1,1,,,,,,,,,
+151,151,-1,1,,,,,,,,,
+152,152,-1,1,,,,,,,,,
+153,153,-1,1,,,,,,,,,
+154,154,12,3000,,,,,,,,,
+155,155,-1,1,,,,,,,,,
+156,156,-1,1,,,,,,,,,
+157,157,12,1,1440.0,"""Both stages, including multiple ablations, were carried out on a 512 H200 cluster over the course of two months."" 2 * 30 * 24 = 1440",,,,,,,
+158,158,-1,1,,,,,,,,,
+159,159,7,1024,1344.0,"In total, approximately 56 days elapsed from the start of training to the evaluation of the Olmo 3 Think 32B checkpoint, on a cluster with 1024 H100 GPUs dedicated to Olmo 3",,1398719.3115551586,1879878.75,,,,
+160,160,7,1024,,,,1398719.3115551586,,,,,
+161,161,7,1024,,,,1398719.3115551586,,,,,
+162,162,7,1024,,,,1398719.3115551586,,,,,
+163,163,-1,1,,,,,,,,,
+164,164,-1,1,,,,,,,,,
+165,165,-1,1,,,,,,,,,
+166,166,13,1,,,,,,,,,
+167,167,-1,1,,,,,,,,,
+168,168,-1,1,,,,,,,,,
+169,169,-1,1,,,,,,,,,
+170,170,-1,1,,,,,,,,,
+171,171,-1,1,,,,,,,,,
+172,172,-1,1,,,,,,,,,
+173,173,-1,1,,,,,,,,,
+174,174,-1,1,,,,,,,,,
+175,175,-1,1,,,,,,,,,
+176,176,-1,1,,,,,,,,,
+177,177,-1,1,,,,,,,,,
+178,178,-1,1,,,,,,,,,
+179,179,-1,1,,,,,,,,,
+180,180,-1,1,,"""thousands of NVIDIA GPUs with minimal communication cost. Additionally, training with MXFP8 allows us to deliver faster inference speeds without requiring post-training quantization.""",,,,,,,
+181,181,4,1,,"""SWE-1.5 is trained on our state-of-the-art cluster of thousands of GB200 NVL72 chips. We believe SWE-1.5 may be the first public production model trained on the new GB200 generation.""",,,,,,,
+182,182,-1,1,,,,,,,,,
+183,183,-1,1,,,,,,,,,
+184,184,14,16,,""" For the 7B model, we train on
+16×A100 GPUs""",,12495.241765683691,,,,,
+185,185,15,8,,"""the 14B model is trained on 8×MI300X GPUs.""",,11714.289155328464,,,,,
+186,186,-1,1,,,,,,,,,
+187,187,9,288,,,,393635.1780890865,,,,,
+188,188,9,32,,,,43737.2420098985,,,,,
+189,189,16,160,,"""We use 20 nodes (each with 8 A100-40G GPUs) for training""",,124969.11444297624,,,,,
+190,190,-1,1,,,,,,,,,
+191,191,-1,1,,,,,,,,,
+192,192,4,80,,"""50k GPU hours on a 17Bx16 MoE (Scout)""",50000.0,187478.7201903392,,,,,
+193,193,17,256,,,,169995.84843414242,,,,,
+194,194,-1,1,,,,,,,,,
+195,195,-1,1,,,,,,,,,
+196,196,-1,1,,,,,,,,,
+197,197,-1,1,,,,,,,,,
+198,198,7,4,72.0,"""Experiments on ARC-AGI were ran for around 3 days with 4 H100 with 80Gb of RAM.""",,5469.225394941245,393.78,,,,
+199,199,4,1,,,,,,,,,
+200,200,4,1,,,,,,,,,
+201,201,4,1,,,,,,,,,
+202,202,-1,1,2880.0,"4 months (from Jaime's correspondence with the GLM team)
+
+4 months * 30 days * 24 hours = 2880 hours",,,,,,,
+203,203,-1,1,,,,,,,,,
+204,204,-1,1,,,,,,,,,
+205,205,-1,1,,,,,,,,,
+206,206,-1,1,,,,,,,,,
+207,207,18,1,,,,,,,,,
+208,208,18,1,,,,,,,,,
+209,209,-1,1,,,,,,,,,
+210,210,-1,1,,,,,,,,,
+211,211,-1,1,,,,,,,,,
+212,212,-1,1,,,,,,,,,
+213,213,-1,1,,,,,,,,,
+214,214,-1,1,,,,,,,,,
+215,215,-1,1,,,,,,,,,
+216,216,7,1,,"""We train granite-docling-258m using IBM's super computing cluster, Blue Vela, which is outfitted with NVIDIA H100 GPUs. This cluster provides a scalable and efficient infrastructure for training our models over thousands of GPUs.""",,,,,,,
+217,217,-1,1,,,,,,,,,
+218,218,-1,1,,,,,,,,,
+219,219,-1,1,,,,,,,,,
+220,220,-1,1,,,,,,,,,
+221,221,-1,1,,,,,,,,,
+222,222,-1,1,,,,,,,,,
+223,223,-1,1,,,,,,,,,
+224,224,19,1,,,,,,,,,
+225,225,20,4096,,,,5604728.8670533225,,,,,
+226,226,20,4096,,"""6 million GPU hours""",6000000.0,5604728.8670533225,,,,,
+227,227,-1,1,720.0,"""completing training within 30 days"" (=720 hours)",,,,,,,
+228,228,-1,1,,,,,,,,,
+229,229,-1,1,,,,,,,,,
+230,230,-1,1,,,,,,,,,
+231,231,-1,1,,,,,,,,,
+232,232,-1,1,,,,,,,,,
+233,233,-1,1,,,,,,,,,
+234,234,16,512,,"""We trained our models for 812.321 GPU hours on a supercomputer, which comprises 936 compute nodes, each containing 4× NVIDIA A100 (40 GB) GPUs connected via NVLink3 intra-node and through Mellanox HDR200 InfiniBand (IB) inter-node.""",812321.0,400444.7737609557,,,,,
+235,235,21,1,,,,,,,,,
+236,236,-1,1,,,,,,,,,
+237,237,-1,1,,,,,,,,,
+238,238,-1,1,,,,,,,,,
+239,239,-1,1,,,,,,,,,
+240,240,-1,1,,,,,,,,,
+241,241,-1,1,,,,,,,,,
+242,242,-1,1,,,,,,,,,
+243,243,-1,1,,,,,,,,,
+244,244,-1,1,,,,,,,,,
+245,245,-1,1,,,,,,,,,
+246,246,-1,1,,,,,,,,,
+247,247,-1,1,,,,,,,,,
+248,248,7,1,,,,,,,,,
+249,249,7,1,,,,,,,,,
+250,250,-1,1,,,,,,,,,
+251,251,-1,1,,,,,,,,,
+252,252,7,80,,"Most compute was used for data generation, not training itself; approximately 2 weeks of initial data generation, 6 days for rounds 2 and 3, and 1 week for round 4, for 3 weeks and 6 days total.",,109545.39710400862,,,,,
+253,253,7,80,,"Most compute was used for data generation, not training itself; approximately 2 weeks of initial data generation, 6 days for rounds 2 and 3, and 1 week for round 4, for 3 weeks and 6 days total.",,109545.39710400862,,,,,
+254,254,22,1,,,,,,,,,
+255,255,22,1,,,,,,,,,
+256,256,-1,1,,,,,,,,,
+257,257,-1,1,,,,,,,,,
+258,258,-1,1,,,,,,,,,
+259,259,-1,1,,,,,,,,,
+260,260,-1,1,,,,,,,,,
+261,261,-1,1,,,,,,,,,
+262,262,-1,1,,,,,,,,,
+263,263,14,64,,"""32B model is trained on 64 NVIDIA A100 GPUs""",,50083.47214569625,,,,,
+264,264,14,16,,""" For the 8B model, we use 16 NVIDIA A100 GPUs""",,12520.868036424064,,,,,
+265,265,-1,1,,,,,,,,,
+266,266,-1,1,,,,,,,,,
+267,267,-1,1,,,,,,,,,
+268,268,-1,1,,,,,,,,,
+269,269,19,64,168.0,"""The model was trained for one week using 64 Tensor Processing Unit v5e chips on the Google Cloud platform""",,28174.462680457786,4733.31,,,,
+270,270,-1,1,,,,,,,,,
+271,271,-1,1,,,,,,,,,
+272,272,-1,1,,,,,,,,,
+273,273,-1,1,,,,,,,,,
+274,274,-1,1,,,,,,,,,
+275,275,21,512,3192.0,"from communication with the authors:
+""EXAONE 4.0 32B: NVIDIA H200 GPUs x 512 EA for 19 weeks (FP8 mode training)""
+
+19 weeks = 3192 hours",,701356.0100875632,2238728.38,,,,
+276,276,21,512,336.0,"from communication with the authors:
+""EXAONE 4.0 1.2B: NVIDIA H200 GPUs x 512 EA for 2 weeks (FP8 mode training)""
+
+2 weeks = 336 hours",,701356.0100875632,235655.62,,,,
+277,277,-1,1,,,,,,,,,
+278,278,-1,1,,,,,,,,,
+279,279,9,1,,,,,,,,,
+280,280,-1,1,,,,,,,,,
+281,281,-1,200000,,,,,,387842678.0863615,,,
+282,282,9,1,,"Table 4
+Total GPU Hours: 1,456K ",1456000.0,,,,,,
+283,283,-1,1,,,,,,,,,
+284,284,9,1,,,,,,,0.47,,"Abstract says: ""We achieve 47% Model FLOPs Utilization (MFU) during the pre-training of our largest ERNIE 4.5 language model.""
+
+Page 4: ""We efficiently pre-train ERNIE 4.5 using a heterogeneous hybrid parallelism approach and a hierarchical load balancing solution tailored to multimodal large models. Through our extreme optimizations, including efficient intra-node expert parallelism, FP8 mixed-precision training, and fine-grained recomputation methods, we achieve 47% Model FLOPs Utilization (MFU) when pre-training our largest ERNIE 4.5 language model on 2016 NVIDIA H800 GPUs. Our training approach enables optimal training performance with limited compute resources, such as 96 GPUs.""
+
+Page 19: ""Our largest ERNIE 4.5 language model employs an 8-way expert parallelism (EP) (Lepikhin et al., 2021), 12-way pipeline parallelism (PP) (Huang et al., 2019), and ZeRO-1 data parallelism (DP) (Rajbhandari et al., 2020) configuration. Through these comprehensive optimizations above, we achieve 47% Model FLOPs Utilization (MFU) in our largest ERNIE 4.5 language model, on 2016 NVIDIA H800 GPUs and RoCE interconnection with 4096 sequence length and 15120 global batch size.""
+
+Interesting tidbit: ""ERNIE-4.5-300B-A47B achieves an inference
+performance of 56k input TPS and 18k output TPS per H800 node""
+This is 5264 TFLOPS per 8 H800s (total performance = 8*989 TFLOPS) which would be 66.5% utilization for inference."
+285,285,-1,1,,,,,,,,,
+286,286,-1,1,,,,,,,,,
+287,287,23,160,,,,78309.46755225716,,,,,
+288,288,-1,1,,,,,,,,,
+289,289,-1,1,,,,,,,,,
+290,290,7,1,,,,,,,,,
+291,291,7,1,,,,,,,,,
+292,292,-1,1,,,,,,,,,
+293,293,-1,1,,,,,,,,,
+294,294,-1,1,,,,,,,,,
+295,295,9,1,,"Continual pre-training: ??
+RL: ""These dual contributions yield an efficient and scalable RL framework for training M1, where the complete training cycle requires 3 weeks on 512 H800 GPUs—equivalent to a rental cost of approximately $0.53M USD.""",,,,,,,
+296,296,9,1,,"Continual pre-training: ??
+RL: ""These dual contributions yield an efficient and scalable RL framework for training M1, where the complete training cycle requires 3 weeks on 512 H800 GPUs—equivalent to a rental cost of approximately $0.53M USD.""
+
+40k vesion training was stopped interemediately",,,,,,,
+297,297,24,1,,,,,,,,,
+298,298,-1,1,,,,,,,,,
+299,299,-1,1,,,,,,,,,
+300,300,-1,1,,,,,,,,,
+301,301,-1,1,,,,,,,,,
+302,302,-1,1,,,,,,,,,
+303,303,25,64,,,,50137.0364857829,,,,,
+304,304,-1,1,,,,,,,,,
+305,305,-1,1,,,,,,,,,
+306,306,-1,1,,,,,,,,,
+307,307,7,384,96.0,"""The seven specialist models were trained using 24-72 Nvidia H100 GPUs each""
+
+""The final all-task RL training phase was performed using 384 H100 GPUs, over 4 days""
+
+4 days = 96 hours",,526485.7790411419,50542.63,,,,
+308,308,-1,1,,,,,,,,,
+309,309,-1,1,,,,,,,,,
+310,310,-1,1,,,,,,,,,
+311,311,-1,1,,,,,,,,,
+312,312,-1,1,,,,,,,,,
+313,313,9,32,,,,43880.65474911279,,,,,
+314,314,-1,1,,,,,,,,,
+315,315,26,4000,,,,2429161.768914584,,,,,
+316,316,-1,1,,,,,,6770000.0,,,
+317,317,-1,1,,,,,,,,,
+318,318,-1,1,,,,,,,,,
+319,319,14,8,,"Table 9:
+40 + 80 + 500 + 36 + 8 = 664 GPU-hours",664.0,6269.362999157688,,,,,
+320,320,-1,1,,,,,,,,,
+321,321,27,32,,"""We have run our experiments on Google TPUs: we used 4 × 4 × 4 topology v5 TPUs for meta-training, and up to 4 × 8 topology v6e TPUs for evaluation.""",,23824.109938841317,,,,,
+322,322,-1,1,,,,,,,,,
+323,323,-1,1,,,,,,,,,
+324,324,-1,1,2.0,"""Reason-ModernColBERT has been trained in less than two hours""",,,,,,,
+325,325,-1,1,,,,,,,,,
+326,326,7,4096,,"""The Falcon-H1 model series was trained on a large-scale infrastructure comprising 4,096 NVIDIA H100 GPUs.""",,5617724.544289504,,,,,
+327,327,-1,1,,,,,,,,,
+328,328,-1,1,,,,,,,,,
+329,329,-1,1,,,,,,,,,
+330,330,-1,1,,,,,,,,,
+331,331,28,1,,,,,,,,,
+332,332,-1,1,,,,,,,,,
+333,333,-1,1,,,,,,,,,
+334,334,-1,1,,,,,,,,,
+335,335,-1,1,,,,,,,,,
+336,336,-1,1,,,,,,,,,
+337,337,-1,1,,,,,,,,,
+338,338,-1,1,,,,,,,,,
+339,339,-1,1,,,,,,,,,
+340,340,9,8,,,,10974.317550529691,,,,,
+341,341,9,1,,""" The pretraining phase consumes 1.3
+million GPU hours in total""
+
+"" all computational costs mentioned in this report are normalized to GPU hours based on the H800""",1300000.0,,,,,,
+342,342,-1,1,,,,,,,,,
+343,343,-1,1,,,,,,,,,
+344,344,-1,1,,,,,,,,,
+345,345,29,6000,,,,4703802.674709778,,,0.3,,"""Taking advantage of our model selection strategy and parallel computing system optimization, when training Pangu Ultra MoE, with performance comparable to DeepSeek R1 [10], we achieve a Model Flops Utilization (MFU) of 30.0% and Tokens Per Second (TPS) of 1.46M on 6K Ascend NPUs, compared to the baseline MFU
+of 18.9% and TPS of 0.61M on 4K Ascend NPUs."""
+346,346,-1,1,,,,,,,,,
+347,347,-1,1,,,,,,,,,
+348,348,-1,1,,,,,,,,,
+349,349,-1,1,,,,,,,,,
+350,350,-1,1,,,,,,,,,
+351,351,7,32,60.0,"""GPUs	32 H100-80G
+Training time	2.5 days""
+
+2.5*24 = 60 (hours)",,43909.002544977615,2634.54,,,,
+352,352,7,32,,,,43909.002544977615,,,,,
+353,353,-1,1,,,,,,,,,
+354,354,-1,1,,,,,,,,,
+355,355,-1,1,,,,,,,,,
+356,356,-1,1,,,,,,,,,
+357,357,-1,1,,,,,,,,,
+358,358,-1,1,,,,,,,,,
+359,359,-1,1,,,,,,,,,
+360,360,-1,1,,,,,,,,,
+361,361,-1,1,,,,,,,,,
+362,362,-1,1,,,,,,,,,
+363,363,-1,1,,,,,,,,,
+364,364,-1,1,,,,,,,,,
+365,365,-1,1,,,,,,,,,
+366,366,-1,1,,,,,,,,,
+367,367,7,16,,,,21956.94597329117,,,,,
+368,368,7,16,,,,21956.94597329117,,,,,
+369,369,-1,1,,,,,,,,,
+370,370,-1,1,,,,,,,,,
+371,371,-1,1,,,,,,,,,
+372,372,7,256,,"""Trillion 7B model was trained using 256 H100 GPUs, each with 80GB HBM3, using mixed precision training with BF16""
+
+""We achieve HFU and MFU of 47.5% and 42.5% respectively.""",59400.0,351342.43087893666,,139200.0,0.425,,
+373,373,-1,1,,,,,,,,,
+374,374,-1,1,,,,,,,,,
+375,375,-1,1,,,,,,,,,
+376,376,-1,1,,,,,,,,,
+377,377,-1,1,,,,,,,,,
+378,378,14,8,216.0,"""DEMIST-2 was trained
+on 8 A100 GPUs over a nine-day period using the AWS Sagemaker platform.""
+
+9 days = 216 hours",,6274.530874518676,1355.3,,,,
+379,379,-1,1,,,,,,,,,
+380,380,-1,1,,,,,,,,,
+381,381,-1,1,,,,,,,,,
+382,382,-1,1,,,,,,,,,
+383,383,-1,1,,,,,,,,,
+384,384,-1,1,,,,,,,,,
+385,385,-1,1,,,,,,,,,
+386,386,-1,1,,,,,,,,,
+387,387,-1,1,,,,,,,,,
+388,388,7,6144,,,,8433532.904958995,,,,,
+389,389,-1,1,,,,,,,,,
+390,390,-1,1,,,,,,,,,
+391,391,-1,1,,,,,,,,,
+392,392,-1,1,,,,,,,,,
+393,393,-1,1,,,,,,,,,
+394,394,29,8192,,,,6426121.277196856,,,0.52,,"""Through careful tuning of load balancing across
+PP and VPP stages, we are able to achieve approximately 43% MFU on an 8,192 NPU cluster as a baseline.""
+...
+""Overall, we achieve over 52% Model FLOPs Utilization (MFU) when training
+Pangu Ultra on 8,192 Ascend NPUs."""
+395,395,-1,1,,,,,,,,,
+396,396,-1,1,,,,,,,,,
+397,397,17,256,,,,170701.44908412764,,,,,
+398,398,17,256,,,,170701.44908412764,,,,,
+399,399,17,256,,,,170701.44908412764,,,,,
+400,400,-1,1,,,,,,,,,
+401,401,-1,1,,,,,,,,,
+402,402,-1,1,,,,,,,,,
+403,403,-1,1,,,,,,,,,
+404,404,7,32000,,"Based on the model cards for Llama 4 Scout and Maverick, they seem to be using H100-80GB GPUs, despite the article saying that 390 TFLOPS/GPU was a high MFU (it is high throughput, but <20% MFU in FP8).",,43933454.99810563,,44588963.624007165,,,
+405,405,7,8,,,,10984.097551853682,,,,,
+406,406,7,8,,,,10984.097551853682,,,,,
+407,407,-1,1,,,,,,,,,
+408,408,-1,1,,,,,,,,,
+409,409,-1,1,,,,,,,,,
+410,410,-1,1,,,,,,,,,
+411,411,7,1,,"""The video tokenizer was trained for 300,000 steps with a batch size of 128 using 128 H100 GPUs""
+
+""The latent world model was trained for 460,000 steps with a batch size of 256 on 256 H100 GPUs""",,,,,,,
+412,412,-1,1,,,,,,,,,
+413,413,-1,1,,,,,,,,,
+414,414,-1,1,,,,,,,,,
+415,415,9,2048,,"""DeepSeek-V3 requires only 2.788M H800 GPU hours for its full training""",2788000.0,2812492.608768545,,5390000.0,0.1947,,"Table 4: Training metric comparison
+
+""Causal MFU only takes into account the flops of the lower triangle of the attention matrix (in line with FlashAttention), while non-causal MFU includes the flops of the whole attention matrix (in line with Megatron)""
+
+TFLOPS (causal) = 385
+H800 maximum FP8 performance = 1979 TFLOPS
+
+therefore MFU = 385/1979 = 0.1947"
+416,416,-1,1,,,,,,,,,
+417,417,-1,1,,,,,,,,,
+418,418,-1,1,,,,,,,,,
+419,419,-1,1,,,,,,,,,
+420,420,-1,1,,,,,,,,,
+421,421,7,1024,48.828125,"""GR00T-N1-2B used roughly 50,000 H100 GPU hours for pretraining""
+""We use up to 1024 GPUs for a single model.""
+
+50e3 GPU*hr / 1024 GPU = 48.8 hr ~= 2.03 day
+
+Table 6: Training hyperparameters.
+Hyperparameter | Pre-training Value
+---------------------------------------
+Batch size | 16,384
+Gradient steps | 200,000
+Backbone’s vision encoder | unfrozen
+Backbone’s text tokenizer | frozen
+DiT | unfrozen
+
+200e3 batches-seen * 16384 examples/batch = 3.2768e9 examples-seen
+592.9e6 examples",,1406434.214264239,68673.55,,,,
+422,422,-1,1,,,,,,,,,
+423,423,7,512,2160.0,512 H100 GPUs were used for three months,,703248.4282353076,1519016.6,,0.3156,,"Training compute was 1.26e24 FLOP.
+
+Training hardware was 512 H100 GPUs used for 3 months (pre-traning and fine-tuning). Model was trained in 16-bit precision.
+
+Therefore MFU = 1.26e24 / (512 H100 * 989 TFLOPS/H100 * 3 months * 30 day/month * 86400 s/day) = 31.56%
+https://www.wolframalpha.com/input?i=1.26e24+FLOP+%2F+%28512+*+989+TFLOPS+*+3+months%29"
+424,424,7,1,,,,,,,,,
+425,425,7,1,,,,,,,,,
+426,426,-1,1,,,,,,,,,
+427,427,-1,1,,,,,,,,,
+428,428,-1,1,,,,,,,,,
+429,429,-1,1,,,,,,,,,
+430,430,-1,1,,,,,,,,,
+431,431,-1,1,,,,,,,,,
+432,432,7,1,,,,,,,0.38,,"""Training infrastructure: OLMo 2 32B was trained on Augusta, a 160 node AI Hypercomputer provided by Google Cloud Engine. Each node has 8 H100 GPUs, and the nodes are connected with GPUDirect-TCPXO interconnect. Over the course of the training run, we reached performance of over 1800 tokens per second per GPU (~38% MFU)."""
+433,433,-1,1,,,,,,,,,
+434,434,-1,1,,,,,,,,,
+435,435,-1,1,,,,,,,,,
+436,436,30,6144,,,,6510651.0908313785,,,,,
+437,437,17,6144,,,,4099298.8349679047,,,,,
+438,438,19,2048,,,,904257.0959488024,,,,,
+439,439,19,512,,,,226064.27398720064,,,,,
+440,440,-1,1,,,,,,,,,
+441,441,-1,1,,,,,,,,,
+442,442,31,120,,"""Trained the model using 120 Nvidia H100 GPUs over a total of 2,688 GPU days"" = 64512 GPU-hours",64512.0,82422.93749007674,,,,,
+443,443,-1,1,,,,,,,,,
+444,444,-1,1,,,,,,,,,
+445,445,-1,1,,,,,,,,,
+446,446,-1,1,,,,,,,,,
+447,447,-1,1,,,,,,,,,
+448,448,-1,1,,,,,,,,,
+449,449,24,512,504.0,21 days * 24 hours / day = 504 hours,,401972.5996644288,202594.19,,,,
+450,450,24,512,672.0,24 hours / day * 28 days = 672 hours,,401972.5996644288,270125.59,,,,
+451,451,-1,1,,,,,,,,,
+452,452,29,10000,,,,7851027.337195874,,,,,
+453,453,-1,1,3000.0,"Likely trained for around 4 months/120 days
+
+https://colab.research.google.com/drive/1QBmVPm64Ti0xucN0EsZTgSz_I7Mj9hAZ#scrollTo=NYH1ABJuLJlw ",,,,366010627.6281514,,,
+454,454,-1,1,,,,,,,,,
+455,455,-1,1,,,,,,,,,
+456,456,7,1,,,,,,,,,
+457,457,7,1,,,,,,,,,
+458,458,-1,1,,,,,,,,,
+459,459,-1,1,,,,,,,,,
+460,460,-1,1,,,,,,,,,
+461,461,-1,1,,,,,,,,,
+462,462,24,1,,,,,,,,,
+463,463,-1,1,,,,,,,,,
+464,464,-1,1,,,,,,,,,
+465,465,-1,1,,,,,,,,,
+466,466,-1,1,,,,,,,,,
+467,467,19,256,72.0,"""PaliGemma 2 3B has roughly the same training cost as PaliGemma (3 days for Stage 1 using 256 chips)""",,113085.0096028742,8142.12,,,,
+468,468,19,256,,,,113085.0096028742,,,,,
+469,469,-1,1,,,,,,,,,
+470,470,-1,1,,,,,,,,,
+471,471,-1,1,,,,,,,,,
+472,472,-1,1,,,,,,,,,
+473,473,-1,1,,,,,,,,,
+474,474,32,1,12.0,Training was conducted on a single NVIDIA Tesla V100 Volta GPU with 32 GB of memory. The total runtime for training one model is ∼12 hours,,323.6250227878313,3.88,,,,
+475,475,-1,1,,,,,,,,,
+476,476,9,1,,"""thousands of H800 GPUs""",,,,,0.35,,"""We train Step-Omni on thousands of H800 GPUs with 35% Model Flops Utilization (MFU)."""
+477,477,7,80000,2160.0,"Estimated to be approximately 3 months. See compute estimate notes for more details.
+",,109948656.20196916,237489097.4,217835545.5267339,,,
+478,478,-1,1,,,,,,,,,
+479,479,-1,1,,,,,,,,,
+480,480,9,1,,,,,,,,,
+481,481,-1,1,,,,,,,,,
+482,482,-1,1,,,,,,,,,
+483,483,-1,1,,,,,,,,,
+484,484,14,128,,,,100540.15721147944,,,,,
+485,485,14,32,9.0,"""It takes about 9 hours to train the model 90 steps with 32xA100.""",,25135.039302869864,226.22,,,,
+486,486,27,1,,,,,,,,,
+487,487,-1,1,,,,,,,,,
+488,488,-1,1,,,,,,,,,
+489,489,33,16,7.0,,,12570.318670696644,87.99,,,,
+490,490,33,16,7.0,,,12570.318670696644,87.99,,,,
+491,491,-1,1,,,,,,,,,
+492,492,7,1,,,,,,,,,
+493,493,-1,1,,,,,,,,,
+494,494,-1,1,,,,,,,,,
+495,495,-1,1,,,,,,,,,
+496,496,16,8,336.0,"""The whole training process took about 9/14 days on a cluster of 16/32 nodes for 1.5B/7B model, each equipped with 8 Nvidia A100 (40GB) GPUs.""
+
+14*24 = 336 hours",,6285.719226471854,2112.0,,,,
+497,497,16,8,216.0,"""The whole training process took about 9/14 days on a cluster of 16/32 nodes for 1.5B/7B model, each equipped with 8 Nvidia A100 (40GB) GPUs.""
+
+9*24 = 216 hours",,6285.719226471854,1357.72,,,,
+498,498,-1,1,,,,,,,,,
+499,499,-1,1,,,,,,,,,
+500,500,-1,1,,,,,,,,,
+501,501,-1,1,,,,,,,,,
+502,502,-1,1,,,,,,,,,
+503,503,-1,1,,,,,,,,,
+504,504,-1,1,,,,,,,,,
+505,505,-1,1,,,,,,,,,
+506,506,-1,1,,,,,,,,,
+507,507,-1,1,,,,,,,,,
+508,508,-1,1,,,,,,,,,
+509,509,-1,1,,,,,,,,,
+510,510,-1,1,,,,,,,,,
+511,511,-1,1,,,,,,,,,
+512,512,-1,1,,,,,,6770000.0,,,
+513,513,-1,1,,,,,,,,,
+514,514,7,256,130.5,"Appendix A. Compute: ""We show our training resource for Eagle2-9B in Tab. A. In actual development, we rarely iterate the Stage-1 model. Usually, we iterate Stage-1.5 once after iterating Stage-2 >10 times.
+Assume "">10 times"" -> 12
+Stage 1.0:  2.5 hr * 1
+Stage 1.5   28 hr * 2
+Stage 2.0:  6 hr * 12
+(2.5 hr * 1) + (28 hr * 2) + (6 hr * 12) = 130.5 hr
+ ",,352055.152733459,45943.2,,,,
+515,515,-1,1,,,,,,,,,
+516,516,-1,1,,,,,,,,,
+517,517,7,16,0.27,"""We perform supervised fine-tuning (SFT) of an off-the-shelf pretrained model on our small dataset requiring just 26 minutes of training on 16 H100 GPUs""",,22006.387259856583,5.94,,,,
+518,518,9,1,,,,,,,,,
+519,519,9,1,,,,,,,,,
+520,520,7,8,,,,11003.193629928292,,,,,
+521,521,7,1,,,,755.7138482093607,,,,,
+522,522,-1,1,,,,,,,,,
+523,523,-1,1,,,,,,,,,
+524,524,-1,1,,,,,,,,,
+525,525,-1,1,,,,,,,,,
+526,526,7,1,,,,,,,,,
+527,527,7,1,,,1280.0,,,,,,
+528,528,-1,1,,,,,,,,,
+529,529,-1,1,,,,,,,,,
+530,530,-1,1,,,,,,,,,
+531,531,-1,1,,,,,,,,,
+532,532,9,2048,,"""DeepSeek-V3 requires only 2.788M H800 GPU hours for its full training""",2788000.0,2818135.181214284,,5390000.0,0.1947,,"Table 4: Training metric comparison
+
+""Causal MFU only takes into account the flops of the lower triangle of the attention matrix (in line with FlashAttention), while non-causal MFU includes the flops of the whole attention matrix (in line with Megatron)""
+
+TFLOPS (causal) = 385
+H800 maximum FP8 performance = 1979 TFLOPS
+
+therefore MFU = 385/1979 = 0.1947"
+533,533,-1,1,,,,,,,,,
+534,534,-1,1,,,,,,,,,
+535,535,7,64,240.0,10 days = 240 hours,,88076.53091181243,21138.37,,,,
+536,536,21,64,136.0,,,88076.53091181243,11978.41,,,,
+537,537,34,192,136.0,,,,,,,,
+538,538,7,8,,,,11009.566363976552,,,,,
+539,539,7,8,,,,11009.566363976552,,,,,
+540,540,7,8,,,,11009.566363976552,,,,,
+541,541,7,8,,,,11009.566363976552,,,,,
+542,542,7,8,,,,11009.566363976552,,,,,
+543,543,24,4,,,,3145.5903897075864,,,,,
+544,544,-1,1,,,,,,,,,
+545,545,7,1,,,,,,,,,
+546,546,7,1,,,,,,,,,
+547,547,7,1024,,,,1409287.2610737197,,,,,
+548,548,16,8,,,,6291.601095376888,,,,,
+549,549,-1,1,,,,,,,,,
+550,550,14,128,,,,100672.34303072088,,,,,
+551,551,14,128,,,,100672.34303072088,,,,,
+552,552,-1,1,,,,,,,,,
+553,553,14,128,,,,100672.34303072088,,,,,
+554,554,-1,1,,,,,,,,,
+555,555,7,1920,504.0,"https://huggingface.co/microsoft/phi-4
+21 days * 24 hours / day = 504 hours",,2642707.855343539,1331924.76,,,,
+556,556,27,1,,,,,,,,,
+557,557,-1,1,,,,,,,,,
+558,558,-1,1,,,,,,,,,
+559,559,-1,1,,,,,,,,,
+560,560,-1,1,,,,,,,,,
+561,561,-1,1,,,,,,,,,
+562,562,-1,1,,,,,,,,,
+563,563,-1,1,,,,,,,,,
+564,564,7,1,,"""Training utilized a cumulative of 39.3M GPU hours of computation on H100-80GB (TDP of 700W) type hardware, per the table below. Training time is the total GPU time required for training each model and power consumption is the peak power capacity per GPU device used, adjusted for power usage efficiency.""
+
+Llama 3.3 70B: Training Time (GPU hours): 7M
+",7000000.0,,,,,,
+565,565,-1,1,,,,,,,,,
+566,566,-1,1,,,,,,,,,
+567,567,-1,1,,,,,,,,,
+568,568,-1,1,,,,,,,,,
+569,569,7,128,,"""We train all models using 128 NVIDIA H100 GPUs with a global batch size of 2048 across all stages.""",,176207.9898367568,,,,,
+570,570,7,128,16.7,"""We train all models using 128 NVIDIA H100 GPUs with a global batch size of 2048 across all stages.""
+
+from Figure 1
+NVILA 8B takes 4.5x times less gpu hours than LLAVA OneVision which is reported to take 400 GPU days (""For example, training a state-of-the-art 7B VLM [5] can take up to 400 GPU days"")
+
+400/4.5 ~ 89 GPU days ~ 2133 GPU hours ~ 16.7 clock hours",2133.0,176207.9898367568,2942.67,,,,
+571,571,7,64,46.0,"""Pleias-pico-350m-Preview was fully pretrained at Jean Zay on 64 h100s for 46 hours with Nanotron""",,88103.9949183784,4052.78,,,,
+572,572,7,192,120.0,"""Pleias-nano-1.2b-Preview was fully pretrained on TractoAI on ISEG GPU cluster by Nebius AI on 192 h100s for 5 days""",,264311.9847551352,31717.44,,,,
+573,573,-1,1,,,,,,,,,
+574,574,-1,1,,,,,,,,,
+575,575,35,1,,,,,,,,,
+576,576,35,1,,,,,,,,,
+577,577,35,1,,,,,,,,,
+578,578,-1,1,,,,,,,,,
+579,579,-1,1,1008.0,"""The pre-training of INTELLECT-1 for 1 trillion tokens took place over 42 days, from October 10, 2024, to November 22, 2024""",,,,,,,
+580,580,-1,1,,,,,,,,,
+581,581,-1,1,,,,,,,,,
+582,582,-1,1,,,,,,,,,
+583,583,-1,1,,,,,,,,,
+584,584,-1,1,,,,,,,,,
+585,585,-1,1,,,,,,,,,
+586,586,-1,1,,,,,,,,,
+587,587,14,32,,,,25178.17637397875,,,,,
+588,588,14,128,,,,100719.43414656924,,,,,
+589,589,7,1,,"SFT: ""To train our Tülu 3 models, we used between 4 and 16 8xH100 nodes with high speed interconnect. <..> the 70B model was trained on 64 GPUs for 50 hours.""
+
+DPO: ""the 70B DPO model is trained for 19 hours on 64 interconnected H100s""
+
+RLVR: ""the final 70B RL run takes 60 hours on 48 GPUs""
+
+64 * 50 + 64 * 19 + 48 * 60 = 7296 GPU-hours",7296.0,,,,,,
+590,590,-1,1,,,,,,,,,
+591,591,7,1,,"SFT: ""To train our Tülu 3 models, we used between 4 and 16 8xH100 nodes with high speed interconnect. The final 8B model is trained on 32 GPUs for 6 hours""
+
+DPO: ""The 8B DPO model is trained for 10 hours on 8 Nvidia H100 GPUs""
+
+RLVR: ""The final 8B reward model is trained in 9 hours on 8 H100 gpus, while the final 8B RL run takes 65 hours on 8 GPUs""
+
+32 * 6 + 8 * 10 + 8 * 9 + 8 * 65 = 864 GPU-hours",864.0,,,,,,
+592,592,-1,1,,,,,,,,,
+593,593,-1,1,,,,,,,,,
+594,594,-1,1,,,,,,,,,
+595,595,-1,1,,,,,,,,,
+596,596,-1,1,,,,,,,,,
+597,597,-1,1,,,,,,,,,
+598,598,-1,1,,,,,,,,,
+599,599,7,8,,,,11017.905508717806,,,,,
+600,600,-1,1,,,,,,,,,
+601,601,-1,1,,,,,,,,,
+602,602,-1,1,,,,,,,,,
+603,603,-1,1,,,,,,,,,
+604,604,7,8,6.0,"""The training process for fine-tuning was approximately 4 hours, with alignment taking 2 hours, both on 8x H100-80GB GPUs""",,11018.150873278302,66.11,,,,
+605,605,-1,1,,,,,,,,,
+606,606,-1,1,,,,,,,,,
+607,607,-1,1,,,,,,,,,
+608,608,-1,1,,,,,,,,,
+609,609,-1,1,,,,,,,,,
+610,610,24,8,,"""Llama-3.1-Minitron-4B-Width-Base was trained between July 29, 2024 and Aug 3, 2024.""
+5 days
+",,6297.48846824743,,,,,
+611,611,24,8,,"All experiments were performed on 16× NVIDIA DGX A100 nodes (8× A100 80GB) for short
+turnaround times.",,6297.48846824743,,,,,
+612,612,24,8,,"All experiments were performed on 16× NVIDIA DGX A100 nodes (8× A100 80GB) for short
+turnaround times.",,6297.48846824743,,,,,
+613,613,-1,1,,,,,,,,,
+614,614,7,8,1.7,"""Fine-tuning the google/gemma-2-9b-it on princeton-nlp/gemma2-ultrafeedback-armorm takes around 100 mins to finish on 8xH100 GPUs.""",,11021.341109849023,18.74,,,,
+615,615,16,128,,,,100771.03540530246,,,,,
+616,616,-1,1,,,,,,,,,
+617,617,-1,1,,,,,,,,,
+618,618,-1,1,,,,,,,,,
+619,619,20,256,,"""During the base model training, we utilized 256 NVIDIA GH200 GPUs, achieving a throughput of over 9,200 tokens per GPU per second.""
+
+36 * 10^9 tokens * 2 epochs / 9200 tokens per GPU per second = 7826087 GPU - seconds = 2173 GPU - hours
+",2173.0,352745.7533267415,,,,,
+620,620,-1,1,,,,,,,,,
+621,621,-1,1,,,,,,,,,
+622,622,-1,1,,,,,,,,,
+623,623,7,128,,,,176380.73226445544,,,,,
+624,624,7,128,,,,176380.73226445544,,,,,
+625,625,7,128,,,,176380.73226445544,,,,,
+626,626,-1,1,,,,,,,,,
+627,627,7,64,,,,88190.36613222772,,,,,
+628,628,7,256,,Table 7,832102.0,352769.3203924083,,,,,
+629,629,7,768,,Table 7,192030.0,1058307.961177225,,,,,
+630,630,-1,1,,,,,,,,,
+631,631,-1,1,,,,,,,,,
+632,632,-1,1,,,,,,,,,
+633,633,-1,1,,,,,,,,,
+634,634,16,16,168.0,"""The whole training process took 7 days on a cluster of 16 nodes, each equipped with 8 Nvidia A100 (40GB) GPUs.""",,12600.026628425288,2116.8,,,,
+635,635,7,2000,720.0,"https://x.com/kaifulee/status/1846310645849047524
+""it was trained on 2000 H100s for 1 month""",,2756317.205735781,1984548.39,,,,
+636,636,-1,1,,,,,,,,,
+637,637,-1,1,,,,,,,,,
+638,638,-1,1,,,,,,,,,
+639,639,14,1,,,,432.7221305136717,,,,,
+640,640,-1,1,96.0,,,,,,,,
+641,641,-1,1,,,,,,,,,
+642,642,-1,1,,,,,,,,,
+643,643,-1,1,,,,,,,,,
+644,644,-1,1,,,,,,,,,
+645,645,-1,1,,,,,,,,,
+646,646,9,64,,,,88241.44346194508,,,,,
+647,647,14,48,,,,37817.761483690745,,,,,
+648,648,7,1,,"Table 8:
+
+pre-train 128 gpus 33.3 hours 4.2k gpu-hours
+fine-tune 256 gpus 32.4 hours 8.3k gpu-hours",,,,,,,
+649,649,7,1,,"""Stage 1 pretraining: 147K H100 hours Stage 2 annealing: 98K H100 hours SFT: 896 H100 hours RLHF: 224 H100 hours""
+
+https://huggingface.co/meta-llama/Llama-3.2-11B-Vision",246120.0,,,,,,
+650,650,7,1,,"""Stage 1 pretraining: 885K H100 hours Stage 2 annealing: 885K H100 hours SFT: 3072 H100 hours RLHF: 2048 H100 hours""
+
+https://huggingface.co/meta-llama/Llama-3.2-90B-Vision",1770000.0,,,,,,
+651,651,7,1,,https://huggingface.co/meta-llama/Llama-3.2-1B,370000.0,,,,,,
+652,652,7,1,,https://huggingface.co/meta-llama/Llama-3.2-1B,460000.0,,,,,,
+653,653,-1,1,,,,,,,,,
+654,654,-1,1,,,,,,,,,
+655,655,-1,1,,,,,,,,,
+656,656,-1,1,,,,,,,,,
+657,657,-1,1,,,,,,,,,
+658,658,-1,1,,,,,,,,,
+659,659,-1,1,,,,,,,,,
+660,660,-1,1,,,,,,,,,
+661,661,-1,1,,,,,,,,,
+662,662,-1,1,,,,,,,,,
+663,663,25,64,,,,50431.54291680728,,,,,
+664,664,14,64,,,,50431.54291680728,,,,,
+665,665,-1,1,,,,,,,,,
+666,666,-1,1,,,,,,,,,
+667,667,-1,1,,,,,,,,,
+668,668,-1,1,,,,,,,,,
+669,669,-1,1,,,,,,,,,
+670,670,-1,1,,,,,,,,,
+671,671,-1,1,,,,,,,,,
+672,672,-1,1,,,,,,,,,
+673,673,-1,1,,,,,,,,,
+674,674,-1,1,,,,,,,,,
+675,675,-1,1,,,,,,,,,
+676,676,-1,1,,,,,,,,,
+677,677,-1,1,,,,,,,,,
+678,678,19,1,,,,,,,,,
+679,679,-1,1,,,,,,,,,
+680,680,-1,1,,,,,,,,,
+681,681,-1,1,,,,,,,,,
+682,682,-1,1,,,,,,,,,
+683,683,-1,1,,,,,,,,,
+684,684,-1,1,,,,,,,,,
+685,685,-1,1,,,,,,,,,
+686,686,-1,1,,,,,,,,,
+687,687,7,256,287.0,"""We pretrain OLMOE-1B-7B on 256 H100 GPUs for approximately 10 days ... For adaptation, we use 32 H100 GPUs for 33 hours to instruction tune and for another 14 hours to preference tune via DPO.""
+10*24 + 33 + 14 = 287",,353146.6076498626,101353.08,,,,
+688,688,-1,1,,,,,,,,,
+689,689,-1,1,,,,,,,,,
+690,690,-1,1,,,,,,,,,
+691,691,-1,1,,,,,,,,,
+692,692,20,256,,,,353193.7969199408,,,,,
+693,693,-1,1,,,,,,,,,
+694,694,-1,1,,,,,,,,,
+695,695,36,256,,,,,,,,,
+696,696,7,32,19.8,,,44151.1910097316,874.19,,,,
+697,697,22,128,528.0,"""The continued pre-training phase lasted 20 days on 128 Nvidia A800 80G GPUs, while the supervised fine-tuning (SFT) process took 2 days on 8 Nvidia A800 80G GPUs.""",,63077.34395151266,33304.84,,,,
+698,698,7,1,,,,,,,,,
+699,699,-1,1,,,,,,,,,
+700,700,-1,1,,,,,,,,,
+701,701,-1,256,,,,,,,,,
+702,702,-1,1,,,,,,,,,
+703,703,-1,1,,,,,,,,,
+704,704,-1,1,,,,,,,,,
+705,705,7,128,,,2086.0,176651.9648701551,,,,,
+706,706,7,48,,,648.0,66244.48682630816,,,,,
+707,707,7,48,,,147.0,66244.48682630816,,,,,
+708,708,-1,1,,,,,,,,,
+709,709,7,1,,,,,,31602310.53083552,,,
+710,710,-1,1,,,,,,,,,
+711,711,-1,1,,,,,,,,,
+712,712,7,256,1440.0,"""Falcon-Mamba-7B was trained on 256 H100 80GB GPUs for the majority of the training, using a 3D parallelism strategy (TP=1, PP=1, DP=256) combined with ZeRO.""
+
+""The model training took roughly two months.""
+
+30*2*24=1440 hours",,353319.6658035087,508780.32,,,,
+713,713,-1,1,,,,,,,,,
+714,714,-1,1,,,,,,,,,
+715,715,-1,1,,,,,,,,,
+716,716,-1,1,,,,,,,,,
+717,717,-1,1,,,,,,,,,
+718,718,7,1,,,,,,,,,
+719,719,-1,1,,,,,,,,,
+720,720,-1,1,, 256 * Nvidia Tesla A100,,,,,,,
+721,721,-1,1,,,,,,,,,
+722,722,-1,1,,,,,,,,,
+723,723,37,64,,,,,,,,,
+724,724,-1,1,,,,,,,,,
+725,725,7,64,48.0,,,88355.49182491149,4241.06,,,,
+726,726,30,2048,,"Trained on ""one slice of 2048 TPUv5p chips""; wall-time not given.",,2181166.9994404097,,,0.52,,"MFU is stated for AFM-server, assumed similar. If anything, this is likely a lower bound as training is done on a single slice of TPU chips compared to the 8 slices for AFM-server.
+
+""AFM-server was trained on 8192 TPUv4 chips provisioned as 8 × 1024  chip slices, where slices are connected together by the data-center network (DCN) [Chowdhery et al., 2022]. Only data-parallelism crosses the slice boundary, other types of state sharding are within-slice only as the within-slice interconnect bandwidth is orders of magnitude higher than the DCN. The sustained model-flop-utilization (MFU) for this training run was approximately 52%. AFM-on-device was trained on one slice of 2048 TPUv5p chips."""
+727,727,17,8192,,,,5493309.480072144,,,0.52,,"""AFM-server was trained on 8192 TPUv4 chips provisioned as 8 × 1024  chip slices, where slices are connected together by the data-center network (DCN) [Chowdhery et al., 2022]. Only data-parallelism crosses the slice boundary, other types of state sharding are within-slice only as the within-slice interconnect bandwidth is orders of magnitude higher than the DCN. The sustained model-flop-utilization (MFU) for this training run was approximately 52%."""
+728,728,38,384,,,,378683.2592359349,,,,0.4,"Compute Infrastructure
+""The computational backbone for the continuous pretraining phase of our project consists of 384 AMD MI250 GPUs. We can reach 40% GPU utilization with our implementation. For instruction fine-tuning and preference optimization, we rely on 64 AMD MI250 GPUs. Evaluation protocols are executed on a single node of AMD MI250 GPU.""
+
+The utilization measurement description, ""We can reach 40% GPU utilization"", sounds like they're reporting HFU."
+729,729,-1,1,,,,,,,,,
+730,730,-1,1,,,,,,,,,
+731,731,-1,1,,,,,,,,,
+732,732,-1,1,,,,,,,,,
+733,733,7,16384,2142.0,"Trained on 30.84M GPU hours (https://huggingface.co/blog/llama31) and used ""up to 16K H100 GPU[s]"" so training took at least
+30.84M / 16k = 1927.5 hours or ~80 days. 
+
+Section 3.3.4 gives reliability details over a 54 day period during training, for which they had ""higher than 90% effective training time""
+1927.5 / 0.9 = 2142 hours
+
+Probably, full training time is somewhat longer, since it sounds like there were periods where not all 16k H100s were running.",,22622532.159299143,48457463.89,52885433.95402246,0.4042,,MFU ranges between 0.38 and 0.43 depending on the specific parallelism used; I assume the geometric mean: sqrt(0.38 * 0.43) = 0.4042
+734,734,-1,1,,,,,,,,,
+735,735,-1,1,,,,,,,,,
+736,736,-1,1,,,,,,,,,
+737,737,7,1,,,,,,,,,
+738,738,-1,1,,,,,,,,,
+739,739,-1,1,,,,,,,,,
+740,740,-1,1,,,,,,,,,
+741,741,-1,1,,,,,,,,,
+742,742,-1,1,,,,,,,,,
+743,743,-1,1,,,,,,,,,
+744,744,-1,1,,,,,,,,,
+745,745,-1,1,,,,,,,,,
+746,746,-1,1,,,,,,,,,
+747,747,-1,1,,,,,,,,,
+748,748,-1,1,,,,,,,,,
+749,749,24,64,35.0,The training cost is 30-40 hours on 8 x 8 NVIDIA A100-SXM4-80GB (may vary due to hardware differences).,,50504.59589543689,1767.66,,,,
+750,750,31,64,,,,44191.52140850728,,,,,
+751,751,-1,1,,,,,,,,,
+752,752,-1,1,,,,,,,,,
+753,753,-1,1,,,,,,,,,
+754,754,-1,1,,,,,,,,,"""We demonstrate its effectiveness by training a model across two continents and three countries, while maintaining 90-95% compute utilization.""
+
+This sounds like it's reporting the percentage of executed calculations that were successfully utilized towards training, not the hardware's achieved utilization as a percentage of its theoretical maximum."
+755,755,7,32,,,,44197.42650739184,,,,,"""We demonstrate its effectiveness by training a model across two continents and three countries, while maintaining 90-95% compute utilization.""
+
+This sounds like it's reporting the percentage of executed calculations that were successfully utilized towards training, not the hardware's achieved utilization as a percentage of its theoretical maximum."
+756,756,9,512,,,,707158.8241182694,,,,,
+757,757,-1,1,,,,,,,,,
+758,758,-1,1,,,,,,,,,
+759,759,-1,1,,,,,,,,,
+760,760,7,8,48.0,""" We run these experiments with 8 H100 GPUs (each with 80GB)""
+
+"" The total training time is 144 hours."" (I assume it is total for 2 models: 72B and 34B -> ~48 hours for 34B model, ~96 hours for 72B model)",,11051.079196681923,530.45,,,,
+761,761,7,8,96.0,""" We run these experiments with 8 H100 GPUs (each with 80GB)""
+
+"" The total training time is 144 hours."" (I assume it is total for 2 models: 72B and 34B -> ~48 hours for 34B model, ~96 hours for 72B model)",,11051.079196681923,1060.9,,,,
+762,762,16,8,,,,6315.183662179627,,,,,
+763,763,14,8,,,,6315.605581782233,,,,,
+764,764,-1,1,,,,,,,,,
+765,765,-1,1,,,,,,,,,
+766,766,-1,1,,,,,,,,,
+767,767,17,4096,,,,2748796.394156227,,,,,
+768,768,30,6144,,,,6548603.174313364,,,,,
+769,769,19,512,,,,227382.0546636585,,,,,
+770,770,17,512,,Our final Cambrian-1 models are trained in less than 4 days on a TPU-V4-512.,,343599.5492695284,,,,,
+771,771,17,512,,Our final Cambrian-1 models are trained in less than 4 days on a TPU-V4-512.,,343599.5492695284,,,,,
+772,772,17,512,,Our final Cambrian-1 models are trained in less than 4 days on a TPU-V4-512.,,343599.5492695284,,,,,
+773,773,-1,1,,,,,,,,,
+774,774,-1,1,,,,,,25870993.12024943,,,
+775,775,-1,1,,,,,,,,,
+776,776,-1,1,,,,,,,,,
+777,777,-1,1,,,,,,,,,
+778,778,7,128,15.0,,,176880.2801222388,2653.2,,,,
+779,779,39,896,1464.0,"""The total training time is
+approximately 2 months""
+
+(30+31) * 24 = 1464 (hours)",,,,,,,
+780,780,7,6144,2200.0,"see training compute notes, this is an inferred estimate",,8490820.682633882,18679805.5,21271017.96222655,0.410675,,"Table 2 indicates MFU at different stages of training.
+
+((42.4% * 200B) + (42.3% * 200B) + (41.0% * 7600B)) / (200B + 200B + 7600B) = 0.410675, averaged over training."
+781,781,-1,1,,,,,,,,,
+782,782,-1,1,,,,,,,,,
+783,783,14,64,336.0,"""The final OpenVLA model is trained on a cluster of 64 A100 GPUs for 14 days""
+14 days * 24 hr/day = 336 hours",,50541.724821294745,16982.02,,,,
+784,784,7,1024,,,,1415199.8102553426,,,0.299,,"""When training on NVIDIA H100 GPUs (NVIDIA 2023), with a tensor-parallel
+size of four and data-parallel size of 256 (1024 total GPUs) (micro batch size 4, global batch size 1024), our Mamba-2-Hybrid achieves an MFU of 29.9%.""
+
+Model Flop Utilization (MFU)"
+785,785,7,1,,,,,,,,,
+786,786,-1,1,,,,,,,,,
+787,787,-1,1,,,,,,,,,
+788,788,-1,1,,,,,,,,,
+789,789,-1,1,,,,,,,,,
+790,790,-1,1,,,,,,,,,
+791,791,-1,1,,,,,,,,,
+792,792,-1,1,,,,,,,,,
+793,793,-1,1,,,,,,,,,
+794,794,-1,1,,,,,,,,,
+795,795,-1,1,,,,,,,,,
+796,796,-1,1,,,,,,,,,
+797,797,-1,1,,,,,,,,,
+798,798,-1,1,,,,,,,,,
+799,799,24,1,,"60 GPU hours for the 13B variant
+",60.0,,,,,,
+800,800,-1,1,,,,,,,,,
+801,801,-1,1,,,,,,,,,
+802,802,-1,1,,,,,,,,,
+803,803,7,128,,Zamba-v1 was trained on 128 H100 GPUs for approximately 30 days.,,176966.95963163028,,,,,
+804,804,-1,1,,,,,,,,,
+805,805,-1,1,,,,,,,,,
+806,806,-1,1,,,,,,,,,
+807,807,-1,1,,,,,,,,,
+808,808,14,1,,,,,,,,,
+809,809,14,1,,,,,,,,,
+810,810,14,1,,,,,,,,,
+811,811,14,1,,,,,,,,,
+812,812,-1,1,,,,,,,,,
+813,813,24,3072,1394.0,"34B model pre-training uses 4282407 GPU-hours, trained across 3072 A100s
+4282407 / 3072 = 1394",,2427515.9787339047,3383957.27,,,,
+814,814,24,1,836.4,"34B model pre-training uses 856481 GPU-hours, trained across 1024 A100s
+856481 / 1024 = 836.4",,,,,,,
+815,815,-1,1,,,,,,,,,
+816,816,-1,1,,,,,,,,,
+817,817,-1,1,,,,,,,,,
+818,818,-1,1,,,,,,,,,
+819,819,-1,1,,,,,,,,,
+820,820,-1,1,,,,,,,,,
+821,821,14,128,,"The training hours for each stage of the 7B model are: projector initialization: 4 hours; visual language pre-training: 30 hours; visual instruction-tuning: 6 hours.
+The training corresponds to a total of 5.1k GPU hours",5100.0,101148.7516079354,,,,,
+822,822,-1,1,,,,,,,,,
+823,823,-1,1,,,,,,,,,
+824,824,-1,1,,,,,,,,,
+825,825,-1,1,,,,,,,,,
+826,826,-1,1,,,,,,,,,
+827,827,-1,1,,,,,,,,,
+828,828,-1,1,,,,,,,,,
+829,829,-1,1,,,,,,,,,
+830,830,-1,1,,,,,,,,,
+831,831,40,2,,,,1185.416125675559,,,,,
+832,832,-1,1,,,,,,,,,
+833,833,17,1,,"""Gemini 1.5 models are trained on multiple 4096-chip pods of Google’s TPUv4 accelerators, distributed across multiple datacenters""",,,,,,,
+834,834,17,1,,"""Gemini 1.5 models are trained on multiple 4096-chip pods of Google’s TPUv4 accelerators, distributed across multiple datacenters""",,,,,,,
+835,835,16,1,1400.0,"roughly two months: https://huggingface.co/tiiuae/falcon-11B 
+
+so ~1400 days",,,,,,,
+836,836,-1,1,,,,,,,,,
+837,837,9,1,,"172.8K GPU hours, wall time not stated",172800.0,,,,,,
+838,838,14,1024,,,,809334.1869283952,,,,,
+839,839,-1,1,,,,,,,,,
+840,840,7,1,,"""MAI-1-preview is an in-house mixture-of-experts model, pre-trained and post-trained on ~15,000 NVIDIA H100 GPUs.""
+
+https://microsoft.ai/news/two-new-in-house-models/",15000.0,,,,,,
+841,841,-1,1,,,,,,,,,
+842,842,14,8,,,,6323.486590573598,,,,,
+843,843,14,8,,,,6323.486590573598,,,,,
+844,844,-1,1,,,,,,,,,
+845,845,14,128,,,,101175.78544917757,,,,,
+846,846,24,128,240.0,11 days (Table 9) = 240 hours,,101178.0385953958,24282.73,,,,
+847,847,7,128,288.0,13 days (Table 9) = 288 hours,,177061.56754194264,50993.73,,,,
+848,848,7,128,72.0,3 days (Table 9) = 72 hours,,177061.56754194264,12748.43,,,,
+849,849,24,128,72.0,3 days (Table 9) = 72 hours,,101178.0385953958,7284.82,,,,
+850,850,17,1,,,,,,,,,
+851,851,36,1,,,,,,,,,
+852,852,36,1,,,,,,,,,
+853,853,-1,1,,,,,,,,,
+854,854,7,1,,,,,,,,,
+855,855,-1,1,,,,,,,,,
+856,856,-1,1,,,,,,,,,
+857,857,-1,1,,,,,,,,,
+858,858,14,1,,,,,,,,0.506,"Table 7
+
+The table shows throughput as maximum of an A100's peak performance. Therefore, this reported utilization is HFU."
+859,859,-1,1,,,,,,,,,
+860,860,-1,1,,"""less than 3K GPU weeks""",504000.0,,,2000000.0,,,
+861,861,-1,1,,,,,,,,,
+862,862,41,1,,,,,,,,,
+863,863,7,512,168.0,"GPUs: 512 H100-80G
+Training time: 7 days
+Tensor type BF16
+https://huggingface.co/microsoft/Phi-3-mini-4k-instruct",,708388.2341861207,119009.22,,,,
+864,864,-1,1,,,,,,,,,
+865,865,-1,1,,,,,,,,,
+866,866,-1,1,,,,,,,,,
+867,867,7,512,240.0,"GPUs: 512 H100-80G
+Training time: 10 days
+https://huggingface.co/microsoft/Phi-3.5-mini-instruct",,708388.2341861207,170013.18,,,,
+868,868,7,512,552.0,"GPUs: 512 H100-80G
+Training time: 23 days
+
+23 days * 24 hours / day = 552 hours",,708388.2341861207,391030.31,,,,
+869,869,7,1,,,6400000.0,,,,,,"Although they describe utilization, this is implied to only be for the largest model, presumably the 405B.
+
+We can impute utilization from comparison between arithmetic and hardware methods.
+
+Arithmetic calculation:
+6 * 15T tokens * 70B parameters = 6.3e24
+
+GPU calculation:
+990 TFLOPS per GPU * 6.4 million GPU hours * 3600s = 2.281e25 at full utilization
+
+Implies 6.3e24 / 2.281e25 = 0.2762 utilization. 
+This seems unlikely – they report utilization during the training of 405B (which was big enough to need to be split across 2 nodes of 8 H100s) between 0.38-0.43."
+870,870,7,1,,,1300000.0,,,,,,"Although they describe utilization, this is implied to only be for the largest model, presumably the 405B."
+871,871,42,160,1920.0,"""The FRED-T5-large and FREDT5-XL models are pretrained with a total batch size of 2048 for 35 days on 160 V100 GPUs, followed by 5 days on 80 A100 GPUs, and for 45 days on 112 A100 GPUs, respectively.""
+
+Total hardware-time: 264960 chip-hours
+https://www.wolframalpha.com/input?i=%2835*160%2B5*80%2B45*112%29*24.",264960.0,,,,,,
+872,872,-1,1,,,,,,,,,
+873,873,43,1,,,,,,,,,
+874,874,-1,1,,,,,,,,,
+875,875,24,8,48.0,"""For the training of GRITLM 7B, we used 8 nodes with 8 NVIDIA A100 80GB GPUs each for 48 hours corresponding to 3,072 GPU hours. """,3072.0,6325.740113156251,303.64,,,,
+876,876,7,8,80.0,"""for GRITLM 8X7B, we used 32 nodes with 8 NVIDIA H100 80GB GPUs each for 80 hours corresponding to 20,480 GPU hours.""",20480.0,11070.04519802344,885.6,,,,
+877,877,-1,1,,,,,,,,,
+878,878,-1,1,,,,,,,,,
+879,879,-1,1,,,,,,,,,
+880,880,-1,1,,,,,,,,,
+881,881,43,1,,,,,,,,,
+882,882,43,1,,,,,,,,,
+883,883,-1,1,,,,,,,,,
+884,884,-1,1,,,,,,,,,
+885,885,-1,1,,,,,,,,,
+886,886,-1,1,,,,,,,,,
+887,887,-1,1,,,,,,,,,
+888,888,-1,1,,,,,,,,,
+889,889,-1,1,,,,,,,,,
+890,890,-1,1,,,,,,,,,
+891,891,7,32,1.3,"""1.3 hours on 4 nodes of 8 x H100s""",,44287.08397263639,57.57,,,,
+892,892,-1,1,,,,,,,,,
+893,893,-1,1,,,,,,,,,
+894,894,7,1,,,,,,,,,
+895,895,-1,1,,,,,,,,,
+896,896,-1,1,,,,,,,,,
+897,897,-1,1,,,,,,,,,
+898,898,-1,1,,,,,,,,,
+899,899,-1,1,,,,,,,,,
+900,900,44,1024,,,,1012411.470653334,,,,,
+901,901,16,64,,,,50620.5735326667,,,,,
+902,902,-1,1,,,,,,,,,
+903,903,-1,1,,,,,,,,,
+904,904,-1,1,,,,,,,,,
+905,905,-1,1,,,,,,,,,
+906,906,-1,1,,,,,,,,,
+907,907,16,640,,"""Training TeleChat took one month (including downtime).""",,506239.5551067574,,,,,
+908,908,16,640,,"""Training TeleChat took one month (including downtime).""",,506239.5551067574,,,,,
+909,909,16,640,,"""Training TeleChat took one month (including downtime).""",,506239.5551067574,,,,,
+910,910,-1,1,,,,,,,,,
+911,911,-1,1,,,,,,,,,
+912,912,-1,1,,,,,,,,,
+913,913,-1,1,,,,,,,,,
+914,914,-1,1,,,,,,,,,
+915,915,-1,1,,,,,,,,,
+916,916,7,1,,,,,,,,,
+917,917,7,1,,,,,,,,,
+918,918,-1,1,,,,,,,,,
+919,919,-1,1,,,,,,,,,
+920,920,45,1,,,,,,,,,
+921,921,46,1,,,,,,,,,
+922,922,-1,1,,,,,,,,,
+923,923,-1,1,,,,,,,,,
+924,924,7,8,,,,11078.430152175726,,,,,
+925,925,-1,1,,,,,,,,,
+926,926,14,512,120.0,"""DeepSeek-VL7B consumed 5 days on a cluster of 64 nodes, each comprising 8 Nvidia A100 GPUs""
+
+5 days = 120 hours",,405208.1557620524,48624.98,,,,
+927,927,14,128,168.0," ""... each comprising 8 Nvidia A100 GPUs, while
+DeepSeek-VL-1B consumed 7 days on a setup involving 16 nodes.""
+
+7 days = 168 hours",,101302.0389405131,17018.74,,,,
+928,928,7,1,,,,,,11804593.33,,,
+929,929,14,8,,,,6331.800435296151,,,,,
+930,930,-1,1,,"Like its predecessors, Claude 3 models employ various training methods, such as unsupervised learning and Constitutional AI [6]. These models were trained using hardware from Amazon Web Services (AWS) and Google Cloud Platform (GCP)",,,,,,,
+931,931,-1,1,,"Like its predecessors, Claude 3 models employ various training methods, such as unsupervised learning and Constitutional AI [6]. These models were trained using hardware from Amazon Web Services (AWS) and Google Cloud Platform (GCP)",,,,,,,
+932,932,-1,1,,"Like its predecessors, Claude 3 models employ various training methods, such as unsupervised learning and Constitutional AI [6]. These models were trained using hardware from Amazon Web Services (AWS) and Google Cloud Platform (GCP)",,,,,,,
+933,933,-1,1,,,,,,,,,
+934,934,-1,1,,,,,,,,,
+935,935,-1,1,,,,,,,,,
+936,936,-1,1,,,,,,,,,
+937,937,-1,1,,,,,,,,,
+938,938,7,1,,"""A cumulative of 145,152 hours of computation was performed on hardware of type H100""",,,,,,,
+939,939,24,1,,"""A cumulative of 97,120 hours of computation was performed on hardware of type A100 SXM4 80 GB""",,,,,,,
+940,940,47,1,,,,,,,,,
+941,941,47,1,,,,,,,,,
+942,942,-1,1,,,,,,,,,
+943,943,7,3072,312.0,"""Training was completed in approximately 13 calendar days.""",,4255633.23275038,1327757.57,,0.305,,MFU shown in Table 2
+944,944,-1,1,,,,,,,,,
+945,945,7,1,2500.0,Speculation by Emad Mostaque: 20M euro spent at Scaleway (1.9 euro per H100-hour) would be around 3 months on 4000 H100s.,,,,14110111.93,,,
+946,946,19,1,,,,,,,,,
+947,947,14,12288,42.0,,,9728028.18454986,408577.18,,0.552,,MFU given in Table 2. Table 3 shows higher utilization when using a smaller number of GPUs.
+948,948,14,11200,117.9,"175B parameter model is stated to have taken 1.75 days. 500B model used more compute, fewer GPUs, and had slightly worse MFU. Accounting for these: 
+1.75 days * 24 hours/day * (9.7e23/3.2e23) * (11200/12288) * (0.552/0.543) = 117.9 hours",,8866692.355709508,1045383.03,,0.543,,"MFU given in fgure 9, when training with the full 11200 GPUs."
+949,949,14,12288,504.0,"Speculative. Authors state ""several weeks"". For analysis, I've assumed this means around 3 weeks.",,9728028.18454986,4902926.21,2614019.245,0.48,,"Figure 12 shows MFU, which is around 0.484 during stable periods, with short spikes to as low as 0.4. It seems like the overall average is likely minimally affected by the spikes, but I'll round down to 0.48"
+950,950,19,4096,,,,1824086.525314047,,,,,
+951,951,19,512,,,,228010.81566425588,,,,,
+952,952,24,1,,"""Training the 70B models required substantial computational resources, exceeding 100,000 A100 GPU hours.""
+
+""Pre-training, exemplified by the LLaMA2 70B model, is notably resource-heavy, requiring about 700 hours on 160 A100 GPUs per epoch. Conversely, instruction tuning is far less resource-demanding, needing roughly 70 hours on 8 A100 GPUs per epoch, making it much more affordable than pre-training. """,100000.0,,,,,,
+953,953,24,1,,,,,,,,,
+954,954,17,1,,,,,,,,,
+955,955,-1,1,,,,,,,,,
+956,956,-1,1,,,,,,,,,
+957,957,17,128,,,,86154.6850166532,,,,,
+958,958,-1,1,,,,,,,,,
+959,959,-1,1,,,,,,,,,
+960,960,-1,1,,,,,,,,,
+961,961,-1,1,,,,,,,,,
+962,962,-1,1,,,,,,,,,
+963,963,-1,1,,,,,,,,,
+964,964,-1,1,,,,,,,,,
+965,965,-1,1,,,,,,,,,
+966,966,-1,1,,,,,,,,,
+967,967,-1,1,,,,,,,,,
+968,968,-1,1,,,,,,,,,
+969,969,-1,1,,,,,,,,,
+970,970,-1,1,,,,,,,,,
+971,971,48,1,,,,,,,,,
+972,972,48,1,,,,,,,,,
+973,973,-1,1,,,,,,,,,
+974,974,14,32,24.0,"""The largest 34B variant finishes training in ~1 day with 32 A100s.""",768.0,25346.95016648552,608.33,,,,
+975,975,49,1,,,,,,,,,
+976,976,24,400,6480.0,"Assuming Code Llama 70B training continued on same hardware as Llama 2 70B.
+Llama 2 70B used 1720320 A100 hours. Training all Code Llama models took 1.4M A100 hours (Table 26). Based on model sizes and number of tokens seen, 70B model used about 985k A100 hours to fine tune (see utilization notes). Total GPU hours is thus around 2.7M",2705320.0,316843.9329176827,2053148.69,,0.3821,,"Based on 6NC estimate, fine tuning required around 4.2e23 FLOP. Table 26 indicates 1400k A100 GPU hours used to train all twelve models, i.e. 1400k * 3600 * 3.12e14 = 1.57e24 FLOP. 70B model trained on 1T tokens while others used 500B. Python finetuning added another 100B tokens to each. 70B's share of total GPU hours was around:
+(70 billion * 1.1 trillion) / (((7 + 13 + 34) billion * 600 billion) + (70 billion * 1.1 trillion)) = 0.7038
+Implies actual GPU-hours for 70B model was: 0.7038 * 1400k = 985k
+(Early version of paper without the 70B models indicated only 400k GPU-hours, which also indicates training 70B models took around 1M GPU-hours)
+Total compute at peak throughput: 985k * 3600 * 3.12e14 = 1.107e24
+Therefore MFU is: 4.23e23 / 1.107e24 = 0.3821"
+977,977,-1,1,,,,,,,,,
+978,978,-1,1,,,,,,,,,
+979,979,-1,1,,,,,,,,,
+980,980,-1,1,,,,,,,,,
+981,981,-1,1,,,,,,,,,
+982,982,-1,1,,,,,,,,,
+983,983,-1,1,,,,,,,,,
+984,984,7,128,240.0,"""The total training time amounted to approximately 10 days for Yi-VL-34B""",,177456.311892851,42589.51,,,,
+985,985,-1,1,,,,,,,,,
+986,986,-1,1,,,,,,,,,
+987,987,16,512,,,,405659.59358954936,,,,,
+988,988,-1,1,,,,,,,,,
+989,989,-1,1,,,,,,,,,
+990,990,-1,1,,,,,,,,,
+991,991,-1,1,,,,,,,,,
+992,992,14,640,,,,507108.36980895983,,,,,
+993,993,-1,1,,,,,,,,,
+994,994,-1,1,,,,,,,,,
+995,995,24,640,800.0,1.744956e+23/(312000000000000*640*3600*0.3) = 809 hours ~ 1 month,,507108.36980895983,405686.7,,,,
+996,996,-1,1,,,,,,,,,
+997,997,50,1,,,,,,,,,
+998,998,-1,1,,,,,,,,,
+999,999,16,256,,,,202870.4528973297,,,,,
+1000,1000,-1,1,,,,,,,,,
+1001,1001,-1,1,,,,,,,,,
+1002,1002,-1,1,,,,,,,,,
+1003,1003,51,1,,,,,,,,,
+1004,1004,-1,1,,,,,,,,,
+1005,1005,-1,1,,,,,,,,,
+1006,1006,-1,1,,,,,,,,,
+1007,1007,16,1,,,,,,,,,
+1008,1008,16,1,,,,,,,,,
+1009,1009,-1,1,,,,,,,,,
+1010,1010,-1,1,,,,,,,,,
+1011,1011,-1,1,,,,,,,,,
+1012,1012,-1,1,,,,,,,,,
+1013,1013,-1,1,,,,,,,,,
+1014,1014,47,1,,"""For α = 0.05, training took approximately 600 TPUv3 chip-days""
+= 14400 chip-hours",14400.0,,,,,,
+1015,1015,23,1000,,6*30000000000*2650000000000=4.77e+23,,495487.7674607929,,,,,
+1016,1016,-1,1,,,,,,,,,
+1017,1017,52,256,168.0,The pre-training job was completed within a timeframe of approximately 7 days (source: https://huggingface.co/rinna/nekomata-14b).,,,,,0.171,,"According to the developer, the model “was trained on 16 nodes of Amazon EC2 trn1.32xlarge instance” (https://huggingface.co/rinna/nekomata-14b). An Amazon EC2 trn1.32xlarge instance can provide up to 3.4 petaflops of FP16/BF16 compute power and is powered by up to 16 AWS Trainium chips (https://aws.amazon.com/blogs/aws/amazon-ec2-trn1-instances-for-high-performance-model-training-are-now-available/). Therefore,
+
+Training compute
+= utilization rate * peak FLOPS / hardware * # of hardware * training time
+~= utilization rate * 3.4e15 FLOPS / Amazon EC2 trn1.32xlarge instance * 16 Amazon EC2 trn1.32xlarge instances * 7 days * 86,400 s / day
+~= 5.6232e21 FLOPs
+
+Utilization rate: MFU equals
+~= 5.6232e21 FLOPs / ( 3.4e15 FLOPS * 16 * 7 days * 86,400 s / day )
+~= 0.171"
+1018,1018,19,1,,,,,,,,,
+1019,1019,19,1,,,,,,,,,
+1020,1020,-1,1,,,,,,,,,
+1021,1021,-1,1,,,,,,,,,
+1022,1022,44,512,,,,507469.8741072884,,,,,
+1023,1023,-1,1,,,,,,,,,
+1024,1024,-1,1,48.0,"Appendix A.5: ""To reproduce admissible set experiments done above (generating 2 million samples) one would have to use 15 instances of StarCoder-15B running on A100 40 GB GPU each and 5 CPU servers (each running 32 evaluators in parallel) for two days""",,,,,,,
+1025,1025,14,128,,,,101496.23505363207,,,,,
+1026,1026,-1,1,,,,,,,,,
+1027,1027,14,1,336.0,14 days,,,,,,,
+1028,1028,24,128,,,,101498.495336141,,,,,
+1029,1029,-1,1,,,,,,,,,
+1030,1030,-1,1,,,,,,,,,
+1031,1031,-1,1,,,,,,,,,
+1032,1032,24,224,600.5,"The GPU cluster consists
+of 56 DGX A100 nodes, each equipped with 4× 80GB A100 GPUs
+
+""The throughput we manage to achieve with our distributed training framework is around 582.4k tokens per second.""
+
+1259130000000 / 582400 / 3600 = 600.5 hours
+
+",,177626.32242072464,106664.61,,,,
+1033,1033,-1,1,4096.0,November 6 to December 8 is 32 days. They did 600B tokens of continual pretraining during this period. The model's total tokens are 3200B. Therefore the total pretraining time was around (32 days * 24 hours/day)*(3200/600) = 4096 hours.,,,,,,,
+1034,1034,32,1,,,,,,,,,
+1035,1035,24,1,,,,,,,,,
+1036,1036,24,8,,"""Hardware: StableLM Zephyr 3B was trained on the Stability AI cluster across 8 nodes with 8 A100 80GBs GPUs for each nodes.""",,6344.362343983899,,,,,
+1037,1037,17,57000,2400.0,"Dylan Patel, author of SemiAnalysis, speculates that the training duration of Gemini may have been 100 days.",132000000.0,38423900.11232233,92217360.27,30719419.93534952,,,
+1038,1038,17,1,,,,,,,,,
+1039,1039,14,16,,,,12689.007261035234,,,,,
+1040,1040,-1,1,,,,,,,,,
+1041,1041,24,1,,"Table 3
+76+64 = 140 GPU-hours",140.0,,,,,,
+1042,1042,-1,1,,,,,,,,,
+1043,1043,-1,1,,,,,,,,,
+1044,1044,-1,1,,,,,,,,,
+1045,1045,16,240,336.0,14 days = 336 hours,,190356.3033115072,63959.72,,,,
+1046,1046,16,256,528.0,22 days,,203046.7235322744,107208.67,,,,
+1047,1047,-1,1,,,,,,,,,
+1048,1048,-1,1,,,,,,,,,
+1049,1049,53,1,,,,,,,,,
+1050,1050,-1,1,,,,,,,,,
+1051,1051,14,1,2208.0,"""Granite.13b.v1 used 256 A100 GPUs for 1056 hours and 120 TFLOPs. Granite.13b.v2 was trained on the same infrastructure for an
+additional 1152 hours with 120 TFLOPS, bringing the total to
+2208 hours""",,,,,,,
+1052,1052,17,1,,,,,,,,,
+1053,1053,-1,1,,,,,,,,,
+1054,1054,-1,1,,,,,,,,,
+1055,1055,-1,1,,,,,,,,,
+1056,1056,7,48,,"for previous llama2 based versions, they report ""All experiments were conducted on up to 48
+H100s using bfloat16 precision.""",,66627.67360574534,,,,,
+1057,1057,-1,1,,,,,,,,,
+1058,1058,-1,1,,,,,,,,,
+1059,1059,24,128,332.0,"""For the pretraining run with Llama-2-70B, we achieve a throughput of 40, 200 tokens/second. This amounts to 1.6884 × 10^16 bfloat16 flop/second and represents roughly 42.3% of the theoretical peak
+flops of 128 A100 GPUs, which is 128 × (312 × 1012) = 3.9936 × 10^16 flops. ""
+
+""Our training of the 70B model ran for 332 hours on 128 A100 GPUs, for 42,496 GPU-hours.""",,101532.40561467802,33708.76,,,0.423,"""For the pretraining run with Llama-2-70B, we achieve a throughput of 40, 200 tokens/second. This amounts to 1.6884 × 1016 bfloat16 flop/second and represents roughly 42.3% of the theoretical peak flops of 128 A100 GPUs, which is 128 × (312 × 1012) = 3.9936 × 1016 flops.""
+
+HFU = 1.6884*10^16 FLOPS / (128 * 311.84*10^12 FLOPS) = 0.42299"
+1060,1060,14,8,,,,6346.057990066165,,,,,
+1061,1061,-1,1,,,,,,,,,
+1062,1062,-1,1,,,,,,,,,
+1063,1063,7,48,,,,66636.57673893808,,,,,
+1064,1064,7,48,,,,66636.57673893808,,,,,
+1065,1065,7,5000,,,,6941464.657305156,,13461144.182562498,,,
+1066,1066,14,8,,"No training time, number of training steps, or number of epochs provided.",,6346.481972393285,,,,,
+1067,1067,-1,1,,,,,,,,,
+1068,1068,24,1,80.0,"17+40+23 hours
+
+""We trained Orca 2 on 32 NVIDIA A100 GPUs with 80GB memory with bfloat16.
+For the 13B checkpoint, it took ~17 hours to train Orca 2 on FLAN dataset for one epoch,
+~40 hours to train on 5 million ChatGPT data for 3 epochs and ~23 hours to continue
+training on ~1.8 million GPT-4 data for 4 epochs""",,,,,,,
+1069,1069,47,512,168.0,"""The 70B variant of TÜLU V2-DPO was trained on a 512-core TPUv3, completing three epochs in approximately 7 days.""
+
+""All models except QLoRA models were trained on a 256-chip (512-chip for 70B DPO training) TPU v3 pod.""",,456967.05429706606,76770.47,,,,
+1070,1070,-1,1,,,,,,,,,
+1071,1071,-1,1,,,,,,,,,
+1072,1072,14,1024,456.0,19 days,,812476.3359553809,370489.21,214467.02013524104,0.3473,,"Ops counting: 8 billion * 3.8 trillion * 6 = 1.82e23
+GPU-time: 19 * 1024 * 3.12e14 * 24 * 3600 = 5.24e23
+Implied MFU: 1.82e23 / 5.24e23 = 0.3473"
+1073,1073,-1,1,,,,,,,,,
+1074,1074,-1,1,,,,,,,,,
+1075,1075,16,32,290.0,"""The pre-training time is around 125 hours on 32 A100 GPUs with a 7B
+language model and about twice the time with a 13B language model.""
+"" The fine-tuning takes about 38 hours with 16 A100 GPUs with a 13B
+language model.""",9280.0,25391.016357362598,7363.39,239188.6875340231,,,
+1076,1076,24,1,30.0,,,,,,,,
+1077,1077,-1,1,,,,,,,,,
+1078,1078,-1,1,,,,,,,,,
+1079,1079,-1,1,,,,,,,,,
+1080,1080,-1,1,,,,,,,,,
+1081,1081,14,8,,,,6348.460931155128,,,,,
+1082,1082,37,16,1080.0,"""Phase 1 of the training lasted approximately 45 days on 16 CS2 nodes within the Condor Galaxy supercomputer.""
+
+45 days = 1080 hours",,,,,,,
+1083,1083,32,4,,"""All the experiments were run on two cloud servers with 4 x V100 GPUs.""",,2380.6728491831727,,,,,
+1084,1084,-1,1,,,,,,,,,
+1085,1085,-1,1,,,,,,,,,
+1086,1086,14,8,9.0,3 hours per epoch over 3 epochs: 9 hours,24.0,6348.602308962822,57.14,,,,
+1087,1087,-1,1,,,,,,,,,
+1088,1088,-1,1,,,,,,,,,
+1089,1089,-1,1,,,,,,,,,
+1090,1090,14,8,24.0,"from abstract ""Our final 13B checkpoint uses merely 1.2M publicly available data, and finishes full training in ~1 day on a single 8-A100 node. """,192.0,6348.88507402357,152.37,,,,
+1091,1091,-1,1,,,,,,,,,
+1092,1092,-1,1,,,,,,,,,
+1093,1093,-1,1,,,,,,,,,
+1094,1094,14,1,,,,,,,,,
+1095,1095,44,1,,,,,,,,,
+1096,1096,-1,1,,,,,,,,,
+1097,1097,14,128,,,,101588.94792366636,,,,,
+1098,1098,-1,1,,,,,,,,,
+1099,1099,-1,1,,,,,,,,,
+1100,1100,-1,1,,,,,,,,,
+1101,1101,-1,1,,,,,,,,,
+1102,1102,-1,1,,,,,,,,,
+1103,1103,-1,1,,,,,,,,,
+1104,1104,-1,1,,,,,,,,,
+1105,1105,-1,1,,,,,,,,,
+1106,1106,-1,1,,,,,,,,,
+1107,1107,-1,1,,,,,,,,,
+1108,1108,-1,1,,,,,,,,,
+1109,1109,14,32,,,,25397.802567713887,,,,,
+1110,1110,-1,1,,,,,,,,,
+1111,1111,-1,1,,,,,,,,,
+1112,1112,-1,1,,,,,,,,,
+1113,1113,-1,1,,,,,,,,,
+1114,1114,-1,1,,,,,,,,,
+1115,1115,23,512,940.0,39 days,,253989.3377909499,238749.98,,0.4637,0.565,"Authors report utilization incorrectly, calculating HFU but reporting it as MFU:
+""With this configuration, we achieved a token throughput of 1873 per GPU per second and a model flops utilization (MFU) of 56.5%.""
+See table 10 for throughput and utilization figures, incorrectly reported as MFU. On the primary Skywork model, they achieve 176.2 TFLOPS (out of 311.8 TFLOPS maximum on the A800) for an HFU of 56.5% (but their utilization column in the table calls it MFU).
+
+Calculating actual MFU:
+Ops-counting method: 6 * 13B * 3.2T = 2.496e23 FLOP
+FLOPs from 39 days on 512 A800s: 39 * 24 * 3600 * 512 * 3.12e14 = 5.383e23 FLOP
+2.496e23 / 5.383e23 = 0.4637
+
+So MFU = 0.4637 and HFU = 0.5651."
+1116,1116,32,8,,,,4762.300083580311,,,,,
+1117,1117,-1,1,,,,,,,,,
+1118,1118,32,4,11.0,"""The system used to run the experiments uses an Intel Core i7 processor (base at 1.8 GHz) along with 4 V100 GPU units, a 64-bit operating system, and 56 GB RAM. CODEFUSION took 8 hours to pre-train and 3 hours to fine-tune on average for each dataset.""",,2381.36215809478,26.19,8.542235671062665,,,
+1119,1119,40,1,,,,,,,,,
+1120,1120,-1,1,,,,,,,,,
+1121,1121,14,16,4.0,"""All experiments were run on 16 A100s using bfloat16 precision
+and typically took 2-4 hours to complete.""",,12700.881013991002,50.8,,,,
+1122,1122,-1,1,,,,,,,,,
+1123,1123,-1,1,,,,,,,,,
+1124,1124,-1,1,,,,,,,,,
+1125,1125,-1,1,,,,,,,,,
+1126,1126,-1,1,,,,,,,,,
+1127,1127,-1,1,,,,,,,,,
+1128,1128,-1,1,,,,,,,,,
+1129,1129,16,256,,"""LLEMMA 34B is trained for 12,000 steps with a global batch size of 4 million tokens and a 4096 context length. This corresponds to roughly 47,000 A100-hours” (https://arxiv.org/pdf/2310.10631, page 3).",47000.0,203254.8293570902,,,,,"MFU = applied FLOPs / maximum hardware FLOPs
+MFU = (6 FLOP/token/param * 33.7B params * 12000 steps * 4 million tokens/step) / (47000 hours * 311.84e12 FLOPS)
+MFU = 0.1839"
+1130,1130,16,256,,"""LLEMMA 7B is trained for 42,000 steps with a global batch size of 4 million tokens and a 4096 token context length. This corresponds to roughly 23,000 A100-hours” (https://arxiv.org/abs/2310.10631, page 3).",23000.0,203254.8293570902,,,,,"MFU = applied FLOPs / maximum hardware FLOPs
+MFU = (6 FLOP/token/param * 6.74B params * 42000 steps * 4 million tokens/step) / (23000 hours * 311.84e12 FLOPS)
+MFU = 0.2631"
+1131,1131,16,512,,,,406536.8177649435,,,,,
+1132,1132,-1,1,,,,,,,,,
+1133,1133,-1,1,,,,,,,,,
+1134,1134,14,8,120.0,"""The training takes ∼5/2.5 days on 8 A100 GPU for a Ferret-13B/7B.""",960.0,6352.420700106825,762.29,,,,
+1135,1135,-1,1,,,,,,,,,
+1136,1136,24,512,960.0,~40 days,,406563.97863021225,390301.42,,,0.5772,"""CodeFuse-13B was trained using 512 Nvidia A100 GPU cards, with a Hardware FLOPs Utilization (HFU) of approximately 60%.""
+
+""we achieved 180 TFLOPS and 56% average utilization rate of tensor cores on 512 GPUs.""
+
+HFU = 180/311.84 = 0.5772"
+1137,1137,54,1,17.25,https://github.com/AI4Finance-Foundation/FinGPT?tab=readme-ov-file,,381.7900590727425,6.59,,,,
+1138,1138,-1,1,,,,,,,,,
+1139,1139,14,8,103.0,"4 days on 8 A100s
+
+""Finetuning to obtain phi-1 used an additional 7 hours on the same hardware""
+
+4*24 + 7 =103 hours",,6353.694007439068,654.43,,,,
+1140,1140,-1,1,,,,,,,,,
+1141,1141,16,16,720.0,"1T checkpoint was released after 1 month
+
+source: https://github.com/jzhang38/TinyLlama",11520.0,12707.671003570757,9149.52,,0.56,,"Per https://github.com/jzhang38/TinyLlama: ""we achieve a throughput of 24k tokens per second per A100-40G GPU, which translates to 56% model flops utilization without activation checkpointing (We expect the MFU to be even higher on A100-80G)"""
+1142,1142,16,16,2160.0,"1T checkpoint was released after 1 month. Assume the 3T checkpoint took 3 months.
+
+source: https://github.com/jzhang38/TinyLlama",34560.0,12707.671003570757,27448.57,,0.56,,"Per https://github.com/jzhang38/TinyLlama: ""we achieve a throughput of 24k tokens per second per A100-40G GPU, which translates to 56% model flops utilization without activation checkpointing (We expect the MFU to be even higher on A100-80G)"""
+1143,1143,14,1,720.0,approximately 30 days,,,,,,,
+1144,1144,14,1,,"""GAIA-1’s world model <..> was trained for 15 days on 64 NVIDIA A100s.""
+""GAIA-1’s video decoder <..> was trained for 15 days on 32 NVIDIA A100s.""
+
+15 days * 24 hours / day * (64+32) GPUs = 34560 GPU-hours",34560.0,,,,,,
+1145,1145,-1,1,,,,,,,,,
+1146,1146,14,13760,1152.0,,,10929327.206416875,12590584.94,7933464.673729055,0.2696,,"6ND gives 4.8e24
+Training took 48 days on 13,760 NVIDIA A100 chips –> 3.12e14 * 13760 * 48 * 24 * 3600 = 1.78e25 FLOPs at full utilization
+Implies 0.2696 MFU."
+1147,1147,-1,1,,,,,,,,,
+1148,1148,16,480,720.0,"""We used 60 ABCI A nodes (480 GPUs) for just under a month, and trained the training data with a total of 1.4T tokens with a context length of 4096.""
+
+https://tech.preferred.jp/ja/blog/llm-plamo/",345600.0,381255.6002238446,274504.03,,0.41,,"41% utilization is given in table 3.
+
+Manual calculation assuming 30 days:
+1.17e23 FLOP (per ops-counting method) / (720 (h) * 3600 (s/h) * 3.12e14 (FLOP/GPU-s) * 480 (GPUs)) = 0.3014
+
+Discrepancy is most likely due to our time assumption – blog post just says ""less than a month"". 41% utilization would imply ~22 days of training.
+
+So most likely, MFU = 41%."
+1149,1149,-1,1,,,,,,,,,
+1150,1150,14,128,80.0,from appendix A.1,10240.0,101672.68833253944,8133.82,,0.4590678418803418,,MFU: 5.28e21 FLOP / (128 A100s * 80 hours * 60 * 60) / (312e12 FLOP/s/A100) ~= 0.4591
+1151,1151,-1,1,,,,,,,,,
+1152,1152,55,144,,,,,,,,,
+1153,1153,37,1,,,,,,,,,
+1154,1154,23,128,17.5,from Table 11: (6+10+1.5) hours,2240.0,63553.92147577903,1112.19,,,,
+1155,1155,23,1024,,,,508431.3718062322,,,,0.5772,"""By integrating these strategies, our system is capable of training Baichuan 2-7B and Baichuan
+2-13B models efficiently on 1,024 NVIDIA A800
+GPUs, achieving a computational efficiency that
+exceeds 180 TFLOPS.""
+
+HFU: 180 TFLOPS / 311.84 TFLOPS = 57.7%"
+1156,1156,-1,1,,,,,,,,,
+1157,1157,-1,1,,,,,,,,,
+1158,1158,-1,1,,,,,,,,,
+1159,1159,16,1,192.0,,,,,,,,
+1160,1160,-1,1,,,,,,,,,
+1161,1161,-1,1,,,,,,,,,
+1162,1162,23,1,517.0,"""Under this growth schedule, the total time cost for our 101B model is 21.54 days""",,,,,,,
+1163,1163,17,1,,,270336.0,,,,,,
+1164,1164,-1,1,,,,,,,,,
+1165,1165,16,4096,4320.0,"Stanford CRFM foundation model ecosystem graph data page https://crfm.stanford.edu/ecosystem-graphs/index.html?asset=Falcon-180B says 9 months, which is the maximum possible amount of time: training began sometime in 2023, and it was released in September. 
+
+However, 6 months is more realistic. That is the length of the gap between Falcon 40B and Falcon 180B. Additionally, the amount of compute is specified in the paper, so there is only one degree of freedom in the uncertain values of training duration and hardware utilization rate. At six months, the utilization is unusually low, so the training was probably not longer than that.",17694720.0,3254975.4289709157,14061493.85,10743500.868805485,0.1892,,"Estimated training compute: 3.76e24
+FLOPs at 100% utilization, based on GPU-hours: 4320 * 4096 * 3600 * 3.12e14 = 1.987e25
+
+Therefore MFU is:
+3.76e24 / 1.987e25 = 0.1892"
+1166,1166,-1,1024,,,,,,,,0.5772,"""By integrating these strategies, our system is
+capable of training Baichuan 2-7B and Baichuan
+2-13B models efficiently on 1,024 NVIDIA A800
+GPUs, achieving a computational efficiency that
+exceeds 180 TFLOPS.""
+
+HFU = 180 TFLOPS / 311.84 TFLOPS = 0.5772"
+1167,1167,14,512,,,,406871.9286213644,,,,,
+1168,1168,-1,1,,,,,,,,,
+1169,1169,-1,1,,,,,,,,,
+1170,1170,37,16,600.0,2023 June 25 to July 18 = 25 days = 600 hours,,,,,,,
+1171,1171,56,6,672.0,"from ""Model Stats""",4032.0,2742.1059640734707,1842.7,,,,
+1172,1172,-1,1,,,,,,,,,
+1173,1173,-1,1,,,,,,,,,
+1174,1174,-1,1,,,,,,,,,
+1175,1175,-1,1,,,,,,,,,
+1176,1176,-1,1,,,,,,,,,
+1177,1177,-1,1,,,,,,,,,
+1178,1178,-1,1,,,,,,,,,
+1179,1179,-1,1,,,,,,,,,
+1180,1180,-1,1,,,,,,,,,
+1181,1181,14,1,2200.0,3 months,,,,,,,
+1182,1182,14,512,672.0,"""IDEFICS-80b pretraining
+
+Hardware Type: 512 NVIDIA A100 GPUs
+Hours used: 672 hours (28 days)
+Cloud Provider: AWS
+Compute Region: US-West 2 (288g CO2eq/kWh)
+Carbon Emitted: 39,498 kg of CO2eq""",,407007.86305450817,273509.28,,,,
+1183,1183,14,128,350.0,"""IDEFICS-9b pretraining
+
+Hardware Type: 128 NVIDIA A100 GPUs
+Hours used: 350 hours
+Cloud Provider: AWS
+Compute Region: US-West 2 (288g CO2eq/kWh)
+Carbon Emitted: 5,160 kg of CO2eq""",,101751.96576362704,35613.19,,,,
+1184,1184,-1,1,,,,,,,,,
+1185,1185,-1,1,,,,,,,,,
+1186,1186,-1,1,,,,,,,,,
+1187,1187,-1,1,,,,,,,,,
+1188,1188,-1,1,,,,,,,,,
+1189,1189,-1,1,,,,,,,,,
+1190,1190,-1,1,,,,,,,,,
+1191,1191,-1,1,,,,,,,,,
+1192,1192,14,1,,see finetune compute,,,,,,,
+1193,1193,24,1,,,,,,,,,
+1194,1194,14,1,,,,,,,,,
+1195,1195,24,1,,,,,,,,,
+1196,1196,24,1,,,,,,,,,
+1197,1197,-1,1,,,,,,,,,
+1198,1198,-1,1,,,,,,,,,
+1199,1199,-1,1,,,,,,,,,
+1200,1200,16,1,392.0,16.33 days,,,,,,,
+1201,1201,-1,1,,,,,,,,,
+1202,1202,-1,1,,,,,,,,,
+1203,1203,24,96,1200.0,52 days,,76349.67141784582,91619.61,,,,
+1204,1204,-1,1,,,,,,,,,
+1205,1205,-1,1,,,,,,,,,
+1206,1206,-1,1,,,,,,,,,
+1207,1207,-1,1,,,,,,,,,
+1208,1208,-1,1,,,,,,,,,
+1209,1209,-1,1,,,,,,,,,
+1210,1210,-1,1,,,,,,,,,
+1211,1211,-1,1,,,,,,,,,
+1212,1212,-1,1,,,,,,,,,
+1213,1213,-1,1,,,,,,,,,
+1214,1214,-1,1,,,,,,,,,
+1215,1215,-1,1,,,,,,,,,
+1216,1216,24,1000,1728.0,"Model was trained from January 2023 to July 2023, which is six months. However, the training run duration did not take up this whole period. According to a Meta employee interviewed by Epoch, Llama 2 34B and 70B were trained on different clusters, with overlapping training periods. Based on an estimate of 1000 GPUs, it would have taken 72 days.",1720320.0,795557.0703894598,1374722.62,1102561.194,0.4191975017,,"8.1e23 FLOPs based on 6NC method.
+Table 2 reports 1720320 A100 hours, which at 100% utilization would give 1720320 * 3600 * 3.12e14 = 1.932e24 FLOP
+
+MFU = 8.1e23 / 1.932e24 = 0.4192
+"
+1217,1217,24,1,,,,,,600469.8720490151,,,
+1218,1218,24,1,,,184320.0,,,114259.38527188863,,,
+1219,1219,24,1,,,,,,235478.3811956922,,,
+1220,1220,24,8,,,,6364.456563115679,,,,0.72,"""We empirically validate that when used end-to-end to train GPT-style models, FlashAttention-2 reaches training speed of up to 225 TFLOPs/s per A100 GPU (72\% model FLOPs utilization).""
+
+Seems to be a test of FlashAttention2. It's also describing HFU, not MFU.
+
+HFU = 0.7200"
+1221,1221,-1,1,,,,,,,,,
+1222,1222,-1,1,,,,,,,,,
+1223,1223,-1,1,,,,,,,,,
+1224,1224,-1,1,,,,,,,,,
+1225,1225,-1,1,,,,,,4902644.123383027,,,
+1226,1226,24,128,48.0,"""We train the model on 128 NVIDIA 80G-A100 GPUs for 10k steps with around 82M samples (150B tokens in total), and the pretraining takes approximately 2 days.""",6144.0,101847.18028115285,4888.66,,,,
+1227,1227,-1,1,,,,,,,,,
+1228,1228,-1,1,,,,,,,,,
+1229,1229,-1,1,,,,,,,,,
+1230,1230,-1,1,,,,,,,,,
+1231,1231,24,1,,Training performance for the open-source InternLM-7B: https://github.com/InternLM/InternLM/blob/main/doc/en/train_performance.md,,,,1505257.378,,,
+1232,1232,-1,1,,,,,,,,,
+1233,1233,-1,512,,,,,,,,,
+1234,1234,-1,1,,,,,,,,,
+1235,1235,-1,1,,,,,,,,,
+1236,1236,-1,1,,,,,,,,,
+1237,1237,-1,1,,,,,,,,,
+1238,1238,32,256,24.0,""" We train the model on 256 V100 GPUs and the training takes approximately one day to complete""",6144.0,152821.8105810948,3667.72,,,,
+1239,1239,-1,1,,,,,,,,,
+1240,1240,7,1,,,,,,,,,
+1241,1241,7,512,278.4,30B: 512x H100-80gb for 11.6 days,142541.0,713231.9794598748,198563.78,,,,"6NC gives 1.89e23 FLOPs needed to train
+
+""The model was trained in three stages using the MosaicML Platform: (i) First it was trained on 440 A100-40GBs with a batch size of 1760. (ii) Then, on 216 A100-40GBs with a batch size of 1728. (iii) Training was completed on 256 H100-80GBs with a batch size of 512 with 8k context length and 50B tokens.""
+
+Training time not provided - unable to calculate utilization
+"
+1242,1242,-1,1,,,,,,,,,
+1243,1243,14,8,,""" The training is done with 8x A100 GPUs. The longest single training run takes around 2 days.""",,6368.142673748882,,,,,
+1244,1244,14,8,48.0,""" The training is done with 8x A100 GPUs. The longest single training run takes around 2 days.""",,6368.142673748882,305.67,,,,
+1245,1245,-1,1,,,,,,,,,
+1246,1246,16,25000,2280.0,(Speculative) SemiAnalysis conjectures that GPT-4 training took 90-100 days with utilization of 32-36%.,57000000.0,19904434.78894729,45382111.32,,0.34,,"CANNOT VERIFY, LIKELY HFU, PAYWALLED. 
+(Speculative) SemiAnalysis conjectures that GPT-4 had utilization of 32-36%: https://www.semianalysis.com/p/gpt-4-architecture-infrastructure"
+1247,1247,-1,1,,,,,,,,,
+1248,1248,-1,1,,,,,,,,,
+1249,1249,-1,1,,,,,,,,,
+1250,1250,-1,1,,,,,,,,,
+1251,1251,14,1,,,,,,,,,
+1252,1252,14,1,,,,,,,,,
+1253,1253,-1,1,,,,,,,,,
+1254,1254,32,3072,,,,1834678.6878449956,,,,,
+1255,1255,-1,1,,,,,,,,,
+1256,1256,14,256,,,,203862.2671051655,,,,,
+1257,1257,23,1024,,,,509689.7180341823,,,,0.5833,"基于上述的几个优化技术，我们在千卡 A800 显卡上达到了 7B 模型 182 TFLOPS 的吞吐，GPU 峰值算力利用率高达 58.3%。
+
+Authors report 182 TFLOPS of throughput, therefore HFU = 182/312 = 58.33%
+"
+1258,1258,-1,1,,,,,,,,,
+1259,1259,-1,1,,,,,,,,,
+1260,1260,-1,1,,,,,,,,,
+1261,1261,-1,1,,,,,,,,,
+1262,1262,-1,1,,,,,,,,,
+1263,1263,-1,1,,,,,,,,,
+1264,1264,-1,1,,,,,,,,,
+1265,1265,-1,1,,,,,,,,,
+1266,1266,-1,5,,,,,,,,,
+1267,1267,57,1,,,,,,,,,
+1268,1268,-1,1,24.0,24 hours,,,,,,,
+1269,1269,56,10,,,,4580.161444318493,,,,,
+1270,1270,24,1,,,,,,,,,
+1271,1271,14,1,,,,,,,,,
+1272,1272,24,1,,,,,,,,,
+1273,1273,-1,1,,,,,,,,,
+1274,1274,-1,1,,,,,,,,,
+1275,1275,-1,1,,,,,,,,,
+1276,1276,14,1,,,,,,,,,
+1277,1277,16,128,576.0,"""The largest model is trained on 128 A100-SXM4-40GB GPUs in about 24 days”, ",73728.0,101974.27158107296,58737.18,,,,
+1278,1278,-1,1,,,,,,,,,
+1279,1279,-1,1,,,,,,,,,
+1280,1280,-1,1,,,,,,,,,
+1281,1281,-1,1,,,,,,,,,
+1282,1282,16,16,36.0,"""All models are trained utilizing 16 Nvidia A100 (40G) GPUs and are completed within 1.5 days.""",576.0,12748.20334097663,458.94,,,,
+1283,1283,17,1,,,,,,5014266.983518871,,,
+1284,1284,-1,1,,,,,,,,,
+1285,1285,-1,1,,,,,,,,,
+1286,1286,-1,1,,,,,,,,,
+1287,1287,-1,1,,,,,,,,,
+1288,1288,24,512,625.5,"625.5 hours = 320256 /512
+512 GPUs from ""We trained our model on a GPU cluster with 512 A100 80 GB GPUs ""
+
+320256 GPU hours from ""Based on the total number of GPU hours that training took (320,256)""
+citations from sections 5.6 and 5.7",320256.0,407960.6765621668,255179.4,212217.65075330864,0.2272360999,,"Actual training compute given by https://huggingface.co/bigcode/starcoder as 8.46e22 FLOPs
+Stated GPU usage is 320,256 A100-hours for pre-training + 11,208 for fine-tuning.
+(320,256 + 11,208) * 3600 * 3.12e14 = 3.723e23 FLOPs at full utilization
+MFU = 8.46e22 / 3.723e23 = 0.2272"
+1289,1289,58,1,,,,,,,,,
+1290,1290,-1,1,,,,,,,,,
+1291,1291,16,440,228.0,"Table 3
+https://www.databricks.com/sites/default/files/inline-images/mpt-commercially-usable-llms-img-8.jpg",100320.0,350622.43759455526,79941.92,,0.3727,,"7B parameter model saw 1T tokens, so 6NC gives 4.2e22 FLOPs needed.
+Training was 9.5 days on 440 A100s:
+
+MFU = 9.5 * 24 * 3600 * 440 * 3.12e14 = 1.127e23
+4.2e22 / 1.127e23 = 0.3727"
+1292,1292,54,4,,,,2789.042117229417,,,,,
+1293,1293,-1,1,,,,,,,,,
+1294,1294,17,1,,,,,,,,,
+1295,1295,-1,1,,,,,,,,,
+1296,1296,32,8,70.0,,,4782.386422758304,334.77,46907.42757520694,,,
+1297,1297,16,384,,"compute divided by flops per seconds
+ 6.3e22 / 3.e16 = 2100000.0 seconds = 583 hours = 24 days
+compute (from other note) = 6.3e22
+flops per seconds = (num gpu) * (peak flops) * (assumed utilization rate) = 
+384*312e12*0.3 = 3.6e16",,306072.7310565314,,,,,
+1298,1298,-1,1,,,,,,,,,
+1299,1299,42,512,1080.0,,,,,,,,
+1300,1300,-1,1,,,,,,,,,
+1301,1301,14,4,10.0,,,3188.541629791884,31.89,,,,
+1302,1302,-1,1,,,,,,,,,
+1303,1303,-1,1,,,,,,,,,
+1304,1304,-1,1,,,,,,,,,
+1305,1305,14,8,10.0,"""We train all models with 8× A100s. Pretraining on CC-595K completes within 4 hours. Finetuning on Instruct-158K completes within 10 hours. Finetuning on ScienceQA completes within 4 hours.""",80.0,6377.509314719864,63.78,42.46267260692187,,,
+1306,1306,24,8,,4.284e+20/312000000000000 FLOPs * 8 * 3600 * 0.3 ~ 159 hours ~ 6.6 days,,6377.651339424,,,,,
+1307,1307,24,1,2.3,"""We trained the model on an A100-SXM-80GB for a total of 10 epochs, which took approximately 2 hours and 17 minutes.""",,,,,,,
+1308,1308,-1,1,,,,,,,,,
+1309,1309,-1,1,,,,,,5328550.47393551,,,
+1310,1310,32,1,576.0,24,,,,3129.0771365574788,,,
+1311,1311,37,1,,,,,,,,,
+1312,1312,-1,1,,,,,,,,,
+1313,1313,-1,1,,,,,,,,,
+1314,1314,-1,1,,,,,,,,,
+1315,1315,16,256,,,72300.0,204143.93434948783,,,0.2659,,"Ops-counting: 2.159e22 FLOP
+Table 5: 72300 A100 hours = 72300 * 3600 * 3.12e14 = 8.121e22 FLOP at max utilization
+
+MFU = 2.159e22 / 8.1207e22 = 0.2659"
+1316,1316,16,64,,,14240.0,51035.98358737197,,,0.3151,,"Ops-counting: 6 * 2.8 billion * 299892736000 = 5.038e21 FLOP
+Table 5: 14240 A100 hours = 14240 * 3600 * 3.12e14 = 1.599e22 FLOP at max utilization
+
+MFU = 5.038e21 / 1.599e22 = 0.3151"
+1317,1317,16,128,,,33500.0,102071.96717474391,,,0.3301,,"Ops-counting: 6 * 6.9 billion * 299892736000 = 1.242e22 FLOP
+Table 5: 33500 A100 hours = 33500 * 3600 * 3.12e14 = 3.763e22 FLOP at max utilization
+
+MFU = 1.242e22 / 3.763e22 = 0.3301"
+1318,1318,16,32,,,1030.0,25517.991793685986,,,,,
+1319,1319,16,64,,,4830.0,51035.98358737197,,,,,
+1320,1320,16,64,,,7120.0,51035.98358737197,,,,,
+1321,1321,16,32,,,510.0,25517.991793685986,,,,,
+1322,1322,16,32,,,2540.0,25517.991793685986,,,,,
+1323,1323,-1,1,,,,,,,,,
+1324,1324,14,8,,,,6380.066243365717,,300.0,,,
+1325,1325,14,512,1270.0,"""~53 days""",650240.0,408324.2395754059,518571.78,369586.1352802876,0.246,0.327,"Table 4 indicates an average of 102e12 FLOP/sec per A100 during training. HFU = 102e12 / 312e12 = 0.327.
+
+Confirmed by calculating manually with number of steps and time per step.
+Note also: ""Since we adopt activation checkpointing to reduce our memory footprint, this costs us an additional 0.33x TFLOPs per iteration due to repeated forward passes."" Then, MFU = (102/1.33)/312 = 0.2460"
+1326,1326,14,8,,,,6380.066243365717,,140.0,,,
+1327,1327,-1,1,,,,,,,,,
+1328,1328,-1,1,,,,,,,,,
+1329,1329,-1,1,,,,,,,,,
+1330,1330,37,1,,,,,,,,,
+1331,1331,-1,1,,,,,,,,,
+1332,1332,59,512,2400.0,"We develop PanGu-Σ model under the framework of MindSpore 5
+and train it on a cluster with only 512 Ascend 910 AI Accelerators [28] with 329 billion tokens over 100 days.",1228800.0,316521.76523003745,759652.24,,,,
+1333,1333,16,25000,2280.0,(Speculative) SemiAnalysis conjectures that GPT-4 training took 90-100 days with utilization of 32-36%.,57000000.0,19944368.12599428,45473159.33,37334304.976625234,0.34,,"CANNOT VERIFY, LIKELY HFU, PAYWALLED. 
+(Speculative) SemiAnalysis conjectures that GPT-4 had utilization of 32-36%: https://www.semianalysis.com/p/gpt-4-architecture-infrastructure"
+1334,1334,14,384,1440.0,"""Falcon-40B was trained on AWS SageMaker, on 384 A100 40GB GPUs in P4d instances.""
+""Training started in December 2022 and took two months.""",552960.0,306345.49441527214,441137.51,319783.157242365,0.3864,,"Estimated training compute: 2.4e23 FLOP
+FLOPs at 100% utilization, based on GPU-hours: (1440 * 384 * 3600 * 3.12e14) = 6.211e23
+
+MFU = 2.4e23 / 6.211e23 = 0.3864"
+1335,1335,-1,1,,,,,,,,,
+1336,1336,-1,1,,,,,,,,,
+1337,1337,24,8,3.0,"""For our initial run, fine-tuning a 7B LLaMA model took 3 hours on 8 80GB A100s, which costs less than $100 on most cloud compute providers.""",,6382.482061713183,19.15,100.0,,,
+1338,1338,-1,8,,,,,,,,,
+1339,1339,-1,1,,,,,,,,,
+1340,1340,-1,1,,,,,,,,,
+1341,1341,17,1,,"https://docs.cohere.com/docs/environmental-impact
+
+2696.16 kg carbon for base-light and 6689.76 kg carbon for embed-english. Nothing listed for the large model. 
+
+It's possible to back out GPU-hours using this calculator, though it varies by region and Cohere doesn't specify the region.
+
+https://mlco2.github.io/impact/",,,,,,,
+1342,1342,-1,1,,,,,,,,,
+1343,1343,-1,1,,,,,,,,,
+1344,1344,-1,1,,,,,,,,,
+1345,1345,-1,1,,,,,,,,,
+1346,1346,-1,1,,,,,,,,,
+1347,1347,17,1,,,,,,,,,
+1348,1348,14,1,,,,,,61300.86591335317,0.5138339921,,"1T tokens * 13B parameters * 6 FLOP/token/parameter = 7.8e22
+
+from paper, Llama-13B took 135,168 GPU hours using A100s
+
+312 trillion * 135,168 * 3600 = 1.518e23 FLOPs at full utilization
+This implies that the actual utilization was:
+MFU = 7.8e22/1.518e23 = 0.514"
+1349,1349,-1,1,,,,,,,,,
+1350,1350,14,2048,500.0,"""When training a 65B-parameter model, our code processes around 380 tokens/sec/GPU on 2048 A100 GPU with 80GB of RAM. This means that training over our dataset containing 1.4T tokens takes approximately 21 days.""",1024000.0,1634534.091472035,817267.05,578026.3043,0.4746,,"Compared to 2048 A100 GPUs each with 311.84 TFLOPS maximum performance for 21 days, this implies 47% utilization.
+
+MFU = 0.4746
+
+https://www.wolframalpha.com/input?i=5.5*10%5E23+FLOP+%2F+%282048+*+311.84+teraFLOPS+*+21+days%29
+
+"
+1351,1351,14,1,,,82432.0,,,46889.820096866126,0.432,,"6CN method: 4.02e22 FLOP
+Actual GPU usage: 82,432 A100-hours
+82432 * 3600 * 3.12e14 = 9.2588e22 FLOPs at 100% utilization
+4.02e22 / 9.2588e22
+
+MFU = 0.4342"
+1352,1352,-1,1,,,,,,,,,
+1353,1353,24,8,,,,6385.325372107343,,,,,
+1354,1354,24,8,,,,6385.325372107343,,,,,
+1355,1355,24,8,,,,6385.325372107343,,,,,
+1356,1356,-1,1,,,,,,,,,
+1357,1357,-1,1,,,,,,,,,
+1358,1358,-1,1,,,,,,,,,
+1359,1359,16,8,,,,6387.031966302971,,,,,
+1360,1360,-1,1,,,,,,,,,
+1361,1361,60,4,,,,1716.782441744986,,,,,
+1362,1362,16,1,200.0,"""less than 6 days for the first
+stage and less than 3 days for the second stage""
+9*24 is 216, rounding down a bit is 200 hours",,,,99690.24664120316,,,
+1363,1363,16,16,200.0,"""For example, using
+a single 16-A100(40G) machine, our largest model with
+ViT-g and FlanT5-XXL requires less than 6 days for the first
+stage and less than 3 days for the second stage.""
+9 days = 216 hours",3200.0,12776.908953102382,2555.38,1960.8225382725807,,,
+1364,1364,61,1,,"""We use a heterogeneous cluster with each node comprised of 4 x
+NVIDIA P100 Pascal (12G or 16G HBM2 memory) or 4 x NVIDIA V100 Volta (32G HBM2 memory). To simulate common practitioners’ limited access to GPUs, we train the WikiText-2, WikiText-103, PASCAL VOC, and CIFAR-10
+experiments on 1 GPU""",,,,,,,
+1365,1365,62,1,,,,,,,,,
+1366,1366,-1,1,,,,,,,,,
+1367,1367,32,1,150.0,"Their initial training runs took 3.1 days. The final training run was run for twice as many iterations with ""all other hyper-parameters the same"" and used twice as much compute as this. So likely 6 days or ~150 hours, but they don't explicitly say whether they used the same hardware.",,,,,,,
+1368,1368,24,1,4.0,"""All pruning experiments are conducted on a single NVIDIA A100 GPU with 80GB of memory. In this setup, SparseGPT can fully sparsify the 175-billion-parameter models in approximately 4 hours.""",,439.0411532246196,1.76,,,,
+1369,1369,-1,1,,,,,,,,,
+1370,1370,-1,1,,,,,,,,,
+1371,1371,-1,1,,,,,,,,,
+1372,1372,24,8,,"""All models were trained on either a single 16xA100-40GB node or a cluster of 8xA100-80GB nodes.""",,6393.151008587547,,,,,
+1373,1373,14,8,,,,6393.151008587547,,,,,
+1374,1374,14,8,,,,6393.151008587547,,,,,
+1375,1375,14,8,,,,6393.151008587547,,,,,
+1376,1376,14,128,72.0,Table 3,9216.0,102304.08471008124,7365.89,,,,
+1377,1377,-1,1,,,,,,,,,
+1378,1378,-1,1,,,,,,,,,
+1379,1379,14,320,720.0,,,255862.7534697245,184221.18,,,,
+1380,1380,54,8,,"
+",1.0,5597.371669502683,,,,,
+1381,1381,-1,1,,,,,,,,,
+1382,1382,-1,1,,,,,,,,,
+1383,1383,24,1,48.0,2 days,,,,233.0630322095263,,,
+1384,1384,24,128,,,,102386.13451047534,,591076.8943544837,,,
+1385,1385,-1,1,,,,,,,,,
+1386,1386,-1,1,,,,,,,,,
+1387,1387,-1,1,,,,,,,,,
+1388,1388,-1,1,,,,,,,,,
+1389,1389,-1,1,,,,,,,,,
+1390,1390,-1,1,,,,,,,,,
+1391,1391,54,8,4.28,40k steps [table 7] * 0.385 sec/step [figure 3] = 15400 sec = 4.28 hours,,5601.237152002178,23.97,,,,
+1392,1392,-1,1,,,,,,,,,
+1393,1393,-1,1,,,,,,,,,
+1394,1394,7,512,,""" for the XL model, we
+use 512 Nvidia A100-80GB GPU cards""",,717038.1909599457,,,,,
+1395,1395,-1,1,,,,,,,,,
+1396,1396,-1,1,,,,,,,,,
+1397,1397,45,1,12.0,,,285.82195776886823,3.43,,,,
+1398,1398,47,1,20.0,"1000 steps * 1024 examples = 10^6 examples per 4 hours
+5M instances -> 20 hours of total training time
+""These experiments are run on Google V3-256 TPUs using a batch size of 1,048,576 tokens (1,024 examples), a constant learning rate of 1e-5 and a total of 1000 steps. Each training run takes 4 hours to complete.""",,,,,,,
+1399,1399,17,512,120.0,5 days,61440.0,348322.23114529514,41798.67,,,,
+1400,1400,-1,1,,,,,,,,,
+1401,1401,17,512,37.0,"""we only use 0.2% of the pre-training compute to instruction-finetune Flan-PaLM 540B (approximately 512 v4 TPU chips for 37 hours)""",18944.0,348322.23114529514,12887.92,,0.1892,,"Estimated training compute: 2.5e24
+FLOPs at 100% utilization, based on GPU-hours: 37 * 512 * 3600 * 3.12e14 = 2.128e22
+
+Therefore, we can calculate utilization from known compute and maximum possible compute:
+MFU = 3.76e24 / 1.987e25 = 0.1892"
+1402,1402,17,1,,,,,,98374.29476250126,,,
+1403,1403,-1,1,,,,,,,,,
+1404,1404,47,1,,,,,,,,,
+1405,1405,-1,1,,,,,,,,,
+1406,1406,63,1,35.0,"""Training was performed on a single NVIDIA A40 GPU for 35 hours.""",,329.9047498229277,11.55,,,,
+1407,1407,-1,1,,,,,,,,,
+1408,1408,-1,1,,,,,,,,,
+1409,1409,-1,1,,,,,,,,,
+1410,1410,-1,1,1632.0,"""The training of CPM-Ant lasts 68 days""",,,,66779.34,,,
+1411,1411,-1,1,,,,,,,,,
+1412,1412,17,1024,240.0,10,172032.0,697203.184254025,167328.76,50878.10777366616,,,
+1413,1413,-1,1,,,,,,,,,
+1414,1414,-1,1,,,,,,,,,
+1415,1415,64,512,2016.0,Approximately 12 weeks = 2016 hours,,,,,,,
+1416,1416,16,512,1344.0,~ 8 weeks = 56*24 = 1344 hours,360000.0,410393.6048104728,551569.0,,,,
+1417,1417,16,128,1344.0,~ 8 weeks = 56*24 = 1344 hours,95000.0,102598.4012026182,137892.25,,,,
+1418,1418,16,128,,,,102609.82584809876,,,,,
+1419,1419,16,8,60.0,"""For SGPT-BE symmetric search training took 21 hours, while asymmetric
+training took 60 hours for the 5.8B model""",,6413.828235359284,384.83,,,,
+1420,1420,16,768,1440.0,"""During the 60-day access to the cluster, we manage to train GLM-130B for 400 billion tokens""
+60 days * 24 = 1,440 hours",1105920.0,615741.2226117075,886667.36,820296.6313095269,0.325,0.433,"""Following the calculation in (Chowdhery et al., 2022), we report hardware FLOPs utilization (HFU) of 43.3% and model FLOPs utilization (MFU) of 32.5% due to re-materialization."""
+1421,1421,14,128,2880.0,"See p.5 of the paper: ""We trained AlexaTM 20B for 120 days on 128 A100 GPUs...""",368640.0,102628.10792703854,295568.95,267943.21130997164,,0.4935,"Training throughput reported at 154 TFLOPs/GPU, vs 312 TFLOPs/GPU for the A100s they use
+
+HFU = 154e12 / 312e12 = 0.4935"
+1422,1422,-1,1,,,,,,,,,
+1423,1423,65,1,,,,,,,,,
+1424,1424,24,2,30.0,"In most of the WikiText-103 experiments, we used 2 NVIDIA A100 80Gb GPUs,
+training time varied from 10 to 30 hours depending on sequence length, memory size, and number of BPTT unrolls",,1604.2428268807498,48.13,,,,
+1425,1425,47,1,72.0,"We train Delphi using TPU v3-32 and evaluate it using TPU v3-8, with model parallelisms of 32 and 8 respectively, on Google Cloud Virtual Machines. Training Delphi on COMMONSENSE NORM BANK for 4 epochs takes approximately 72 hours.",,,,,,,
+1426,1426,24,384,2808.0,117 days * 24 hours/day,1078272.0,308035.2013244814,864962.85,995819.1171,,0.5,"""We were able to achieve 156 TFLOPs in our fastest configuration with A100 GPUs, attaining our objective of half of the theoretical peak performance of 312 TFLOPs (in float32 or bfloat16).""
+
+HFU = 156/312 = 0.5"
+1427,1427,24,1,,,59168.0,,,50667.25034038439,,,
+1428,1428,-1,1,,,,,,,,,
+1429,1429,14,1,504.0,21 days,,,,4478.145684414144,,,
+1430,1430,-1,1,,,,,,,,,
+1431,1431,-1,1,,,,,,,,,
+1432,1432,-1,1,,,,,,,,,
+1433,1433,-1,1,,,,,,,,,
+1434,1434,-1,1,,,,,,,,,
+1435,1435,-1,1,,,,,,,,,
+1436,1436,17,1024,696.0,,712704.0,698399.733142376,486086.21,,,,
+1437,1437,14,1,60.0,"""Our training process took 2.5 days utilizing 16 of the DGX A100 servers (in total 128 GPUs).""",,,,,,,
+1438,1438,-1,1,,,,,,,,,
+1439,1439,14,800,1560.0,65 days,1248000.0,641997.2949584174,1001515.78,,,,
+1440,1440,59,1,156.1,"Assume 30% utilization on 1536 Ascend 910 calculating in FP16.
+https://www.wolframalpha.com/input?i=6+*+13+billion+*+850+billion+FLOP+%2F+%280.30*1536*256+TFLOPS%29
+If they used INT8 precision, the training time would be half of this.",,,,,,,
+1441,1441,-1,1,,,,,,,,,
+1442,1442,-1,1,,,,,,,,,
+1443,1443,-1,1,,,,,,,,,
+1444,1444,-1,1,,,,,,,,,
+1445,1445,-1,1,,,,,,,,,
+1446,1446,-1,1,,,,,,,,,
+1447,1447,24,1,,,,,,,,,
+1448,1448,-1,1,,,,,,,,,
+1449,1449,-1,1,,,,,,,,,
+1450,1450,-1,1,,,,,,,,,
+1451,1451,-1,1,,,,,,,,,
+1452,1452,-1,1,,,,,,,,,
+1453,1453,17,1,,,,,,,,,
+1454,1454,-1,1,,,,,,,,,
+1455,1455,14,1,,,,,,,,,
+1456,1456,14,1,,,,441.0304118405999,,,,,
+1457,1457,-1,1,,,,,,,,,
+1458,1458,66,1,,,,,,,,,
+1459,1459,32,8,,,,4816.802908983849,,,,,
+1460,1460,67,192,7.0,,,96346.78549412632,674.43,,,,
+1461,1461,16,8,165.6,6.9 days,,6423.834266872993,1063.79,,,,
+1462,1462,-1,1,,,,,,,,,
+1463,1463,-1,1,,,,,,,,,
+1464,1464,-1,1,,,,,,,,,
+1465,1465,-1,1,,,,,,,,,
+1466,1466,-1,1,,,,,,,,,
+1467,1467,47,256,96.0,4 days,,231335.2960762711,22208.19,3523.0649800752253,,,
+1468,1468,17,512,744.0,"around 31 days from 'Pre-training took approximately slight more than one month for about 1 trillion
+tokens.' from section 5.1
+so around 31*24 = 744
+",380928.0,349588.9061965891,260094.15,126785.76203549476,0.2992518703,,"""Pretraining took slightly longer than 1 month"" to train on 1T tokens using 512 TPUv4 chips.
+ops-counting method gives 1.20e23 FLOP needed to train, and 512 TPUv4s running at max FLOPs for 1.1 months is:
+1.1 * 30 * 24 * 3600 * 512 * 2.75e14 = 4.01e23 FLOP
+1.2e23 / 4.01e23 = MFU = 0.29925"
+1469,1469,-1,1,,,,,,,,,
+1470,1470,-1,1,,,,,,,,,
+1471,1471,24,1024,793.5,"4.3*10^23 FLOP / (147 TFLOPS) = 813000 A100-hours
+https://www.wolframalpha.com/input?i=4.3*10%5E23+FLOP+%2F+%28147+TFLOPS%29
+
+""As of yesterday, at 12:46pm PST on January 6, our 175B model finally completed its training run on 300B tokens. This required ~4.30E+23 FLOPs of compute, or roughly ~33 days of continuous training on 1024 80GB A100s (assuming no hardware issues, no numerical instabilities, etc.).""",812544.0,822708.6888139298,652819.34,733634.637,,0.47115,"""[...] which enabled training OPT-175B on 992 80GB A100 GPUs, reaching 147 TFLOP/s utilization per GPU.
+
+Peak FLOP/s per A100: 312 TFLOP/s
+HFU = 147/312 = 0.4712"
+1472,1472,17,1536,360.0,1536 TPU v4 chips for 15 days,552960.0,1049023.659188776,377648.52,183423.16330597224,,,
+1473,1473,-1,1,,,,,,,,,
+1474,1474,32,1,112.0,,,,,,,,
+1475,1475,-1,1,,,,,,,,,
+1476,1476,-1,1,,,,,,,,,
+1477,1477,17,6144,1536.0,"6144 TPUv4 for 1200 hours + 3072 TPUv4 for 336 hours.
+
+Equivalent to 6144 TPUv4 for 1368 hours.",8404992.0,4198431.396906301,6448790.63,3060364.5969860666,0.462,0.578,"""In Section 4, we describe how we were able to scale pipeline-free training of PaLM 540B to 6144 chips across two TPU v4 Pods while achieving very high efficiency of 46.2% in model FLOPs utilization (observed throughput relative to theoretical max throughput) and 57.8% in hardware FLOPs utilization.""
+
+MFU = 0.4620
+HFU = 0.5780
+"
+1478,1478,32,1,,,,,,,,,
+1479,1479,32,1,,,,,,,,,
+1480,1480,-1,1,,,,,,,,,
+1481,1481,68,1,,,,,,,,,
+1482,1482,-1,1,,,,,,,,,
+1483,1483,-1,1,,,,,,,,,
+1484,1484,-1,1,,,,,,,,,
+1485,1485,-1,1,,,,,,,,,
+1486,1486,-1,1,,,,,,,,,
+1487,1487,16,1,,,,,,4897551.634095244,,,
+1488,1488,-1,1,,,,,,,,,
+1489,1489,14,1,,"""with our 774m parameters model, running a full expert iteration to train θ full required about 2000 A100
+days of compute""
+
+2000 days = 48000 hours",48000.0,,,,,,
+1490,1490,-1,1,,,,,,,,,
+1491,1491,45,1,1000.0,6 weeks,,,,,,,
+1492,1492,-1,1,,,,,,,,,
+1493,1493,47,1024,1385.0,57.7 days * 24,1418240.0,927218.301405043,1284197.35,229949.98625999544,,0.565,"""We used the Lingvo framework [94] for training and achieved 123 TFLOPS/sec with 56.5% FLOPS utilization""
+
+HFU = 0.5650
+"
+1494,1494,16,96,2160.0,"see other notes
+",207360.0,77269.91251696396,166903.01,184272.8073600264,,,"Previously given as 0.3750, but no source found."
+1495,1495,-1,1,,,,,,,,,
+1496,1496,17,3750,147.2,"Figure 7 (a) shows that the models were trained for around 23000 TPU-days. We know they trained on TPUv4s, and in appendix D.1 they say they have 3750 TPUv4 and TPUv4i. Assuming they trained only on the 3750 TPUv4s, that suggests 23000 / 3750 = 6.13 days, or 147.2 hours.",,2566002.5357062262,377715.57,,0.4364,,"Using C=6ND, we have C = 6 FLOP/token/param * 41.1B params * 967B tokens = 2.38e23 FLOP.
+
+Figure 7 (a) shows a maximum training compute budget of approx 23000 TPU-days per model. This implies 2.38e23 / (275e12 * 86400 * 23000) = 43.64%
+
+MFU = 0.4364"
+1497,1497,-1,1,,,,,,,,,
+1498,1498,-1,1,,,,,,,,,
+1499,1499,-1,1,,,,,,,,,
+1500,1500,-1,1,,,,,,,,,
+1501,1501,17,512,140.0,"""Each model is trained using batches of ∼2M tokens using 512 TPUv4 chips for ∼140 hours (∼71.8K total accelerator hours or ∼1M train steps).""",,350415.1042206616,49058.11,,,,
+1502,1502,-1,1,,,,,,,,,
+1503,1503,69,64,,"""For training, we use batch size 128 and train the models on 64 16GB TPUs""",,36072.1430815387,,,,,
+1504,1504,-1,1,,,,,,,,,
+1505,1505,-1,1,,,,,,,,,
+1506,1506,-1,1,,,,,,,,,
+1507,1507,-1,1,,,,,,,,,
+1508,1508,70,1920,,,,,,,,,
+1509,1509,14,1,,,,,,,,,
+1510,1510,14,1,,,,,,,,,
+1511,1511,14,256,504.0,"appendix A : ""The XGLM 7.5B model was trained on 256 A100 GPUs for about 3 weeks, at a speed of 311.6k words per second""",129024.0,206287.25531193183,103968.78,104152.22590136188,,,
+1512,1512,-1,1,,,,,,,,,
+1513,1513,-1,1,,,,,,,,,
+1514,1514,47,128,,,,116049.50214083788,,,,,
+1515,1515,-1,1,,,,,,2702636.289081865,,,
+1516,1516,17,1024,1366.0,"Note that they give several energy estimates. Use the complete training figures for 600B tokens, not the GPT-3 comparison values with 280B tokens.
+
+""326W measured system power per TPU-v4 chip""
+""The complete GLaM training using 600B tokens consumes only
+456 MWh""
+1024 TPU v4 chips
+(456 MWh) / (326W/chip * 1024 chips) = 1366 hours",1398784.0,701486.0111048243,958229.89,541437.4162400038,0.2869636964,,"6ND: 6 * 600B * 96.6B = 3.478e23
+Hardware: Digitizing figure 4 (d) indicates 139.67 TPU-years of training. 2.75e14 * 139.67 * 365.25 * 24 * 3600 = 1.212e24 at full utilization
+Implies utilization of 0.287
+
+MFU = 0.2870"
+1517,1517,-1,1,,,,,,,,,
+1518,1518,-1,1,,,,,,,,,
+1519,1519,-1,1,,,,,,,,,
+1520,1520,47,4096,920.0,"""We trained Gopher for 920 hours in November and December 2020 in Google’s Georgia datacentre. The PUE of the datacenter at this time was 1.08; the net tCO2e per MWh in October 2020 was 0.33. Using an estimate of 283W drawn per chip, this leads to a total of 380 net tCO2e""",3768320.0,3714163.007906485,3417029.97,640616.8522346151,0.378,,"Compute used to train model (table A26): 6.31e23 
+Maximum possble compute based on GPU-hours at 100% utilization: 920 * 4096 * 3600 * 1.23e14 =  1.669e24
+
+Therefore, we can calculate utilization:
+MFU = 6.31e23 / 1.669e24 = 0.3780"
+1521,1521,-1,1,,,,,,,,,
+1522,1522,-1,1,,,,,,,,,
+1523,1523,32,1,,,,,,,,,
+1524,1524,32,1,,,,,,,,,
+1525,1525,-1,1,,,,,,,,,
+1526,1526,-1,1,,,,,,,,,
+1527,1527,14,1,,,,,,,,,
+1528,1528,-1,1,,,,,,,,,
+1529,1529,24,1,,"All experiments are conducted on SKT’s proprietary supercomputer, Titan, equipped with NVIDIA A100 SXM4 80GB GPUs.",,,,,,,
+1530,1530,-1,1,,,,,,,,,
+1531,1531,-1,1,,,,,,,,,
+1532,1532,14,8,24.0,"Models are trained with 8 A100 GPUs, each requiring less than a day. Unless otherwise specified, for GPT-2 we use the default HuggingFace (Wolf et al., 2020) generation parameters, except that we use beam search.",,6452.509026418002,154.86,,,,
+1533,1533,71,1,8.0,"""In this setup, fine-tuning takes approximately 8 hours""",,277.0039416764727,2.22,,,,
+1534,1534,14,1,288.0,"""The total training time for CodeT5-small and CodeT5- base is 5 and 12 days, respectively""",,,,3114.8690946174474,,,
+1535,1535,14,8,,,,6453.658675376135,,,,,
+1536,1536,-1,1,,,,,,,,,
+1537,1537,-1,1,,,,,,,,,
+1538,1538,-1,1,,,,,,,,,
+1539,1539,-1,1,,,,,,,,,
+1540,1540,-1,1,,,,,,,,,
+1541,1541,72,1,,,,,,,,,
+1542,1542,-1,1,,,,,,,,,
+1543,1543,14,2,,,,1613.9537048231884,,,,,
+1544,1544,14,2,,,,1613.9537048231884,,,,,
+1545,1545,47,256,27.0,"For main model, 27 hours (Table 1)
+
+Total time taken to train for all experiments was 270 hours ""These training runs corresponded to about 270 total hours of training on a v3-512 Cloud TPU device.""",69120.0,232414.50916190376,6275.19,11671.840843653788,,,
+1546,1546,-1,1,6.5,6.5 hours (Table 3),,,,,,,
+1547,1547,-1,2128,,,,,,591664.5798708292,,0.45,"""The Yuan models are trained on a cluster with 2128 GPUs. A stable real performance of 45% of the theoretical peak performance is achieved on this cluster.""
+
+HFU = 0.4500"
+1548,1548,-1,1,,,,,,,,,
+1549,1549,24,4480,770.0,"Total compute was 1.17*10^24 FLOP.
+They don't directly report the utilization and training speed when using the full Selene supercomputer with 560 DGX * 8 A100/DGX = 4480 GPUs. See section 2.3 Hardware Setup.
+
+At 280 DGX, the utilization is 126/312 = 40% and a batch takes 60 seconds; at 350, it is 39% for 50 seconds; at 420, it is 36% for 44 seconds.
+
+The overall utilization was 30.2% and the full cluster has 560 DGX. Dividing the total compute by the total performance of 4480 A100 at 30.2% utilization gives 770 hours.",3449600.0,3615658.868639838,2784057.33,3848505.625647173,,0.302,"They don't directly report the utilization and training speed when using the full Selene supercomputer with 560 DGX * 8 A100/DGX = 4480 GPUs. See section 2.3 Hardware Setup.
+
+At 280 DGX, the utilization is 126/312 = 40% and a batch takes 60 seconds; at 350, it is 39% for 50 seconds; at 420, it is 36% for 44 seconds.
+
+The overall utilization was 30.2% and the full cluster has 560 DGX. 
+
+HFU = 0.3020
+"
+1550,1550,-1,1,,512 GPUs * 10 days * 24 h/day,,,,,,,
+1551,1551,14,256,336.0,"""two weeks on 256 NVIDIA A100 GPUs""",,206668.900572444,69440.75,,,,
+1552,1552,32,256,,,,155029.29220816068,,,,,
+1553,1553,14,1024,643.2,see compute notes,658637.0,827007.0405400413,531930.93,586408.7810520589,0.1995,,"6ND method gives 1.476e23 FLOP needed to train the model.
+
+Actual use was 1,024 A100 GPUs for 13.4 days for 150B tokens; 300B model probably took twice as long.
+
+26.8 * 24 * 3600 * 1024 * 3.12e14 = 7.3978e23
+1.476e23 / 7.3978e23
+
+MFU = 0.1995"
+1554,1554,14,1,,,,,,441770.0038182093,,,
+1555,1555,54,1,,,,388.2894463979599,,,,,
+1556,1556,32,8,,Running all code needed to produce plots took about 10 days on 8 V100s,,4846.17604411253,,,,,
+1557,1557,-1,1,,,,,,,,,
+1558,1558,-1,1,,,,,,,,,
+1559,1559,47,1,,,3840.0,,,,,,
+1560,1560,73,1,,,,277.3990201821971,,,,,
+1561,1561,-1,1,,,,,,,,,
+1562,1562,-1,1,,,,,,,,,
+1563,1563,32,128,155.0,,,77580.26955910088,12024.94,,,,
+1564,1564,32,128,,,,77580.26955910088,,,,,
+1565,1565,14,1,,,,,,836700.050829598,,,
+1566,1566,-1,1,,,,,,,,,
+1567,1567,74,4,,,,3637.223067232183,,,,,
+1568,1568,-1,1,,,,,,,,,
+1569,1569,-1,1,,,,,,,,,
+1570,1570,32,384,,,,232943.03314881725,,39104.26710360624,,,
+1571,1571,73,4,250.0,Figure 1c,,2022.3901774609187,505.6,,,,
+1572,1572,32,8,79.4,""" The training is on 8 Tesla V100 GPU cards""
+286k steps ~ [assumption] 286000 seconds = 79.4 hours",,4853.736425906205,385.39,,,,
+1573,1573,-1,1,,,,,,,,,
+1574,1574,47,512,347.3,14820 TPU core-hours / 1024 TPU cores = 347.3 hours,177818.0,466135.13260508416,161888.73,32852.91660437908,,,
+1575,1575,-1,1,,,,,,,,,
+1576,1576,32,256,720.0,30 days (Table 8),,155381.83775233384,111874.92,6682.2289986716,,,
+1577,1577,14,1,355.0,"""We run all of our experiments on a machine with 96 CPUs, 1.3TB physical memory, and 16 A100 GPUs [...] our experiments on NQ and TriviaQA took approximately 25 hours to complete, while experiments on WebQ took roughly 8 hours to complete. Before supervised training, we also perform a one-time unsupervised MSS pre-training for 82,000 steps that took roughly 1 week""
+
+Additionally, they pre-trained BERT, ICT, and T5 models, which took a combined 8.733e20 FLOPs. On 16 A100s at 0.3 utilization, that would have taken approximately 162 hours.
+
+So total time for the largest experiment (NQ or TriviaQA) is around:
+25 + 168 + 162 = 355",,,,2773.3124307816734,,,
+1578,1578,-1,1,,,,,,,,,
+1579,1579,-1,1,,,,,,,,,
+1580,1580,-1,1,,,,,,,,,
+1581,1581,-1,1,,,,,,2870839.8244998017,,,
+1582,1582,-1,1,,,,,,,,,
+1583,1583,47,1,,"Table 9 indicates pretraining completes 25 sequences per second on a TPUv3-64 device. 
+
+""we set our sequence length to 1024 (bytes rather than tokens), and train for 1 million steps over batches of 2^20 tokens."" 
+
+So 1024 sequences per step * 1M steps = 1.024 billion sequences
+1.024 B / 25 = 40.96M seconds = 11378 hours or 474 days. This seems implausible, so probably they just used a bigger TPU slice for the full training, but this is not indicated.",,,,92453.37635669748,,,
+1584,1584,75,1,0.1,,,,,957.274379475876,,,
+1585,1585,-1,1,,,,,,,,,
+1586,1586,-1,1,,,,,,,,,
+1587,1587,-1,1,,,,,,,,,
+1588,1588,47,1,840.0,"""GPT-J training took roughly five weeks with TPU v3-256.""
+5*7*24=",,,,,,0.6,"""At the 6B config on a TPU V3-256 pod, GPT-J achieves high absolute efficiency. The hardware has a theoretical maximum of 13.4PFLOPs, and GPT-J achieves 5.4 PFLOPs as measured in the GPT3 paper (ignoring attention computation, ignoring compute-memory tradeoffs like gradient checkpointing). When taking these additional factors into account, 8.1 PFLOPs, or approximately 60% of the theoretical maximum is utilized.""
+
+Need to check the GPT-3 paper to verify the 5.4 or 8.1 PFLOPS values.
+
+HFU = 0.6000
+"
+1589,1589,-1,1,,,,,,,,,
+1590,1590,59,2048,,,,1285806.3528918722,,,,,
+1591,1591,32,1,,,,,,,,,
+1592,1592,14,128,840.0,35 days,,103707.91685199105,87114.65,108672.69136370042,,,
+1593,1593,14,1,,,,,,,,,
+1594,1594,76,4,40.0,table 7,,2026.0414956053005,81.04,,,,
+1595,1595,-1,1,,,,,,,,,
+1596,1596,-1,1,,,,,,,,,
+1597,1597,32,8,,Table 1,98.0,4864.124132899583,,,,,
+1598,1598,32,8,11.8,95h GPU time / 8 GPUs ~11.8h wall clock time,,4864.124132899583,57.4,,,,
+1599,1599,32,8,12.25,,,4864.124132899583,59.59,,,,
+1600,1600,-1,1,3.0,"""Training times usually took several hours per run""
+Guessing ",,,,,,,
+1601,1601,-1,1,,,,,,,,,
+1602,1602,-1,1,,,,,,,,,
+1603,1603,-1,1,,,,,,,,,
+1604,1604,-1,1,,,,,,,,,
+1605,1605,-1,1,,,,,,,,,
+1606,1606,-1,1,,,,,,,,,
+1607,1607,-1,1,,,,,,,,,
+1608,1608,32,64,1791.0,"""The models
+are trained on 64 V100 GPUs for 200K steps with
+batch size of 1024 and maximum sequence length
+of 512, which takes about 2.5 days for GLMLarge.""
+GLMLarge - 335M parameters
+2.5 days * 24 hours/day * 10000/335 = 1791 hours",,38918.19281791449,69702.48,,,,
+1609,1609,-1,1,,,,,,,,,
+1610,1610,-1,1,,,,,,,,,
+1611,1611,-1,1,,,,,,,,,
+1612,1612,47,8,576.0,"""Pre-training took 24 days to finish on a TPUv3-8 slice""
+
+24 days = 576 hours",,7298.948907417686,4204.19,,,,
+1613,1613,77,480,,,,243309.1333554511,,13156.86123531961,,,
+1614,1614,-1,1,,,,,,,,,
+1615,1615,47,16,3.36,7.1368704e+18 FLOP [estimated compute] / (123000000000000 FLOP / s * 16 GPUs * 3600 sec / hour * 0.3 [assumed precision]) = 3.36 hours,,14599.198216777892,49.05,,,,
+1616,1616,32,64,60.0,2.5 days = 60 hours,,38932.92922983772,2335.98,,,,
+1617,1617,14,128,168.0,,,103821.1446129006,17441.95,,,,
+1618,1618,-1,1,,,,,,,,,
+1619,1619,-1,1,,,,,,,,,
+1620,1620,32,1,, 15† GPU-days = 360 GPU-hours,360.0,,,,,,
+1621,1621,32,8,24.0,,,4867.158066309197,116.81,,,,
+1622,1622,32,8,33.0,,,4867.158066309197,160.62,,,,
+1623,1623,-1,1,,,,,,,,,
+1624,1624,32,2,,,,1216.8437120592066,,,,,
+1625,1625,-1,1,,,,,,,,,
+1626,1626,-1,1,,,,,,,,,
+1627,1627,-1,1,,,,,,,,,
+1628,1628,-1,1,,,,,,,,,
+1629,1629,47,1024,648.0,"see table 4 in https://arxiv.org/ftp/arxiv/papers/2104/2104.10350.pdf
+",663552.0,935410.4639575824,606145.98,145100.89767585773,,0.2796747967,"Table 4 in https://arxiv.org/pdf/2104.10350 gives measured performance of 34.4 TFLOP/s, vs. peak achievable FLOP/s of 123 TFLOP/s on the TPUv3 being used.
+
+HFU = 34.4/123 = 0.27967"
+1630,1630,32,64,336.0,two weeks = 336 hours,,38975.435998232606,13095.75,,,,
+1631,1631,32,256,288.0,"“The largest ResNet model, RN50x64, took 18 days to train on 592 V100 GPUs while the largest Vision Transformer took 12 days on 256 V100 GPUs”",,155922.57638758916,44905.7,24638.518413409514,,,
+1632,1632,-1,1,,,,,,,,,
+1633,1633,-1,1,,,,,,,,,
+1634,1634,69,4,0.66,,,2273.870905652342,1.5,,,,
+1635,1635,32,8,,,,4873.014568662182,,,,,
+1636,1636,32,8,,,,4873.014568662182,,,,,
+1637,1637,32,8,,,,4873.014568662182,,,,,
+1638,1638,47,128,216.0,"https://github.com/aub-mind/arabert?tab=readme-ov-file#AraGPT2
+
+9 days = 216 hours",,116954.95413218816,25262.27,,,,
+1639,1639,-1,1,,,,,,,,,
+1640,1640,-1,1,,,,,,,,,
+1641,1641,-1,1,,,,,,,,,
+1642,1642,76,4,,,,2030.739275278243,,,,,
+1643,1643,-1,1,,,,,,,,,
+1644,1644,78,1,,,,200.84234590663945,,,,,
+1645,1645,78,1,,,,200.84234590663945,,,,,
+1646,1646,79,8,20.0,appendix A row 3,160.0,4061.6594477324606,81.23,,,,
+1647,1647,-1,1,,,,,,,,,
+1648,1648,32,64,336.0,"""It takes two weeks to train our largest model using 64 NVIDIA V100.""",,39011.038545758856,13107.71,7340.099044719796,,,
+1649,1649,-1,1,,,,,,,,,
+1650,1650,-1,1,,,,,,,,,
+1651,1651,-1,1,,,,,,,,,
+1652,1652,-1,1,,,,,,,,,
+1653,1653,47,64,264.0,11 days from Table 2,16896.0,58570.010422244966,15462.48,3771.13338489269,,,
+1654,1654,47,64,168.0,7 days from Table 2,10752.0,58570.010422244966,9839.76,2392.2883349806307,,,
+1655,1655,-1,1,,,,,,179442.0291399545,,,
+1656,1656,-1,1,,,,,,,,,
+1657,1657,80,4,96.0,"""We trained our model on NVIDIA V100 16GB and 2080Ti 11GB. <..> The training for language modeling took approximately four days on four GPUs.""
+
+4 days = 96 hours",,,,,,,
+1658,1658,32,16,720.0,see compute notes,11520.0,9765.799615782104,7031.38,4186.383565732907,,,
+1659,1659,-1,1,,,,,,,,,
+1660,1660,-1,1,,,,,,,,,
+1661,1661,-1,1,,,,,,,,,
+1662,1662,-1,1,,,,,,,,,
+1663,1663,-1,1,,,,,,,,,
+1664,1664,-1,1,,,,,,,,,
+1665,1665,-1,1,,,,,,,,,
+1666,1666,-1,1,,,,,,,,,
+1667,1667,32,8,30.0,"Table 5 reports training time for 54M translation model (23h)
+it should be more for the 99M language modeling model.",,4889.428515149248,146.68,,,,
+1668,1668,32,256,420.0,"""mBART trained for 2.5 weeks on 256 Nvidia V100 GPUs""",107520.0,156465.19682753857,65715.38,,,,
+1669,1669,-1,1,,,,,,,,,
+1670,1670,-1,1,,,,,,,,,
+1671,1671,-1,1,,,,,,,,,
+1672,1672,-1,1,,,,,,,,,
+1673,1673,-1,1,,,,,,,,,
+1674,1674,47,1024,1008.0,6 weeks = 1008 hours,1032192.0,939481.3420790088,946997.19,266200.0315979732,,,"Trained for a total of 235.5 TPU v3 core-years.
+Hardware: 235.5 * 365.25 * 24 * 3600 * (1.23e14 / 2) = 4.571e23 at full utilization
+
+Footnote 10 indicates 300k steps and 4M tokens/step -> 1.2T tokens
+6ND: 6 * 2.3B * 1.2T = 1.656e22 FLOPs
+
+Implied utilization: 1.656e22 / 4.571e23 = 0.036
+This seems implausibly low, but it's not clear where a mistake could have entered the calculation."
+1675,1675,47,1,96.0,"https://arxiv.org/pdf/2104.10350 Table 4 gives 3.1 days
+
+""The 600B parameters model that achieved the best translation quality was trained with 2048 TPU v3 cores for 4 days, a total cost of 22 TPU v3 core-years.""
+
+22 TPU v3 core-years * 365 days per year * 24 hours per day / 2 cores per TPU v3 chip = 96360 chip-hours",96360.0,,,,,,
+1676,1676,77,1,,,,,,,,,
+1677,1677,77,1,,,,,,,,,
+1678,1678,77,1,,,,,,,,,
+1679,1679,77,1,,,,,,,,,
+1680,1680,77,1,,,,,,,,,
+1681,1681,77,1,,,,,,,,,
+1682,1682,77,1,,,,,,,,,
+1683,1683,-1,1,,,,,,,,,
+1684,1684,-1,1,,,,,,,,,
+1685,1685,-1,1,,,,,,,,,
+1686,1686,-1,1,,,,,,,,,
+1687,1687,-1,1,,,,,,,,,
+1688,1688,77,10000,355.2,14.8 days according to https://arxiv.org/ftp/arxiv/papers/2104/2104.10350.pdf,3552000.0,5100759.605963441,1811789.81,2116866.242839016,0.1966,,"See table 4 of the carbon emissions paper: https://arxiv.org/pdf/2104.10350
+
+MFU calculation from total compute:
+(6 FLOP/token/param * 174.6B params * 300B tokens) / (10k V100 * 125 TFLOPS/V100 * 14.8 days) = 0.1966
+https://www.wolframalpha.com/input?i=%286*174.6+billion+*+300+billion%29+FLOP+%2F+%281250000+TFLOPS+*+14.8+days%29
+
+HFU calculation from GPU throughput:
+The paper reports 24.6 TFLOPS throughput per V100, and reports the V100 peak performance of 125 TFLOPS (which is correct if training was done in tensor 16-bit format).
+HFU = 24.6/125 = 0.1968
+
+These are suspiciously close, so it's likely they did not actually measure the GPU throughput, but estimated it from the total compute and the training duration. Therefore, let's leave HFU blank because the true value is uncertain.
+
+MFU = 0.1966"
+1689,1689,32,1,,,,,,,,,
+1690,1690,81,1,,,,,,,,,
+1691,1691,-1,1,,,,,,,,,
+1692,1692,71,1,84.0,"""for 2 epochs, <..>  Each training epoch takes approximately 1-2
+days to complete on the full dataset.""
+
+assuming 3.5 days total = 84 hours",,280.311451241256,23.55,,,,
+1693,1693,-1,1,,,,,,,,,
+1694,1694,-1,1,,,,,,,,,
+1695,1695,76,1,,2890000000000000000 FLOP / (11340000000000 FLOP / sec [fp32] * 1 GPU * 3600 sec / hour * 0.3 [assumed utilization]) = 235 hours,,280.3988579029138,,,,,
+1696,1696,76,1,,,,280.3988579029138,,,,,
+1697,1697,47,8,36.0,"Appendix A.2: ""pretraining UNIFIEDQA approximately takes about 36 and 55 hours, on T5(11B) and BART models, respectively.""",,7349.34790019072,264.58,59.12208690735248,,,
+1698,1698,-1,1,,,,,,,,,
+1699,1699,-1,1,,,,,,,,,
+1700,1700,-1,1,,,,,,,,,
+1701,1701,-1,1,,,,,,,,,
+1702,1702,69,8,96.0,4 days = 96 hours,,4576.289412806967,439.32,,,,
+1703,1703,47,128,168.0,7 days = 168 hours,,117676.01347217915,19769.57,,,,
+1704,1704,-1,1,,table 1,,,,,,,
+1705,1705,-1,1,,,,,,,,,
+1706,1706,-1,1,,,,,,,,,
+1707,1707,-1,1,,,,,,,,,
+1708,1708,47,64,,,,58861.596601264864,,,,,
+1709,1709,32,4,219.0,3152 sec per epoch (Table 7) * 250 epochs / 3600 sec/hour = 219 hours,,2452.621142775376,537.12,,,,
+1710,1710,73,1,,,,280.8050317098096,,,,,
+1711,1711,-1,1,,,,,,,,,
+1712,1712,-1,1,,,,,,,,,
+1713,1713,-1,1,84.0,""" Our Feedback architecture takes 3.5 days to train""
+3.5*24 = 84 hours",,,,,,,
+1714,1714,69,16,21.85,"""Each training step took approximately 0.15 seconds on a 32-core TPUv2 cluster"" -> 16 chips
+
+""we pre-train for 524,288 steps""
+
+524288*0.15/3600 ~ 21.85 hours",,9161.75542079835,200.18,,,,
+1715,1715,77,256,,,,130885.13499433055,,51659.713290894986,,,
+1716,1716,47,512,32.0,,,471228.4599562152,15079.31,4439.921298510215,,,
+1717,1717,-1,1,,,,,,,,,
+1718,1718,73,8,,,,4090.615920439178,,,,,
+1719,1719,32,1,,,,,,,,,
+1720,1720,47,1024,720.0,"We trained our best model for 30 days on a TPUv3 Pod (2,048 TPU cores)",737280.0,942708.8086440804,678750.34,214809.91213508436,,0.34306622,"Per https://arxiv.org/ftp/arxiv/papers/2104/2104.10350.pdf
+1.12e23 FLOPs used
+1024 TPUv3s for 30 days: 30 * 24 * 3600 * 1024 * 1.23e14 = 3.2647e23
+1.12e23 / 3.2647e23 
+
+HFU = 0.3431"
+1721,1721,-1,1,,,,,,,,,
+1722,1722,-1,1,,,,,,,,,
+1723,1723,-1,1,,,,,,,,,
+1724,1724,-1,1,,,,,,,,,
+1725,1725,-1,1,,,,,,,,,
+1726,1726,-1,1,,,,,,,,,
+1727,1727,73,4,,,,2048.635648068786,,,,,
+1728,1728,76,2,,,,1024.317824034393,,,,,
+1729,1729,78,1,,,,202.61231684196784,,,,,
+1730,1730,47,64,12.0,"""The model converged in a little over 12 hours.""",,59019.10425314221,708.23,,,,
+1731,1731,-1,1,,,,,,,,,
+1732,1732,32,1,24.0,1 day for each model (may not have been a full 24 hours),,,,2319.5419478533995,,,
+1733,1733,77,500,,,,256204.94677329363,,77861.31819548723,,,
+1734,1734,-1,1,,,,,,,,,
+1735,1735,-1,1,,,,,,,,,
+1736,1736,-1,1,,,,,,,,,
+1737,1737,47,1,,,,,,17420.709393371122,,,
+1738,1738,47,512,481.9,"4.05*10^22 FLOP at 37.073% utilization on 512 TPU v3 chips (123 TFLOPS) -> 482 hours
+https://www.wolframalpha.com/input?i=4.05*10%5E22+seconds+%2F+%28512*123*10%5E12%29+*%28123%2F45.6%29",246733.0,472373.69114573154,227636.88,78464.68282814459,,0.3707,Table 4 in https://arxiv.org/pdf/2104.10350 gives measured performance of  45.6 TFLOP/s out of maximum 123 TFLOP/s. Therefore HFU = 45.6/123 = 0.3707
+1739,1739,-1,1,,,,,,,,,
+1740,1740,-1,1,,,,,,,,,
+1741,1741,32,1,19.25,"Table 4: 
+231 seconds per 1k training steps
+300k steps -> 300*231 seconds -> 19.25 hours",,338.0031859126085,6.51,,,,
+1742,1742,-1,1,,,,,,,,,
+1743,1743,-1,1,,,,,,,,,
+1744,1744,82,1,,,,,,,,,
+1745,1745,47,1,,,,,,,,,
+1746,1746,-1,1,,,,,,,,,
+1747,1747,-1,1,,,,,,,,,
+1748,1748,-1,1,,,,,,,,,
+1749,1749,-1,1,,,,,,,,,
+1750,1750,-1,1,,,,,,,,,
+1751,1751,75,512,374.0,"The 8.3B GPT-like arch took 2.1 days per epoch on 512 GPUs, batch size 512, sequence length 1024. An epoch was 68.5k iterations.
+
+BERT: batch size 1024, sequence length 512, 2e6 iterations total.
+
+Halving the model size should ~halve the iteration time.
+Doubling the batch size should ~double the iteration time.
+Halving the sequence length should ~quarter the iteration time (quadratic scaling).
+
+Hence 3.1e-5 days/iteration * 2 * 1/2 * 1/4 = 7.8e-6 days/iteration.
+
+2e6 iterations => seems like 15.6 days training.",191488.0,262640.30207328824,98227.47,171818.64196707975,,,"When training the 512 V100 GPT-2 style models, achieved 15.1 PetaFLOP/s vs theoretical maximum of 512 * 125e12 = 64 PetaFLOP/s
+BERT model used same number of GPUs, likely had similar utilization (around 15.1/64=23.59%), probably slightly lower because they are splitting a model across the same number of GPUs but it is smaller so the GPUs are doing fewer matmuls."
+1752,1752,77,512,327.0,"Reported throughput is 15.1 teraFLOPS per GPU on 512 GPUs
+Assume total compute is 9.1e21 FLOP.
+Then training time is 327 hours.
+https://www.wolframalpha.com/input?i=9.1*10%5E21+FLOP+%2F+%28512*15.1+teraFLOPS%29",167424.0,262640.30207328824,85883.38,109287.55758939347,,0.2359,"Achieved 15.1 PetaFLOP/s on 512 V100s, vs theoretical maximum of 512 * 125e12 = 64 PetaFLOP/s
+HFU = 15.1 / 64 = 0.2359"
+1753,1753,32,128,,,,78792.09062198647,,,,,
+1754,1754,-1,1,,,,,,,,,
+1755,1755,83,1,,,,338.2215428484996,,,,,
+1756,1756,-1,1,,,,,,,,,
+1757,1757,-1,1,,,,,,,,,
+1758,1758,-1,1,,,,,,,,,
+1759,1759,-1,1,,,,,,,,,
+1760,1760,-1,1,,,,,,,,,
+1761,1761,-1,1,,,,,,,,,
+1762,1762,-1,1,,,,,,,,,
+1763,1763,-1,1,,,,,,,,,
+1764,1764,-1,1,,,,,,,,,
+1765,1765,-1,1,,,,,,,,,
+1766,1766,-1,1,,,,,,,,,
+1767,1767,-1,1,,,,,,,,,
+1768,1768,84,1,,char4-MS-vec 165.46 seconds per epoch,,,,,,,
+1769,1769,84,1,,char3-MS-vec 171.10 seconds per epoch,,,,,,,
+1770,1770,-1,1,,,,,,,,,
+1771,1771,-1,1,,,,,,,,,
+1772,1772,32,64,24.0,"""Training large models takes about a day on 64 V100 GPUs.""",,39463.657300276864,947.13,,,,
+1773,1773,77,1024,120.0,"First the model is pretrained for 100k steps on 1024 GPUs for 1 day, then pretraining is increased to 500k steps, so assuming they used the same number of GPUs, this would have taken 5 days.",122880.0,526193.8152119832,63143.26,85350.2350127364,,,"Hardware estimate: 100k steps took 1 day on 1024 V100; 500k steps would have taken about 5 days.
+1024 * 1.25e14 * 5 * 24 * 3600 = 5.5296e22 at full utilization
+
+6ND estimate: batches are 8k sequences of 512 tokens; 500k updates means the model saw 500k * 8k * 512 = 2.048T tokens
+6 * 2.048T * 355M = 4.36224e21
+
+Implies 4.36224e21 / 5.5296e22 = 0.0789 utilization
+That seems on the edge of plausibility; our lowest confirmed utilization is 0.189."
+1774,1774,-1,1,,,,,,,,,
+1775,1775,85,2,,,,1027.8825149290835,,,,,
+1776,1776,85,2,,,,1027.8825149290835,,,,,
+1777,1777,85,2,,,,1027.8825149290835,,,,,
+1778,1778,85,2,,,,1027.8825149290835,,,,,
+1779,1779,85,2,,,,1027.8825149290835,,,,,
+1780,1780,-1,1,,,,,,,,,
+1781,1781,-1,1,,,,,,,,,
+1782,1782,84,1,,char2-MS-vec 173.77 seconds per epoch,,,,,,,
+1783,1783,-1,1,,,,,,,,,
+1784,1784,-1,1,,,,,,,,,
+1785,1785,-1,1,,,,,,,,,
+1786,1786,-1,1,,,,,,,,,
+1787,1787,-1,1,,,,,,,,,
+1788,1788,-1,1,,,,,,,,,
+1789,1789,47,1,,,,,,13644.95913543866,,,
+1790,1790,-1,1,,,,,,,,,
+1791,1791,47,128,336.0,"""We trained Grover-Mega for 800k iterations, using a batch size of 512 and 256 TPU v3 cores. Training time was two weeks.""",,118480.6465908319,39809.5,15691.613136656457,,,
+1792,1792,-1,1,,,,,,,,,
+1793,1793,-1,1,29.0,106 sec per epoch (Table 3) -> 106000 seconds = 29 hours,,,,,,,
+1794,1794,-1,1,,53s per epoch (Table 3),,,,,,,
+1795,1795,-1,1,,,,,,,,,
+1796,1796,32,8,,,,4940.652929089749,,,,,
+1797,1797,-1,1,,,,,,,,,
+1798,1798,-1,1,,,,,,,,,
+1799,1799,-1,1,,,,,,,,,
+1800,1800,-1,1,,,,,,,,,
+1801,1801,-1,1,,,,,,,,,
+1802,1802,-1,1,,,,,,,,,
+1803,1803,-1,1,,,,,,,,,
+1804,1804,-1,1,,,,,,,,,
+1805,1805,-1,1,,,,,,,,,
+1806,1806,32,1,120.0,,,339.4439274233134,40.73,,,,
+1807,1807,32,1,24.0,,,339.4439274233134,8.15,,,,
+1808,1808,76,1,,,,,,,,,
+1809,1809,32,1,,,,,,,,,
+1810,1810,47,4,168.0,1 week,672.0,3707.800947246575,622.91,247.26289010271603,,,
+1811,1811,-1,1,,,,,,,,,
+1812,1812,-1,1,,,,,,,,,
+1813,1813,-1,1,,,,,,,,,
+1814,1814,-1,1,,,,,,,,,
+1815,1815,47,1,,,,,,4348.443645,,,
+1816,1816,-1,1,,,,,,,,,
+1817,1817,-1,1,,,,,,18857.363172241257,,,
+1818,1818,-1,1,,,,,,8649.049000458455,,,
+1819,1819,-1,1,,,,,,,,,
+1820,1820,-1,1,,,,,,,,,
+1821,1821,-1,1,,,,,,,,,
+1822,1822,-1,1,,,,,,,,,
+1823,1823,-1,1,,,,,,,,,
+1824,1824,-1,1,,,,,,,,,
+1825,1825,-1,1,,,,,,,,,
+1826,1826,47,32,,,,29712.65288608572,,,,,
+1827,1827,-1,1,,,,,,,,,
+1828,1828,-1,1,,,,,,,,,
+1829,1829,-1,1,,,,,,,,,
+1830,1830,-1,1,,,,,,,,,
+1831,1831,-1,1,,,,,,,,,
+1832,1832,-1,1,,,,,,,,,
+1833,1833,-1,1,,,,,,,,,
+1834,1834,69,256,13.0,"from section 9.1 ""For the billion-word language modeling benchmark, we trained the models for 10 epochs. The largest model (4.9B parameters) took 13 hours to train on a 512-core TPUv2 cluster.""",3328.0,148117.2291982981,1925.52,935.3300509163912,,,
+1835,1835,69,64,22.0,"from section 9.1 ""On the WMT14 En-Fr translation tasks (3), we trained the models for 3 epochs. The largest model
+(2.9B parameters) was trained for 22 hours on a 128-core TPUv2 cluster.""",1408.0,37029.30729957453,814.64,395.71656000308855,,,
+1836,1836,86,1,,"""reasonable amount of time"" with a single GPU",,,,,,,
+1837,1837,87,1,36.0,"When training on a single Tesla K80 GPU, we achieve a training
+throughput of more than 1000 methods per second. Therefore, a single training epoch takes about 3 hours, and it takes about 1.5 days to completely train a model.
+
+36/3 = 12 epochs",,,,,,,
+1838,1838,-1,1,,,,,,,,,
+1839,1839,-1,1,,,,,,,,,
+1840,1840,69,64,96.0,"from appendix A.2: ""Training of BERTLARGE was performed
+on 16 Cloud TPUs (64 TPU chips total). Each pre-
+training took 4 days to complete.""",6144.0,37049.92852412132,3556.79,1751.4770087736404,0.2801,,"Estimated FLOPs used (see training compute notes): 2.85e20
+GPU-time: 96 h * 3600 s/h * 64 GPU * 4.6e13 FLOP/GPU-s = 1.017e21 FLOP
+
+MFU = 2.85e20 / 1.017e21 = 0.2801"
+1841,1841,32,8,67.0,,4288.0,4963.480727525225,332.55,2880.917278699733,,,
+1842,1842,-1,1,,,,,,,,,
+1843,1843,-1,1,,,,,,,,,
+1844,1844,-1,1,,,,,,,,,
+1845,1845,32,8,,,,4964.696746005496,,45.37321924485877,,,
+1846,1846,-1,1,,,,,,,,,
+1847,1847,-1,1,,,,,,,,,
+1848,1848,-1,1,,,,,,,,,
+1849,1849,-1,1,,,,,,,,,
+1850,1850,82,128,27.666,"""training updates in 27h 40min on 128 GPUs""",3541.0,66225.44602672113,1832.19,2442.1618775733145,,,
+1851,1851,-1,1,,,,,,,,,
+1852,1852,-1,1,,,,,,,,,
+1853,1853,-1,1,,,,,,,,,
+1854,1854,71,8,,,,4140.473231727164,,,,,
+1855,1855,-1,1,,,,,,,,,
+1856,1856,76,1,72.0,"for PTB (they say WT-2 training is similar): The training takes 3 days on a single 1080Ti GPU with our PyTorch implementation
+
+3*24 = 72 hours",,284.6899784455654,20.5,,,,
+1857,1857,-1,1,24.0,,,,,,,,
+1858,1858,-1,1,,,,,,,,,
+1859,1859,88,8,720.0,"""1 month on 8 GPUs."" from the reference link",,663.5535559333689,477.76,,,,
+1860,1860,-1,1,,,,,,,,,
+1861,1861,-1,1,,,,,,,,,
+1862,1862,-1,1,,,,,,,,,
+1863,1863,-1,1,,,,,,,,,
+1864,1864,-1,1,,,,,,,,,
+1865,1865,-1,1,,,,,,,,,
+1866,1866,-1,1,,,,,,,,,
+1867,1867,-1,1,,,,,,,,,
+1868,1868,-1,1,,,,,,,,,
+1869,1869,-1,1,,,,,,,,,
+1870,1870,-1,1,,,,,,,,,
+1871,1871,-1,1,,,,,,,,,
+1872,1872,-1,1,,,,,,,,,
+1873,1873,-1,1,,,,,,,,,
+1874,1874,67,32,120.0,from Table 1,3840.0,16602.143459185685,1992.26,,,,
+1875,1875,67,8,144.0,6 days,,4153.309685987008,598.08,590.5320553042133,,,
+1876,1876,89,1,12.0,"""Results are obtained in only 12 hours (WikiText-103) to 2 days (enwik8) using a single modern GPU""",12.0,268.1693571105067,3.22,,,,
+1877,1877,-1,1,,,,,,,,,
+1878,1878,-1,1,,,,,,,,,
+1879,1879,-1,1,,,,,,,,,
+1880,1880,-1,1,,,,,,,,,
+1881,1881,-1,1,,,,,,,,,
+1882,1882,-1,1,,,,,,,,,
+1883,1883,76,1,,,,,,,,,
+1884,1884,-1,1,,,,,,,,,
+1885,1885,32,1,12.0,"""The model trains at 2980 seconds per epoch on the NVIDIA V100
+and 5460 seconds per epoch on the NVIDIA P100.""
+
+""Using this approach we reduce our per-epoch time substantially and achieve a new state-of-the-art on WikiText-103 despite training for 14 epochs, a total time of only 12 hours.""",,,,,,,
+1886,1886,90,1,,"""our machines equipped with 16GB of GPU RAM (NVIDIA P100)""",,,,,,,
+1887,1887,-1,1,,,,,,,,,
+1888,1888,-1,1,,,,,,,,,
+1889,1889,-1,1,,,,,,,,,
+1890,1890,-1,1,,,,,,,,,
+1891,1891,-1,1,,,,,,,,,
+1892,1892,-1,3,,,,,,,,,
+1893,1893,-1,1,,,,,,,,,
+1894,1894,-1,1,,,,,,,,,
+1895,1895,-1,1,,,,,,,,,
+1896,1896,-1,1,,,,,,,,,
+1897,1897,-1,1,,,,,,,,,
+1898,1898,-1,1,,,,,,,,,
+1899,1899,-1,1,,,,,,,,,
+1900,1900,-1,1,,,,,,,,,
+1901,1901,-1,1,,,,,,,,,
+1902,1902,-1,1,,,,,,,,,
+1903,1903,-1,1,,,,,,,,,
+1904,1904,-1,1,,,,,,,,,
+1905,1905,-1,1,,,,,,,,,
+1906,1906,-1,1,,,,,,,,,
+1907,1907,-1,1,,,,,,,,,
+1908,1908,-1,1,,,,,,,,,
+1909,1909,-1,1,,,,,,,,,
+1910,1910,-1,1,,,,,,,,,
+1911,1911,-1,1,,,,,,,,,
+1912,1912,-1,1,,,,,,,,,
+1913,1913,-1,1,,,,,,,,,
+1914,1914,-1,1,,,,,,,,,
+1915,1915,-1,1,,,,,,,,,
+1916,1916,-1,1,,,,,,,,,
+1917,1917,86,1,,,,,,,,,
+1918,1918,-1,1,,,,,,,,,
+1919,1919,-1,1,,,,,,,,,
+1920,1920,-1,1,,,,,,,,,
+1921,1921,67,8,84.0,"We trained our models on one machine with 8 NVIDIA P100 GPUs. For our base models using
+the hyperparameters described throughout the paper, each training step took about 0.4 seconds. We trained the base models for a total of 100,000 steps or 12 hours. For our big models,(described on the
+bottom line of table 3), step time was 1.0 seconds. The big models were trained for 300,000 steps
+(3.5 days).",672.0,4180.032869488383,351.12,438.0356518424336,,,
+1922,1922,-1,1,,,,,,,,,
+1923,1923,-1,1,,,,,,,,,
+1924,1924,-1,1,,,,,,,,,
+1925,1925,78,1,,,,207.17498102199565,,,,,
+1926,1926,91,1,,"""One epoch took from 24 minutes to 2h45 for depth 9, and from 50 minutes to 7h (on the largest datasets) for depth 29. It took between 10 to 15 epoches to converge.""",,282.2017592376111,,,,,
+1927,1927,92,64,288.0,12 days,,32873.78910003616,9467.65,3874.12265,,,
+1928,1928,-1,1,,,,,,,,,
+1929,1929,-1,1,,,,,,,,,
+1930,1930,-1,1,,,,,,,,,
+1931,1931,-1,1,,,,,,,,,
+1932,1932,-1,1,,,,,,,,,
+1933,1933,-1,1,,,,,,,,,
+1934,1934,-1,1,,,,,,,,,
+1935,1935,-1,1,,,,,,,,,
+1936,1936,93,8,60.0,see compute notes,480.0,4200.468649711526,252.03,41.25014556779628,,,
+1937,1937,-1,1,,,,,,,,,
+1938,1938,-1,1,,,,,,,,,
+1939,1939,-1,1,,,,,,,,,
+1940,1940,-1,1,,,,,,,,,
+1941,1941,87,1,,"Test model used 96 K80 for 9 days, then this was scaled up by 31x for the production model, but unclear how many GPUs were used or how long it was trained for. The production run used 96 * 9 days * sqrt(1000) ~= 655730 chip-hours.",655730.0,,,201331.569937687,,,
+1942,1942,-1,1,,,,,,,,,
+1943,1943,87,1,,,,,,,,,
+1944,1944,-1,1,,,,,,,,,
+1945,1945,-1,1,,,,,,,,,
+1946,1946,-1,1,,,,,,,,,
+1947,1947,-1,1,,,,,,,,,
+1948,1948,-1,1,,,,,,,,,
+1949,1949,-1,1,720.0,,,,,,,,
+1950,1950,-1,1,,,,,,,,,
+1951,1951,-1,1,,,,,,,,,
+1952,1952,-1,1,,,,,,,,,
+1953,1953,-1,1,,,,,,,,,
+1954,1954,-1,1,,,,,,,,,
+1955,1955,93,1,12.0,"""the model training requires about 12 hours for POS tagging and 8
+hours for NER""",12.0,289.523491253324,3.47,,,,
+1956,1956,-1,1,,,,,,,,,
+1957,1957,93,1,8.0,"""the model training requires about 12 hours for POS tagging and 8
+hours for NER""",8.0,290.0785080846343,2.32,,,,
+1958,1958,91,32,,"*I assumed Tesla K40s though they stated it was just one of Tesla K40
+
+""The best model needs about 5 days to get to 35 perplexity and 10 days to 32.5.""
+
+10*24 = 240
+
+This model is not the biggest but has the best performance, I assume it is *likely* to have comparativeley similar training time",240.0,16564.40221110092,,71.21404931614963,,,
+1959,1959,91,32,,"*I assumed Tesla K40s though they stated it was just one of Tesla K40
+
+""The best results were achieved after 3 weeks of training.""
+
+21*24 = 504
+",504.0,16564.40221110092,,,,,
+1960,1960,-1,1,,,,,,,,,
+1961,1961,-1,1,,,,,,,,,
+1962,1962,-1,1,,,,,,,,,
+1963,1963,-1,1,,,,,,,,,
+1964,1964,-1,1,,,,,,,,,
+1965,1965,-1,1,336.0,,,,,,,,
+1966,1966,-1,1,,,,,,,,,
+1967,1967,91,1,48.0,""" The optimization is done mainly on a Tesla K40 GPU, which takes about 2 days for the training on a dataset containing 1M sentences.""
+this training doesn't refer to the PTB dataset but to wiki dataset so it is likely an upper bound",,,,,,,
+1968,1968,-1,1,,,,,,,,,
+1969,1969,-1,1,,,,,,,,,
+1970,1970,-1,1,,,,,,,,,
+1971,1971,-1,1,,,,,,,,,
+1972,1972,-1,1,,,,,,,,,
+1973,1973,-1,1,,,,,,,,,
+1974,1974,-1,1,,,,,,,,,
+1975,1975,-1,1,,,,,,,,,
+1976,1976,-1,1,,,,,,,,,
+1977,1977,94,1,40.0,"""""e stopped training our SPN when its performance on the validation set
+stops improving at two consecutive evaluation points, or when it has run for 40 hours, whichever occurred first. (It turned out that both SPN-3 and SPN-4 ran for the maximum of 40 hours.)
+We parallelized our SPN code2 to run on a GPU, and ran our experiments on a machine with a 2.4 GHz CPU and an NVIDIA Tesla C2075 GPU (448 CUDA cores, 5GB of device memory).""",,290.04546165358084,11.6,,,,
+1978,1978,-1,1,240.0,Training took about 10 days,,,,,,,
+1979,1979,95,1,24.0,"""Training this network takes an entire day on an NVIDIA K20 GPU.""",,264.24675821957226,6.34,,,,
+1980,1980,96,1,,,,,,,,,
+1981,1981,-1,1,,,,,,,,,
+1982,1982,-1,1,,,,,,,,,
+1983,1983,-1,1,,,,,,,,,
+1984,1984,-1,1,,,,,,,,,
+1985,1985,-1,1,,"Section 4.6 in original paper (https://nlp.stanford.edu/pubs/glove.pdf)
+
+85 min to populate coocurrence matrix
++ 25 training iterations
+
+Each iteration takes 14 minutes on 32 cores ",,,,,,,
+1986,1986,-1,1,,"Section 4.6 in original paper (https://nlp.stanford.edu/pubs/glove.pdf)
+
+85 min to populate coocurrence matrix
++ 25 training iterations
+
+Each iteration takes 14 minutes on 32 cores ",,,,,,,
+1987,1987,-1,1,,,,,,,,,
+1988,1988,-1,1,,,,,,,,,
+1989,1989,-1,1,,,,,,,,,
+1990,1990,-1,24,240.0,"from Table 1,240 hours on 24 CPUs",5760.0,,,,,,
+1991,1991,-1,1,,,,,,30.02809731331717,,,
+1992,1992,-1,1,,,,,,,,,
+1993,1993,-1,1,,,,,,,,,
+1994,1994,-1,1,24.0,"Table 5 appears to call the model ""Skip-Phrase"" and says it took 1 day",,,,,,,
+1995,1995,-1,1,5.0,The RNTN would usually achieve its best performance on the dev set after training for 3 - 5 hours.,,,,,,,
+1996,1996,-1,3,15.0,The training of an RCTM takes about 15 hours on 3 multicore CPUs.,,,,,,,
+1997,1997,-1,1,,,,,,,,,
+1998,1998,-1,1,,,,,,,,,
+1999,1999,-1,180,336.0,Trained for 14 days (Table 6),,,,3255.18396377876,,,
+2000,2000,-1,1,,,,,,,,,
+2001,2001,-1,1,,,,,,,,,
+2002,2002,-1,1,,,,,,,,,
+2003,2003,-1,1,,,,,,,,,
+2004,2004,-1,1,,,,,,,,,
+2005,2005,-1,1,,,,,,,,,
+2006,2006,-1,1,,,,,,,,,
+2007,2007,-1,1,,,,,,,,,
+2008,2008,-1,1,,,,,,,,,
+2009,2009,-1,1,,,,,,,,,
+2010,2010,-1,1,,,,,,,,,
+2011,2011,-1,1,72.0,"""Chunking and NER take about one hour to train, POS takes few hours, and SRL takes about three days.""
+SRL is the longest task.",,,,,,,
+2012,2012,-1,1,,,,,,,,,
+2013,2013,-1,1,,,,,,,,,
+2014,2014,-1,1,,,,,,,,,
+2015,2015,-1,1,,,,,,,,,
+2016,2016,-1,1,,,,,,,,,
+2017,2017,-1,1,,,,,,,,,
+2018,2018,-1,1,504.0,"""it takes several weeks to train the most complex models.""
+Rough guess, 3 weeks = 504 hours
+
+Assuming these models trained at the same time on different machines.",,,,,,,
+2019,2019,-1,1,,,,,,,,,
+2020,2020,-1,1,,,,,,,,,
+2021,2021,-1,1,,,,,,,,,
+2022,2022,-1,1,,,,,,,,,
+2023,2023,-1,1,,"Table 3: 18,598 h (cumulative CPU)",18598.0,,,,,,
+2024,2024,-1,1,,,,,,,,,
+2025,2025,-1,1,,HLBL with largest tree (T7) takes 32 minutes per epoch. Unstated how many epochs they trained for.,,,,,,,
+2026,2026,-1,1,,"32 minutes per epoch for the largest model, but unfortunately no epoch count given.
+
+""Models were trained using the learning rate of 10^−3 until the perplexity on the validation set started to increase. Then the learning rate was reduced to 3 × 10^−5 and training was resumed until the validation perplexity started increasing again.""",,,,,,,
+2027,2027,-1,1,,,,,,,,,
+2028,2028,-1,1,168.0,1 week on 1 computer,,,,,,,
+2029,2029,-1,1500,24.0,Table 2,,,,,,,
+2030,2030,-1,400,48.0,Table 2,,,,,,,
+2031,2031,-1,1,,,,,,,,,
+2032,2032,-1,1,,,,,,,,,
+2033,2033,-1,1,,,,,,,,,
+2034,2034,-1,1,13.4,"Training time per epoch: 1609s (table 1)
+Total training time 30*1609/60/60=13.408h
+",,,,,,,
+2035,2035,-1,1,,,,,,,,,
+2036,2036,-1,1,,,,,,,,,
+2037,2037,-1,1,,,,,,,,,
+2038,2038,-1,1,,,,,,,,,
+2039,2039,-1,1,,,,,,,,,
+2040,2040,-1,1,,,,,,,,,
+2041,2041,-1,1,,,,,,,,,
+2042,2042,-1,1,,,,,,,,,
+2043,2043,-1,1,,,,,,,,,
+2044,2044,-1,1,,,,,,,,,
+2045,2045,-1,1,,,,,,,,,
+2046,2046,-1,1,,,,,,,,,
+2047,2047,-1,1,,,,,,,,,
+2048,2048,-1,1,,,,,,,,,
+2049,2049,-1,1,,,,,,,,,
+2050,2050,-1,1,,,,,,,,,
+2051,2051,-1,1,,,,,,,,,
+2052,2052,-1,1,,,,,,,,,
+2053,2053,-1,1,,,,,,,,,
+2054,2054,-1,1,,,,,,,,,
+2055,2055,-1,1,,,,,,,,,
+2056,2056,-1,1,,,,,,,,,
+2057,2057,-1,1,,,,,,,,,
+2058,2058,-1,1,,,,,,,,,
+2059,2059,-1,1,,,,,,,,,
+2060,2060,-1,1,,,,,,,,,
+2061,2061,-1,1,,,,,,,,,
+2062,2062,-1,1,,,,,,,,,
+2063,2063,-1,1,,,,,,,,,

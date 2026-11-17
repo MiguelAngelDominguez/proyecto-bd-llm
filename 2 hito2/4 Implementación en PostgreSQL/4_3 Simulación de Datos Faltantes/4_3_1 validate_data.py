@@ -35,13 +35,16 @@ def check_fk(rows, fk_col, parent_ids, label, parent_label):
     if bad:
         errors.append(f"FK invalida en {label}.{fk_col}: {len(bad)} (ej: {bad[:5]})")
 
-# PKs
+# PKs simples
 for rows,col,label in [(org,"id_organizacion","organizacion"),(model,"id_modelo","modelo_llm"),(dataset,"id_dataset","dataset"),
  (exp,"id_run","experimento"),(gpu,"id_gpu","gpu"),(bench,"id_benchmark","benchmark"),
- (evalu,"id_evaluacion","evaluacion"),(item,"id_item","item_benchmark"),(resp,"id_respuesta","respuesta_modelo")]:
+ (evalu,"id_evaluacion","evaluacion"),(resp,"id_respuesta","respuesta_modelo")]:
     check_pk(rows,col,label)
-# composite PKs
-if len(set((r["id_run"],r["id_dataset"]) for r in ed)) != len(ed):
+
+# PKs compuestas
+if len(set((r["id_benchmark"],r["id_item"]) for r in item)) != len(item):
+    errors.append("PK compuesta duplicada en item_benchmark")
+if len(set((r["id_run"],r["id_dataset"],r["fase_uso"]) for r in ed)) != len(ed):
     errors.append("PK compuesta duplicada en experimento_dataset")
 if len(set((r["id_run"],r["id_gpu"]) for r in eg)) != len(eg):
     errors.append("PK compuesta duplicada en experimento_gpu")
@@ -55,10 +58,10 @@ exp_ids = ids(exp,"id_run")
 gpu_ids = ids(gpu,"id_gpu")
 bench_ids = ids(bench,"id_benchmark")
 eval_ids = ids(evalu,"id_evaluacion")
-item_ids = ids(item,"id_item")
+item_keys = set((r["id_benchmark"],r["id_item"]) for r in item)
 
 check_fk(model,"id_organizacion",org_ids,"modelo_llm","organizacion")
-# dataset no tiene id_modelo en el esquema real
+check_fk(dataset,"id_dataset",dataset_ids,"dataset","dataset")  # trivial
 check_fk(exp,"id_modelo",model_ids,"experimento","modelo_llm")
 check_fk(ed,"id_run",exp_ids,"experimento_dataset","experimento")
 check_fk(ed,"id_dataset",dataset_ids,"experimento_dataset","dataset")
@@ -68,14 +71,27 @@ check_fk(evalu,"id_modelo",model_ids,"evaluacion","modelo_llm")
 check_fk(evalu,"id_benchmark",bench_ids,"evaluacion","benchmark")
 check_fk(evalu,"id_organizacion_evaluadora",org_ids,"evaluacion","organizacion")
 check_fk(resp,"id_evaluacion",eval_ids,"respuesta_modelo","evaluacion")
-check_fk(resp,"id_item",item_ids,"respuesta_modelo","item_benchmark")
+check_fk(resp,"id_benchmark",bench_ids,"respuesta_modelo","benchmark")
+# composite FK (id_benchmark, id_item) -> item_benchmark
+bad_item = [(r["id_benchmark"],r["id_item"]) for r in resp if (r["id_benchmark"],r["id_item"]) not in item_keys]
+if bad_item:
+    errors.append(f"FK compuesta invalida en respuesta_modelo: {len(bad_item)}")
 check_fk(rb,"id_run",exp_ids,"resultado_benchmark","experimento")
 check_fk(rb,"id_benchmark",bench_ids,"resultado_benchmark","benchmark")
 check_fk(item,"id_benchmark",bench_ids,"item_benchmark","benchmark")
+
 # id_modelo_base optional
 bad_base = [r["id_modelo_base"] for r in model if r["id_modelo_base"] not in ("",) and r["id_modelo_base"] not in model_ids]
 if bad_base:
     errors.append(f"id_modelo_base invalido: {len(bad_base)}")
+
+# UNIQUE (id_evaluacion, id_item) en respuesta_modelo
+if len(set((r["id_evaluacion"],r["id_item"]) for r in resp)) != len(resp):
+    errors.append("UNIQUE (id_evaluacion, id_item) violado en respuesta_modelo")
+
+# UNIQUE (id_evaluacion, id_benchmark) en evaluacion (verificar no duplicados)
+if len(set((r["id_evaluacion"],r["id_benchmark"]) for r in evalu)) != len(evalu):
+    errors.append("UNIQUE (id_evaluacion, id_benchmark) violado en evaluacion")
 
 # ranges
 for r in model:
@@ -88,7 +104,7 @@ for r in gpu:
 for r in bench:
     if int(r["num_items"]) <= 0: errors.append("num_items <=0")
 
-# dates coherence
+# fechas
 for r in exp:
     if r["fecha_fin"]:
         try:

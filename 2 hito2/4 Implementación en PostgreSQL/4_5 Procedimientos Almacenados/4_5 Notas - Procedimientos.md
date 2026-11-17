@@ -116,3 +116,10 @@ Resultado:
 
 ## Nota para el informe (LaTeX)
 Explicar los procedimientos como automatización del ciclo de vida del experimento y su integración con triggers. Incluir la prueba y sus resultados.
+
+
+## 7. Verificación en la BD
+`sql
+SELECT routine_name FROM information_schema.routines WHERE routine_schema='public' AND routine_type='PROCEDURE';
+`
+Resultado: sp_finalizar_experimento, sp_registrar_experimento.

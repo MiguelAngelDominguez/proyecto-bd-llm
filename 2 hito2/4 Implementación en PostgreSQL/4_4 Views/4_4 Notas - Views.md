@@ -107,3 +107,10 @@ Resultado esperado: `v_consumo_por_experimento`, `v_mejor_benchmark`, `v_modelo_
 
 ## Nota para el informe (LaTeX)
 Explicar el propósito de cada vista (resumen de modelos, consumo por experimento, mejor resultado por benchmark) y las correcciones de nombres de tablas. Incluir ejemplos de salida.
+
+
+## 7. Verificación en la BD
+`sql
+SELECT viewname FROM pg_views WHERE schemaname='public' ORDER BY viewname;
+`
+Resultado: _consumo_por_experimento, _mejor_benchmark, _modelo_resumen.

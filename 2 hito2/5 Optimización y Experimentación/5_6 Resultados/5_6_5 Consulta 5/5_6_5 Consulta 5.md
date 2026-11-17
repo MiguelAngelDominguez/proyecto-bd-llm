@@ -26,18 +26,18 @@ FROM ranked WHERE rnk <= 3;
 
 | Volumen | Sin índices | Con índices | Speedup |
 |---|---|---|---|
-| 1k | 0.222 | 0.213 | 1.04x |
-| 10k | 1.212 | 1.206 | 1.00x |
-| 100k | 13.172 | 13.214 | 1.00x |
-| 1M | 150.546 | 171.121 | 0.88x |
+| 1k | 0.543 | 0.241 | 2.25x |
+| 10k | 2.013 | 1.143 | 1.76x |
+| 100k | 12.382 | 13.477 | 0.92x |
+| 1M | 161.629 | 151.010 | 1.07x |
 
 ## Plan (EXPLAIN)
 - **Sin índices:** Seq Scan + Hash Join + WindowAgg.
-- **Con índices:** mismo plan (Seq Scan + Hash Join). El índice `idx_evaluacion_benchmark_score` no se usa.
+- **Con índices:** Seq Scan + Hash Join + WindowAgg. El índice `idx_evaluacion_benchmark_score` no se usa.
 
 ## Análisis
 - La agregación cubre toda la tabla → Seq Scan más eficiente.
-- Los índices no ayudan (tiempo empeora ligeramente en 1M).
+- Los índices no ayudan (tiempo empeora ligeramente en 100k).
 
 ## Verificación
 ```sql

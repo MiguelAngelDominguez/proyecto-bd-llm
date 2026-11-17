@@ -93,6 +93,7 @@ for i,(n,v,c,m,ni,d) in enumerate(benchmarks, start=1):
         "metodo": m,
         "num_items": ni,
         "descripcion": d,
+        "autor": random.choice([o["nombre"] for o in org_rows]),
     })
 
 # ---------- item_benchmark (10 por benchmark = 100) ----------
@@ -153,15 +154,13 @@ for i in range(1, N_MODEL+1):
         toks = random.randint(1_000_000, 10_000_000_000)
     dataset_rows.append({
         "id_dataset": i,
-        "id_modelo": m["id_modelo"],
         "nombre": f"Dataset {i}",
         "version": f"v{random.randint(1,3)}.{random.randint(0,9)}",
-        "fase_uso": random.choice(["Entrenamiento","Validación","Prueba","Fine-tuning"]),
         "dominio": dominio,
         "formato_datos": random.choice(["Texto","JSON","Parquet","CSV"]),
         "tamanio": round(random.uniform(1.0, 500.0), 2),
         "num_registros": random.randint(1000, 10_000_000),
-        "licencia": random.choice(["MIT","Apache-2.0","CC-BY-4.0","Propietaria","Desconocida"]),
+        "licencias": random.choice(["MIT","Apache-2.0","CC-BY-4.0","Propietaria","Desconocida"]),
         "fuente_origen": random.choice(["Hugging Face","Kaggle","Propio","Web scrape","Sintetico"]),
     })
 
@@ -172,12 +171,10 @@ for i in range(1, N_MODEL+1):
     estado = random.choice(["Finalizado","Finalizado","Finalizado","En ejecución","Error","Cancelado"])
     fecha_inicio = datetime.datetime(2020,1,1) + datetime.timedelta(days=random.randint(0,1800))
     fecha_fin = ""
-    segundos = ""
     loss = ""
     if estado != "En ejecución":
         dur = random.randint(3600, 30*86400)
         fecha_fin = fecha_inicio + datetime.timedelta(seconds=dur)
-        segundos = dur
         loss = round(random.uniform(0.5, 5.0), 6) if estado == "Finalizado" else round(random.uniform(0.5, 5.0), 6)
     exp_rows.append({
         "id_run": i,
@@ -192,12 +189,11 @@ for i in range(1, N_MODEL+1):
         "estado_ejecucion": estado,
         "fecha_inicio": fecha_inicio.strftime("%Y-%m-%d %H:%M:%S"),
         "fecha_fin": fecha_fin.strftime("%Y-%m-%d %H:%M:%S") if fecha_fin else "",
-        "segundos": segundos,
         "loss_final": loss,
     })
 
 # ---------- experimento_dataset (1500) ----------
-ed_rows = [{"id_run": i, "id_dataset": i} for i in range(1, N_MODEL+1)]
+ed_rows = [{"id_run": i, "id_dataset": i, "fase_uso": random.choice(["Entrenamiento","Validación","Prueba","Fine-tuning"])} for i in range(1, N_MODEL+1)]
 
 # ---------- experimento_gpu (1500) ----------
 eg_rows = []
@@ -237,15 +233,21 @@ for it in item_rows:
 
 resp_rows = []
 rid = 1
-for _ in range(N_RESP):
+seen_resp = set()
+while len(resp_rows) < N_RESP:
     ev = random.choice(eval_rows)
     bench_id = ev["id_benchmark"]
     if bench_id not in items_by_bench or not items_by_bench[bench_id]:
         continue
     it = random.choice(items_by_bench[bench_id])
+    key = (ev["id_evaluacion"], it["id_item"])
+    if key in seen_resp:
+        continue
+    seen_resp.add(key)
     resp_rows.append({
         "id_respuesta": rid,
         "id_evaluacion": ev["id_evaluacion"],
+        "id_benchmark": bench_id,
         "id_item": it["id_item"],
         "output_generado": f"Respuesta generada {rid}",
         "es_correcta": random.choice([True, False]),
@@ -284,14 +286,14 @@ def write_csv(name, rows, fieldnames):
 
 write_csv("organizacion.csv", org_rows, ["id_organizacion","nombre","pais","tipo","fecha_fundacion"])
 write_csv("modelo_llm.csv", model_rows, ["id_modelo","nombre","version","arquitectura","tipo_modelo","num_param","longitud_token","tipo_token","estado","id_organizacion","id_modelo_base"])
-write_csv("dataset.csv", dataset_rows, ["id_dataset","nombre","version","fase_uso","dominio","formato_datos","tamanio","num_registros","licencia","fuente_origen"])
-write_csv("experimento.csv", exp_rows, ["id_run","nombre","id_modelo","tipo_entrenamiento","optimizador","precision_calculo","num_epocas","tam_batch","tasa_aprendizaje","estado_ejecucion","fecha_inicio","fecha_fin","segundos","loss_final"])
+write_csv("dataset.csv", dataset_rows, ["id_dataset","nombre","version","dominio","formato_datos","tamanio","num_registros","licencias","fuente_origen"])
+write_csv("experimento.csv", exp_rows, ["id_run","nombre","id_modelo","tipo_entrenamiento","optimizador","precision_calculo","num_epocas","tam_batch","tasa_aprendizaje","estado_ejecucion","fecha_inicio","fecha_fin","loss_final"])
 write_csv("gpu.csv", gpu_rows, ["id_gpu","modelo_gpu","fabricante","proveedor_cloud","memoria_vram","num_nucleos","costo_por_hora"])
-write_csv("benchmark.csv", bench_rows, ["id_benchmark","nombre","version","categoria","metodo","num_items","descripcion"])
+write_csv("benchmark.csv", bench_rows, ["id_benchmark","nombre","version","categoria","metodo","num_items","descripcion","autor"])
 write_csv("evaluacion.csv", eval_rows, ["id_evaluacion","id_modelo","id_benchmark","id_organizacion_evaluadora","fecha_evaluacion","resultado_metrica"])
-write_csv("item_benchmark.csv", item_rows, ["id_item","id_benchmark","prompt_pregunta","respuesta_esperada"])
-write_csv("respuesta_modelo.csv", resp_rows, ["id_respuesta","id_evaluacion","id_item","output_generado","es_correcta","tokens_output","latencia"])
-write_csv("experimento_dataset.csv", ed_rows, ["id_run","id_dataset"])
+write_csv("item_benchmark.csv", item_rows, ["id_benchmark","id_item","prompt_pregunta","respuesta_esperada"])
+write_csv("respuesta_modelo.csv", resp_rows, ["id_respuesta","id_evaluacion","id_benchmark","id_item","output_generado","es_correcta","tokens_output","latencia"])
+write_csv("experimento_dataset.csv", ed_rows, ["id_run","id_dataset","fase_uso"])
 write_csv("experimento_gpu.csv", eg_rows, ["id_run","id_gpu","horas_uso","consumo_energetico"])
 write_csv("resultado_benchmark.csv", rb_rows, ["id_run","id_benchmark","valor","metrica","fecha"])
 

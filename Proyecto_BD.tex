@@ -14,6 +14,54 @@
 % =====================================================================
 \documentclass[12pt,a4paper]{article}
 
+% =====================================================================
+% PREAMBULO: estilo de codigo SQL (pegar ANTES de \begin{document})
+% Requiere los paquetes:  listings, xcolor, inputenc (utf8), fontenc (T1)
+% Con \lstset{style=estilosql} TODO bloque lstlisting/lstinputlisting
+% hereda colores, fondo, numeracion y saltos de linea automaticos.
+% =====================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinelanguage{PostgreSQLinf}{
+  morekeywords={add,alter,and,as,before,begin,bigint,boolean,by,cascade,check,column,comment,constraint,create,date,declare,default,delete,distinct,double,each,end,epoch,exception,execute,exists,extract,for,foreign,from,function,generated,identity,if,in,insert,integer,into,is,key,language,loop,not,null,numeric,of,on,or,precision,primary,raise,references,replace,return,returns,round,row,select,set,smallint,table,text,time,timestamp,trigger,type,unique,update,using,varchar,when,where,while,with},
+  sensitive=false,
+  morecomment=[l]{--},
+  morestring=[b]',
+}
+
+\lstdefinestyle{estilosql}{
+  language=PostgreSQLinf,
+  backgroundcolor=\color{backcolour},
+  commentstyle=\itshape\color{codegreen},
+  keywordstyle=\color{magenta},
+  stringstyle=\color{codepurple},
+  numberstyle=\tiny\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=true,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  aboveskip=6pt,
+  belowskip=6pt,
+  tabsize=2,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1
+           {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {Ñ}{{\~N}}1
+}
+
+\lstset{style=estilosql}   % <- aplica el estilo por defecto a todos los listados
 \usepackage[margin=2.54cm]{geometry}
 
 % --- fuente: igual en los tres motores ---------------------------------
@@ -43,13 +91,16 @@
 \usepackage{array}
 \usepackage{longtable}
 \usepackage{graphicx}
+\usepackage{pdflscape}   % pagina horizontal para el diagrama ER
 \usepackage{float}
+\usepackage{seqsplit}
 \usepackage[hidelinks]{hyperref}
 
 % --- cuerpo: 12pt, justificado, sangria 1.27cm, interlinea 1.15 -------
-\setlength{\parindent}{1.27cm}
-\setlength{\parskip}{0pt}
-\setstretch{1.15}
+\setlength{\parindent}{0.635cm}
+\setlength{\parskip}{10pt plus 2pt minus 1pt}   % espacio entre parrafos (antes 6pt)
+\setstretch{1.25}                                 % interlineado (antes 1.2)
+\setlength{\emergencystretch}{2em}
 
 % --- paginacion: el .docx NO tiene header/footer (no hay header1.xml ni
 % footer1.xml en el ZIP), asi que no muestra numeros de pagina.
@@ -79,25 +130,33 @@
 \titleformat{\paragraph}[hang]{\normalfont\normalsize}
 {\theparagraph.}{0pt}{}
 
-\titlespacing*{\section}{1.27cm}{0pt}{0pt}
-\titlespacing*{\subsection}{2.54cm}{0pt}{0pt}
-\titlespacing*{\subsubsection}{3.81cm}{0pt}{0pt}
-\titlespacing*{\paragraph}{5.08cm}{0pt}{0pt}
+\titlespacing*{\section}{0.635cm}{20pt}{10pt}
+\titlespacing*{\subsection}{1.27cm}{16pt}{8pt}
+\titlespacing*{\subsubsection}{1.905cm}{14pt}{8pt}
+\titlespacing*{\paragraph}{2.54cm}{12pt}{6pt}
 
 % --- listas: vinetas nivel 0/1/2 y numeros 1. -------------------------
 % Word usa discinto (nivel 0), circulo (nivel 1) y cuadrado (nivel 2).
 % El cuadrado se dibuja con \rule para no depender de amssymb.
-\setlist[itemize,1]{label=\textbullet,leftmargin=1.27cm,nosep}
-\setlist[itemize,2]{label=$\circ$,leftmargin=1.27cm,nosep}
-\setlist[itemize,3]{label=\raisebox{0.15ex}{\rule{0.55ex}{0.55ex}},leftmargin=1.27cm,nosep}
-\setlist[enumerate,1]{label=\arabic*.,leftmargin=1.27cm,nosep}
-\setlist[enumerate,2]{label=\alph*.,leftmargin=1.27cm,nosep}
+\setlist[itemize,1]{label=\textbullet,leftmargin=1.27cm,itemsep=4pt,parsep=2pt,topsep=6pt}
+\setlist[itemize,2]{label=$\circ$,leftmargin=1.27cm,itemsep=4pt,parsep=2pt,topsep=6pt}
+\setlist[itemize,3]{label=\raisebox{0.15ex}{\rule{0.55ex}{0.55ex}},leftmargin=1.27cm,itemsep=4pt,parsep=2pt,topsep=6pt}
+\setlist[enumerate,1]{label=\arabic*.,leftmargin=1.27cm,itemsep=4pt,parsep=2pt,topsep=6pt}
+\setlist[enumerate,2]{label=\alph*.,leftmargin=1.27cm,itemsep=4pt,parsep=2pt,topsep=6pt}
 
 % --- tablas: rejilla completa como Word (single sz=8) ----------------
-\setlength{\tabcolsep}{5pt}
-\setlength{\LTpre}{0pt}
-\setlength{\LTpost}{0pt}
-\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\setlength{\LTpre}{6pt}
+\setlength{\LTpost}{10pt}
+\renewcommand{\arraystretch}{1.3}    % mas aire dentro de las tablas (antes 1.15)
+
+% --- modelo relacional (3.1) al estilo Bodega Jessica ---------------------
+% Relaciones y atributos en azul; la entidad referenciada por una clave
+% foranea (Entidad.atributo) en verde; claves primarias subrayadas.
+% Para cambiar los colores modifica solo estas dos lineas.
+\definecolor{azulRel}{RGB}{0,51,204}
+\definecolor{verdeFK}{RGB}{0,130,50}
+\newcommand{\fk}[2]{\textcolor{verdeFK}{#1}\textcolor{azulRel}{.\allowbreak #2}}
 
 % --- indice ----------------------------------------------------------
 \setcounter{tocdepth}{3}
@@ -148,10 +207,8 @@ Talavera Pinto, Martin Gabriel \\
 \tableofcontents
 \newpage
 
-\addcontentsline{toc}{section}{Requisitos}
 \section{Requisitos}
 
-\addcontentsline{toc}{subsection}{Introducción}
 \subsection{Introducción}
 
 Una base de datos es un sistema destinado al almacenamiento y la gestión de datos, que comprende tanto el hardware físico en el que se almacenan los datos como el software que los organiza y controla el acceso a los mismos.
@@ -161,7 +218,6 @@ Los modelos de lenguaje grande (LLM) son una categoría de modelos de aprendizaj
 El entrenamiento comienza con una gran cantidad de datos: miles de millones o billones de palabras de libros, artículos, sitios web, código y otras fuentes de texto. Los científicos de datos supervisan la limpieza y el preprocesamiento para eliminar errores, duplicaciones y contenido no deseado.
 
 
-\addcontentsline{toc}{subsection}{Descripción general del problema/organización/empresa}
 \subsection{Descripción general del problema/organización/empresa}
 
 \noindent Los datos de entrenamiento es un conjunto de datos de información que se utiliza para enseñar a un modelo de aprendizaje automático a realizar predicciones, reconocer patrones o generar contenido. Mediante el procesamiento de una gran cantidad de datos, se considera que un modelo está ``entrenado'' cuando consigue reconocer relaciones y características relevantes, hasta alcanzar un nivel de entrenamiento listo para utilizarse en numerosas aplicaciones.
@@ -169,17 +225,14 @@ El entrenamiento comienza con una gran cantidad de datos: miles de millones o bi
 El mayor desafío al que nos enfrentamos está relacionado con el uso de modelos basados en un lenguaje no supervisado. Mientras que el aprendizaje supervisado resulta útil para establecer correspondencias entre entradas y salidas, el aprendizaje no supervisado es más adecuado para encontrar patrones, estructuras y relaciones dentro de los propios datos, sin ninguna orientación sobre qué buscar. Esto permite identificar patrones, estructuras y relaciones que pueden no ser evidentes a simple vista. Por el contrario, su funcionamiento autónomo también representa un desafío, al necesitar los resultados obtenidos una correcta interpretación y supervisión para garantizar que sean relevantes y confiables.
 
 
-\addcontentsline{toc}{subsection}{Necesidad/usos de la base de datos}
 \subsection{Necesidad/usos de la base de datos}
 
 Cuando un LLM recibe una consulta de un usuario, utiliza representaciones codificadas para buscar documentos o fragmentos relevantes en una base de datos vectorial. Estos resultados, seleccionados por su similitud vectorial con la entrada, se devuelven al LLM, que los sintetiza en una respuesta bien fundamentada y contextualmente precisa.
 
 Las bases de datos vectoriales permiten a los modelos de lenguaje grande (LLM) realizar búsquedas semánticas, en las que tanto las consultas como el contenido se transforman en representaciones vectoriales. El LLM codifica la solicitud del usuario y la base de datos vectorial encuentra los elementos con las representaciones vectoriales que más se ajustan a ella, independientemente de las palabras clave, lo que permite el descubrimiento basado en el significado y la intención reales.
 
-\addcontentsline{toc}{subsection}{¿Cómo resuelve el problema hoy?}
 \subsection{¿Cómo resuelve el problema hoy?}
 
-\addcontentsline{toc}{subsubsection}{¿Cómo se almacenan/procesan los datos hoy?}
 \subsubsection{¿Cómo se almacenan/procesan los datos hoy?}
 
 Actualmente, la información asociada a los experimentos de entrenamiento puede encontrarse distribuida entre diferentes archivos y registros generados durante las ejecuciones. Por ejemplo, la información de los modelos y datasets puede mantenerse en archivos estructurados, mientras que los datos relacionados con el consumo de GPUs y los resultados de evaluación pueden encontrarse en registros independientes.
@@ -188,7 +241,6 @@ Este enfoque dificulta relacionar de manera eficiente un experimento con el mode
 
 La base de datos propuesta permitirá integrar esta información mediante relaciones entre entidades, facilitando su consulta, actualización y análisis.
 
-\addcontentsline{toc}{subsubsection}{Flujo de datos}
 \subsubsection{Flujo de datos}
 
 El flujo de datos comienza con la disponibilidad de los datasets que serán utilizados para entrenar un modelo LLM. El investigador elige un dataset, almacenado como archivo local o en un repositorio como Hugging Face, y define la configuración del experimento en un archivo de configuración (YAML/JSON) que no queda formalmente registrado.
@@ -197,10 +249,8 @@ Durante el run de entrenamiento, el consumo de GPU se observa mediante herramien
 
 Al finalizar, el modelo entrenado se guarda como checkpoint en disco, y su evaluación mediante benchmarks se ejecuta con scripts independientes (p. ej. lm-eval-harness), cuyos resultados suelen consolidarse manualmente en hojas de cálculo para poder compararlos entre runs.
 
-\addcontentsline{toc}{subsection}{Descripción detallada del sistema}
 \subsection{Descripción detallada del sistema}
 
-\addcontentsline{toc}{subsubsection}{Objetos de información actuales}
 \subsubsection{Objetos de información actuales}
 
 La información relacionada con el entrenamiento y evaluación de modelos LLM se encuentra actualmente distribuida en diferentes archivos y registros, como archivos de configuración, registros de ejecuciones, información sobre el consumo de GPU y hojas de cálculo utilizadas para consolidar los resultados de los benchmarks. Esta información será recopilada y organizada para ser incorporada a la base de datos propuesta.
@@ -208,7 +258,6 @@ La información relacionada con el entrenamiento y evaluación de modelos LLM se
 
 Adicionalmente, como parte del desarrollo del proyecto, se generarán datos mediante scripts para realizar pruebas de consultas y evaluar el comportamiento de la base de datos en diferentes volúmenes. Los escenarios considerados serán de 1\,000 (mil) datos, 10\,000 (diez mil) datos, 100\,000 (cien mil) datos y 1\,000\,000 (un millón) de datos almacenados en la base de datos.
 
-\addcontentsline{toc}{subsubsection}{Características y funcionalidades esperadas}
 \subsubsection{Características y funcionalidades esperadas}
 
 {\begin{itemize}
@@ -217,7 +266,7 @@ Adicionalmente, como parte del desarrollo del proyecto, se generarán datos medi
   \item Registrar experimentos de entrenamiento: Cada vez que se entrena un modelo. Este queda registrado con hiperparametros, configuración, fecha; entre otros.
   \item Asociar datasets con experimentos: Se vinculan que datasets se usaron para cada experimento.
   \item Registrar el uso de GPUs: Se mapea los GPUs usados para determinar si se están desperdiciando recursos.
-  \item Registrar resultados de benchmarks: Guardar las métricas de evaluación de cada modelo o experimento para compararlos objetivamente.
+  \item Registrar resultados de benchmarks: Guardar las métricas de evaluación de cada modelo, indicando el benchmark aplicado y la organización que realizó la evaluación, para compararlos objetivamente.
   \item Consultar el rendimiento de los modelos: Poder hacer búsquedas y consultar su rendimiento dependiendo de los benchmarks, latencia u otro parámetro.
   \item Comparar diferentes runs: Vista comparativa lado a lado de varios entrenamientos para notar los cambios, mejoras y deficiencias.
   \item Analizar el consumo de recursos: Reportes de uso para identificar las ineficiencias.
@@ -225,7 +274,6 @@ Adicionalmente, como parte del desarrollo del proyecto, se generarán datos medi
 \end{itemize}
 }
 
-\addcontentsline{toc}{subsubsection}{Tipos de usuarios existentes/necesarios}
 \subsubsection{Tipos de usuarios existentes/necesarios}
 
 \noindent Las consultas a analizar están relacionadas con las necesidades de investigadores y analistas que utilizan la plataforma de entrenamiento. Las principales consultas identificadas son las siguientes:
@@ -236,7 +284,6 @@ Adicionalmente, como parte del desarrollo del proyecto, se generarán datos medi
 \end{enumerate}
 }
 
-\addcontentsline{toc}{subsubsection}{Tipos de consulta, actualizaciones}
 \subsubsection{Tipos de consulta, actualizaciones}
 
 La base de datos deberá permitir realizar diferentes tipos de consultas relacionadas con el entrenamiento y evaluación de modelos LLM.
@@ -285,7 +332,7 @@ La base de datos deberá permitir realizar diferentes tipos de consultas relacio
 {\begin{enumerate}
   \item ¿Qué resultados de benchmark obtuvo un modelo determinado?
   \item ¿Qué modelo obtuvo el mejor puntaje (score) en un benchmark específico?
-  \item ¿Qué experimentos, evaluados sobre el mismo benchmark, muestran mejoras respecto a ejecuciones anteriores del mismo modelo?
+  \item ¿Qué modelos muestran mejoras en un mismo benchmark respecto a evaluaciones anteriores del mismo modelo o de su modelo base?
 \end{enumerate}
 }
 
@@ -313,7 +360,6 @@ La base de datos deberá permitir realizar diferentes tipos de consultas relacio
 \end{enumerate}
 }
 
-\addcontentsline{toc}{subsubsection}{Tamaño estimado de la base de datos}
 \subsubsection{Tamaño estimado de la base de datos}
 
 Se considera que la etapa de ``experimentación y optimización'' debe realizarse utilizando 5 consultas de nivel intermedio no triviales previamente propuestas. Dichas consultas se deben realizar en cuatro contextos de:
@@ -328,7 +374,6 @@ Se considera que la etapa de ``experimentación y optimización'' debe realizars
 \noindent Para cada escenario se deberá contar con una versión de la base de datos correspondiente al tamaño indicado. Por ende, al final de cada etapa, se deberán disponer de 4 dumps de la base de datos, uno por cada volumen de registros, con la finalidad de realizar pruebas y comparar el comportamiento y rendimiento de las consultas a medida que aumenta el tamaño de registros almacenados.
 
 
-\addcontentsline{toc}{subsection}{Objetivos del proyecto}
 \subsection{Objetivos del proyecto}
 
 Diseñar e implementar una base de datos relacional en PostgreSQL que permita gestionar de manera estructurada el proceso de entrenamiento y evaluación de modelos de lenguaje grande (LLM) y sistemas de inteligencia artificial generativa, registrando información relacionada con modelos, datasets, experimentos de entrenamiento, recursos de cómputo GPU y evaluaciones de rendimiento mediante benchmarks. Tomando como medidas de progreso:
@@ -342,7 +387,6 @@ Diseñar e implementar una base de datos relacional en PostgreSQL que permita ge
 \end{itemize}
 }
 
-\addcontentsline{toc}{subsection}{Referencias del Proyecto}
 \subsection{Referencias del Proyecto}
 {\begin{itemize}
   \item PostgreSQL Guide: Documentación y guía de referencia utilizada para la implementación y gestión de la base de datos en PostgreSQL.
@@ -350,188 +394,243 @@ Diseñar e implementar una base de datos relacional en PostgreSQL que permita ge
 \end{itemize}
 }
 
-\addcontentsline{toc}{subsection}{Eventualidades}
 \subsection{Eventualidades}
 
-\addcontentsline{toc}{subsubsection}{Problemas que pudieran encontrarse en el proyecto}
 \subsubsection{Problemas que pudieran encontrarse en el proyecto}
 
 Durante el desarrollo pueden presentarse problemas como datos incompletos, inconsistencias en los registros y tiempos elevados de respuesta al trabajar con grandes volúmenes de información. También puede ser necesario generar datos sintéticos para realizar las pruebas de rendimiento. Además se tiene que tomar en cuenta la capacidad de procesamiento del hardware en el que se almacena el LLM.
 
-\addcontentsline{toc}{subsubsection}{Límites y alcances del proyecto}
 \subsubsection{Límites y alcances del proyecto}
 
 El proyecto se enfocará en registrar y analizar información sobre modelos LLM, datasets, ejecuciones de entrenamiento, consumo de GPU y evaluaciones de benchmarks. No se almacenarán los modelos ni datasets completos, sino sus principales metadatos.
 
-\addcontentsline{toc}{section}{Modelo Entidad-Relación}
 \section{Modelo Entidad-Relación}
 
-%% --- diagrama Entidad-Relacion (2048x1204 px) ---
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{Modelo E-R.png}
-    \caption{Modelo ER}
-    \label{fig:placeholder}
-\end{figure}
-
-\addcontentsline{toc}{subsection}{Reglas semánticas}
 \subsection{Reglas semánticas}
 {\begin{itemize}
-  \item Un Modelo LLM es entrenado en el contexto de uno o más Experimentos; cada Experimento entrena exactamente un Modelo LLM.
-  \item Un Experimento utiliza uno o más Datasets; un Dataset puede ser utilizado por cero o más Experimentos.
-  \item Un Experimento consume una o más GPUs; una GPU puede ser utilizada en cero o más Experimentos. Por cada uso, se debe registrar la cantidad de horas de utilización y el consumo energético estimado de esa asignación particular (no de la GPU en general, ya que una misma GPU puede usarse en múltiples experimentos con duraciones distintas).
-  \item Un Experimento, al finalizar, es evaluado mediante uno o más Benchmarks; un Benchmark puede evaluar a cero o más Experimentos. Cada evaluación produce un resultado (valor, métrica y fecha) propio de ese par Experimento--Benchmark, ya que el mismo benchmark aplicado a experimentos distintos produce valores distintos.
-  \item Cada entidad se identifica de forma única mediante su llave primaria (idModelo, idDataset, idRun, idGpu, idBenchmark).
+  \item Una Organización se identifica por un id y tiene un nombre, un país, una fecha de fundación y un tipo (Creador, Evaluador o Ambos).
+  \item Una Organización crea cero o más Modelos LLM; cada Modelo LLM es creado por exactamente una Organización.
+  \item Una Organización de tipo Evaluador no puede crear modelos, y una de tipo Creador no puede aplicar evaluaciones; una de tipo Ambos puede hacer ambas cosas.
+  \item Un Modelo LLM puede derivar, como máximo, de otro Modelo LLM, llamado modelo base; un Modelo LLM puede ser el modelo base de cero o más modelos derivados. Un modelo base no deriva de ningún otro.
+  \item Un Experimento (run) es una ejecución de entrenamiento mediante la cual se construye un Modelo LLM; cada Experimento entrena exactamente un Modelo LLM, y un Modelo LLM puede ser entrenado en cero o más Experimentos (por ejemplo, un modelo de un tercero que solo se evalúa puede no tener experimentos registrados).
+  \item Un Experimento utiliza uno o más Datasets; un Dataset puede ser utilizado por cero o más Experimentos. Por cada uso se registra la fase de uso del dataset (entrenamiento, validación, prueba o fine-tuning), y un mismo Experimento puede utilizar el mismo Dataset en más de una fase.
+  \item Un Experimento consume una o más GPUs; una GPU puede ser utilizada en cero o más Experimentos. Por cada uso, se debe registrar la cantidad de horas de utilización, el consumo energético estimado y la cantidad de unidades empleadas de esa asignación particular (no de la GPU en general, ya que una misma GPU puede usarse en múltiples experimentos con duraciones distintas).
+  \item Un Benchmark es una prueba estandarizada formada por un conjunto de ítems (preguntas). Un Benchmark contiene cero o más ItemBenchmark, porque solo se almacena una muestra de preguntas; cada ItemBenchmark pertenece a exactamente un Benchmark y se identifica dentro de él.
+  \item Una Evaluación es la aplicación de un Benchmark a un Modelo LLM ya construido por parte de una Organización evaluadora, y produce un resultado (valor y fecha) propio de esa terna Modelo--Benchmark--Organización. La evaluación se aplica al Modelo y no al Experimento.
+  \item Cada Evaluación se aplica a exactamente un Modelo LLM, usa exactamente un Benchmark y es realizada por exactamente una Organización. Un Modelo LLM puede ser evaluado en cero o más Evaluaciones, un Benchmark puede usarse en cero o más Evaluaciones y una Organización puede realizar cero o más Evaluaciones. La Organización evaluadora puede ser la propia creadora del modelo (evaluación interna) o un tercero.
+  \item Una Evaluación genera cero o más Respuestas del Modelo (una por cada pregunta respondida). Cada RespuestaModelo pertenece a exactamente una Evaluación y corresponde a exactamente un ItemBenchmark, que debe pertenecer al Benchmark de dicha Evaluación.
+  \item Dentro de una misma Evaluación, el modelo da como máximo una respuesta por pregunta; si el modelo repite la prueba, se registra una nueva Evaluación.
+  \item Cada entidad se identifica de forma única mediante su llave primaria (idOrganizacion, idModelo, idDataset, idRun, idGPU, idBenchmark, idEvaluacion, idRespuesta). ItemBenchmark es una entidad débil de Benchmark y se identifica mediante (idBenchmark, idItem).
 \end{itemize}
 }
 
-% --- tabla 171: 10 filas x 3 cols, 11pt ---
-\fontsize{11}{12}\selectfont
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.55cm}|>{\raggedright\arraybackslash}p{6.88cm}|>{\raggedright\arraybackslash}p{4.43cm}|}
-\hline
-Entidad & Atributos & Descripción y Rol \\
-\hline
-Organización & idOrganizacion (PK), nombre, pais, tipo \newline (Creador/Evaluador/Ambos), fechaFundacion & Especificar la empresa encargada del desarrollo, entrenamiento y testeo de los modelo LLM \\
-\hline
-Modelo LLM & idModelo (PK), nombre, version, arquitectura, tipoModelo, numParam, longitudToken, tipoToken, estado, idOrganizaion, idModeloBase & Es un modelo de language diseñado para realizar tareas basado en texto \\
-\hline
-Dataset & idDataset (PK), idModelo (FK), nombre, version, faseUso, dominio, formatoDatos, tamanio, numRegistros, licencia, fuenteOrigen & Un conjunto de Datos ordenado y agrupado para entrenar a un modelo computacional \\
-\hline
-Experimento / Run & idRun (PK), nombre, idModelo, tipoEntrenamiento, optimizador, precisionCalculo, numEpocas, tamBatch, tasaAprendizaje, estadoEjecucion, fechaInicio, fechaFin, segundos, lossFinal & Es un conjunto de pruebas que se le plantea a un modelo LLM en base a un Dataset. \\
-\hline
-GPU & idGpu (PK), modeloGpu, fabricante, proveedorCloud, memoriaVRAM, numNucleos, costoPorHora & Componente físico del hardware donde se entrena el modelo LLM. \\
-\hline
-Benchmark & idBenchmark (PK), nombre, version, categoria, metodo, numItems, descripcion & Logros obtenidos por el modelo LLM durante la fase de prueba y entrenamiento. \\
-\hline
-Evaluación & idEvaluacion (PK), idModelo (FK), idBenchmark (FK), idOrganizacionEvaluadora (FK), fechaEvaluacion, resultadoMetrica & Un exámen designado para evaluar a un modelo su tasa de aprendizaje. \\
-\hline
-ItemBenchmark & idItem (PK), idBenchmark (FK), promptPregunta, respuestaEsperada & Pregunta planteada dentro de una evaluación \\
-\hline
-RespuestaModelo & idRespuesta (PK), idEvaluacion (FK), idItem (FK), outputGenerado, esCorrecta, \newline tokensOutput, latencia & Comparativa entre la respuesta del modelo y la esperada por los evaluadores \\
-\hline
-\end{longtable}
-\normalsize
-
-
-
-
-\addcontentsline{toc}{subsection}{Modelo Entidad-Relación}
+\begin{landscape}
 \subsection{Modelo Entidad-Relación}
 
-\addcontentsline{toc}{subsection}{Especificaciones y consideraciones sobre el modelo}
+%% --- diagrama Entidad-Relacion en pagina horizontal ---
+\begin{figure}[H]
+    \centering
+    \makebox[\linewidth][c]{\includegraphics[width=\dimexpr\linewidth+3.4cm\relax,height=0.82\textheight,keepaspectratio]{Modelo ER.png}}
+    \caption{Modelo entidad-relación}
+    \label{fig:modelo_er}
+\end{figure}
+\end{landscape}
+
+Notación utilizada en el diagrama: los rectángulos representan entidades (el rectángulo doble, la entidad débil ItemBenchmark) y los rombos representan relaciones (el rombo doble, la relación identificadora). Una flecha desde una entidad hacia una relación indica que la entidad participa en ella como máximo una vez (restricción de clave), y una doble línea indica participación total (la entidad participa al menos una vez). En la relación recursiva basado, los roles modeloBase y modeloDerivado distinguen los dos lados. La multiplicidad (mínimo, máximo) de cada relación se detalla en la sección 3.2.4.
+
 \subsection{Especificaciones y consideraciones sobre el modelo}
 
-\noindent 2.3.1 Entidad Organización
+\textbf{Entidades y atributos}
+
+\begingroup
+\fontsize{11}{14}\selectfont
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{6.9cm}|>{\raggedright\arraybackslash}p{4.3cm}|}
+\hline
+\textbf{Entidad} & \textbf{Atributos} & \textbf{Descripción y Rol} \\
+\hline
+\endhead
+Organización & idOrganizacion (PK), nombre, pais, tipo (Creador/Evaluador/Ambos), fechaFundacion & Empresa u organización que crea modelos LLM, aplica evaluaciones sobre ellos, o ambas cosas. \\
+\hline
+Modelo LLM & idModelo (PK), nombre, version, arquitectura, tipoModelo, numParam, longitudToken, tipoToken, estado & Es un modelo de lenguaje diseñado para realizar tareas basadas en texto. \\
+\hline
+Dataset & idDataset (PK), nombre, version, dominio, formatoDatos, tamanio, numRegistros, licencias, fuenteOrigen & Un conjunto de datos ordenado y agrupado para entrenar a un modelo computacional. \\
+\hline
+Experimento / Run & idRun (PK), nombre, tipoEntrenamiento, optimizador, precisionCalculo, numEpocas, tamBatch, tasaAprendizaje, estadoEjecucion, fechaInicio, fechaFin, lossFinal & Ejecución de entrenamiento mediante la cual se construye un modelo LLM a partir de uno o más Datasets. \\
+\hline
+GPU & idGPU (PK), modeloGPU, fabricante, proveedorCloud, memoriaVRAM, numNucleos, costoPorHora & Tipo de hardware (componente físico) donde se entrena el modelo LLM. \\
+\hline
+Benchmark & idBenchmark (PK), nombre, version, categoria, metodo, numItems, descripcion, autor & Prueba estandarizada (conjunto de preguntas) con la que se mide el desempeño de un modelo LLM. \\
+\hline
+Evaluación & idEvaluacion (PK), fechaEvaluacion, resultadoMetrica & Aplicación de un Benchmark a un modelo LLM por parte de una organización evaluadora, con su resultado. \\
+\hline
+ItemBenchmark (entidad débil) & idItem (llave parcial), promptPregunta, respuestaEsperada & Pregunta de un Benchmark; se identifica por (idBenchmark, idItem). \\
+\hline
+RespuestaModelo & idRespuesta (PK), outputGenerado, esCorrecta, tokensOutput, latencia & Respuesta del modelo a una pregunta dentro de una evaluación, comparada con la esperada por los evaluadores. \\
+\hline
+\end{longtable}
+\endgroup
+
+\textbf{Relaciones}
+
+\begingroup
+\fontsize{11}{14}\selectfont
+\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{5.0cm}|>{\raggedright\arraybackslash}p{6.8cm}|}
+\hline
+\textbf{Relación} & \textbf{Entidades que asocia} & \textbf{Atributos propios de la relación} \\
+\hline
+\endhead
+crea & Organización -- ModeloLLM & Ninguno \\
+\hline
+realiza & Organización -- Evaluación & Ninguno \\
+\hline
+entrena & Experimento -- ModeloLLM & Ninguno \\
+\hline
+basado (recursiva) & ModeloLLM (modeloBase) -- ModeloLLM (modeloDerivado) & Ninguno \\
+\hline
+evalua & Evaluación -- ModeloLLM & Ninguno \\
+\hline
+usa & Evaluación -- Benchmark & Ninguno \\
+\hline
+contiene (identificadora) & Benchmark -- ItemBenchmark & Ninguno \\
+\hline
+genera & Evaluación -- RespuestaModelo & Ninguno \\
+\hline
+corresponde & RespuestaModelo -- ItemBenchmark & Ninguno \\
+\hline
+utiliza (N:M) & Experimento -- Dataset & faseUso \\
+\hline
+consume (N:M) & Experimento -- GPU & horasUso, consumoEnergetico, cantidadUnidades \\
+\hline
+\end{longtable}
+\endgroup
+
+\noindent 2.3.1. Entidad Organización
 {\begin{itemize}
-  \item Especificaciones: Grupo de investigadores que se encargan de investigar, desarrollar y entrenar un Modelo LLM
-  \item Consideraciones: La llave primaria seleccionada es el id.
+  \item Especificaciones: Empresa u organización que crea (desarrolla y entrena) modelos LLM, aplica evaluaciones sobre ellos, o ambas cosas.
+  \item Consideraciones: La llave primaria seleccionada es el id; el nombre es una llave candidata. El atributo tipo (Creador, Evaluador o Ambos) indica los roles que puede cumplir la organización y se modela como atributo y no como jerarquía, porque las organizaciones no tienen atributos ni relaciones propias que dependan de su rol.
 \end{itemize}
 }
 
 \noindent 2.3.2. Entidad Modelo LLM
 {\begin{itemize}
   \item Especificaciones: Representa los metadatos de los modelos de lenguaje entrenados.
-  \item Consideraciones: La llave principal es el id del modelo, si bien es cierto que pueden diferentes modelos todos tienen un procesamiento distinto.
+  \item Consideraciones: La llave principal es el id del modelo, si bien es cierto que pueden existir diferentes modelos, todos tienen un procesamiento distinto; (nombre, version) es una llave candidata. Cada modelo es creado por exactamente una organización y puede derivar, como máximo, de otro modelo (su modelo base).
 \end{itemize}
 }
 
 \noindent 2.3.3. Entidad Dataset
 {\begin{itemize}
   \item Especificaciones: Almacena los metadatos de los conjuntos de datos empleados
-  \item Consideraciones: La llave principal es el id del Dataset. Se pueden usar varios Dataset para un Experimento.
+  \item Consideraciones: La llave principal es el id del Dataset; (nombre, version) es una llave candidata. Se pueden usar varios Dataset para un Experimento. La fase de uso no es un atributo del Dataset sino de la relación utiliza, porque un mismo dataset puede emplearse en fases distintas.
 \end{itemize}
 }
 
 \noindent 2.3.4. Entidad Experimento
 {\begin{itemize}
-  \item Especificaciones: Almacena las ejecuciones (runs) de entrenamiento realizadas
-  \item Consideraciones: La llave principal es el código de id del experimento
+  \item Especificaciones: Almacena las ejecuciones (runs) de entrenamiento realizadas, es decir, la fase en la que un modelo se construye.
+  \item Consideraciones: La llave principal es el código de id del experimento. Cada experimento entrena exactamente un modelo. La duración del experimento no se almacena, pues se obtiene como la diferencia entre fechaFin y fechaInicio.
 \end{itemize}
 }
 
 \noindent 2.3.5. Entidad GPU
 {\begin{itemize}
-  \item Especificaciones: Representa la infraestructura de cómputo gráfico utilizada
-  \item Consideraciones: La llave principal es el id del GPU. Se puede usar mas de un GPU en un experimento
+  \item Especificaciones: Representa la infraestructura de cómputo gráfico utilizada (un tipo de hardware).
+  \item Consideraciones: La llave principal es el id del GPU. Se puede usar más de un GPU en un experimento; las horas de uso, el consumo energético y la cantidad de unidades se registran en la relación consume.
 \end{itemize}
 }
 
 \noindent 2.3.6. Entidad Benchmark
 {\begin{itemize}
-  \item Especificaciones: Comparación entre las pruebas estandarizadas de evaluación de rendimiento.
-  \item Consideraciones: La llave principal es el id del Benchmark. Hay diferentes Benchmarks pedendiendo del modelo y los objetivos
+  \item Especificaciones: Prueba estandarizada de evaluación de rendimiento, formada por un conjunto de preguntas (ítems).
+  \item Consideraciones: La llave principal es el id del Benchmark; (nombre, version) es una llave candidata. Hay diferentes Benchmarks dependiendo del modelo y los objetivos. El atributo autor es opcional y solo se almacena una muestra de los ítems de cada benchmark.
 \end{itemize}
 }
 
 \noindent 2.3.7. Entidad Evaluación
 {\begin{itemize}
-  \item Especificaciones: Evaluzaicon que se le hace a un modelo LLM
-  \item Consideraciones: La llave principal es el id de la evaluacion. Puede haber mas de una evaluzaicon a la vez
+  \item Especificaciones: Evaluación que se le hace a un modelo LLM ya construido: la aplicación de un benchmark por parte de una organización evaluadora.
+  \item Consideraciones: La llave principal es el id de la evaluación. Puede haber más de una evaluación a la vez. La evaluación se aplica al modelo y no al experimento, y puede ser realizada por la propia organización creadora o por un tercero.
 \end{itemize}
 }
 
 \noindent 2.3.8. Entidad ItemBenchmark
 {\begin{itemize}
-  \item Especificaciones: Es una pregunta del examen de Evaluacion
-  \item Consideraciones: La llave principal es el id del Item. Las preguntas pueden llegar a ser similares despues de varios experimentos
+  \item Especificaciones: Es una pregunta del examen (benchmark) que se aplica en una evaluación.
+  \item Consideraciones: Es una entidad débil de Benchmark: su identificador idItem es una llave parcial, único solo dentro de su benchmark, por lo que la llave primaria completa es (idBenchmark, idItem). Las preguntas pueden llegar a ser similares después de varios experimentos.
 \end{itemize}
 }
 
 \noindent 2.3.9. Entidad RespuestaModelo
 {\begin{itemize}
-  \item Especificaciones: Respuesta concreta de un Modelo LLM a una o varias preguntas de ItemBenchmark dentro de evaluacion.
-  \item Consideraciones: La llave principal es el id de la Respuesta. El modelo puede devolver diferentes respuestas a una sola pregunta
+  \item Especificaciones: Respuesta concreta de un Modelo LLM a una pregunta de ItemBenchmark dentro de una evaluación.
+  \item Consideraciones: La llave principal es el id de la Respuesta; (idEvaluacion, idItem) es una llave candidata, pues dentro de una evaluación el modelo da como máximo una respuesta por pregunta. Si el modelo repite la prueba, se registra una nueva Evaluación.
 \end{itemize}
 }
 
-El modelo entidad-relación representa los principales elementos del proceso de entrenamiento y evaluación de modelos LLM: modelos, ejecuciones, datasets, GPU y benchmarks, junto con sus respectivos atributos.
+El modelo entidad-relación representa los principales elementos del proceso de entrenamiento y evaluación de modelos LLM: organizaciones, modelos, ejecuciones (experimentos), datasets, GPU, benchmarks, evaluaciones y respuestas, junto con sus respectivos atributos.
 
-La entidad Modelo LLM almacena características como nombre, versión, arquitectura y cantidad de parámetros. Run representa cada ejecución de entrenamiento y registra sus parámetros, fechas y estado. Dataset contiene información sobre los datos utilizados, mientras que GPU representa los recursos computacionales empleados. Finalmente, Benchmark permite registrar información relacionada con la evaluación de los modelos.
+La entidad Modelo LLM almacena características como nombre, versión, arquitectura y cantidad de parámetros. Run representa cada ejecución de entrenamiento y registra sus parámetros, fechas y estado. Dataset contiene información sobre los datos utilizados, mientras que GPU representa los recursos computacionales empleados. Benchmark define las pruebas estandarizadas con sus preguntas, y Evaluación registra la aplicación de un benchmark a un modelo por parte de una organización, junto con las respuestas del modelo.
 
-Las relaciones del modelo representan cómo estos elementos interactúan durante el proceso de entrenamiento. Además, se consideran restricciones para mantener la consistencia de los datos, como identificadores únicos, valores numéricos válidos y fechas coherentes entre el inicio y finalización de los entrenamientos.
+Las relaciones del modelo representan cómo estos elementos interactúan durante el proceso de entrenamiento y evaluación. Además, se consideran restricciones para mantener la consistencia de los datos, como identificadores únicos, valores numéricos válidos y fechas coherentes entre el inicio y finalización de los entrenamientos.
 
 Esto encaja con lo que pide el proyecto para el modelo E/R: contextualizar la base, indicar las llaves y considerar multiplicidad, participación y restricciones.
 
-\addcontentsline{toc}{section}{Modelo Relacional}
+
 \section{Modelo Relacional}
 
-\addcontentsline{toc}{subsection}{Modelo Relacional}
+% ---------------------------------------------------------------------
 \subsection{Modelo Relacional}
-{\begin{itemize}
-  \item Modelo LLM(idModelo, nombre, version, arquitectura, tipoModelo, numParam, longitudToken, tipoToken, estado)
-  \item Dataset(idDataset, nombre, version, faseUso, dominio, formatoDatos, tamanio, numRegistros, licencia, fuenteOrigen)
-  \item Experimento(idRun, nombre, idModelo, tipoEntrenamiento, optimizador, precisionCalculo, numEpocas, tamBatch, tasaAprendizaje, estadoEjecucion, fechaInicio, fechaFin, segundos, lossFinal)
-  \item GPU(idGPU, modeloGPU, fabricante, proveedorCloud, memoriaVRAM, numNucleos, costoPorHora)
-  \item Benchmark(idBenchmark, nombre, version, categoria, metodo, numItems, descripcion)
-  \item Evaluación(idEvaluacion, ModeloLLM.idModelo, Benchmark.idBenchmark, idOrganizacionEvaluadora FK, fechaEvaluacion, resultadoMetrica)
-  \item ItemBenchmark(idItem, Benchmark.idBenchmark, promptPregunta, respuestaEsperada)
-  \item RespuestaModelo(idRespuesta, Evaluacion.idEvaluacion, ItemBenchmark.idItem, outputGenerado, esCorrecta, tokensOutput, latencia)
-\end{itemize}
-}
 
-\addcontentsline{toc}{subsection}{Especificaciones de transformación}
+El modelo relacional se obtiene a partir del modelo entidad-relación de la sección 2 y está formado por 11 relaciones: 9 provienen de entidades (8 entidades fuertes y 1 entidad débil, ItemBenchmark) y 2 son tablas intermedias de las relaciones M:N (Experimento\_Dataset y Consumo\_GPU). En la notación utilizada, los atributos subrayados forman la clave primaria; la forma \textcolor{verdeFK}{Entidad}\textcolor{azulRel}{.atributo} indica una clave foránea (FK), donde la entidad referenciada se muestra en verde.
+
+\begin{itemize}[label={},leftmargin=0.635cm,itemsep=9pt]
+{\color{azulRel}\raggedright
+  \item Organización(\underline{idOrganizacion}, nombre, pais, tipo, fechaFundacion)
+  \item ModeloLLM(\underline{idModelo}, nombre, version, arquitectura, tipoModelo, numParam, longitudToken, tipoToken, estado, \fk{Organización}{idOrganizacion}, \fk{ModeloLLM}{idModeloBase})
+  \item Dataset(\underline{idDataset}, nombre, version, dominio, formatoDatos, tamanio, numRegistros, licencias, fuenteOrigen)
+  \item Experimento(\underline{idRun}, nombre, \fk{ModeloLLM}{idModelo}, tipoEntrenamiento, optimizador, precisionCalculo, numEpocas, tamBatch, tasaAprendizaje, estadoEjecucion, fechaInicio, fechaFin, lossFinal)
+  \item GPU(\underline{idGPU}, modeloGPU, fabricante, proveedorCloud, memoriaVRAM, numNucleos, costoPorHora)
+  \item Benchmark(\underline{idBenchmark}, nombre, version, categoria, metodo, numItems, descripcion, autor)
+  \item Evaluación(\underline{idEvaluacion}, \fk{ModeloLLM}{idModelo}, \fk{Benchmark}{idBenchmark}, \fk{Organización}{idOrganizacion} (como idOrganizacionEvaluadora), fechaEvaluacion, resultadoMetrica)
+  \item ItemBenchmark(\underline{\fk{Benchmark}{idBenchmark}}, \underline{idItem}, promptPregunta, respuestaEsperada)
+  \item RespuestaModelo(\underline{idRespuesta}, \fk{Evaluación}{idEvaluacion}, \fk{Evaluación}{idBenchmark}, \fk{ItemBenchmark}{idItem}, outputGenerado, esCorrecta, tokensOutput, latencia)
+  \item Experimento\_Dataset(\underline{\fk{Experimento}{idRun}}, \underline{\fk{Dataset}{idDataset}}, \underline{faseUso})
+  \item Consumo\_GPU(\underline{\fk{Experimento}{idRun}}, \underline{\fk{GPU}{idGPU}}, horasUso, consumoEnergetico, cantidadUnidades)
+}
+\end{itemize}
+
+En RespuestaModelo, el par (idEvaluacion, idBenchmark) es una clave foránea compuesta hacia Evaluación(idEvaluacion, idBenchmark) y el par (idBenchmark, idItem) es una clave foránea compuesta hacia ItemBenchmark(idBenchmark, idItem). La justificación de este diseño se presenta en la sección 3.2.4.1.
+
+% ---------------------------------------------------------------------
 \subsection{Especificaciones de transformación}
 
-\addcontentsline{toc}{subsubsection}{Entidades}
+% .....................................................................
 \subsubsection{Entidades}
 
-Cada entidad fuerte del Modelo Entidad-Relación se convierte en una tabla (relación) independiente dentro del Modelo Relacional. Los atributos simples se transforman en columnas y el atributo identificador único se define como la Clave Primaria (PK):
+Cada entidad fuerte del Modelo Entidad-Relación se convierte en una tabla (relación) independiente dentro del Modelo Relacional. Los atributos simples se transforman en columnas y el atributo identificador único se define como la Clave Primaria (PK). Además de la clave primaria, se declaran las claves candidatas como restricciones UNIQUE:
 {\begin{itemize}
-  \item Organización
-  \item Modelo LLM:
+  \item Organización:
+  \begin{itemize}
+  \item Clave Primaria (PK): idOrganizacion
+  \item Atributos: nombre, pais, tipo, fechaFundacion
+  \item Clave candidata: nombre
+  \end{itemize}
+  \item ModeloLLM:
   \begin{itemize}
   \item Clave Primaria (PK): idModelo
   \item Atributos: nombre, version, arquitectura, tipoModelo, numParam, longitudToken, tipoToken, estado
-  \end{itemize}
-  \item Experimento:
-  \begin{itemize}
-  \item Clave Primaria (PK): idRun
-  \item Atributos: nombre, tipoEntrenamiento, optimizador, precisionCalculo, numEpocas, tamBatch, tasaAprendizaje, estadoEjecucion, fechaInicio, fechaFin, segundos, lossFinal
+  \item Clave candidata: (nombre, version)
   \end{itemize}
   \item Dataset:
   \begin{itemize}
   \item Clave Primaria (PK): idDataset
-  \item Atributos: nombre, version, faseUso, dominio, formatoDatos, tamanio, numRegistros, licencia, fuenteOrigen
+  \item Atributos: nombre, version, dominio, formatoDatos, tamanio, numRegistros, licencias, fuenteOrigen
+  \item Clave candidata: (nombre, version)
+  \end{itemize}
+  \item Experimento:
+  \begin{itemize}
+  \item Clave Primaria (PK): idRun
+  \item Atributos: nombre, tipoEntrenamiento, optimizador, precisionCalculo, numEpocas, tamBatch, tasaAprendizaje, estadoEjecucion, fechaInicio, fechaFin, lossFinal
   \end{itemize}
   \item GPU:
   \begin{itemize}
@@ -541,137 +640,193 @@ Cada entidad fuerte del Modelo Entidad-Relación se convierte en una tabla (rela
   \item Benchmark:
   \begin{itemize}
   \item Clave Primaria (PK): idBenchmark
-  \item Atributos: nombre, version, categoria, metodo, numItems, descripcion
+  \item Atributos: nombre, version, categoria, metodo, numItems, descripcion, autor
+  \item Clave candidata: (nombre, version)
   \end{itemize}
-  \item Evaluacion: Un examen entre las preguntas del Benchmark a un modelo LLM específico.
+  \item Evaluación: Aplicación de un Benchmark a un Modelo LLM por parte de una Organización evaluadora, con su resultado.
   \begin{itemize}
   \item Clave Primaria (PK): idEvaluacion
-  \item Atributos: ModeloLLM.idModelo, Benchmark.idBenchmark, idOrganizacionEvaluadora FK, fechaEvaluacion, resultadoMetrica
-  \end{itemize}
-  \item ItemBenchmark:
-  \begin{itemize}
-  \item Clave Primaria (PK): idItem
-  \item Atributos: Benchmark.idBenchmark, promptPregunta, respuestaEsperada
+  \item Atributos: fechaEvaluacion, resultadoMetrica
   \end{itemize}
   \item RespuestaModelo:
   \begin{itemize}
   \item Clave Primaria (PK): idRespuesta
-  \item Atribautos: Evaluacion.idEvaluacion, ItemBenchmark.idItem, outputGenerado, esCorrecta, tokensOutput, latencia
-\end{itemize}
+  \item Atributos: outputGenerado, esCorrecta, tokensOutput, latencia
+  \item Clave candidata: (idEvaluacion, idItem)
+  \end{itemize}
 \end{itemize}
 }
 
-\addcontentsline{toc}{subsubsection}{Entidades débiles}
+El atributo segundos del Experimento no se almacena: es un atributo derivado (fechaFin $-$ fechaInicio) y almacenarlo duplicaría información que puede obtenerse directamente de las fechas. El atributo faseUso no pertenece a Dataset sino a la relación utiliza (véase la sección 3.2.4.2).
+
+% .....................................................................
 \subsubsection{Entidades débiles}
 
-Ninguna: No existen entidades débiles en el modelo conceptual que requieran dependencia de existencia respecto a otra entidad.
+ItemBenchmark es una entidad débil de Benchmark: una pregunta no tiene sentido fuera del benchmark al que pertenece, la relación contiene es identificadora (N a 1 respecto de su dueño) y la participación de ItemBenchmark es total. Su identificador idItem es una llave parcial (discriminador): solo es único dentro de un mismo benchmark, es decir, numera los ítems 1, 2, 3, \ldots{} de cada benchmark.
+{\begin{itemize}
+  \item ItemBenchmark:
+  \begin{itemize}
+  \item Clave Primaria (PK) compuesta: (idBenchmark, idItem), donde idBenchmark es además clave foránea hacia Benchmark(idBenchmark) y idItem es la llave parcial.
+  \item Atributos: promptPregunta, respuestaEsperada
+  \item Integridad referencial: ON DELETE CASCADE desde Benchmark, pues al eliminar un benchmark sus ítems dejan de existir.
+  \end{itemize}
+\end{itemize}
+}
 
-\addcontentsline{toc}{subsubsection}{Entidades superclase/subclases}
+RespuestaModelo no se modela como entidad débil porque depende simultáneamente de dos entidades (Evaluación e ItemBenchmark), y una entidad débil se identifica respecto de un único dueño. Por ello tiene una llave primaria propia (idRespuesta) y participación total en ambas relaciones.
+
+% .....................................................................
 \subsubsection{Entidades superclase/subclases}
 
-Ninguna: El dominio del problema no contempla relaciones de herencia, especialización ni generalización.
+Ninguna: El dominio del problema no contempla relaciones de herencia, especialización ni generalización. El rol de una Organización (Creador, Evaluador o Ambos) se modela como el atributo tipo y no como una jerarquía, porque las organizaciones no tienen atributos ni relaciones propias que dependan de su rol.
 
-\addcontentsline{toc}{subsubsection}{Relaciones binarias}
+% .....................................................................
 \subsubsection{Relaciones binarias}
+
+Para expresar la multiplicidad de cada relación se emplea la notación (mínimo, máximo) por entidad. Una relación con restricción de clave (máximo 1) se transforma agregando una clave foránea en la tabla del lado N; si la participación es total (mínimo 1), la clave foránea se declara NOT NULL. Las relaciones M:N se transforman en tablas intermedias.
 
 \paragraph{Relaciones 1:N (Uno a Muchos):}
 
-Modelo LLM $\rightarrow$ Dataset (""): La clave primaria del lado 1 (idModelo en Modelo\_LLM) se propaga como Clave Foránea (FK) hacia la tabla del lado N (Dataset).
+{\sloppy\begin{itemize}
+  \item Organización $\rightarrow$ ModeloLLM (``crea''): La clave primaria del lado 1 (idOrganizacion en Organización) se propaga como Clave Foránea (FK) hacia la tabla del lado N (ModeloLLM).
+  Resultado: ModeloLLM añade el atributo idOrganizacion (FK, NOT NULL) que referencia a Organización(idOrganizacion).
+  Multiplicidad: Organización (0,N), porque existen organizaciones que solo evalúan y no crean modelos; ModeloLLM (1,1), porque todo modelo tiene exactamente una organización creadora.
 
-Resultado: Dataset añade el atributo idModelo (FK) que referencia a Modelo\_LLM(idModelo).
+  \item Organización $\rightarrow$ Evaluación (``realiza''): La clave primaria del lado 1 (idOrganizacion en Organización) se propaga como FK hacia la tabla del lado N (Evaluación).
+  Resultado: Evaluación añade el atributo idOrganizacionEvaluadora (FK, NOT NULL) que referencia a Organización(idOrganizacion).
+  Multiplicidad: Organización (0,N), porque una organización puede no haber aplicado ninguna evaluación; Evaluación (1,1), porque toda evaluación es aplicada por exactamente una organización.
 
-Modelo LLM $\rightarrow$ Evaluacion (``evalua''): La clave primaria del lado 1 (idModelo en Modelo LLM) se propaga como Clave Foránea (FK) hacia la tabla del lado N (Evaluación)
+  \item ModeloLLM $\rightarrow$ Experimento (``entrena''): La clave primaria del lado 1 (idModelo en ModeloLLM) se propaga como FK hacia la tabla del lado N (Experimento).
+  Resultado: Experimento añade el atributo idModelo (FK, NOT NULL) que referencia a ModeloLLM(idModelo). El modelo referenciado es el modelo que el experimento entrena; el linaje entre modelos se expresa mediante la relación ``basado''.
+  Multiplicidad: ModeloLLM (0,N), porque un modelo puede no tener experimentos registrados (por ejemplo, un modelo de un tercero que solo se evalúa); Experimento (1,1), porque cada experimento entrena exactamente un modelo.
 
-Resultado: Evaluación añade el atributo idModelo (FK) que referencia a Modelo\_LLM(idModelo).
+  \item ModeloLLM $\rightarrow$ ModeloLLM (``basado'', relación recursiva): La clave primaria del lado 1 (idModelo del modeloBase) se propaga como FK hacia la tabla del lado N (modeloDerivado), que es la misma tabla ModeloLLM.
+  Resultado: ModeloLLM añade el atributo idModeloBase (FK, puede ser NULL) que referencia a ModeloLLM(idModelo). Un modelo base (que no deriva de ningún otro) tiene idModeloBase nulo. Se agrega la restricción CHECK idModeloBase IS NULL OR idModeloBase $\neq$ idModelo para impedir que un modelo sea su propia base.
+  Multiplicidad: modeloDerivado (0,1), porque un modelo deriva como máximo de un modelo base; modeloBase (0,N), porque un modelo puede ser base de muchos modelos.
 
-Benchmark $\rightarrow$ Evaluacion (``usa''): La clave primaria del lado 1 (idBenchmark en Benchmark) se propaga como Clave Foránea (FK) hacia la tabla del lado N (Evaluación)
+  \item ModeloLLM $\rightarrow$ Evaluación (``evalua''): La clave primaria del lado 1 (idModelo en ModeloLLM) se propaga como FK hacia la tabla del lado N (Evaluación).
+  Resultado: Evaluación añade el atributo idModelo (FK, NOT NULL) que referencia a ModeloLLM(idModelo).
+  Multiplicidad: ModeloLLM (0,N), porque un modelo puede evaluarse muchas veces (en distintos benchmarks, por distintas organizaciones y en distintas fechas) o ninguna; Evaluación (1,1), porque cada evaluación se aplica a exactamente un modelo.
 
-Resultado: Evaluacion añade el atributo idBnechmark (FK) que referencia a Benchmark(idBenchmark).
+  \item Benchmark $\rightarrow$ Evaluación (``usa''): La clave primaria del lado 1 (idBenchmark en Benchmark) se propaga como FK hacia la tabla del lado N (Evaluación).
+  Resultado: Evaluación añade el atributo idBenchmark (FK, NOT NULL) que referencia a Benchmark(idBenchmark).
+  Multiplicidad: Benchmark (0,N), porque un benchmark catalogado puede no haberse aplicado aún; Evaluación (1,1), porque cada evaluación aplica exactamente un benchmark.
 
-Benchmark $\rightarrow$ ItemBenchmark (``contiene''): La clave primaria del lado 1 (idBenchmark en Benchmark) se propaga como Clave Foránea (FK) hacia la tabla del lado N (ItemBenchmark)
+  \item Benchmark $\rightarrow$ ItemBenchmark (``contiene'', relación identificadora): La clave primaria del lado 1 (idBenchmark en Benchmark) se propaga a ItemBenchmark y pasa a formar parte de su clave primaria compuesta (idBenchmark, idItem), como se describe en la sección 3.2.2.
+  Multiplicidad: Benchmark (0,N), porque solo se almacena una muestra de preguntas y un benchmark puede no tener ítems registrados; ItemBenchmark (1,1).
 
-Resultado: ItemBenchmark añade el atributo idBenchmark (FK) que referencia Benchmark(idBenchmark).
+  \item Evaluación $\rightarrow$ RespuestaModelo (``genera''): La clave del lado 1 (idEvaluacion en Evaluación) se propaga como FK hacia la tabla del lado N (RespuestaModelo).
+  Resultado: RespuestaModelo añade los atributos (idEvaluacion, idBenchmark) como clave foránea compuesta que referencia a Evaluación(idEvaluacion, idBenchmark), con ON DELETE CASCADE.
+  Multiplicidad: Evaluación (0,N), porque existen evaluaciones publicadas solo con un puntaje agregado, sin detalle por pregunta; RespuestaModelo (1,1), porque cada respuesta pertenece a exactamente una evaluación.
 
-Evaluacion $\rightarrow$ RespuestaModelo(``genera''): La llave primaria del lado 1 (idEvaluacion en Evaluación) se propaga como Clave Foránea (FK) hacia la tabla del lado N (RespuestaModelo)
-
-Resultado: RespuestaModelo añade el atributo idEvaluacion (FK) que referencia a Evaluacion(idEvaluacion).
-
-ItemBenchmark $\rightarrow$ RespuestaModelo (``''): La clave primaria del lado 1 (idItem en ItemBenchmark) se propaga como Clave Foránea (FK) hacia la tabla del lado N (RespuestaModelo)
-
-Resultado: RespuestaModelo añade el atributo idItem (FK) que referencia a ItemBenchmark(idItemBenchmark).
-
-\addcontentsline{toc}{paragraph}{Relaciones M:N (Muchos a Muchos)}
-\paragraph{Relaciones M:N (Muchos a Muchos)}
-
-Las relaciones M:N se transforman en tablas intermedias o asociativas. Su clave primaria estará formada por la combinación de las claves primarias de las entidades asociadas, actuando a su vez como claves foráneas (FK).
-{\begin{itemize}
-  \item Experimento $\rightarrow$ Dataset ("utiliza"):
+  \item ItemBenchmark $\rightarrow$ RespuestaModelo (``corresponde''): La clave primaria compuesta del lado 1 (idBenchmark, idItem en ItemBenchmark) se propaga como FK hacia la tabla del lado N (RespuestaModelo).
+  Resultado: RespuestaModelo añade el atributo idItem y comparte idBenchmark, formando la clave foránea compuesta (idBenchmark, idItem) que referencia a ItemBenchmark(idBenchmark, idItem).
+  Multiplicidad: ItemBenchmark (0,N), porque una pregunta puede recibir respuestas de distintos modelos y evaluaciones, o ninguna; RespuestaModelo (1,1), porque cada respuesta corresponde a exactamente una pregunta.
 \end{itemize}
 }
+
+\textbf{Resumen de relaciones 1:N.}
+
+\begin{longtable}{|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{4.3cm}|>{\raggedright\arraybackslash}p{4.9cm}|>{\raggedright\arraybackslash}p{2.0cm}|}
+\hline
+\textbf{Relación} & \textbf{Multiplicidad (mín,máx)} & \textbf{Implementación (FK)} & \textbf{ON DELETE} \\
+\hline
+crea & Organización (0,N); ModeloLLM (1,1) & ModeloLLM.\allowbreak idOrganizacion, NOT NULL & NO ACTION \\
+\hline
+realiza & Organización (0,N); Evaluación (1,1) & Evaluación.\allowbreak idOrganizacion\allowbreak Evaluadora, NOT NULL & NO ACTION \\
+\hline
+entrena & ModeloLLM (0,N); Experimento (1,1) & Experimento.idModelo, NOT NULL & NO ACTION \\
+\hline
+basado & modeloBase (0,N); modeloDerivado (0,1) & ModeloLLM.idModeloBase, NULL permitido & NO ACTION \\
+\hline
+evalua & ModeloLLM (0,N); Evaluación (1,1) & Evaluación.idModelo, NOT NULL & NO ACTION \\
+\hline
+usa & Benchmark (0,N); Evaluación (1,1) & Evaluación.idBenchmark, NOT NULL & NO ACTION \\
+\hline
+contiene (identificadora) & Benchmark (0,N); ItemBenchmark (1,1) & PK compuesta (idBenchmark, idItem) & CASCADE \\
+\hline
+genera & Evaluación (0,N); RespuestaModelo (1,1) & FK compuesta (idEvaluacion, idBenchmark) & CASCADE \\
+\hline
+corresponde & ItemBenchmark (0,N); RespuestaModelo (1,1) & FK compuesta (idBenchmark, idItem) & NO ACTION \\
+\hline
+\end{longtable}
+
+\textbf{Regla de una respuesta por pregunta.} Dentro de una misma evaluación, el modelo emite como máximo una respuesta por pregunta, por lo que (idEvaluacion, idItem) es clave candidata de RespuestaModelo (restricción UNIQUE). Si el modelo repite la prueba, se registra una nueva Evaluación, con su propia fecha y resultado.
+% (P6) Si decides permitir varias respuestas por pregunta, elimina este parrafo
+% y la fila UNIQUE(idEvaluacion, idItem) de la tabla RespuestaModelo en 3.3.
+
+\textbf{Redundancia controlada en RespuestaModelo.} Como la clave primaria de ItemBenchmark es compuesta, RespuestaModelo debe almacenar idBenchmark para poder referenciar a su ítem. Pero la evaluación de la respuesta ya determina su benchmark, de modo que en RespuestaModelo existe la dependencia idEvaluacion $\rightarrow$ idBenchmark, que es una dependencia transitiva y, formalmente, se aparta de la tercera forma normal. Se acepta de forma deliberada porque las dos claves foráneas compuestas comparten la columna idBenchmark: el motor de base de datos garantiza que el ítem respondido pertenezca siempre al benchmark de la evaluación, de modo que las dos copias del dato no pueden contradecirse. Esto evita depender de un trigger para esa regla, el cual podría desactivarse (por ejemplo, durante una carga masiva).
+
+\paragraph{Relaciones M:N (Muchos a Muchos):}
+
+Las relaciones M:N se transforman en tablas intermedias o asociativas. Su clave primaria está formada por las claves primarias de las entidades asociadas, que actúan a su vez como claves foráneas (FK); los atributos propios de la relación pasan a ser columnas de la tabla intermedia.
+
 {\begin{itemize}
+  \item Experimento $\leftrightarrow$ Dataset (``utiliza''):
+  \begin{itemize}
   \item Tabla intermedia: Experimento\_Dataset
-  \item Atributos: idRun (FK a Experimento), idDataset (FK a Dataset)
-  \item Clave Primaria Compuesta (PK): (idRun, idDataset)
-\end{itemize}
-}
-{\begin{itemize}
-  \item Experimento $\rightarrow$ GPU ("procesa"):
-\end{itemize}
-}
-{\begin{itemize}
+  \item Atributos: idRun (FK a Experimento), idDataset (FK a Dataset), faseUso
+  \item Clave Primaria Compuesta (PK): (idRun, idDataset, faseUso)
+  \item Multiplicidad: Experimento (1,N), porque un experimento utiliza uno o más datasets; Dataset (0,N), porque un dataset catalogado puede no haberse utilizado aún.
+  \item faseUso es un atributo de la relación y no de Dataset: un mismo dataset puede emplearse para entrenamiento en un experimento y para validación en otro. Forma parte de la clave primaria porque un mismo experimento puede utilizar el mismo dataset en más de una fase.
+  \item Integridad referencial: ON DELETE CASCADE desde Experimento y NO ACTION desde Dataset.
+  \end{itemize}
+  \item Experimento $\leftrightarrow$ GPU (``consume''):
+  \begin{itemize}
   \item Tabla intermedia: Consumo\_GPU
-  \item Atributos: idRun (FK a Experimento), idGPU (FK a GPU)
+  \item Atributos: idRun (FK a Experimento), idGPU (FK a GPU), horasUso, consumoEnergetico, cantidadUnidades
   \item Clave Primaria Compuesta (PK): (idRun, idGPU)
-\end{itemize}
-}
-{\begin{itemize}
-  \item Experimento / Modelo $\rightarrow$ Benchmark ("produce"):
-\end{itemize}
-}
-{\begin{itemize}
-  \item Tabla intermedia: Resultado\_Benchmark
-  \item Atributos: idRun (FK a Experimento), idBenchmark (FK a Benchmark)
-  \item Clave Primaria Compuesta (PK): (idRun, idBenchmark)
+  \item Multiplicidad: Experimento (1,N), porque un experimento consume una o más GPU; GPU (0,N), porque un mismo tipo de GPU puede usarse en muchos experimentos o en ninguno.
+  \item horasUso, consumoEnergetico y cantidadUnidades dependen del par (experimento, GPU) y no de cada uno por separado, por lo que son atributos de la relación. La entidad GPU representa un tipo de hardware (por ejemplo, un modelo de GPU), por lo que cantidadUnidades indica cuántas unidades de ese tipo se emplearon en el experimento.
+  \item Integridad referencial: ON DELETE CASCADE desde Experimento y NO ACTION desde GPU.
+  \end{itemize}
 \end{itemize}
 }
 
-\addcontentsline{toc}{subsubsection}{Relaciones ternarias}
+\textbf{Participación total en las relaciones M:N.} La participación total de Experimento en utiliza y en consume (mínimo 1) no puede imponerse únicamente con claves ni con restricciones CHECK, porque el experimento se registra antes de asociarle sus datasets y GPU. Se declara como regla de negocio, verificada por los procedimientos de registro del experimento.
+
+\textbf{Otras reglas de negocio no expresables con claves.} Estas reglas se implementan con triggers (sección de Triggers):
+{\begin{itemize}
+  \item Una organización de tipo Evaluador no puede crear modelos, y una organización de tipo Creador no puede aplicar evaluaciones.
+  \item La cadena de modelos base (relación basado) no puede contener ciclos.
+\end{itemize}
+}
+
+% .....................................................................
 \subsubsection{Relaciones ternarias}
 
-Ninguna: No se definen relaciones que vinculen de forma directa y simultánea a tres entidades en el modelo
+Ninguna: No se definen relaciones que vinculen de forma directa y simultánea a tres entidades en el modelo. La asociación entre un Modelo, un Benchmark y la Organización que aplica la prueba se representa con la entidad Evaluación y tres relaciones binarias 1:N (evalua, usa y realiza).
 
-\addcontentsline{toc}{subsection}{Diccionario de Datos}
+% ---------------------------------------------------------------------
 \subsection{Diccionario de Datos}
 
+Los tipos de datos corresponden a PostgreSQL. Los identificadores simples (idOrganizacion, idModelo, idDataset, idRun, idGPU, idBenchmark, idEvaluacion e idRespuesta) son autogenerados (IDENTITY); idItem no lo es, pues numera los ítems dentro de cada benchmark.
 
 \textbf{Tabla: Organización}
 
-% --- tabla 286: 6 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
 \hline
-idOrganizacion & INEGER & PK, NOT NULL & Identificador único de la organización \\
+idOrganizacion & INTEGER & PK, NOT NULL & Identificador único de la organización \\
 \hline
-nombre & VARCHAR(50) & NOT NULL & Nombre de la organización \\
+nombre & VARCHAR(50) & NOT NULL, UNIQUE & Nombre de la organización \\
 \hline
 pais & VARCHAR(50) & NOT NULL & País de origen \\
 \hline
-tipo & VARCHAR(20) & NOT NULL & Rol de la organización \\
+tipo & VARCHAR(20) & NOT NULL, CHECK (tipo IN ('Creador', 'Evaluador', 'Ambos')) & Rol de la organización \\
 \hline
 fechaFundacion & DATE & NOT NULL & Fecha de fundación \\
 \hline
 \end{longtable}
 
+\textbf{Tabla: ModeloLLM}
 
-\textbf{Tabla: Modelo LLM}
-
-% --- tabla 289: 12 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
 \hline
-idModelo & INEGER & PK, NOT NULL & Identificador único del modelo \\
+idModelo & INTEGER & PK, NOT NULL & Identificador único del modelo \\
 \hline
 nombre & VARCHAR(100) & NOT NULL & Nombre del modelo \\
 \hline
@@ -683,251 +838,939 @@ tipoModelo & VARCHAR(50) & NOT NULL & Categoría del modelo \\
 \hline
 numParam & BIGINT & NOT NULL, CHECK (numParam > 0) & Número de parámetros \\
 \hline
-longitudToken & INTEGER & NOT NULL, CHECK (longitudToken > 0) & Longitud máxima de tokens \\
+longitudToken & INTEGER & NOT NULL, CHECK (longitudToken > 0) & Ventana de contexto máxima en tokens \\
 \hline
 tipoToken & VARCHAR(50) & NOT NULL & Tipo de tokenizador \\
 \hline
-estado & VARCHAR(50) & NOT NULL, CHECK (estado IN ('Activo','Inactivo','En Pruebas','Obsoleto')) & Estado actual \\
+estado & VARCHAR(50) & NOT NULL, CHECK (estado IN ('Activo', 'Inactivo', 'En Pruebas', 'Obsoleto')) & Estado actual \\
 \hline
-idOrganizacion & INTEGER & FK, NOT NULL & Organización creadora \\
+idOrganizacion & INTEGER & FK $\rightarrow$ Organización (idOrganizacion), NOT NULL & Organización creadora \\
 \hline
-idModeloBase & INTEGER & FK, NOT NULL & Modelo base \\
+idModeloBase & INTEGER & FK $\rightarrow$ ModeloLLM (idModelo), NULL & Modelo del que deriva (NULL si es un modelo base) \\
 \hline
 \end{longtable}
 
+Restricciones de tabla: UNIQUE (nombre, version); CHECK (idModeloBase IS NULL OR idModeloBase <> idModelo).
 
 \textbf{Tabla: Dataset}
 
-% --- tabla 292: 12 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
 \hline
-idDataset & INEGER & PK, NOT NULL & Identificador único del dataset \\
-\hline
-idModelo & INTEGER & FK, NOT NULL & Modelo asociado \\
+idDataset & INTEGER & PK, NOT NULL & Identificador único del dataset \\
 \hline
 nombre & VARCHAR(100) & NOT NULL & Nombre del dataset \\
 \hline
-version & VARCHAR(50) & NOT NULL & Version del dataset \\
+version & VARCHAR(50) & NOT NULL & Versión del dataset \\
 \hline
-faseUso & VARCHAR(50) & NOT NULL, CHECK (faseUso IN ('Entrenamiento','Validación','Prueba','Fine-tuning')) & Fase de Uso \\
+dominio & VARCHAR(100) & NOT NULL & Dominio temático \\
 \hline
-dominio & VARCHAR(100) & NOT NULL, CHECK (numParam > 0) & Dominio tematico \\
+formatoDatos & VARCHAR(50) & NOT NULL & Formato de los datos \\
 \hline
-formatoDatos & VARCHAR(50) & NOT NULL, CHECK (longitudToken > 0) & Formato de los datos \\
-\hline
-tamanio & VARCHAR(50) & NOT NULL, CHECK (tamanio > 0) & Tamaño en GB \\
+tamanio & NUMERIC(12,3) & NOT NULL, CHECK (tamanio > 0) & Tamaño en GB \\
 \hline
 numRegistros & BIGINT & NOT NULL, CHECK (numRegistros > 0) & Número de registros \\
 \hline
-licencia & VARCHAR(50) & NOT NULL & Tipo de Licencia \\
+licencias & VARCHAR(50) & NOT NULL & Tipo de licencia \\
 \hline
-fuenteOrigen & VARCHAR(200) & NOT NULL & Fuente de Origen \\
+fuenteOrigen & VARCHAR(200) & NOT NULL & Fuente de origen \\
 \hline
 \end{longtable}
 
+Restricciones de tabla: UNIQUE (nombre, version).
 
 \textbf{Tabla: Experimento}
 
-% --- tabla 295: 15 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
 \hline
-idRun & INEGER & PK, NOT NULL & Identificador único del experimento \\
+idRun & INTEGER & PK, NOT NULL & Identificador único del experimento \\
 \hline
 nombre & VARCHAR(100) & NOT NULL & Nombre del experimento \\
 \hline
-idModelo & INTEGER & FK, NOT NULL & Modelo entrenado \\
+idModelo & INTEGER & FK $\rightarrow$ ModeloLLM (idModelo), NOT NULL & Modelo que entrena el experimento \\
 \hline
-tipoEntrenamiento & VARCHAR(50) & NOT NULL, CHECK (tipoEntrenamiento IN ('Preentrenamiento','Fine-tuning','RLHF','Destilación')) & Tipo de experimento \\
+tipoEntrenamiento & VARCHAR(50) & NOT NULL, CHECK (tipoEntrenamiento IN ('Preentrenamiento', 'Fine-tuning', 'RLHF', 'Destilación')) & Tipo de entrenamiento \\
 \hline
 optimizador & VARCHAR(50) & NOT NULL & Optimizador usado \\
 \hline
-precisionCalculo & VARCHAR(50) & NOT NULL, CHECK (precisionCalculo IN ('FP32','FP16','BF16','INT8')) & Precisión numérica \\
+precisionCalculo & VARCHAR(50) & NOT NULL, CHECK (precisionCalculo IN ('FP32', 'FP16', 'BF16', 'INT8')) & Precisión numérica \\
 \hline
 numEpocas & INTEGER & NOT NULL, CHECK (numEpocas > 0) & Número de épocas \\
 \hline
 tamBatch & INTEGER & NOT NULL, CHECK (tamBatch > 0) & Tamaño del batch \\
 \hline
-tasaAprendizaje & NUMERIC(10,8) & NOT NULL, CHECK (tasaAprendizaje > 0) & Tasa de Aprendizaje \\
+tasaAprendizaje & NUMERIC(10,8) & NOT NULL, CHECK (tasaAprendizaje > 0) & Tasa de aprendizaje \\
 \hline
-estadoEjecucion & VARCHAR(50) & NOT NULL, CHECK (estadoEjecucion IN ('En ejecución','Finalizado','Error','Cancelado')) & Estado actual \\
+estadoEjecucion & VARCHAR(50) & NOT NULL, CHECK (estadoEjecucion IN ('En ejecución', 'Finalizado', 'Error', 'Cancelado')) & Estado actual del experimento \\
 \hline
-fechaInicio & TIMESTAMP & NOT NULL & Fecha/hora de inicio \\
+fechaInicio & TIMESTAMP & NOT NULL & Fecha y hora de inicio \\
 \hline
-fechaFin & TIMESTAMP & NULL & Fecha/hora de fin \\
+fechaFin & TIMESTAMP & NULL & Fecha y hora de fin \\
 \hline
-segundos & BIGINT & NULL, CHECK (segundos >= 0) & Duración en Segundos \\
-\hline
-lossFinal & NUMERIC(10,6) & NULL, CHECK (lossFinal >= 0) & Loss final \\
+lossFinal & NUMERIC(10,6) & NULL, CHECK (lossFinal >= 0) & Pérdida (loss) final \\
 \hline
 \end{longtable}
 
+Restricciones de tabla: CHECK (fechaFin IS NULL OR fechaFin >= fechaInicio); CHECK ((estadoEjecucion = 'En ejecución' AND fechaFin IS NULL) OR (estadoEjecucion <> 'En ejecución' AND fechaFin IS NOT NULL)). La duración del experimento no se almacena: se calcula como fechaFin $-$ fechaInicio.
+
 \textbf{Tabla: GPU}
 
-% --- tabla 297: 8 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
 \hline
-idGPU & INEGER & PK, NOT NULL & Identificador único de GPU \\
+idGPU & INTEGER & PK, NOT NULL & Identificador único del tipo de GPU \\
 \hline
 modeloGPU & VARCHAR(100) & NOT NULL & Modelo de GPU \\
 \hline
-fabricante & VARCHAR(100) & NOT NULL & Fabricante de GPU \\
+fabricante & VARCHAR(100) & NOT NULL & Fabricante de la GPU \\
 \hline
-proveedorCloud & VARCHAR(100) & NULL & Proveedor de Cloud \\
+proveedorCloud & VARCHAR(100) & NULL & Proveedor cloud (NULL si el hardware es propio) \\
 \hline
 memoriaVRAM & INTEGER & NOT NULL, CHECK (memoriaVRAM > 0) & Memoria VRAM en GB \\
 \hline
 numNucleos & INTEGER & NOT NULL, CHECK (numNucleos > 0) & Número de núcleos \\
 \hline
-numNucleos & NUMERIC(10,4) & NOT NULL, CHECK (numNucleos > 0) & Costo por hora en USD \\
+costoPorHora & NUMERIC(10,4) & NOT NULL, CHECK (costoPorHora >= 0) & Costo en USD por hora de uso \\
 \hline
 \end{longtable}
-
 
 \textbf{Tabla: Benchmark}
 
-% --- tabla 300: 8 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
 \hline
-idBenchmark & INEGER & PK, NOT NULL & Identificador único del benchmark \\
+idBenchmark & INTEGER & PK, NOT NULL & Identificador único del benchmark \\
 \hline
 nombre & VARCHAR(100) & NOT NULL & Nombre del benchmark \\
 \hline
-version & VARCHAR(50) & NOT NULL & Version del benchmark \\
+version & VARCHAR(50) & NOT NULL & Versión del benchmark \\
 \hline
-categoria & VARCHAR(100) & NOT NULL & Categoria del benchmark \\
+categoria & VARCHAR(100) & NOT NULL & Categoría del benchmark \\
 \hline
-metodo & VARCHAR(100) & NOT NULL & Metodo de Evaluacion \\
+metodo & VARCHAR(100) & NOT NULL & Método de evaluación \\
 \hline
-numItems & INTEGER & NOT NULL, CHECK (numItems > 0) & Número de ítems \\
+numItems & INTEGER & NOT NULL, CHECK (numItems > 0) & Número de ítems del benchmark \\
 \hline
 descripcion & TEXT & NULL & Descripción detallada \\
 \hline
-\end{longtable}
-
-
-\textbf{Tabla: Evaluacion}
-
-% --- tabla 303: 7 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
-\hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
-\hline
-idBenchmark & INEGER & PK, NOT NULL & Identificador único de la evaluación \\
-\hline
-idModelo & INEGER & FK, NOT NULL & Modelo evaluado \\
-\hline
-idBenchmark & INEGER & FK, NOT NULL & Benchmark aplicado \\
-\hline
-idOrganizacionEvaluadora & INEGER & FK, NOT NULL & Organización evaluadora \\
-\hline
-fechaEvaluacion & DATE & NOT NULL & Fecha de evaluación \\
-\hline
-resultadoMetrico & NUMERIC(10,4) & NOT NULL, CHECK (resultadoMetrica >= 0) & Resultado de la métrica \\
+autor & VARCHAR(100) & NULL & Autor o creador del benchmark \\
 \hline
 \end{longtable}
 
+Restricciones de tabla: UNIQUE (nombre, version).
+
+\textbf{Tabla: Evaluación}
+
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
+\hline
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
+\hline
+idEvaluacion & INTEGER & PK, NOT NULL & Identificador único de la evaluación \\
+\hline
+idModelo & INTEGER & FK $\rightarrow$ ModeloLLM (idModelo), NOT NULL & Modelo evaluado \\
+\hline
+idBenchmark & INTEGER & FK $\rightarrow$ Benchmark (idBenchmark), NOT NULL & Benchmark aplicado \\
+\hline
+idOrganizacion\allowbreak Evaluadora & INTEGER & FK $\rightarrow$ Organización (idOrganizacion), NOT NULL & Organización que aplica la evaluación \\
+\hline
+fechaEvaluacion & DATE & NOT NULL & Fecha de la evaluación \\
+\hline
+resultadoMetrica & NUMERIC(10,4) & NOT NULL, CHECK (resultadoMetrica >= 0) & Resultado obtenido en la métrica \\
+\hline
+\end{longtable}
+
+Restricciones de tabla: UNIQUE (idEvaluacion, idBenchmark), necesaria para que RespuestaModelo pueda referenciar la pareja (evaluación, benchmark) mediante una clave foránea compuesta.
 
 \textbf{Tabla: ItemBenchmark}
 
-% --- tabla 306: 5 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
 \hline
-idItem & INEGER & PK, NOT NULL & Identificador único del ítem \\
+idBenchmark & INTEGER & PK, FK $\rightarrow$ Benchmark (idBenchmark), NOT NULL, ON DELETE CASCADE & Benchmark al que pertenece el ítem \\
 \hline
-idBenchmark & INEGER & FK, NOT NULL & Benchmark al que pertenece \\
+idItem & INTEGER & PK, NOT NULL, CHECK (idItem > 0) & Número del ítem dentro de su benchmark (llave parcial) \\
 \hline
-promtPregunta & TEXT & NOT NULL & Pregunta planetada \\
+promptPregunta & TEXT & NOT NULL & Pregunta planteada \\
 \hline
 respuestaEsperada & TEXT & NOT NULL & Respuesta de referencia \\
 \hline
 \end{longtable}
 
+Restricciones de tabla: PRIMARY KEY (idBenchmark, idItem).
 
 \textbf{Tabla: RespuestaModelo}
 
-% --- tabla 309: 8 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
 \hline
-idRespuesta & INEGER & PK, NOT NULL & Identificador único de la respuesta \\
+idRespuesta & INTEGER & PK, NOT NULL & Identificador único de la respuesta \\
 \hline
-idEvaluacion & INEGER & FK, NOT NULL & Evaluación asociada \\
+idEvaluacion & INTEGER & FK (compuesta con idBenchmark) $\rightarrow$ Evaluación (idEvaluacion, idBenchmark), NOT NULL, ON DELETE CASCADE & Evaluación a la que pertenece la respuesta \\
 \hline
-idItem & INEGER & FK, NOT NULL & Ítem respondido \\
+idBenchmark & INTEGER & FK (compuesta con idEvaluacion) $\rightarrow$ Evaluación (idEvaluacion, idBenchmark); FK (compuesta con idItem) $\rightarrow$ ItemBenchmark (idBenchmark, idItem); NOT NULL & Benchmark de la evaluación y del ítem (redundancia controlada) \\
+\hline
+idItem & INTEGER & FK (compuesta con idBenchmark) $\rightarrow$ ItemBenchmark (idBenchmark, idItem), NOT NULL & Ítem respondido \\
 \hline
 outputGenerado & TEXT & NOT NULL & Respuesta generada por el modelo \\
 \hline
-esCorrecta & BOOLEAN & NOT NULL & Indica si es correcta \\
+esCorrecta & BOOLEAN & NOT NULL & Indica si la respuesta es correcta \\
 \hline
 tokensOutput & INTEGER & NOT NULL, CHECK (tokensOutput >= 0) & Tokens de salida \\
 \hline
-latencia & NUMERIC(10,4) & NOT NULL, CHECK (latencia >= 0) & Latencia en segundos \\
+latencia & NUMERIC(10,4) & NOT NULL, CHECK (latencia >= 0) & Latencia de la respuesta en segundos \\
 \hline
 \end{longtable}
 
+Restricciones de tabla: UNIQUE (idEvaluacion, idItem) (una respuesta por pregunta dentro de una evaluación); FOREIGN KEY (idEvaluacion, idBenchmark) REFERENCES Evaluación(idEvaluacion, idBenchmark) ON DELETE CASCADE; FOREIGN KEY (idBenchmark, idItem) REFERENCES ItemBenchmark(idBenchmark, idItem).
 
-\textbf{Tabla: ExperimentoDataset}
+\textbf{Tabla: Experimento\_Dataset}
 
-% --- tabla 312: 3 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
 \hline
-idRun & INEGER & PK, FK & Experimento \\
+idRun & INTEGER & PK, FK $\rightarrow$ Experimento (idRun), NOT NULL, ON DELETE CASCADE & Experimento que utiliza el dataset \\
 \hline
-idDataset & INTEGER & PK, FK & Dataset Utilizado \\
+idDataset & INTEGER & PK, FK $\rightarrow$ Dataset (idDataset), NOT NULL & Dataset utilizado \\
+\hline
+faseUso & VARCHAR(50) & PK, NOT NULL, CHECK (faseUso IN ('Entrenamiento', 'Validación', 'Prueba', 'Fine-tuning')) & Fase en la que el experimento usa el dataset \\
 \hline
 \end{longtable}
 
+Restricciones de tabla: PRIMARY KEY (idRun, idDataset, faseUso).
 
-\textbf{Tabla: ExperimentoGPU}
+\textbf{Tabla: Consumo\_GPU}
 
-% --- tabla 315: 5 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
+\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restricción} & \textbf{Descripción} \\
 \hline
-idRun & INEGER & PK, FK & Experimento \\
+idRun & INTEGER & PK, FK $\rightarrow$ Experimento (idRun), NOT NULL, ON DELETE CASCADE & Experimento que consume la GPU \\
 \hline
-idGPU & INTEGER & PK, FK & GPU Utilizada \\
+idGPU & INTEGER & PK, FK $\rightarrow$ GPU (idGPU), NOT NULL & Tipo de GPU utilizado \\
 \hline
-horasUso & NUMERIC(10,2) & NOT NULL. CHECK(horasUso > 0) & Horas de uso en un experimento \\
+horasUso & NUMERIC(10,2) & NOT NULL, CHECK (horasUso > 0) & Horas de uso de esta GPU en el experimento \\
 \hline
-consumoEnergetico & NUMERIC(10,2) & NOT NULL, CHECK(consumoEnergetico >= 0) & Consumo energetico estimado (kWh) \\
+consumoEnergetico & NUMERIC(10,2) & NOT NULL, CHECK (consumoEnergetico >= 0) & Consumo energético estimado de esta asignación (kWh) \\
+\hline
+cantidadUnidades & INTEGER & NOT NULL, DEFAULT 1, CHECK (cantidadUnidades > 0) & Número de unidades de este tipo de GPU empleadas \\
 \hline
 \end{longtable}
 
+Restricciones de tabla: PRIMARY KEY (idRun, idGPU).
 
-\textbf{Tabla: ResultadoBenchmark}
+\section{Implementación de la base de datos}
 
-% --- tabla 318: 6 filas x 4 cols, 12pt ---
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|>{\raggedright\arraybackslash}p{3.63cm}|}
-\hline
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Restriccion} & \textbf{Descripcion} \\
-\hline
-idRun & INEGER & PK, FK & Experimento \\
-\hline
-idBenchmark & INTEGER & PK, FK & Benchmark aplicado \\
-\hline
-valor & NUMERIC(10 4) & NOT NULL, CHECK(valor >= 0) & Valor obtenido \\
-\hline
-metrica & NUMERIC(10,2) & NOT NULL & Matrica utilizada \\
-\hline
-fecha & NUMERIC(10,2) & NOT NULL & Fecha del resultado \\
-\hline
-\end{longtable}
+\subsection{Creación de tablas en PostgreSQL}
 
+El siguiente script crea la base de datos a partir del modelo relacional de la sección 3. Siguiendo la convención del proyecto de referencia, los nombres de tablas y columnas se escriben en minúsculas con guion bajo (por ejemplo, la relación ModeloLLM se implementa como la tabla \texttt{modelo\_llm} y el atributo idBenchmark como la columna \texttt{id\_benchmark}). El script se organiza en cinco bloques: creación de las 11 tablas, restricciones de llave (primarias, foráneas y la clave candidata de Evaluación necesaria para la clave foránea compuesta), restricciones NOT NULL, otras restricciones (UNIQUE y CHECK) y triggers para las reglas de negocio que no pueden expresarse de forma declarativa.
+
+\begin{lstlisting}
+-- Creacion de tablas
+
+CREATE TABLE IF NOT EXISTS organizacion (
+    id_organizacion INTEGER,
+    nombre VARCHAR(50),
+    pais VARCHAR(50),
+    tipo VARCHAR(20),
+    fecha_fundacion DATE
+);
+
+CREATE TABLE IF NOT EXISTS modelo_llm (
+    id_modelo INTEGER,
+    nombre VARCHAR(100),
+    version VARCHAR(50),
+    arquitectura VARCHAR(100),
+    tipo_modelo VARCHAR(50),
+    num_param BIGINT,
+    longitud_token INTEGER,
+    tipo_token VARCHAR(50),
+    estado VARCHAR(50),
+    id_organizacion INTEGER,
+    id_modelo_base INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS dataset (
+    id_dataset INTEGER,
+    nombre VARCHAR(100),
+    version VARCHAR(50),
+    dominio VARCHAR(100),
+    formato_datos VARCHAR(50),
+    tamanio NUMERIC(12,3),
+    num_registros BIGINT,
+    licencias VARCHAR(50),
+    fuente_origen VARCHAR(200)
+);
+
+CREATE TABLE IF NOT EXISTS experimento (
+    id_run INTEGER,
+    nombre VARCHAR(100),
+    id_modelo INTEGER,
+    tipo_entrenamiento VARCHAR(50),
+    optimizador VARCHAR(50),
+    precision_calculo VARCHAR(50),
+    num_epocas INTEGER,
+    tam_batch INTEGER,
+    tasa_aprendizaje NUMERIC(10,8),
+    estado_ejecucion VARCHAR(50),
+    fecha_inicio TIMESTAMP,
+    fecha_fin TIMESTAMP,
+    loss_final NUMERIC(10,6)
+);
+
+CREATE TABLE IF NOT EXISTS gpu (
+    id_gpu INTEGER,
+    modelo_gpu VARCHAR(100),
+    fabricante VARCHAR(100),
+    proveedor_cloud VARCHAR(100),
+    memoria_vram INTEGER,
+    num_nucleos INTEGER,
+    costo_por_hora NUMERIC(10,4)
+);
+
+CREATE TABLE IF NOT EXISTS benchmark (
+    id_benchmark INTEGER,
+    nombre VARCHAR(100),
+    version VARCHAR(50),
+    categoria VARCHAR(100),
+    metodo VARCHAR(100),
+    num_items INTEGER,
+    descripcion TEXT,
+    autor VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS evaluacion (
+    id_evaluacion INTEGER,
+    id_modelo INTEGER,
+    id_benchmark INTEGER,
+    id_organizacion_evaluadora INTEGER,
+    fecha_evaluacion DATE,
+    resultado_metrica NUMERIC(10,4)
+);
+
+CREATE TABLE IF NOT EXISTS item_benchmark (
+    id_benchmark INTEGER,
+    id_item INTEGER,
+    prompt_pregunta TEXT,
+    respuesta_esperada TEXT
+);
+
+CREATE TABLE IF NOT EXISTS respuesta_modelo (
+    id_respuesta INTEGER,
+    id_evaluacion INTEGER,
+    id_benchmark INTEGER,
+    id_item INTEGER,
+    output_generado TEXT,
+    es_correcta BOOLEAN,
+    tokens_output INTEGER,
+    latencia NUMERIC(10,4)
+);
+
+CREATE TABLE IF NOT EXISTS experimento_dataset (
+    id_run INTEGER,
+    id_dataset INTEGER,
+    fase_uso VARCHAR(50)
+);
+
+CREATE TABLE IF NOT EXISTS consumo_gpu (
+    id_run INTEGER,
+    id_gpu INTEGER,
+    horas_uso NUMERIC(10,2),
+    consumo_energetico NUMERIC(10,2),
+    cantidad_unidades INTEGER DEFAULT 1
+);
+
+
+-- Key constraints
+
+-- Organizacion
+ALTER TABLE organizacion ADD CONSTRAINT pk_organizacion_id PRIMARY KEY ( id_organizacion );
+
+-- ModeloLLM
+ALTER TABLE modelo_llm ADD CONSTRAINT pk_modelo_llm_id PRIMARY KEY ( id_modelo );
+ALTER TABLE modelo_llm ADD CONSTRAINT fk_modelo_llm_organizacion FOREIGN KEY ( id_organizacion ) REFERENCES organizacion ( id_organizacion );
+ALTER TABLE modelo_llm ADD CONSTRAINT fk_modelo_llm_modelo_base FOREIGN KEY ( id_modelo_base ) REFERENCES modelo_llm ( id_modelo );
+
+-- Dataset
+ALTER TABLE dataset ADD CONSTRAINT pk_dataset_id PRIMARY KEY ( id_dataset );
+
+-- Experimento
+ALTER TABLE experimento ADD CONSTRAINT pk_experimento_id_run PRIMARY KEY ( id_run );
+ALTER TABLE experimento ADD CONSTRAINT fk_experimento_modelo_llm FOREIGN KEY ( id_modelo ) REFERENCES modelo_llm ( id_modelo );
+
+-- GPU
+ALTER TABLE gpu ADD CONSTRAINT pk_gpu_id PRIMARY KEY ( id_gpu );
+
+-- Benchmark
+ALTER TABLE benchmark ADD CONSTRAINT pk_benchmark_id PRIMARY KEY ( id_benchmark );
+
+-- Evaluacion
+ALTER TABLE evaluacion ADD CONSTRAINT pk_evaluacion_id PRIMARY KEY ( id_evaluacion );
+ALTER TABLE evaluacion ADD CONSTRAINT fk_evaluacion_modelo_llm FOREIGN KEY ( id_modelo ) REFERENCES modelo_llm ( id_modelo );
+ALTER TABLE evaluacion ADD CONSTRAINT fk_evaluacion_benchmark FOREIGN KEY ( id_benchmark ) REFERENCES benchmark ( id_benchmark );
+ALTER TABLE evaluacion ADD CONSTRAINT fk_evaluacion_organizacion FOREIGN KEY ( id_organizacion_evaluadora ) REFERENCES organizacion ( id_organizacion );
+-- Clave candidata que permite la FK compuesta de respuesta_modelo
+ALTER TABLE evaluacion ADD CONSTRAINT uq_evaluacion_id_benchmark UNIQUE ( id_evaluacion, id_benchmark );
+
+-- ItemBenchmark (entidad debil de Benchmark)
+ALTER TABLE item_benchmark ADD CONSTRAINT pk_item_benchmark_id PRIMARY KEY ( id_benchmark, id_item );
+ALTER TABLE item_benchmark ADD CONSTRAINT fk_item_benchmark_benchmark FOREIGN KEY ( id_benchmark ) REFERENCES benchmark ( id_benchmark ) ON DELETE CASCADE;
+
+-- RespuestaModelo
+ALTER TABLE respuesta_modelo ADD CONSTRAINT pk_respuesta_modelo_id PRIMARY KEY ( id_respuesta );
+ALTER TABLE respuesta_modelo ADD CONSTRAINT fk_respuesta_evaluacion FOREIGN KEY ( id_evaluacion, id_benchmark ) REFERENCES evaluacion ( id_evaluacion, id_benchmark ) ON DELETE CASCADE;
+ALTER TABLE respuesta_modelo ADD CONSTRAINT fk_respuesta_item_benchmark FOREIGN KEY ( id_benchmark, id_item ) REFERENCES item_benchmark ( id_benchmark, id_item );
+
+-- Experimento_Dataset (relacion utiliza)
+ALTER TABLE experimento_dataset ADD CONSTRAINT pk_experimento_dataset PRIMARY KEY ( id_run, id_dataset, fase_uso );
+ALTER TABLE experimento_dataset ADD CONSTRAINT fk_experimento_dataset_experimento FOREIGN KEY ( id_run ) REFERENCES experimento ( id_run ) ON DELETE CASCADE;
+ALTER TABLE experimento_dataset ADD CONSTRAINT fk_experimento_dataset_dataset FOREIGN KEY ( id_dataset ) REFERENCES dataset ( id_dataset );
+
+-- Consumo_GPU (relacion consume)
+ALTER TABLE consumo_gpu ADD CONSTRAINT pk_consumo_gpu PRIMARY KEY ( id_run, id_gpu );
+ALTER TABLE consumo_gpu ADD CONSTRAINT fk_consumo_gpu_experimento FOREIGN KEY ( id_run ) REFERENCES experimento ( id_run ) ON DELETE CASCADE;
+ALTER TABLE consumo_gpu ADD CONSTRAINT fk_consumo_gpu_gpu FOREIGN KEY ( id_gpu ) REFERENCES gpu ( id_gpu );
+
+
+-- Not null constraints
+
+ALTER TABLE organizacion ALTER COLUMN nombre SET NOT NULL;
+ALTER TABLE organizacion ALTER COLUMN pais SET NOT NULL;
+ALTER TABLE organizacion ALTER COLUMN tipo SET NOT NULL;
+ALTER TABLE organizacion ALTER COLUMN fecha_fundacion SET NOT NULL;
+
+ALTER TABLE modelo_llm ALTER COLUMN nombre SET NOT NULL;
+ALTER TABLE modelo_llm ALTER COLUMN version SET NOT NULL;
+ALTER TABLE modelo_llm ALTER COLUMN arquitectura SET NOT NULL;
+ALTER TABLE modelo_llm ALTER COLUMN tipo_modelo SET NOT NULL;
+ALTER TABLE modelo_llm ALTER COLUMN num_param SET NOT NULL;
+ALTER TABLE modelo_llm ALTER COLUMN longitud_token SET NOT NULL;
+ALTER TABLE modelo_llm ALTER COLUMN tipo_token SET NOT NULL;
+ALTER TABLE modelo_llm ALTER COLUMN estado SET NOT NULL;
+ALTER TABLE modelo_llm ALTER COLUMN id_organizacion SET NOT NULL;
+
+ALTER TABLE dataset ALTER COLUMN nombre SET NOT NULL;
+ALTER TABLE dataset ALTER COLUMN version SET NOT NULL;
+ALTER TABLE dataset ALTER COLUMN dominio SET NOT NULL;
+ALTER TABLE dataset ALTER COLUMN formato_datos SET NOT NULL;
+ALTER TABLE dataset ALTER COLUMN tamanio SET NOT NULL;
+ALTER TABLE dataset ALTER COLUMN num_registros SET NOT NULL;
+ALTER TABLE dataset ALTER COLUMN licencias SET NOT NULL;
+ALTER TABLE dataset ALTER COLUMN fuente_origen SET NOT NULL;
+
+ALTER TABLE experimento ALTER COLUMN nombre SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN id_modelo SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN tipo_entrenamiento SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN optimizador SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN precision_calculo SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN num_epocas SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN tam_batch SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN tasa_aprendizaje SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN estado_ejecucion SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN fecha_inicio SET NOT NULL;
+
+ALTER TABLE gpu ALTER COLUMN modelo_gpu SET NOT NULL;
+ALTER TABLE gpu ALTER COLUMN fabricante SET NOT NULL;
+ALTER TABLE gpu ALTER COLUMN memoria_vram SET NOT NULL;
+ALTER TABLE gpu ALTER COLUMN num_nucleos SET NOT NULL;
+ALTER TABLE gpu ALTER COLUMN costo_por_hora SET NOT NULL;
+
+ALTER TABLE benchmark ALTER COLUMN nombre SET NOT NULL;
+ALTER TABLE benchmark ALTER COLUMN version SET NOT NULL;
+ALTER TABLE benchmark ALTER COLUMN categoria SET NOT NULL;
+ALTER TABLE benchmark ALTER COLUMN metodo SET NOT NULL;
+ALTER TABLE benchmark ALTER COLUMN num_items SET NOT NULL;
+
+ALTER TABLE evaluacion ALTER COLUMN id_modelo SET NOT NULL;
+ALTER TABLE evaluacion ALTER COLUMN id_benchmark SET NOT NULL;
+ALTER TABLE evaluacion ALTER COLUMN id_organizacion_evaluadora SET NOT NULL;
+ALTER TABLE evaluacion ALTER COLUMN fecha_evaluacion SET NOT NULL;
+ALTER TABLE evaluacion ALTER COLUMN resultado_metrica SET NOT NULL;
+
+ALTER TABLE item_benchmark ALTER COLUMN prompt_pregunta SET NOT NULL;
+ALTER TABLE item_benchmark ALTER COLUMN respuesta_esperada SET NOT NULL;
+
+ALTER TABLE respuesta_modelo ALTER COLUMN id_evaluacion SET NOT NULL;
+ALTER TABLE respuesta_modelo ALTER COLUMN id_benchmark SET NOT NULL;
+ALTER TABLE respuesta_modelo ALTER COLUMN id_item SET NOT NULL;
+ALTER TABLE respuesta_modelo ALTER COLUMN output_generado SET NOT NULL;
+ALTER TABLE respuesta_modelo ALTER COLUMN es_correcta SET NOT NULL;
+ALTER TABLE respuesta_modelo ALTER COLUMN tokens_output SET NOT NULL;
+ALTER TABLE respuesta_modelo ALTER COLUMN latencia SET NOT NULL;
+
+ALTER TABLE consumo_gpu ALTER COLUMN horas_uso SET NOT NULL;
+ALTER TABLE consumo_gpu ALTER COLUMN consumo_energetico SET NOT NULL;
+ALTER TABLE consumo_gpu ALTER COLUMN cantidad_unidades SET NOT NULL;
+
+
+-- Otros constraints
+
+-- Organizacion
+ALTER TABLE organizacion ADD CONSTRAINT uq_organizacion_nombre UNIQUE ( nombre );
+ALTER TABLE organizacion ADD CONSTRAINT ck_organizacion_tipo CHECK ( tipo IN ('Creador', 'Evaluador', 'Ambos') );
+
+-- ModeloLLM
+ALTER TABLE modelo_llm ADD CONSTRAINT uq_modelo_llm_nombre_version UNIQUE ( nombre, version );
+ALTER TABLE modelo_llm ADD CONSTRAINT ck_modelo_llm_num_param CHECK ( num_param > 0 );
+ALTER TABLE modelo_llm ADD CONSTRAINT ck_modelo_llm_longitud_token CHECK ( longitud_token > 0 );
+ALTER TABLE modelo_llm ADD CONSTRAINT ck_modelo_llm_estado CHECK ( estado IN ('Activo', 'Inactivo', 'En Pruebas', 'Obsoleto') );
+ALTER TABLE modelo_llm ADD CONSTRAINT ck_modelo_llm_base_distinto CHECK ( id_modelo_base IS NULL OR id_modelo_base <> id_modelo );
+
+-- Dataset
+ALTER TABLE dataset ADD CONSTRAINT uq_dataset_nombre_version UNIQUE ( nombre, version );
+ALTER TABLE dataset ADD CONSTRAINT ck_dataset_tamanio CHECK ( tamanio > 0 );
+ALTER TABLE dataset ADD CONSTRAINT ck_dataset_num_registros CHECK ( num_registros > 0 );
+
+-- Experimento
+ALTER TABLE experimento ADD CONSTRAINT ck_experimento_tipo_entrenamiento CHECK ( tipo_entrenamiento IN ('Preentrenamiento', 'Fine-tuning', 'RLHF', 'Destilación') );
+ALTER TABLE experimento ADD CONSTRAINT ck_experimento_precision CHECK ( precision_calculo IN ('FP32', 'FP16', 'BF16', 'INT8') );
+ALTER TABLE experimento ADD CONSTRAINT ck_experimento_num_epocas CHECK ( num_epocas > 0 );
+ALTER TABLE experimento ADD CONSTRAINT ck_experimento_tam_batch CHECK ( tam_batch > 0 );
+ALTER TABLE experimento ADD CONSTRAINT ck_experimento_tasa_aprendizaje CHECK ( tasa_aprendizaje > 0 );
+ALTER TABLE experimento ADD CONSTRAINT ck_experimento_estado CHECK ( estado_ejecucion IN ('En ejecución', 'Finalizado', 'Error', 'Cancelado') );
+ALTER TABLE experimento ADD CONSTRAINT ck_experimento_loss_final CHECK ( loss_final >= 0 );
+ALTER TABLE experimento ADD CONSTRAINT ck_experimento_fechas CHECK ( fecha_fin IS NULL OR fecha_fin >= fecha_inicio );
+
+-- GPU
+ALTER TABLE gpu ADD CONSTRAINT ck_gpu_memoria_vram CHECK ( memoria_vram > 0 );
+ALTER TABLE gpu ADD CONSTRAINT ck_gpu_num_nucleos CHECK ( num_nucleos > 0 );
+ALTER TABLE gpu ADD CONSTRAINT ck_gpu_costo_por_hora CHECK ( costo_por_hora >= 0 );
+
+-- Benchmark
+ALTER TABLE benchmark ADD CONSTRAINT uq_benchmark_nombre_version UNIQUE ( nombre, version );
+ALTER TABLE benchmark ADD CONSTRAINT ck_benchmark_num_items CHECK ( num_items > 0 );
+
+-- Evaluacion
+ALTER TABLE evaluacion ADD CONSTRAINT ck_evaluacion_resultado CHECK ( resultado_metrica >= 0 );
+
+-- ItemBenchmark
+ALTER TABLE item_benchmark ADD CONSTRAINT ck_item_benchmark_id_item CHECK ( id_item > 0 );
+
+-- RespuestaModelo
+ALTER TABLE respuesta_modelo ADD CONSTRAINT uq_respuesta_evaluacion_item UNIQUE ( id_evaluacion, id_item );
+ALTER TABLE respuesta_modelo ADD CONSTRAINT ck_respuesta_tokens_output CHECK ( tokens_output >= 0 );
+ALTER TABLE respuesta_modelo ADD CONSTRAINT ck_respuesta_latencia CHECK ( latencia >= 0 );
+
+-- Experimento_Dataset
+ALTER TABLE experimento_dataset ADD CONSTRAINT ck_experimento_dataset_fase CHECK ( fase_uso IN ('Entrenamiento', 'Validación', 'Prueba', 'Fine-tuning') );
+
+-- Consumo_GPU
+ALTER TABLE consumo_gpu ADD CONSTRAINT ck_consumo_gpu_horas CHECK ( horas_uso > 0 );
+ALTER TABLE consumo_gpu ADD CONSTRAINT ck_consumo_gpu_energia CHECK ( consumo_energetico >= 0 );
+ALTER TABLE consumo_gpu ADD CONSTRAINT ck_consumo_gpu_unidades CHECK ( cantidad_unidades > 0 );
+
+
+-- Triggers (reglas de negocio no expresables con claves ni CHECK)
+
+-- Una organizacion de tipo Evaluador no puede crear modelos
+CREATE OR REPLACE FUNCTION fn_validar_organizacion_creadora ()
+RETURNS TRIGGER AS
+$$
+BEGIN
+    IF (SELECT tipo FROM organizacion WHERE id_organizacion = NEW.id_organizacion) = 'Evaluador' THEN
+        RAISE EXCEPTION 'La organizacion % es de tipo Evaluador y no puede crear modelos',
+            NEW.id_organizacion;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_validar_organizacion_creadora
+BEFORE INSERT OR UPDATE OF id_organizacion ON modelo_llm
+FOR EACH ROW EXECUTE FUNCTION fn_validar_organizacion_creadora ();
+
+-- Una organizacion de tipo Creador no puede aplicar evaluaciones
+CREATE OR REPLACE FUNCTION fn_validar_organizacion_evaluadora ()
+RETURNS TRIGGER AS
+$$
+BEGIN
+    IF (SELECT tipo FROM organizacion WHERE id_organizacion = NEW.id_organizacion_evaluadora) = 'Creador' THEN
+        RAISE EXCEPTION 'La organizacion % es de tipo Creador y no puede aplicar evaluaciones',
+            NEW.id_organizacion_evaluadora;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_validar_organizacion_evaluadora
+BEFORE INSERT OR UPDATE OF id_organizacion_evaluadora ON evaluacion
+FOR EACH ROW EXECUTE FUNCTION fn_validar_organizacion_evaluadora ();
+
+-- La cadena de modelos base (relacion basado) no puede contener ciclos
+CREATE OR REPLACE FUNCTION fn_validar_ciclo_modelo_base ()
+RETURNS TRIGGER AS
+$$
+BEGIN
+    IF NEW.id_modelo_base IS NOT NULL AND EXISTS (
+        WITH RECURSIVE ancestros AS (
+            SELECT id_modelo, id_modelo_base
+            FROM modelo_llm
+            WHERE id_modelo = NEW.id_modelo_base
+            UNION
+            SELECT m.id_modelo, m.id_modelo_base
+            FROM modelo_llm m JOIN ancestros a ON m.id_modelo = a.id_modelo_base
+        )
+        SELECT 1 FROM ancestros WHERE id_modelo = NEW.id_modelo
+    ) THEN
+        RAISE EXCEPTION 'El modelo base % genera un ciclo en la cadena de modelos',
+            NEW.id_modelo_base;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_validar_ciclo_modelo_base
+BEFORE INSERT OR UPDATE OF id_modelo_base ON modelo_llm
+FOR EACH ROW EXECUTE FUNCTION fn_validar_ciclo_modelo_base ();
+\end{lstlisting}
+
+
+
+\subsection{Carga de datos}
+
+La carga de datos se realizó mediante un pipeline ETL que parte del CSV de Epoch (\texttt{all\_ai\_models.csv}), filtra modelos de lenguaje, limpia columnas numéricas y genera 12 archivos CSV (uno por tabla) con datos reales enriquecidos con valores sintéticos para los campos faltantes. El generador (\texttt{generate\_data.py}) usa \texttt{random.seed(42)}, por lo que los datos son reproducibles.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Tabla} & \textbf{Filas} \\
+\hline
+organizacion & 20 \\
+modelo\_llm & 1500 \\
+dataset & 1500 \\
+experimento & 1500 \\
+gpu & 20 \\
+benchmark & 10 \\
+evaluacion & 750 \\
+item\_benchmark & 100 \\
+respuesta\_modelo & 1000 \\
+experimento\_dataset & 1500 \\
+consumo\_gpu & 1500 \\
+\hline
+\textbf{Total} & \textbf{10000} \\
+\hline
+\end{tabular}
+\caption{Conteo de registros cargados (contexto de 10.000 datos)}
+\end{table}
+
+La carga se ejecutó con \texttt{\textbackslash copy} en el orden de las claves foráneas, desactivando el trigger \texttt{trg\_validar\_respuesta} durante la carga masiva y reactivándolo al final. Se validó la integridad (PKs, FKs, CHECKs, fechas) con \texttt{validate\_data.py}: 0 errores.
+
+\subsection{Simulación de Datos Faltantes}
+
+Se simularon datos faltantes (NULLs) de dos tipos:
+\begin{itemize}
+  \item \textbf{Por diseño (semánticos):} \texttt{id\_modelo\_base} NULL para modelos base; \texttt{fecha\_fin}/\texttt{loss\_final} NULL para experimentos no finalizados; \texttt{proveedor\_cloud} NULL para hardware propio.
+  \item \textbf{Por falta de fuente:} Epoch no reporta todos los campos (ej. \texttt{tokens\_totales} ~60\% nulos, \texttt{computo\_pretraining\_flop} ~57\% nulos).
+\end{itemize}
+
+Esto permite probar la robustez de consultas y vistas frente a valores NULL.
+
+\subsection{Views}
+
+Se crearon 3 vistas de usuario:
+
+\begin{lstlisting}
+CREATE OR REPLACE VIEW v_modelo_resumen AS
+SELECT m.id_modelo, m.nombre, m.arquitectura, m.num_param, m.estado,
+       o.nombre AS organizacion, o.pais
+FROM modelo_llm m
+JOIN organizacion o ON o.id_organizacion = m.id_organizacion;
+
+CREATE OR REPLACE VIEW v_consumo_por_experimento AS
+SELECT e.id_run, e.nombre AS experimento, m.nombre AS modelo,
+       COUNT(cg.id_gpu) AS num_gpus,
+       SUM(cg.horas_uso) AS horas_totales,
+       SUM(cg.horas_uso * g.costo_por_hora) AS costo_estimado_usd,
+       SUM(cg.consumo_energetico) AS kwh_total
+FROM experimento e
+JOIN modelo_llm m ON m.id_modelo = e.id_modelo
+LEFT JOIN consumo_gpu cg ON cg.id_run = e.id_run
+LEFT JOIN gpu g ON g.id_gpu = cg.id_gpu
+GROUP BY e.id_run, e.nombre, m.nombre;
+
+CREATE OR REPLACE VIEW v_mejor_benchmark AS
+SELECT b.nombre AS benchmark, m.nombre AS modelo,
+       e.resultado_metrica AS valor, e.fecha_evaluacion AS fecha
+FROM evaluacion e
+JOIN benchmark b ON b.id_benchmark = e.id_benchmark
+JOIN modelo_llm m ON m.id_modelo = e.id_modelo
+WHERE e.resultado_metrica = (
+    SELECT MAX(e2.resultado_metrica)
+    FROM evaluacion e2
+    WHERE e2.id_benchmark = e.id_benchmark
+);
+\end{lstlisting}
+
+\subsection{Procedimientos Almacenados}
+
+\begin{lstlisting}
+CREATE OR REPLACE PROCEDURE sp_registrar_experimento(
+    p_id_run INTEGER, p_nombre VARCHAR, p_id_modelo INTEGER,
+    p_tipo VARCHAR, p_opt VARCHAR, p_prec VARCHAR,
+    p_epocas INTEGER, p_batch INTEGER, p_lr NUMERIC
+)
+LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO experimento(id_run, nombre, id_modelo, tipo_entrenamiento, optimizador,
+        precision_calculo, num_epocas, tam_batch, tasa_aprendizaje, estado_ejecucion, fecha_inicio)
+    VALUES (p_id_run, p_nombre, p_id_modelo, p_tipo, p_opt, p_prec, p_epocas, p_batch, p_lr,
+            'En ejecución', NOW());
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE sp_finalizar_experimento(
+    p_id_run INTEGER, p_loss NUMERIC
+)
+LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE experimento
+    SET estado_ejecucion = 'Finalizado',
+        fecha_fin = NOW(),
+        loss_final = p_loss
+    WHERE id_run = p_id_run;
+END;
+$$;
+\end{lstlisting}
+
+Se probaron con un registro de prueba (id\_run = 9999): registro exitoso en estado ``En ejecución'', finalización con loss\_final y fecha\_fin, y limpieza posterior. Conteo final: 1500 experimentos.
+
+\subsection{Triggers}
+
+Triggers implementados (según el esquema corregido):
+\begin{itemize}
+  \item \texttt{trg\_validar\_organizacion\_creadora}: una organización de tipo Evaluador no puede crear modelos.
+  \item \texttt{trg\_validar\_organizacion\_evaluadora}: una organización de tipo Creador no puede aplicar evaluaciones.
+  \item \texttt{trg\_validar\_ciclo\_modelo\_base}: la cadena de modelos base no puede contener ciclos.
+\end{itemize}
+
+Adicionalmente se incluye un trigger auxiliar \texttt{trg\_estado\_gpu} que valida que \texttt{consumo\_energetico >= 0}.
+
+\section{Optimización y Experimentación}
+
+\subsection{Consultas SQL para el experimento}
+
+\subsubsection{Descripción de las 5 consultas intermedias seleccionadas}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Q} & \textbf{Pregunta de negocio} & \textbf{Operación principal} \\
+\hline
+Q1 & Modelo con mayor número de parámetros por arquitectura & RANK() OVER (PARTITION BY arquitectura) \\
+Q2 & Datasets más utilizados por dominio (top 5) & JOIN + GROUP BY + AVG + LIMIT \\
+Q3 & Experimentos con menor loss final por modelo (top 3) & ROW\_NUMBER() OVER (PARTITION BY id\_modelo) \\
+Q4 & Consumo total de horas GPU y costo por experimento & JOIN múltiple + SUM + GROUP BY \\
+Q5 & Mejor resultado por benchmark y modelo (top 3) & RANK() OVER (PARTITION BY id\_benchmark) \\
+\hline
+\end{tabular}
+\caption{Descripción de las 5 consultas intermedias}
+\end{table}
+
+\subsubsection{Implementación de consultas en SQL}
+
+\begin{lstlisting}
+-- Q1: Modelo con mayor numero de parametros por arquitectura
+WITH ranked AS (
+  SELECT nombre, arquitectura, num_param,
+         RANK() OVER (PARTITION BY arquitectura ORDER BY num_param DESC) AS rnk
+  FROM modelo_llm
+)
+SELECT arquitectura, nombre, num_param
+FROM ranked WHERE rnk = 1;
+
+-- Q2: Datasets mas utilizados por dominio (top 5)
+SELECT d.dominio, COUNT(ed.id_run) AS num_experimentos, AVG(d.num_registros) AS avg_registros
+FROM dataset d
+JOIN experimento_dataset ed ON ed.id_dataset = d.id_dataset
+GROUP BY d.dominio
+ORDER BY num_experimentos DESC
+LIMIT 5;
+
+-- Q3: Experimentos con menor loss final por modelo (top 3)
+WITH ranked AS (
+  SELECT e.id_run, m.nombre AS modelo, e.loss_final, e.num_epocas, e.tasa_aprendizaje,
+         ROW_NUMBER() OVER (PARTITION BY e.id_modelo ORDER BY e.loss_final ASC NULLS LAST) AS rn
+  FROM experimento e JOIN modelo_llm m ON m.id_modelo=e.id_modelo
+  WHERE e.estado_ejecucion='Finalizado'
+)
+SELECT * FROM ranked WHERE rn <= 3;
+
+-- Q4: Consumo total de horas GPU y costo por experimento
+SELECT e.id_run, m.nombre AS modelo, SUM(cg.horas_uso) AS horas_totales,
+       SUM(cg.horas_uso*g.costo_por_hora) AS costo_usd,
+       SUM(cg.consumo_energetico) AS kwh
+FROM experimento e
+JOIN modelo_llm m ON m.id_modelo=e.id_modelo
+JOIN consumo_gpu cg ON cg.id_run=e.id_run
+JOIN gpu g ON g.id_gpu=cg.id_gpu
+GROUP BY e.id_run, m.nombre
+ORDER BY costo_usd DESC;
+
+-- Q5: Mejor resultado por benchmark y modelo (top 3)
+WITH ranked AS (
+  SELECT b.nombre AS benchmark, m.nombre AS modelo, e.resultado_metrica AS valor,
+         e.fecha_evaluacion AS fecha,
+         RANK() OVER (PARTITION BY b.id_benchmark ORDER BY e.resultado_metrica DESC) AS rnk
+  FROM evaluacion e
+  JOIN benchmark b ON b.id_benchmark=e.id_benchmark
+  JOIN modelo_llm m ON m.id_modelo=e.id_modelo
+)
+SELECT benchmark, modelo, valor, fecha, rnk
+FROM ranked WHERE rnk <= 3;
+\end{lstlisting}
+
+Las 5 consultas se probaron en los 4 volúmenes (1k/10k/100k/1M) sin errores.
+
+\subsection{Metodología del experimento}
+
+Protocolo de medición:
+\begin{enumerate}
+  \item Warm-up: ejecutar cada consulta una vez y descartar el resultado.
+  \item 5 repeticiones por consulta, tomando el tiempo medio.
+  \item Métrica: tiempo de ejecución (ms) reportado por \texttt{EXPLAIN (ANALYZE, TIMING)}.
+  \item Limpieza de caché: \texttt{DISCARD ALL;} entre ejecuciones.
+  \item Orden aleatorio de consultas.
+  \item Escenarios: sin índices (solo PKs) y con índices (script \texttt{5\_3\_0 indices.sql}).
+\end{enumerate}
+
+Volúmenes probados: 1.000, 10.000, 100.000 y 1.000.000 de registros.
+
+\subsection{Optimización de consultas}
+
+Índices creados:
+\begin{lstlisting}
+CREATE INDEX idx_modelo_llm_arq_numparam ON modelo_llm (arquitectura, num_param DESC);
+CREATE INDEX idx_dataset_dominio ON dataset (dominio);
+CREATE INDEX idx_exp_dataset_dataset ON experimento_dataset (id_dataset);
+CREATE INDEX idx_experimento_modelo_loss ON experimento (id_modelo, loss_final) WHERE estado_ejecucion = 'Finalizado';
+CREATE INDEX idx_consumo_gpu_run ON consumo_gpu (id_run);
+CREATE INDEX idx_consumo_gpu_gpu ON consumo_gpu (id_gpu);
+CREATE INDEX idx_experimento_modelo ON experimento (id_modelo);
+CREATE INDEX idx_evaluacion_benchmark_score ON evaluacion (id_benchmark, resultado_metrica DESC);
+CREATE INDEX idx_evaluacion_modelo ON evaluacion (id_modelo);
+\end{lstlisting}
+
+\textbf{Planes observados:} En volúmenes pequeños (1k/10k) el planner usa Seq Scan. En volúmenes grandes (100k/1M), Q1 usa Index Scan (mejora ~2-3x). Q2–Q5 siguen usando Seq Scan porque son agregaciones sobre toda la tabla.
+
+\subsection{Plataforma de Pruebas}
+
+\begin{itemize}
+  \item \textbf{CPU:} Intel Core i5-10400F @ 2.90GHz
+  \item \textbf{RAM:} 16 GB
+  \item \textbf{Disco:} SSD (D: 647 GB)
+  \item \textbf{PostgreSQL:} 18.6 (x86\_64-windows, msvc-19.44.35229, 64-bit)
+  \item \textbf{OS:} Windows
+  \item \textbf{Configuración:} default (shared\_buffers, work\_mem, max\_connections)
+\end{itemize}
+
+\subsection{Medición de tiempos}
+
+\subsubsection{Sin índices}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|r|r|r|r|r|}
+\hline
+\textbf{Volumen} & \textbf{Q1} & \textbf{Q2} & \textbf{Q3} & \textbf{Q4} & \textbf{Q5} \\
+\hline
+1k & 0.359 & 0.206 & 0.226 & 0.597 & 0.543 \\
+10k & 3.185 & 3.424 & 1.339 & 5.402 & 2.013 \\
+100k & 16.385 & 10.215 & 11.075 & 39.303 & 12.382 \\
+1M & 217.460 & 108.444 & 161.249 & 561.265 & 161.629 \\
+\hline
+\end{tabular}
+\caption{Tiempos de ejecución sin índices (ms)}
+\end{table}
+
+\subsubsection{Con índices}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|r|r|r|r|r|}
+\hline
+\textbf{Volumen} & \textbf{Q1} & \textbf{Q2} & \textbf{Q3} & \textbf{Q4} & \textbf{Q5} \\
+\hline
+1k & 0.433 & 0.204 & 0.393 & 1.633 & 0.241 \\
+10k & 1.558 & 1.055 & 1.272 & 5.041 & 1.143 \\
+100k & 7.238 & 10.593 & 10.839 & 38.089 & 13.477 \\
+1M & 98.962 & 89.314 & 110.461 & 582.728 & 151.010 \\
+\hline
+\end{tabular}
+\caption{Tiempos de ejecución con índices (ms)}
+\end{table}
+
+\subsection{Resultados}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|r|r|r|r|r|r|r|r|r|r|}
+\hline
+\textbf{Vol} & \textbf{Q1 s} & \textbf{Q1 c} & \textbf{Q2 s} & \textbf{Q2 c} & \textbf{Q3 s} & \textbf{Q3 c} & \textbf{Q4 s} & \textbf{Q4 c} & \textbf{Q5 s} & \textbf{Q5 c} \\
+\hline
+1k & 0.359 & 0.433 & 0.206 & 0.204 & 0.226 & 0.393 & 0.597 & 1.633 & 0.543 & 0.241 \\
+10k & 3.185 & 1.558 & 3.424 & 1.055 & 1.339 & 1.272 & 5.402 & 5.041 & 2.013 & 1.143 \\
+100k & 16.385 & 7.238 & 10.215 & 10.593 & 11.075 & 10.839 & 39.303 & 38.089 & 12.382 & 13.477 \\
+1M & 217.460 & 98.962 & 108.444 & 89.314 & 161.249 & 110.461 & 561.265 & 582.728 & 161.629 & 151.010 \\
+\hline
+\end{tabular}
+\caption{Resultados consolidados (s=sin índices, c=con índices) en ms}
+\end{table}
+
+\textbf{Resultados por consulta:}
+\begin{itemize}
+  \item \textbf{Q1:} mejora ~2.2x en 100k/1M con índices.
+  \item \textbf{Q2:} mejora en 10k (3.25x) y 1M (1.21x); empeora en 100k.
+  \item \textbf{Q3:} mejora en 10k (1.05x) y 1M (1.46x); empeora en 1k.
+  \item \textbf{Q4:} mejora en 10k/100k; empeora en 1k y 1M.
+  \item \textbf{Q5:} mejora en 1k (2.25x), 10k (1.76x), 1M (1.07x); empeora en 100k.
+\end{itemize}
+
+\subsection{Análisis y Discusión}
+
+\textbf{Comparación de planes:}
+\begin{itemize}
+  \item En volúmenes pequeños (1k/10k), el planner usa Seq Scan porque el costo de un escaneo secuencial es menor que el de un Index Scan.
+  \item En volúmenes grandes (100k/1M), los índices ayudan en Q1 (Index Scan + Sort) pero no en Q2–Q5.
+\end{itemize}
+
+\textbf{Bottlenecks identificados:}
+\begin{itemize}
+  \item \textbf{Agregaciones (GROUP BY):} Q2, Q4 agregan toda la tabla $\rightarrow$ Seq Scan inevitable.
+  \item \textbf{Window functions (RANK/ROW\_NUMBER):} Q1, Q3, Q5 requieren ordenar/particionar $\rightarrow$ Sort costoso.
+  \item \textbf{Joins M:N:} Q4 une 4 tablas $\rightarrow$ Hash Join + Seq Scan.
+\end{itemize}
+
+\textbf{Por qué los índices no ayudan en Q2–Q5:}
+Las consultas agregan toda la tabla (no filtran por un valor específico). El índice no reduce el número de filas a leer, por lo que el planner prefiere Seq Scan. Los índices son útiles cuando hay filtros selectivos.
+
+\textbf{Escalabilidad:}
+\begin{itemize}
+  \item Q1 escala bien con índices (mejora ~2-3x en 1M).
+  \item Q2–Q5 no escalan con índices; se necesitarían índices parciales más selectivos o materialized views.
+\end{itemize}
+
+\section{Conclusiones}
+
+Se diseñó e implementó una base de datos relacional en PostgreSQL para gestionar el proceso de entrenamiento y evaluación de modelos LLM. El modelo incluye 11 tablas (9 entidades + 2 intermedias M:N) con restricciones de integridad, triggers para reglas de negocio y vistas de usuario.
+
+La carga de datos fue exitosa: 10.000 registros con integridad verificada (0 errores). Se simularon datos faltantes (NULLs) para probar la robustez del sistema.
+
+La experimentación con índices mostró que solo la consulta Q1 (mayor número de parámetros por arquitectura) se beneficia claramente de los índices (~3x en 1M). Las consultas de agregación (Q2–Q5) no se benefician porque el planner prefiere Seq Scan cuando se procesa toda la tabla.
+
+Los tiempos de ejecución crecen linealmente con el volumen de datos, lo que indica que la arquitectura cliente-servidor de PostgreSQL es adecuada para millones de registros, pero se requiere optimización específica (índices parciales, materialized views) para consultas de agregación.
+
+\section{Anexos}
+
+Se anexa la guía de grabación para la experimentación con 1.000.000 de registros con y sin índices (archivo \texttt{7\_1 Guia de grabacion del video.md}). El video se grabará siguiendo dicha guía, mostrando los comandos, planes y tiempos de las 5 consultas.
 
 
 

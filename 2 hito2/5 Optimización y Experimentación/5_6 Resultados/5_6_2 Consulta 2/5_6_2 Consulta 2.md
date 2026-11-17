@@ -24,18 +24,18 @@ LIMIT 5;
 
 | Volumen | Sin índices | Con índices | Speedup |
 |---|---|---|---|
-| 1k | 0.237 | 0.227 | 1.04x |
-| 10k | 1.066 | 1.083 | 0.98x |
-| 100k | 16.679 | 10.463 | 1.59x |
-| 1M | 142.170 | 210.319 | 0.68x |
+| 1k | 0.206 | 0.204 | 1.01x |
+| 10k | 3.424 | 1.055 | 3.25x |
+| 100k | 10.215 | 10.593 | 0.96x |
+| 1M | 108.444 | 89.314 | 1.21x |
 
 ## Plan (EXPLAIN)
 - **Sin índices:** Seq Scan + Hash Join + HashAggregate + Sort.
-- **Con índices:** mismo plan (Seq Scan + Hash Join). El índice en `dominio` no se usa porque la agregación cubre toda la tabla.
+- **Con índices:** Seq Scan + Hash Join + HashAggregate + Sort. El índice en `dominio` no se usa.
 
 ## Análisis
 - Los índices no ayudan porque la consulta agrega **toda la tabla** (no filtra por un dominio específico).
-- En 1M, los índices empeoran el tiempo (210ms vs. 142ms) por overhead de mantenimiento.
+- En 10k los índices mejoran (3.25x), pero en 100k/1M el efecto es mínimo o negativo.
 
 ## Verificación
 ```sql

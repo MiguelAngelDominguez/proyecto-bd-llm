@@ -84,7 +84,7 @@ python "4_3_1 validate_data.py"
 psql -U postgres -c "CREATE DATABASE proyectobd;"
 
 # Cargar esquema (tablas + constraints + triggers)
-psql -U postgres -d proyectobd -f "2 hito2/4 Implementación en PostgreSQL/4_1 Creación de Tablas en PostgreSQL/4_1_2 Esquema real con constraints y triggers.sql"
+psql -U postgres -d proyectobd -f "2 hito2/4 Implementación en PostgreSQL/4_1 Creación de Tablas en PostgreSQL/4_1_3 Esquema corregido (según LaTeX).sql"
 ```
 
 ### 4. Cargar datos

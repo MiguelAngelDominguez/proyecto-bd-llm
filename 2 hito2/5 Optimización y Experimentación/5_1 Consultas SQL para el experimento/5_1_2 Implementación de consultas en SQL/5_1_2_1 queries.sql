@@ -1,5 +1,5 @@
 -- =====================================================================
--- HITO 2 - 5 consultas intermedias no triviales (adaptadas al esquema real)
+-- HITO 2 - 5 consultas intermedias no triviales (esquema corregido)
 -- =====================================================================
 
 -- Q1: Modelo con mayor numero de parametros por arquitectura

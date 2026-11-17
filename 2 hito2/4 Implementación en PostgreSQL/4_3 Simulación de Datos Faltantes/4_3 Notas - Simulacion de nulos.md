@@ -87,3 +87,11 @@ if estado != "En ejecución":
 
 ## Nota para el informe (LaTeX)
 Explicar la diferencia entre nulos por diseño y nulos por falta de fuente, y cómo se mantienen para probar la robustez de consultas y vistas. Incluir tabla de tasas de missingness.
+
+
+## 5. Cambios respecto al esquema corregido
+- dataset: sin ase_uso ni id_modelo.
+- xperimento: sin segundos (no se simula nulo en ese campo).
+- xperimento_dataset: ase_uso puede ser NULL? No, es NOT NULL en el esquema.
+- 
+espuesta_modelo: id_benchmark se deriva de la evaluación (no NULL).

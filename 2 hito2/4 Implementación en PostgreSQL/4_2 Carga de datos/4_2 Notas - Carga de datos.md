@@ -215,3 +215,15 @@ Total: 10.000 filas.
 
 ## Nota para el informe (LaTeX)
 Explicar el pipeline ETL completo (fuente → transformación → carga), las decisiones de enriquecimiento sintético y la validación de integridad. Incluir la tabla de conteos.
+
+
+## 6. Cambios respecto al esquema corregido (LaTeX 4.1)
+- dataset: licencia → licencias (plural); se elimina ase_uso y id_modelo.
+- xperimento: se elimina segundos.
+- enchmark: se agrega utor.
+- item_benchmark: PK compuesta (id_benchmark, id_item).
+- 
+espuesta_modelo: se agrega id_benchmark; FKs compuestas a valuacion y item_benchmark.
+- xperimento_dataset: se agrega ase_uso; PK compuesta (id_run, id_dataset, fase_uso).
+- consumo_gpu: sin cambios.
+- Triggers: solo los 3 del informe (org creadora, org evaluadora, ciclo modelo base).

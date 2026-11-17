@@ -28,10 +28,10 @@ ORDER BY costo_usd DESC;
 
 | Volumen | Sin índices | Con índices | Speedup |
 |---|---|---|---|
-| 1k | 0.711 | 0.580 | 1.23x |
-| 10k | 4.701 | 4.207 | 1.12x |
-| 100k | 39.143 | 42.913 | 0.91x |
-| 1M | 541.884 | 556.302 | 0.97x |
+| 1k | 0.597 | 1.633 | 0.37x |
+| 10k | 5.402 | 5.041 | 1.07x |
+| 100k | 39.303 | 38.089 | 1.03x |
+| 1M | 561.265 | 582.728 | 0.96x |
 
 ## Plan (EXPLAIN)
 - **Sin índices:** Seq Scan + Hash Join + HashAggregate + Sort.
@@ -39,7 +39,7 @@ ORDER BY costo_usd DESC;
 
 ## Análisis
 - La agregación cubre toda la tabla → Seq Scan más eficiente.
-- Los índices no ayudan (tiempo empeora ligeramente en 100k/1M).
+- Los índices no ayudan (tiempo empeora ligeramente en 1k y 1M).
 
 ## Verificación
 ```sql

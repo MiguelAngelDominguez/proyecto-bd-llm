@@ -1,8 +1,6 @@
 -- =====================================================================
--- HITO 2 - Indices para optimizacion (Seccion 5.3)
+-- HITO 2 - Indices para optimizacion (Seccion 5.3) - Esquema corregido
 -- =====================================================================
-
--- Indices para FKs y consultas criticas
 
 -- Q1: mayor num_param por arquitectura
 CREATE INDEX IF NOT EXISTS idx_modelo_llm_arq_numparam
@@ -15,7 +13,7 @@ CREATE INDEX IF NOT EXISTS idx_dataset_dominio
 CREATE INDEX IF NOT EXISTS idx_exp_dataset_dataset
     ON experimento_dataset (id_dataset);
 
--- Q3: experimentos con menor loss por modelo
+-- Q3: experimentos con menor loss final por modelo
 CREATE INDEX IF NOT EXISTS idx_experimento_modelo_loss
     ON experimento (id_modelo, loss_final)
     WHERE estado_ejecucion = 'Finalizado';
@@ -37,6 +35,19 @@ CREATE INDEX IF NOT EXISTS idx_evaluacion_benchmark_score
 CREATE INDEX IF NOT EXISTS idx_evaluacion_modelo
     ON evaluacion (id_modelo);
 
+-- Indices para FKs compuestas
+CREATE INDEX IF NOT EXISTS idx_item_benchmark_benchmark
+    ON item_benchmark (id_benchmark, id_item);
+
+CREATE INDEX IF NOT EXISTS idx_respuesta_eval_benchmark
+    ON respuesta_modelo (id_evaluacion, id_benchmark);
+
+CREATE INDEX IF NOT EXISTS idx_respuesta_benchmark_item
+    ON respuesta_modelo (id_benchmark, id_item);
+
+CREATE INDEX IF NOT EXISTS idx_exp_dataset_run
+    ON experimento_dataset (id_run, id_dataset, fase_uso);
+
 -- Indices para FKs generales
 CREATE INDEX IF NOT EXISTS idx_modelo_llm_org
     ON modelo_llm (id_organizacion);
@@ -57,6 +68,10 @@ CREATE INDEX IF NOT EXISTS idx_experimento_id_modelo
 -- DROP INDEX IF EXISTS idx_experimento_modelo;
 -- DROP INDEX IF EXISTS idx_evaluacion_benchmark_score;
 -- DROP INDEX IF EXISTS idx_evaluacion_modelo;
+-- DROP INDEX IF EXISTS idx_item_benchmark_benchmark;
+-- DROP INDEX IF EXISTS idx_respuesta_eval_benchmark;
+-- DROP INDEX IF EXISTS idx_respuesta_benchmark_item;
+-- DROP INDEX IF EXISTS idx_exp_dataset_run;
 -- DROP INDEX IF EXISTS idx_modelo_llm_org;
 -- DROP INDEX IF EXISTS idx_dataset_id;
 -- DROP INDEX IF EXISTS idx_experimento_id_modelo;

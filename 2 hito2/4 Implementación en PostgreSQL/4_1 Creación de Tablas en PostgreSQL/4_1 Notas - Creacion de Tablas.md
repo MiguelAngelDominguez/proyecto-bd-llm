@@ -84,14 +84,21 @@ CREATE TRIGGER trg_calcular_segundos
 
 ---
 
-## 3. Diferencias entre DDL base y esquema real
+## 3. Diferencias entre DDL base, esquema viejo y esquema corregido
 
-| Aspecto | DDL base (`4_1_1`) | Esquema real (`4_1_2`) |
-|---|---|---|
-| Tabla de consumo | `experimento_gpu` | `consumo_gpu` |
-| `resultado_benchmark` | Existe | No existe |
-| `dataset.id_modelo` | Existe | No existe |
-| Triggers | Básicos | Incluye validaciones de org creadora/evaluadora, respuesta vs. benchmark |
+| Aspecto | DDL base (`4_1_1`) | Esquema viejo (`4_1_2` antiguo) | Esquema corregido (`4_1_3`) |
+|---|---|---|---|
+| Tabla de consumo | `experimento_gpu` | `consumo_gpu` | `consumo_gpu` |
+| `resultado_benchmark` | Existe | No existe | No existe |
+| `dataset.id_modelo` | Existe | No existe | No existe |
+| `dataset.licencia` | `licencia` | `licencia` | `licencias` (plural) |
+| `dataset.fase_uso` | Existe | No existe | No existe (movido a `experimento_dataset`) |
+| `experimento.segundos` | Existe | Existe | **No existe** |
+| `benchmark.autor` | No existe | No existe | **Existe** |
+| `item_benchmark` PK | Simple (`id_item`) | Simple (`id_item`) | **Compuesta (`id_benchmark, id_item`)** |
+| `respuesta_modelo.id_benchmark` | No existe | No existe | **Existe** |
+| `experimento_dataset.fase_uso` | No existe | No existe | **Existe** |
+| Triggers | Básicos | 6 triggers | **3 triggers** (org creadora, org evaluadora, ciclo modelo base) |
 
 **Por qué se renombró `experimento_gpu` → `consumo_gpu`:** el esquema final se ajustó al dominio real (la tabla representa consumo de GPU, no solo el experimento). Por eso todas las vistas/procedimientos deben usar `consumo_gpu`.
 

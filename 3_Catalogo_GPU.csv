@@ -1,0 +1,97 @@
+id_gpu,modelo_hardware,fabricante,proveedor_cloud,centro_de_datos
+1,NVIDIA B200,NVIDIA,On-Premise / No especificado,No especificado
+2,NVIDIA GB300 (Blackwell Ultra),NVIDIA,On-Premise / No especificado,No especificado
+3,"NVIDIA B200,NVIDIA H200",NVIDIA,On-Premise / No especificado,No especificado
+4,NVIDIA GB200,NVIDIA,On-Premise / No especificado,No especificado
+5,NVIDIA B300 (Blackwell Ultra),NVIDIA,On-Premise / No especificado,No especificado
+6,"NVIDIA GB200,NVIDIA GB300 (Blackwell Ultra)",NVIDIA,On-Premise / No especificado,No especificado
+7,NVIDIA H100 SXM5 80GB,NVIDIA,Cirrascale Cloud Services,"Ai2 Jupiter, Austin, Texas"
+8,Huawei Ascend 910C,Otro,On-Premise / No especificado,No especificado
+9,NVIDIA H800 SXM5,NVIDIA,On-Premise / No especificado,Paper on DeepSeek-V3
+10,NVIDIA B200 GPUs,NVIDIA,On-Premise / No especificado,No especificado
+11,Nvidia H100 80G,NVIDIA,On-Premise / No especificado,No especificado
+12,NVIDIA H200,NVIDIA,On-Premise / No especificado,No especificado
+13,Google TPU v7 Ironwood,Google,On-Premise / No especificado,No especificado
+14,NVIDIA A100,NVIDIA,"AWS,Amazon Web Services",ByteDance MegaScale training cluster
+15,AMD Instinct MI300X,AMD,On-Premise / No especificado,No especificado
+16,NVIDIA A100 SXM4 40 GB,NVIDIA,Amazon Web Services,AWS US East
+17,Google TPU v4,Google,Google Cloud,Google us-central2-b
+18,"Google TPU v4,Google TPU v5e,Google TPU v6e Trillium",Google,On-Premise / No especificado,No especificado
+19,Google TPU v5e,Google,Google Cloud,No especificado
+20,NVIDIA GH200,NVIDIA,On-Premise / No especificado,"""We gratefully acknowledge Poland’s highperformance Infrastructure PLGrid ACK Cyfronet AGH for providing computer facilities and support within computational grant no PLG/2024/016951."""
+21,NVIDIA H200 SXM,NVIDIA,On-Premise / No especificado,Cloud Provider: SMC H200
+22,NVIDIA A800 PCIe 80 GB,NVIDIA,On-Premise / No especificado,No especificado
+23,NVIDIA A800 PCIe 40 GB,NVIDIA,On-Premise / No especificado,No especificado
+24,NVIDIA A100 SXM4 80 GB,NVIDIA,On-Premise / No especificado,"Hardware Provider: EPFL Research Computing Platform, Compute Region: Switzerland"
+25,NVIDIA A800 SXM,NVIDIA,On-Premise / No especificado,No especificado
+26,Huawei Ascend 800T A2,Otro,On-Premise / No especificado,No especificado
+27,Google TPU v6e Trillium,Google,On-Premise / No especificado,No especificado
+28,"Google TPU v5e,Google TPU v4",Google,Google Cloud,No especificado
+29,Huawei Ascend 910B,Otro,On-Premise / No especificado,No especificado
+30,Google TPU v5p,Google,Google Cloud,Google us-east (either us-east1 or us-east5)
+31,NVIDIA H100 PCIe,NVIDIA,On-Premise / No especificado,Taipei-1 Supercomputer facility
+32,NVIDIA V100,NVIDIA,On-Premise / No especificado,No especificado
+33,NVIDIA H100 NVL,NVIDIA,On-Premise / No especificado,No especificado
+34,"NVIDIA H200 SXM,NVIDIA H100 SXM5 80GB",NVIDIA,On-Premise / No especificado,No especificado
+35,"Amazon Trainium1,NVIDIA A100,NVIDIA H100 SXM5 80GB",NVIDIA,On-Premise / No especificado,No especificado
+36,"NVIDIA A100 SXM4 80 GB,NVIDIA H100 SXM5 80GB",NVIDIA,On-Premise / No especificado,No especificado
+37,Cerebras CS-2,Otro,Cerebras,"""The training process was performed on the Condor Galaxy (CG) supercomputer platform. A CG contains 64 Cerebras CS-2 Wafer-Scale Engines (WSE-2) with 40 GB of SRAM, and achieves a total of 960 PetaFLOP/s."""
+38,AMD Radeon Instinct MI250,AMD,On-Premise / No especificado,No especificado
+39,"NVIDIA A800 PCIe,Ascend (昇腾) 910B",NVIDIA,On-Premise / No especificado,No especificado
+40,NVIDIA RTX A6000,NVIDIA,On-Premise / No especificado,No especificado
+41,Huawei Ascend,Otro,On-Premise / No especificado,No especificado
+42,"NVIDIA A100,NVIDIA Tesla V100 SXM2",NVIDIA,On-Premise / No especificado,No especificado
+43,"NVIDIA A100,NVIDIA H100 SXM5 80GB",NVIDIA,On-Premise / No especificado,No especificado
+44,AMD Radeon Instinct MI250X,AMD,On-Premise / No especificado,LUMI supercomputer (Finland)
+45,NVIDIA Quadro RTX 8000,NVIDIA,On-Premise / No especificado,No especificado
+46,NVIDIA GeForce RTX 4090,NVIDIA,On-Premise / No especificado,No especificado
+47,Google TPU v3,Google,Google Cloud,No especificado
+48,"AMD Radeon Instinct MI250X,NVIDIA A100",NVIDIA,On-Premise / No especificado,"LUMI supercomputer,  MosaicML (Databricks)"
+49,"NVIDIA A100,NVIDIA A800 PCIe 40 GB",NVIDIA,On-Premise / No especificado,No especificado
+50,"NVIDIA A100,NVIDIA H800 SXM5",NVIDIA,On-Premise / No especificado,No especificado
+51,"NVIDIA H800 SXM5,NVIDIA A800 SXM",NVIDIA,On-Premise / No especificado,Geely Xingrui intelligent computing center
+52,Amazon Trainium1,Otro,On-Premise / No especificado,No especificado
+53,NVIDIA A800 PCIe,NVIDIA,On-Premise / No especificado,No especificado
+54,NVIDIA GeForce RTX 3090,NVIDIA,On-Premise / No especificado,No especificado
+55,Ascend (昇腾) 910,Otro,On-Premise / No especificado,PengCheng Cloud Brain II 
+56,NVIDIA RTX A5000,NVIDIA,On-Premise / No especificado,No especificado
+57,NVIDIA A10 PCIe,NVIDIA,On-Premise / No especificado,No especificado
+58,"NVIDIA V100,NVIDIA A100",NVIDIA,On-Premise / No especificado,No especificado
+59,Huawei Ascend 910,Otro,On-Premise / No especificado,No especificado
+60,NVIDIA GeForce RTX 2080,NVIDIA,On-Premise / No especificado,No especificado
+61,"NVIDIA P100,NVIDIA V100",NVIDIA,On-Premise / No especificado,No especificado
+62,"NVIDIA V100,NVIDIA P100",NVIDIA,On-Premise / No especificado,No especificado
+63,NVIDIA A40 PCIe,NVIDIA,On-Premise / No especificado,No especificado
+64,"NVIDIA A100 SXM4 40 GB,NVIDIA A100 SXM4 80 GB",NVIDIA,On-Premise / No especificado,No especificado
+65,"NVIDIA A100 PCIe,NVIDIA GeForce RTX 2080 Ti 11GB",NVIDIA,On-Premise / No especificado,No especificado
+66,"Google TPU v2,Google TPU v3,Google TPU v4",Google,On-Premise / No especificado,No especificado
+67,NVIDIA P100,NVIDIA,On-Premise / No especificado,No especificado
+68,"Google TPU v4,Google TPU v3",Google,On-Premise / No especificado,No especificado
+69,Google TPU v2,Google,On-Premise / No especificado,No especificado
+70,"NVIDIA Tesla V100 DGXS 32 GB,Huawei Ascend 910",NVIDIA,On-Premise / No especificado,"Peng Cheng Cloud Brain II, Paper on Ernie 3.0"
+71,NVIDIA Titan V,NVIDIA,On-Premise / No especificado,No especificado
+72,NVIDIA Tesla V100 SXM2,NVIDIA,On-Premise / No especificado,No especificado
+73,NVIDIA GeForce RTX 2080 Ti 11GB,NVIDIA,On-Premise / No especificado,No especificado
+74,NVIDIA GeForce RTX 3090 Ti,NVIDIA,On-Premise / No especificado,No especificado
+75,NVIDIA Tesla V100S PCIe 32 GB,NVIDIA,On-Premise / No especificado,No especificado
+76,NVIDIA GeForce GTX 1080 Ti,NVIDIA,On-Premise / No especificado,No especificado
+77,NVIDIA Tesla V100 DGXS 32 GB,NVIDIA,Microsoft,No especificado
+78,NVIDIA GeForce GTX 1080,NVIDIA,On-Premise / No especificado,No especificado
+79,NVIDIA TITAN Xp,NVIDIA,On-Premise / No especificado,No especificado
+80,"NVIDIA Tesla V100 DGXS 16 GB,NVIDIA GeForce RTX 2080 Ti 11GB",NVIDIA,On-Premise / No especificado,No especificado
+81,NVIDIA Tesla V100 PCIe 32 GB,NVIDIA,On-Premise / No especificado,No especificado
+82,NVIDIA Tesla V100 DGXS 16 GB,NVIDIA,On-Premise / No especificado,No especificado
+83,NVIDIA Tesla V100 SXM3 32 GB,NVIDIA,On-Premise / No especificado,No especificado
+84,NVIDIA Tesla P100 PCIe 16GB,NVIDIA,On-Premise / No especificado,No especificado
+85,NVIDIA P40,NVIDIA,On-Premise / No especificado,No especificado
+86,NVIDIA M40,NVIDIA,On-Premise / No especificado,No especificado
+87,NVIDIA Tesla K80,NVIDIA,On-Premise / No especificado,No especificado
+88,NVIDIA Quadro P600,NVIDIA,On-Premise / No especificado,No especificado
+89,NVIDIA Quadro GP100,NVIDIA,On-Premise / No especificado,No especificado
+90,NVIDIA P100 PCIe 16GB,NVIDIA,On-Premise / No especificado,No especificado
+91,NVIDIA Tesla K40s,NVIDIA,On-Premise / No especificado,No especificado
+92,NVIDIA Tesla K40t,NVIDIA,On-Premise / No especificado,No especificado
+93,NVIDIA GeForce GTX TITAN X,NVIDIA,On-Premise / No especificado,No especificado
+94,NVIDIA Tesla C2075,NVIDIA,On-Premise / No especificado,No especificado
+95,NVIDIA Tesla K20c,NVIDIA,On-Premise / No especificado,No especificado
+96,NVIDIA Quadro K6000,NVIDIA,On-Premise / No especificado,No especificado

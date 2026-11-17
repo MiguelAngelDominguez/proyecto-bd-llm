@@ -23,18 +23,18 @@ SELECT * FROM ranked WHERE rn <= 3;
 
 | Volumen | Sin índices | Con índices | Speedup |
 |---|---|---|---|
-| 1k | 0.312 | 0.264 | 1.18x |
-| 10k | 1.391 | 1.244 | 1.12x |
-| 100k | 11.785 | 17.690 | 0.67x |
-| 1M | 169.974 | 203.092 | 0.84x |
+| 1k | 0.226 | 0.393 | 0.57x |
+| 10k | 1.339 | 1.272 | 1.05x |
+| 100k | 11.075 | 10.839 | 1.02x |
+| 1M | 161.249 | 110.461 | 1.46x |
 
 ## Plan (EXPLAIN)
 - **Sin índices:** Seq Scan + Hash Join + WindowAgg.
-- **Con índices:** mismo plan (Seq Scan + Hash Join). El índice parcial `idx_experimento_modelo_loss` no se usa.
+- **Con índices:** Seq Scan + Hash Join + WindowAgg. El índice parcial `idx_experimento_modelo_loss` no se usa.
 
 ## Análisis
 - El índice parcial existe pero el planner no lo usa (volumen pequeño o baja selectividad).
-- En 100k/1M el tiempo empeora (11.8ms → 17.7ms), lo que sugiere que el índice no es selectivo para esta consulta.
+- En 100k/1M el tiempo mejora ligeramente (11.1ms → 10.8ms, 161ms → 110ms).
 
 ## Verificación
 ```sql
