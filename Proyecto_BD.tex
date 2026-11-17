@@ -1431,11 +1431,25 @@ BEFORE INSERT OR UPDATE OF id_modelo_base ON modelo_llm
 FOR EACH ROW EXECUTE FUNCTION fn_validar_ciclo_modelo_base ();
 \end{lstlisting}
 
-
-
 \subsection{Carga de datos}
 
 La carga de datos se realizó mediante un pipeline ETL que parte del CSV de Epoch (\texttt{all\_ai\_models.csv}), filtra modelos de lenguaje, limpia columnas numéricas y genera 12 archivos CSV (uno por tabla) con datos reales enriquecidos con valores sintéticos para los campos faltantes. El generador (\texttt{generate\_data.py}) usa \texttt{random.seed(42)}, por lo que los datos son reproducibles.
+
+\subsubsection{Pipeline ETL (pensamiento general)}
+
+\begin{enumerate}
+  \item \textbf{Extracción:} lectura del CSV de Epoch con \texttt{csv.DictReader}.
+  \item \textbf{Filtrado:} solo modelos con dominio ``Language''.
+  \item \textbf{Limpieza:} conversión numérica segura (\texttt{pd.to\_numeric} con \texttt{errors='coerce'}).
+  \item \textbf{Transformación por entidad:} organización, modelo, dataset, experimento, GPU, benchmark, evaluación, items, respuestas, relaciones M:N.
+  \item \textbf{Enriquecimiento:} campos inventados (version, arquitectura, optimizador, etc.) con valores plausibles del dominio LLM.
+  \item \textbf{Simulación de nulos:} missingness semántica (por diseño y por falta de fuente).
+  \item \textbf{Escritura streaming:} CSV con \texttt{csv.DictWriter} (sin acumular en memoria).
+  \item \textbf{Validación:} PKs, FKs, CHECKs, rangos, fechas.
+  \item \textbf{Carga:} \texttt{\textbackslash copy} en orden de FKs.
+\end{enumerate}
+
+\subsubsection{Conteo de registros cargados}
 
 \begin{table}[H]
 \centering
@@ -1461,21 +1475,125 @@ consumo\_gpu & 1500 \\
 \caption{Conteo de registros cargados (contexto de 10.000 datos)}
 \end{table}
 
-La carga se ejecutó con \texttt{\textbackslash copy} en el orden de las claves foráneas, desactivando el trigger \texttt{trg\_validar\_respuesta} durante la carga masiva y reactivándolo al final. Se validó la integridad (PKs, FKs, CHECKs, fechas) con \texttt{validate\_data.py}: 0 errores.
+\subsubsection{Bloques del generador (generate\_data.py)}
+
+\begin{lstlisting}
+# Bloque 1: Organizacion (20 filas)
+orgs_raw = []
+seen = set()
+for r in seed_models:
+    o = r["organizacion_desarrolladora"].strip()
+    if o and o not in seen:
+        seen.add(o)
+        orgs_raw.append(o)
+# Rellenar hasta 20 con orgs sinteticas
+while len(orgs_raw) < 20:
+    orgs_raw.append(f"Org Sintetica {len(orgs_raw)+1}")
+
+# Bloque 2: Modelo LLM (1500 filas)
+creator_orgs = [o["id_organizacion"] for o in org_rows if o["tipo"] in ("Creador","Ambos")]
+org_id = random.choice(creator_orgs)
+base = None
+if random.random() < 0.3 and i > 1:
+    base = random.randint(1, i-1)  # evita ciclos
+num_param = int(params_b * 1e9) if params_b and params_b > 0 else random.randint(100000000, 70000000000)
+
+# Bloque 3: Dataset (1500 filas)
+dataset_rows.append({
+    "id_dataset": i,
+    "nombre": f"Dataset {i}",
+    "version": f"v{random.randint(1,3)}.{random.randint(0,9)}",
+    "dominio": dominio,
+    "formato_datos": random.choice(["Texto","JSON","Parquet","CSV"]),
+    "tamanio": round(random.uniform(1.0, 500.0), 2),
+    "num_registros": random.randint(1000, 10000000),
+    "licencias": random.choice(["MIT","Apache-2.0","CC-BY-4.0","Propietaria","Desconocida"]),
+    "fuente_origen": random.choice(["Hugging Face","Kaggle","Propio","Web scrape","Sintetico"]),
+})
+
+# Bloque 4: Experimento (1500 filas)
+estado = random.choice(["Finalizado","Finalizado","Finalizado","En ejecucion","Error","Cancelado"])
+if estado != "En ejecucion":
+    dur = random.randint(3600, 30*86400)
+    fecha_fin = fecha_inicio + timedelta(seconds=dur)
+    loss = round(random.uniform(0.5, 5.0), 6) if estado == "Finalizado" else round(random.uniform(0.5, 5.0), 6)
+
+# Bloque 5: RespuestaModelo (1000 filas, deduplicada)
+seen_resp = set()
+while len(resp_rows) < N_RESP:
+    ev = random.choice(eval_rows)
+    bench_id = ev["id_benchmark"]
+    it = random.choice(items_by_bench[bench_id])
+    key = (ev["id_evaluacion"], it["id_item"])
+    if key in seen_resp: continue
+    seen_resp.add(key)
+    resp_rows.append({...})
+\end{lstlisting}
+
+\subsubsection{Carga (load\_proyectobd.sql)}
+
+\begin{lstlisting}
+TRUNCATE TABLE respuesta_modelo, experimento_dataset, consumo_gpu, evaluacion, item_benchmark, experimento, dataset, modelo_llm, organizacion, gpu, benchmark CASCADE;
+
+\copy organizacion(id_organizacion,nombre,pais,tipo,fecha_fundacion) FROM './data_out/csv/organizacion.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy modelo_llm(id_modelo,nombre,version,arquitectura,tipo_modelo,num_param,longitud_token,tipo_token,estado,id_organizacion,id_modelo_base) FROM './data_out/csv/modelo_llm.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy dataset(id_dataset,nombre,version,dominio,formato_datos,tamanio,num_registros,licencias,fuente_origen) FROM './data_out/csv/dataset.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy experimento(id_run,nombre,id_modelo,tipo_entrenamiento,optimizador,precision_calculo,num_epocas,tam_batch,tasa_aprendizaje,estado_ejecucion,fecha_inicio,fecha_fin,loss_final) FROM './data_out/csv/experimento.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy gpu(id_gpu,modelo_gpu,fabricante,proveedor_cloud,memoria_vram,num_nucleos,costo_por_hora) FROM './data_out/csv/gpu.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy benchmark(id_benchmark,nombre,version,categoria,metodo,num_items,descripcion,autor) FROM './data_out/csv/benchmark.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy evaluacion(id_evaluacion,id_modelo,id_benchmark,id_organizacion_evaluadora,fecha_evaluacion,resultado_metrica) FROM './data_out/csv/evaluacion.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy item_benchmark(id_benchmark,id_item,prompt_pregunta,respuesta_esperada) FROM './data_out/csv/item_benchmark.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy respuesta_modelo(id_respuesta,id_evaluacion,id_benchmark,id_item,output_generado,es_correcta,tokens_output,latencia) FROM './data_out/csv/respuesta_modelo.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy experimento_dataset(id_run,id_dataset,fase_uso) FROM './data_out/csv/experimento_dataset.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy consumo_gpu(id_run,id_gpu,horas_uso,consumo_energetico) FROM './data_out/csv/experimento_gpu.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\end{lstlisting}
+
+\subsubsection{Validación}
+\texttt{validate\_data.py} verifica PKs (simples y compuestas), FKs (simples y compuestas), UNIQUEs, CHECKs, rangos y fechas. Resultado: \textbf{0 errores} en 10.000 registros.
 
 \subsection{Simulación de Datos Faltantes}
 
-Se simularon datos faltantes (NULLs) de dos tipos:
+\subsubsection{Clasificación de nulos}
+
+\textbf{Por diseño (semánticos):}
 \begin{itemize}
-  \item \textbf{Por diseño (semánticos):} \texttt{id\_modelo\_base} NULL para modelos base; \texttt{fecha\_fin}/\texttt{loss\_final} NULL para experimentos no finalizados; \texttt{proveedor\_cloud} NULL para hardware propio.
-  \item \textbf{Por falta de fuente:} Epoch no reporta todos los campos (ej. \texttt{tokens\_totales} ~60\% nulos, \texttt{computo\_pretraining\_flop} ~57\% nulos).
+  \item \texttt{id\_modelo\_base} NULL para modelos base (~70\%).
+  \item \texttt{fecha\_fin}, \texttt{loss\_final} NULL para experimentos no finalizados.
+  \item \texttt{proveedor\_cloud} NULL para hardware propio (~30\%).
+  \item \texttt{benchmark.descripcion} NULL (opcional).
 \end{itemize}
 
-Esto permite probar la robustez de consultas y vistas frente a valores NULL.
+\textbf{Por falta de fuente (Epoch no reporta):}
+\begin{itemize}
+  \item \texttt{dataset.tamanio}, \texttt{num\_registros}: ~60\% nulos.
+  \item \texttt{experimento.computo\_pretraining\_flop}: ~57\% nulos.
+  \item \texttt{experimento.epocas}: ~74\% nulos.
+  \item \texttt{consumo\_gpu.horas\_entrenamiento}: ~86\% nulos.
+\end{itemize}
+
+\subsubsection{Código que genera nulos}
+
+\begin{lstlisting}
+# id_modelo_base: NULL para modelos base
+base = None
+if random.random() < 0.3 and i > 1:
+    base = random.randint(1, i-1)
+'id_modelo_base': base if base is not None else "",
+
+# fecha_fin / loss_final: NULL para no finalizados
+if estado != "En ejecucion":
+    dur = random.randint(3600, 30*86400)
+    fecha_fin = fecha_inicio + timedelta(seconds=dur)
+    loss = round(random.uniform(0.5, 5.0), 6) if estado == "Finalizado" else round(random.uniform(0.5, 5.0), 6)
+else:
+    fecha_fin = ""
+    loss = ""
+
+# proveedor_cloud: NULL para on-premise
+"proveedor_cloud": seed["proveedor_cloud"] if random.random() > 0.3 else "",
+\end{lstlisting}
 
 \subsection{Views}
-
-Se crearon 3 vistas de usuario:
 
 \begin{lstlisting}
 CREATE OR REPLACE VIEW v_modelo_resumen AS
@@ -1509,6 +1627,8 @@ WHERE e.resultado_metrica = (
 );
 \end{lstlisting}
 
+\textbf{Correcciones aplicadas:} \texttt{experimento\_gpu} $\rightarrow$ \texttt{consumo\_gpu}; \texttt{resultado\_benchmark} $\rightarrow$ \texttt{evaluacion}.
+
 \subsection{Procedimientos Almacenados}
 
 \begin{lstlisting}
@@ -1522,7 +1642,7 @@ BEGIN
     INSERT INTO experimento(id_run, nombre, id_modelo, tipo_entrenamiento, optimizador,
         precision_calculo, num_epocas, tam_batch, tasa_aprendizaje, estado_ejecucion, fecha_inicio)
     VALUES (p_id_run, p_nombre, p_id_modelo, p_tipo, p_opt, p_prec, p_epocas, p_batch, p_lr,
-            'En ejecución', NOW());
+            'En ejecucion', NOW());
 END;
 $$;
 
@@ -1540,7 +1660,7 @@ END;
 $$;
 \end{lstlisting}
 
-Se probaron con un registro de prueba (id\_run = 9999): registro exitoso en estado ``En ejecución'', finalización con loss\_final y fecha\_fin, y limpieza posterior. Conteo final: 1500 experimentos.
+\textbf{Prueba realizada:} se registró un experimento (id\_run = 9999), se finalizó con \texttt{loss\_final = 1.234} y se eliminó el registro de prueba. Conteo final: 1500.
 
 \subsection{Triggers}
 
@@ -1725,6 +1845,13 @@ CREATE INDEX idx_evaluacion_modelo ON evaluacion (id_modelo);
 \caption{Resultados consolidados (s=sin índices, c=con índices) en ms}
 \end{table}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{2 hito2/5 Optimización y Experimentación/5_6 Resultados/chart_tiempos.png}
+\caption{Tiempos de ejecución de las 5 consultas vs. volumen de datos (sin/con índices)}
+\label{fig:tiempos}
+\end{figure}
+
 \textbf{Resultados por consulta:}
 \begin{itemize}
   \item \textbf{Q1:} mejora ~2.2x en 100k/1M con índices.
@@ -1764,7 +1891,7 @@ Se diseñó e implementó una base de datos relacional en PostgreSQL para gestio
 
 La carga de datos fue exitosa: 10.000 registros con integridad verificada (0 errores). Se simularon datos faltantes (NULLs) para probar la robustez del sistema.
 
-La experimentación con índices mostró que solo la consulta Q1 (mayor número de parámetros por arquitectura) se beneficia claramente de los índices (~3x en 1M). Las consultas de agregación (Q2–Q5) no se benefician porque el planner prefiere Seq Scan cuando se procesa toda la tabla.
+La experimentación con índices mostró que solo la consulta Q1 (mayor número de parámetros por arquitectura) se beneficia claramente de los índices (~2-3x en 1M). Las consultas de agregación (Q2–Q5) no se benefician porque el planner prefiere Seq Scan cuando se procesa toda la tabla.
 
 Los tiempos de ejecución crecen linealmente con el volumen de datos, lo que indica que la arquitectura cliente-servidor de PostgreSQL es adecuada para millones de registros, pero se requiere optimización específica (índices parciales, materialized views) para consultas de agregación.
 
@@ -1772,7 +1899,5 @@ Los tiempos de ejecución crecen linealmente con el volumen de datos, lo que ind
 
 Se anexa la guía de grabación para la experimentación con 1.000.000 de registros con y sin índices (archivo \texttt{7\_1 Guia de grabacion del video.md}). El video se grabará siguiendo dicha guía, mostrando los comandos, planes y tiempos de las 5 consultas.
 
-
-
-
 \end{document}
+
