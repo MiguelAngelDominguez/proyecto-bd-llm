@@ -434,7 +434,7 @@ begin{figure}[H]
     \centering
     \makebox[\linewidth][c]{\includegraphics[width=\dimexpr\linewidth+3.4cm\relax,height=0.82\textheight,keepaspectratio]{Modelo ER.png}}
     \caption{Modelo entidad-relación}
-    \label{fig:modelo_er}
+    \label{fig:modelo\_er}
 \end{figure}
 \end{landscape}
 
@@ -583,7 +583,7 @@ Esto encaja con lo que pide el proyecto para el modelo E/R: contextualizar la ba
 % ---------------------------------------------------------------------
 \subsection{Modelo Relacional}
 
-El modelo relacional se obtiene a partir del modelo entidad-relación de la sección 2 y está formado por 11 relaciones: 9 provienen de entidades (8 entidades fuertes y 1 entidad débil, ItemBenchmark) y 2 son tablas intermedias de las relaciones M:N (Experimento\_Dataset y Consumo\_GPU). En la notación utilizada, los atributos subrayados forman la clave primaria; la forma \textcolor{verdeFK}{Entidad}\textcolor{azulRel}{.atributo} indica una clave foránea (FK), donde la entidad referenciada se muestra en verde.
+El modelo relacional se obtiene a partir del modelo entidad-relación de la sección 2 y está formado por 11 relaciones: 9 provienen de entidades (8 entidades fuertes y 1 entidad débil, ItemBenchmark) y 2 son tablas intermedias de las relaciones M:N (Experimento\\_Dataset y Consumo\\_GPU). En la notación utilizada, los atributos subrayados forman la clave primaria; la forma \textcolor{verdeFK}{Entidad}\textcolor{azulRel}{.atributo} indica una clave foránea (FK), donde la entidad referenciada se muestra en verde.
 
 \begin{itemize}[label={},leftmargin=0.635cm,itemsep=9pt]
 {\color{azulRel}\raggedright
@@ -596,8 +596,8 @@ El modelo relacional se obtiene a partir del modelo entidad-relación de la secc
   \item Evaluación(\underline{idEvaluacion}, \fk{ModeloLLM}{idModelo}, \fk{Benchmark}{idBenchmark}, \fk{Organización}{idOrganizacion} (como idOrganizacionEvaluadora), fechaEvaluacion, resultadoMetrica)
   \item ItemBenchmark(\underline{\fk{Benchmark}{idBenchmark}}, \underline{idItem}, promptPregunta, respuestaEsperada)
   \item RespuestaModelo(\underline{idRespuesta}, \fk{Evaluación}{idEvaluacion}, \fk{Evaluación}{idBenchmark}, \fk{ItemBenchmark}{idItem}, outputGenerado, esCorrecta, tokensOutput, latencia)
-  \item Experimento\_Dataset(\underline{\fk{Experimento}{idRun}}, \underline{\fk{Dataset}{idDataset}}, \underline{faseUso})
-  \item Consumo\_GPU(\underline{\fk{Experimento}{idRun}}, \underline{\fk{GPU}{idGPU}}, horasUso, consumoEnergetico, cantidadUnidades)
+  \item Experimento\\_Dataset(\underline{\fk{Experimento}{idRun}}, \underline{\fk{Dataset}{idDataset}}, \underline{faseUso})
+  \item Consumo\\_GPU(\underline{\fk{Experimento}{idRun}}, \underline{\fk{GPU}{idGPU}}, horasUso, consumoEnergetico, cantidadUnidades)
 }
 \end{itemize}
 
@@ -766,7 +766,7 @@ Las relaciones M:N se transforman en tablas intermedias o asociativas. Su clave 
 {\begin{itemize}
   \item Experimento $\leftrightarrow$ Dataset (``utiliza''):
   \begin{itemize}
-  \item Tabla intermedia: Experimento\_Dataset
+  \item Tabla intermedia: Experimento\\_Dataset
   \item Atributos: idRun (FK a Experimento), idDataset (FK a Dataset), faseUso
   \item Clave Primaria Compuesta (PK): (idRun, idDataset, faseUso)
   \item Multiplicidad: Experimento (1,N), porque un experimento utiliza uno o más datasets; Dataset (0,N), porque un dataset catalogado puede no haberse utilizado aún.
@@ -775,7 +775,7 @@ Las relaciones M:N se transforman en tablas intermedias o asociativas. Su clave 
   \end{itemize}
   \item Experimento $\leftrightarrow$ GPU (``consume''):
   \begin{itemize}
-  \item Tabla intermedia: Consumo\_GPU
+  \item Tabla intermedia: Consumo\\_GPU
   \item Atributos: idRun (FK a Experimento), idGPU (FK a GPU), horasUso, consumoEnergetico, cantidadUnidades
   \item Clave Primaria Compuesta (PK): (idRun, idGPU)
   \item Multiplicidad: Experimento (1,N), porque un experimento consume una o más GPU; GPU (0,N), porque un mismo tipo de GPU puede usarse en muchos experimentos o en ninguno.
@@ -1032,7 +1032,7 @@ latencia & NUMERIC(10,4) & NOT NULL, CHECK (latencia >= 0) & Latencia de la resp
 
 Restricciones de tabla: UNIQUE (idEvaluacion, idItem) (una respuesta por pregunta dentro de una evaluación); FOREIGN KEY (idEvaluacion, idBenchmark) REFERENCES Evaluación(idEvaluacion, idBenchmark) ON DELETE CASCADE; FOREIGN KEY (idBenchmark, idItem) REFERENCES ItemBenchmark(idBenchmark, idItem).
 
-\textbf{Tabla: Experimento\_Dataset}
+\textbf{Tabla: Experimento\\_Dataset}
 
 \begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
@@ -1048,7 +1048,7 @@ faseUso & VARCHAR(50) & PK, NOT NULL, CHECK (faseUso IN ('Entrenamiento', 'Valid
 
 Restricciones de tabla: PRIMARY KEY (idRun, idDataset, faseUso).
 
-\textbf{Tabla: Consumo\_GPU}
+\textbf{Tabla: Consumo\\_GPU}
 
 \begin{longtable}{|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|>{\raggedright\arraybackslash}p{3.45cm}|}
 \hline
@@ -1072,173 +1072,173 @@ Restricciones de tabla: PRIMARY KEY (idRun, idGPU).
 
 \subsection{Creación de tablas en PostgreSQL}
 
-El siguiente script crea la base de datos a partir del modelo relacional de la sección 3. Siguiendo la convención del proyecto de referencia, los nombres de tablas y columnas se escriben en minúsculas con guion bajo (por ejemplo, la relación ModeloLLM se implementa como la tabla \texttt{modelo\_llm} y el atributo idBenchmark como la columna \texttt{id\_benchmark}). El script se organiza en cinco bloques: creación de las 11 tablas, restricciones de llave (primarias, foráneas y la clave candidata de Evaluación necesaria para la clave foránea compuesta), restricciones NOT NULL, otras restricciones (UNIQUE y CHECK) y triggers para las reglas de negocio que no pueden expresarse de forma declarativa.
+El siguiente script crea la base de datos a partir del modelo relacional de la sección 3. Siguiendo la convención del proyecto de referencia, los nombres de tablas y columnas se escriben en minúsculas con guion bajo (por ejemplo, la relación ModeloLLM se implementa como la tabla \texttt{modelo\\_llm} y el atributo idBenchmark como la columna \texttt{id\\_benchmark}). El script se organiza en cinco bloques: creación de las 11 tablas, restricciones de llave (primarias, foráneas y la clave candidata de Evaluación necesaria para la clave foránea compuesta), restricciones NOT NULL, otras restricciones (UNIQUE y CHECK) y triggers para las reglas de negocio que no pueden expresarse de forma declarativa.
 
 \begin{lstlisting}
 -- Creacion de tablas
 
 CREATE TABLE IF NOT EXISTS organizacion (
-    id_organizacion INTEGER,
+    id\_organizacion INTEGER,
     nombre VARCHAR(50),
     pais VARCHAR(50),
     tipo VARCHAR(20),
-    fecha_fundacion DATE
+    fecha\_fundacion DATE
 );
 
-CREATE TABLE IF NOT EXISTS modelo_llm (
-    id_modelo INTEGER,
+CREATE TABLE IF NOT EXISTS modelo\_llm (
+    id\_modelo INTEGER,
     nombre VARCHAR(100),
     version VARCHAR(50),
     arquitectura VARCHAR(100),
-    tipo_modelo VARCHAR(50),
-    num_param BIGINT,
-    longitud_token INTEGER,
-    tipo_token VARCHAR(50),
+    tipo\_modelo VARCHAR(50),
+    num\_param BIGINT,
+    longitud\_token INTEGER,
+    tipo\_token VARCHAR(50),
     estado VARCHAR(50),
-    id_organizacion INTEGER,
-    id_modelo_base INTEGER
+    id\_organizacion INTEGER,
+    id\_modelo\_base INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS dataset (
-    id_dataset INTEGER,
+    id\_dataset INTEGER,
     nombre VARCHAR(100),
     version VARCHAR(50),
     dominio VARCHAR(100),
-    formato_datos VARCHAR(50),
+    formato\_datos VARCHAR(50),
     tamanio NUMERIC(12,3),
-    num_registros BIGINT,
+    num\_registros BIGINT,
     licencias VARCHAR(50),
-    fuente_origen VARCHAR(200)
+    fuente\_origen VARCHAR(200)
 );
 
 CREATE TABLE IF NOT EXISTS experimento (
-    id_run INTEGER,
+    id\_run INTEGER,
     nombre VARCHAR(100),
-    id_modelo INTEGER,
-    tipo_entrenamiento VARCHAR(50),
+    id\_modelo INTEGER,
+    tipo\_entrenamiento VARCHAR(50),
     optimizador VARCHAR(50),
-    precision_calculo VARCHAR(50),
-    num_epocas INTEGER,
-    tam_batch INTEGER,
-    tasa_aprendizaje NUMERIC(10,8),
-    estado_ejecucion VARCHAR(50),
-    fecha_inicio TIMESTAMP,
-    fecha_fin TIMESTAMP,
-    loss_final NUMERIC(10,6)
+    precision\_calculo VARCHAR(50),
+    num\_epocas INTEGER,
+    tam\_batch INTEGER,
+    tasa\_aprendizaje NUMERIC(10,8),
+    estado\_ejecucion VARCHAR(50),
+    fecha\_inicio TIMESTAMP,
+    fecha\_fin TIMESTAMP,
+    loss\_final NUMERIC(10,6)
 );
 
 CREATE TABLE IF NOT EXISTS gpu (
-    id_gpu INTEGER,
-    modelo_gpu VARCHAR(100),
+    id\_gpu INTEGER,
+    modelo\_gpu VARCHAR(100),
     fabricante VARCHAR(100),
-    proveedor_cloud VARCHAR(100),
-    memoria_vram INTEGER,
-    num_nucleos INTEGER,
-    costo_por_hora NUMERIC(10,4)
+    proveedor\_cloud VARCHAR(100),
+    memoria\_vram INTEGER,
+    num\_nucleos INTEGER,
+    costo\_por\_hora NUMERIC(10,4)
 );
 
 CREATE TABLE IF NOT EXISTS benchmark (
-    id_benchmark INTEGER,
+    id\_benchmark INTEGER,
     nombre VARCHAR(100),
     version VARCHAR(50),
     categoria VARCHAR(100),
     metodo VARCHAR(100),
-    num_items INTEGER,
+    num\_items INTEGER,
     descripcion TEXT,
     autor VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS evaluacion (
-    id_evaluacion INTEGER,
-    id_modelo INTEGER,
-    id_benchmark INTEGER,
-    id_organizacion_evaluadora INTEGER,
-    fecha_evaluacion DATE,
-    resultado_metrica NUMERIC(10,4)
+    id\_evaluacion INTEGER,
+    id\_modelo INTEGER,
+    id\_benchmark INTEGER,
+    id\_organizacion\_evaluadora INTEGER,
+    fecha\_evaluacion DATE,
+    resultado\_metrica NUMERIC(10,4)
 );
 
-CREATE TABLE IF NOT EXISTS item_benchmark (
-    id_benchmark INTEGER,
-    id_item INTEGER,
-    prompt_pregunta TEXT,
-    respuesta_esperada TEXT
+CREATE TABLE IF NOT EXISTS item\_benchmark (
+    id\_benchmark INTEGER,
+    id\_item INTEGER,
+    prompt\_pregunta TEXT,
+    respuesta\_esperada TEXT
 );
 
-CREATE TABLE IF NOT EXISTS respuesta_modelo (
-    id_respuesta INTEGER,
-    id_evaluacion INTEGER,
-    id_benchmark INTEGER,
-    id_item INTEGER,
-    output_generado TEXT,
-    es_correcta BOOLEAN,
-    tokens_output INTEGER,
+CREATE TABLE IF NOT EXISTS respuesta\_modelo (
+    id\_respuesta INTEGER,
+    id\_evaluacion INTEGER,
+    id\_benchmark INTEGER,
+    id\_item INTEGER,
+    output\_generado TEXT,
+    es\_correcta BOOLEAN,
+    tokens\_output INTEGER,
     latencia NUMERIC(10,4)
 );
 
-CREATE TABLE IF NOT EXISTS experimento_dataset (
-    id_run INTEGER,
-    id_dataset INTEGER,
-    fase_uso VARCHAR(50)
+CREATE TABLE IF NOT EXISTS experimento\_dataset (
+    id\_run INTEGER,
+    id\_dataset INTEGER,
+    fase\_uso VARCHAR(50)
 );
 
-CREATE TABLE IF NOT EXISTS consumo_gpu (
-    id_run INTEGER,
-    id_gpu INTEGER,
-    horas_uso NUMERIC(10,2),
-    consumo_energetico NUMERIC(10,2),
-    cantidad_unidades INTEGER DEFAULT 1
+CREATE TABLE IF NOT EXISTS consumo\_gpu (
+    id\_run INTEGER,
+    id\_gpu INTEGER,
+    horas\_uso NUMERIC(10,2),
+    consumo\_energetico NUMERIC(10,2),
+    cantidad\_unidades INTEGER DEFAULT 1
 );
 
 
 -- Key constraints
 
 -- Organizacion
-ALTER TABLE organizacion ADD CONSTRAINT pk_organizacion_id PRIMARY KEY ( id_organizacion );
+ALTER TABLE organizacion ADD CONSTRAINT pk\_organizacion\_id PRIMARY KEY ( id\_organizacion );
 
 -- ModeloLLM
-ALTER TABLE modelo_llm ADD CONSTRAINT pk_modelo_llm_id PRIMARY KEY ( id_modelo );
-ALTER TABLE modelo_llm ADD CONSTRAINT fk_modelo_llm_organizacion FOREIGN KEY ( id_organizacion ) REFERENCES organizacion ( id_organizacion );
-ALTER TABLE modelo_llm ADD CONSTRAINT fk_modelo_llm_modelo_base FOREIGN KEY ( id_modelo_base ) REFERENCES modelo_llm ( id_modelo );
+ALTER TABLE modelo\_llm ADD CONSTRAINT pk\_modelo\_llm\_id PRIMARY KEY ( id\_modelo );
+ALTER TABLE modelo\_llm ADD CONSTRAINT fk\_modelo\_llm\_organizacion FOREIGN KEY ( id\_organizacion ) REFERENCES organizacion ( id\_organizacion );
+ALTER TABLE modelo\_llm ADD CONSTRAINT fk\_modelo\_llm\_modelo\_base FOREIGN KEY ( id\_modelo\_base ) REFERENCES modelo\_llm ( id\_modelo );
 
 -- Dataset
-ALTER TABLE dataset ADD CONSTRAINT pk_dataset_id PRIMARY KEY ( id_dataset );
+ALTER TABLE dataset ADD CONSTRAINT pk\_dataset\_id PRIMARY KEY ( id\_dataset );
 
 -- Experimento
-ALTER TABLE experimento ADD CONSTRAINT pk_experimento_id_run PRIMARY KEY ( id_run );
-ALTER TABLE experimento ADD CONSTRAINT fk_experimento_modelo_llm FOREIGN KEY ( id_modelo ) REFERENCES modelo_llm ( id_modelo );
+ALTER TABLE experimento ADD CONSTRAINT pk\_experimento\_id\_run PRIMARY KEY ( id\_run );
+ALTER TABLE experimento ADD CONSTRAINT fk\_experimento\_modelo\_llm FOREIGN KEY ( id\_modelo ) REFERENCES modelo\_llm ( id\_modelo );
 
 -- GPU
-ALTER TABLE gpu ADD CONSTRAINT pk_gpu_id PRIMARY KEY ( id_gpu );
+ALTER TABLE gpu ADD CONSTRAINT pk\_gpu\_id PRIMARY KEY ( id\_gpu );
 
 -- Benchmark
-ALTER TABLE benchmark ADD CONSTRAINT pk_benchmark_id PRIMARY KEY ( id_benchmark );
+ALTER TABLE benchmark ADD CONSTRAINT pk\_benchmark\_id PRIMARY KEY ( id\_benchmark );
 
 -- Evaluacion
-ALTER TABLE evaluacion ADD CONSTRAINT pk_evaluacion_id PRIMARY KEY ( id_evaluacion );
-ALTER TABLE evaluacion ADD CONSTRAINT fk_evaluacion_modelo_llm FOREIGN KEY ( id_modelo ) REFERENCES modelo_llm ( id_modelo );
-ALTER TABLE evaluacion ADD CONSTRAINT fk_evaluacion_benchmark FOREIGN KEY ( id_benchmark ) REFERENCES benchmark ( id_benchmark );
-ALTER TABLE evaluacion ADD CONSTRAINT fk_evaluacion_organizacion FOREIGN KEY ( id_organizacion_evaluadora ) REFERENCES organizacion ( id_organizacion );
--- Clave candidata que permite la FK compuesta de respuesta_modelo
-ALTER TABLE evaluacion ADD CONSTRAINT uq_evaluacion_id_benchmark UNIQUE ( id_evaluacion, id_benchmark );
+ALTER TABLE evaluacion ADD CONSTRAINT pk\_evaluacion\_id PRIMARY KEY ( id\_evaluacion );
+ALTER TABLE evaluacion ADD CONSTRAINT fk\_evaluacion\_modelo\_llm FOREIGN KEY ( id\_modelo ) REFERENCES modelo\_llm ( id\_modelo );
+ALTER TABLE evaluacion ADD CONSTRAINT fk\_evaluacion\_benchmark FOREIGN KEY ( id\_benchmark ) REFERENCES benchmark ( id\_benchmark );
+ALTER TABLE evaluacion ADD CONSTRAINT fk\_evaluacion\_organizacion FOREIGN KEY ( id\_organizacion\_evaluadora ) REFERENCES organizacion ( id\_organizacion );
+-- Clave candidata que permite la FK compuesta de respuesta\_modelo
+ALTER TABLE evaluacion ADD CONSTRAINT uq\_evaluacion\_id\_benchmark UNIQUE ( id\_evaluacion, id\_benchmark );
 
 -- ItemBenchmark (entidad debil de Benchmark)
-ALTER TABLE item_benchmark ADD CONSTRAINT pk_item_benchmark_id PRIMARY KEY ( id_benchmark, id_item );
-ALTER TABLE item_benchmark ADD CONSTRAINT fk_item_benchmark_benchmark FOREIGN KEY ( id_benchmark ) REFERENCES benchmark ( id_benchmark ) ON DELETE CASCADE;
+ALTER TABLE item\_benchmark ADD CONSTRAINT pk\_item\_benchmark\_id PRIMARY KEY ( id\_benchmark, id\_item );
+ALTER TABLE item\_benchmark ADD CONSTRAINT fk\_item\_benchmark\_benchmark FOREIGN KEY ( id\_benchmark ) REFERENCES benchmark ( id\_benchmark ) ON DELETE CASCADE;
 
 -- RespuestaModelo
-ALTER TABLE respuesta_modelo ADD CONSTRAINT pk_respuesta_modelo_id PRIMARY KEY ( id_respuesta );
-ALTER TABLE respuesta_modelo ADD CONSTRAINT fk_respuesta_evaluacion FOREIGN KEY ( id_evaluacion, id_benchmark ) REFERENCES evaluacion ( id_evaluacion, id_benchmark ) ON DELETE CASCADE;
-ALTER TABLE respuesta_modelo ADD CONSTRAINT fk_respuesta_item_benchmark FOREIGN KEY ( id_benchmark, id_item ) REFERENCES item_benchmark ( id_benchmark, id_item );
+ALTER TABLE respuesta\_modelo ADD CONSTRAINT pk\_respuesta\_modelo\_id PRIMARY KEY ( id\_respuesta );
+ALTER TABLE respuesta\_modelo ADD CONSTRAINT fk\_respuesta\_evaluacion FOREIGN KEY ( id\_evaluacion, id\_benchmark ) REFERENCES evaluacion ( id\_evaluacion, id\_benchmark ) ON DELETE CASCADE;
+ALTER TABLE respuesta\_modelo ADD CONSTRAINT fk\_respuesta\_item\_benchmark FOREIGN KEY ( id\_benchmark, id\_item ) REFERENCES item\_benchmark ( id\_benchmark, id\_item );
 
--- Experimento_Dataset (relacion utiliza)
-ALTER TABLE experimento_dataset ADD CONSTRAINT pk_experimento_dataset PRIMARY KEY ( id_run, id_dataset, fase_uso );
-ALTER TABLE experimento_dataset ADD CONSTRAINT fk_experimento_dataset_experimento FOREIGN KEY ( id_run ) REFERENCES experimento ( id_run ) ON DELETE CASCADE;
-ALTER TABLE experimento_dataset ADD CONSTRAINT fk_experimento_dataset_dataset FOREIGN KEY ( id_dataset ) REFERENCES dataset ( id_dataset );
+-- Experimento\_Dataset (relacion utiliza)
+ALTER TABLE experimento\_dataset ADD CONSTRAINT pk\_experimento\_dataset PRIMARY KEY ( id\_run, id\_dataset, fase\_uso );
+ALTER TABLE experimento\_dataset ADD CONSTRAINT fk\_experimento\_dataset\_experimento FOREIGN KEY ( id\_run ) REFERENCES experimento ( id\_run ) ON DELETE CASCADE;
+ALTER TABLE experimento\_dataset ADD CONSTRAINT fk\_experimento\_dataset\_dataset FOREIGN KEY ( id\_dataset ) REFERENCES dataset ( id\_dataset );
 
--- Consumo_GPU (relacion consume)
-ALTER TABLE consumo_gpu ADD CONSTRAINT pk_consumo_gpu PRIMARY KEY ( id_run, id_gpu );
-ALTER TABLE consumo_gpu ADD CONSTRAINT fk_consumo_gpu_experimento FOREIGN KEY ( id_run ) REFERENCES experimento ( id_run ) ON DELETE CASCADE;
-ALTER TABLE consumo_gpu ADD CONSTRAINT fk_consumo_gpu_gpu FOREIGN KEY ( id_gpu ) REFERENCES gpu ( id_gpu );
+-- Consumo\_GPU (relacion consume)
+ALTER TABLE consumo\_gpu ADD CONSTRAINT pk\_consumo\_gpu PRIMARY KEY ( id\_run, id\_gpu );
+ALTER TABLE consumo\_gpu ADD CONSTRAINT fk\_consumo\_gpu\_experimento FOREIGN KEY ( id\_run ) REFERENCES experimento ( id\_run ) ON DELETE CASCADE;
+ALTER TABLE consumo\_gpu ADD CONSTRAINT fk\_consumo\_gpu\_gpu FOREIGN KEY ( id\_gpu ) REFERENCES gpu ( id\_gpu );
 
 
 -- Not null constraints
@@ -1246,191 +1246,191 @@ ALTER TABLE consumo_gpu ADD CONSTRAINT fk_consumo_gpu_gpu FOREIGN KEY ( id_gpu )
 ALTER TABLE organizacion ALTER COLUMN nombre SET NOT NULL;
 ALTER TABLE organizacion ALTER COLUMN pais SET NOT NULL;
 ALTER TABLE organizacion ALTER COLUMN tipo SET NOT NULL;
-ALTER TABLE organizacion ALTER COLUMN fecha_fundacion SET NOT NULL;
+ALTER TABLE organizacion ALTER COLUMN fecha\_fundacion SET NOT NULL;
 
-ALTER TABLE modelo_llm ALTER COLUMN nombre SET NOT NULL;
-ALTER TABLE modelo_llm ALTER COLUMN version SET NOT NULL;
-ALTER TABLE modelo_llm ALTER COLUMN arquitectura SET NOT NULL;
-ALTER TABLE modelo_llm ALTER COLUMN tipo_modelo SET NOT NULL;
-ALTER TABLE modelo_llm ALTER COLUMN num_param SET NOT NULL;
-ALTER TABLE modelo_llm ALTER COLUMN longitud_token SET NOT NULL;
-ALTER TABLE modelo_llm ALTER COLUMN tipo_token SET NOT NULL;
-ALTER TABLE modelo_llm ALTER COLUMN estado SET NOT NULL;
-ALTER TABLE modelo_llm ALTER COLUMN id_organizacion SET NOT NULL;
+ALTER TABLE modelo\_llm ALTER COLUMN nombre SET NOT NULL;
+ALTER TABLE modelo\_llm ALTER COLUMN version SET NOT NULL;
+ALTER TABLE modelo\_llm ALTER COLUMN arquitectura SET NOT NULL;
+ALTER TABLE modelo\_llm ALTER COLUMN tipo\_modelo SET NOT NULL;
+ALTER TABLE modelo\_llm ALTER COLUMN num\_param SET NOT NULL;
+ALTER TABLE modelo\_llm ALTER COLUMN longitud\_token SET NOT NULL;
+ALTER TABLE modelo\_llm ALTER COLUMN tipo\_token SET NOT NULL;
+ALTER TABLE modelo\_llm ALTER COLUMN estado SET NOT NULL;
+ALTER TABLE modelo\_llm ALTER COLUMN id\_organizacion SET NOT NULL;
 
 ALTER TABLE dataset ALTER COLUMN nombre SET NOT NULL;
 ALTER TABLE dataset ALTER COLUMN version SET NOT NULL;
 ALTER TABLE dataset ALTER COLUMN dominio SET NOT NULL;
-ALTER TABLE dataset ALTER COLUMN formato_datos SET NOT NULL;
+ALTER TABLE dataset ALTER COLUMN formato\_datos SET NOT NULL;
 ALTER TABLE dataset ALTER COLUMN tamanio SET NOT NULL;
-ALTER TABLE dataset ALTER COLUMN num_registros SET NOT NULL;
+ALTER TABLE dataset ALTER COLUMN num\_registros SET NOT NULL;
 ALTER TABLE dataset ALTER COLUMN licencias SET NOT NULL;
-ALTER TABLE dataset ALTER COLUMN fuente_origen SET NOT NULL;
+ALTER TABLE dataset ALTER COLUMN fuente\_origen SET NOT NULL;
 
 ALTER TABLE experimento ALTER COLUMN nombre SET NOT NULL;
-ALTER TABLE experimento ALTER COLUMN id_modelo SET NOT NULL;
-ALTER TABLE experimento ALTER COLUMN tipo_entrenamiento SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN id\_modelo SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN tipo\_entrenamiento SET NOT NULL;
 ALTER TABLE experimento ALTER COLUMN optimizador SET NOT NULL;
-ALTER TABLE experimento ALTER COLUMN precision_calculo SET NOT NULL;
-ALTER TABLE experimento ALTER COLUMN num_epocas SET NOT NULL;
-ALTER TABLE experimento ALTER COLUMN tam_batch SET NOT NULL;
-ALTER TABLE experimento ALTER COLUMN tasa_aprendizaje SET NOT NULL;
-ALTER TABLE experimento ALTER COLUMN estado_ejecucion SET NOT NULL;
-ALTER TABLE experimento ALTER COLUMN fecha_inicio SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN precision\_calculo SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN num\_epocas SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN tam\_batch SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN tasa\_aprendizaje SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN estado\_ejecucion SET NOT NULL;
+ALTER TABLE experimento ALTER COLUMN fecha\_inicio SET NOT NULL;
 
-ALTER TABLE gpu ALTER COLUMN modelo_gpu SET NOT NULL;
+ALTER TABLE gpu ALTER COLUMN modelo\_gpu SET NOT NULL;
 ALTER TABLE gpu ALTER COLUMN fabricante SET NOT NULL;
-ALTER TABLE gpu ALTER COLUMN memoria_vram SET NOT NULL;
-ALTER TABLE gpu ALTER COLUMN num_nucleos SET NOT NULL;
-ALTER TABLE gpu ALTER COLUMN costo_por_hora SET NOT NULL;
+ALTER TABLE gpu ALTER COLUMN memoria\_vram SET NOT NULL;
+ALTER TABLE gpu ALTER COLUMN num\_nucleos SET NOT NULL;
+ALTER TABLE gpu ALTER COLUMN costo\_por\_hora SET NOT NULL;
 
 ALTER TABLE benchmark ALTER COLUMN nombre SET NOT NULL;
 ALTER TABLE benchmark ALTER COLUMN version SET NOT NULL;
 ALTER TABLE benchmark ALTER COLUMN categoria SET NOT NULL;
 ALTER TABLE benchmark ALTER COLUMN metodo SET NOT NULL;
-ALTER TABLE benchmark ALTER COLUMN num_items SET NOT NULL;
+ALTER TABLE benchmark ALTER COLUMN num\_items SET NOT NULL;
 
-ALTER TABLE evaluacion ALTER COLUMN id_modelo SET NOT NULL;
-ALTER TABLE evaluacion ALTER COLUMN id_benchmark SET NOT NULL;
-ALTER TABLE evaluacion ALTER COLUMN id_organizacion_evaluadora SET NOT NULL;
-ALTER TABLE evaluacion ALTER COLUMN fecha_evaluacion SET NOT NULL;
-ALTER TABLE evaluacion ALTER COLUMN resultado_metrica SET NOT NULL;
+ALTER TABLE evaluacion ALTER COLUMN id\_modelo SET NOT NULL;
+ALTER TABLE evaluacion ALTER COLUMN id\_benchmark SET NOT NULL;
+ALTER TABLE evaluacion ALTER COLUMN id\_organizacion\_evaluadora SET NOT NULL;
+ALTER TABLE evaluacion ALTER COLUMN fecha\_evaluacion SET NOT NULL;
+ALTER TABLE evaluacion ALTER COLUMN resultado\_metrica SET NOT NULL;
 
-ALTER TABLE item_benchmark ALTER COLUMN prompt_pregunta SET NOT NULL;
-ALTER TABLE item_benchmark ALTER COLUMN respuesta_esperada SET NOT NULL;
+ALTER TABLE item\_benchmark ALTER COLUMN prompt\_pregunta SET NOT NULL;
+ALTER TABLE item\_benchmark ALTER COLUMN respuesta\_esperada SET NOT NULL;
 
-ALTER TABLE respuesta_modelo ALTER COLUMN id_evaluacion SET NOT NULL;
-ALTER TABLE respuesta_modelo ALTER COLUMN id_benchmark SET NOT NULL;
-ALTER TABLE respuesta_modelo ALTER COLUMN id_item SET NOT NULL;
-ALTER TABLE respuesta_modelo ALTER COLUMN output_generado SET NOT NULL;
-ALTER TABLE respuesta_modelo ALTER COLUMN es_correcta SET NOT NULL;
-ALTER TABLE respuesta_modelo ALTER COLUMN tokens_output SET NOT NULL;
-ALTER TABLE respuesta_modelo ALTER COLUMN latencia SET NOT NULL;
+ALTER TABLE respuesta\_modelo ALTER COLUMN id\_evaluacion SET NOT NULL;
+ALTER TABLE respuesta\_modelo ALTER COLUMN id\_benchmark SET NOT NULL;
+ALTER TABLE respuesta\_modelo ALTER COLUMN id\_item SET NOT NULL;
+ALTER TABLE respuesta\_modelo ALTER COLUMN output\_generado SET NOT NULL;
+ALTER TABLE respuesta\_modelo ALTER COLUMN es\_correcta SET NOT NULL;
+ALTER TABLE respuesta\_modelo ALTER COLUMN tokens\_output SET NOT NULL;
+ALTER TABLE respuesta\_modelo ALTER COLUMN latencia SET NOT NULL;
 
-ALTER TABLE consumo_gpu ALTER COLUMN horas_uso SET NOT NULL;
-ALTER TABLE consumo_gpu ALTER COLUMN consumo_energetico SET NOT NULL;
-ALTER TABLE consumo_gpu ALTER COLUMN cantidad_unidades SET NOT NULL;
+ALTER TABLE consumo\_gpu ALTER COLUMN horas\_uso SET NOT NULL;
+ALTER TABLE consumo\_gpu ALTER COLUMN consumo\_energetico SET NOT NULL;
+ALTER TABLE consumo\_gpu ALTER COLUMN cantidad\_unidades SET NOT NULL;
 
 
 -- Otros constraints
 
 -- Organizacion
-ALTER TABLE organizacion ADD CONSTRAINT uq_organizacion_nombre UNIQUE ( nombre );
-ALTER TABLE organizacion ADD CONSTRAINT ck_organizacion_tipo CHECK ( tipo IN ('Creador', 'Evaluador', 'Ambos') );
+ALTER TABLE organizacion ADD CONSTRAINT uq\_organizacion\_nombre UNIQUE ( nombre );
+ALTER TABLE organizacion ADD CONSTRAINT ck\_organizacion\_tipo CHECK ( tipo IN ('Creador', 'Evaluador', 'Ambos') );
 
 -- ModeloLLM
-ALTER TABLE modelo_llm ADD CONSTRAINT uq_modelo_llm_nombre_version UNIQUE ( nombre, version );
-ALTER TABLE modelo_llm ADD CONSTRAINT ck_modelo_llm_num_param CHECK ( num_param > 0 );
-ALTER TABLE modelo_llm ADD CONSTRAINT ck_modelo_llm_longitud_token CHECK ( longitud_token > 0 );
-ALTER TABLE modelo_llm ADD CONSTRAINT ck_modelo_llm_estado CHECK ( estado IN ('Activo', 'Inactivo', 'En Pruebas', 'Obsoleto') );
-ALTER TABLE modelo_llm ADD CONSTRAINT ck_modelo_llm_base_distinto CHECK ( id_modelo_base IS NULL OR id_modelo_base <> id_modelo );
+ALTER TABLE modelo\_llm ADD CONSTRAINT uq\_modelo\_llm\_nombre\_version UNIQUE ( nombre, version );
+ALTER TABLE modelo\_llm ADD CONSTRAINT ck\_modelo\_llm\_num\_param CHECK ( num\_param > 0 );
+ALTER TABLE modelo\_llm ADD CONSTRAINT ck\_modelo\_llm\_longitud\_token CHECK ( longitud\_token > 0 );
+ALTER TABLE modelo\_llm ADD CONSTRAINT ck\_modelo\_llm\_estado CHECK ( estado IN ('Activo', 'Inactivo', 'En Pruebas', 'Obsoleto') );
+ALTER TABLE modelo\_llm ADD CONSTRAINT ck\_modelo\_llm\_base\_distinto CHECK ( id\_modelo\_base IS NULL OR id\_modelo\_base <> id\_modelo );
 
 -- Dataset
-ALTER TABLE dataset ADD CONSTRAINT uq_dataset_nombre_version UNIQUE ( nombre, version );
-ALTER TABLE dataset ADD CONSTRAINT ck_dataset_tamanio CHECK ( tamanio > 0 );
-ALTER TABLE dataset ADD CONSTRAINT ck_dataset_num_registros CHECK ( num_registros > 0 );
+ALTER TABLE dataset ADD CONSTRAINT uq\_dataset\_nombre\_version UNIQUE ( nombre, version );
+ALTER TABLE dataset ADD CONSTRAINT ck\_dataset\_tamanio CHECK ( tamanio > 0 );
+ALTER TABLE dataset ADD CONSTRAINT ck\_dataset\_num\_registros CHECK ( num\_registros > 0 );
 
 -- Experimento
-ALTER TABLE experimento ADD CONSTRAINT ck_experimento_tipo_entrenamiento CHECK ( tipo_entrenamiento IN ('Preentrenamiento', 'Fine-tuning', 'RLHF', 'Destilación') );
-ALTER TABLE experimento ADD CONSTRAINT ck_experimento_precision CHECK ( precision_calculo IN ('FP32', 'FP16', 'BF16', 'INT8') );
-ALTER TABLE experimento ADD CONSTRAINT ck_experimento_num_epocas CHECK ( num_epocas > 0 );
-ALTER TABLE experimento ADD CONSTRAINT ck_experimento_tam_batch CHECK ( tam_batch > 0 );
-ALTER TABLE experimento ADD CONSTRAINT ck_experimento_tasa_aprendizaje CHECK ( tasa_aprendizaje > 0 );
-ALTER TABLE experimento ADD CONSTRAINT ck_experimento_estado CHECK ( estado_ejecucion IN ('En ejecución', 'Finalizado', 'Error', 'Cancelado') );
-ALTER TABLE experimento ADD CONSTRAINT ck_experimento_loss_final CHECK ( loss_final >= 0 );
-ALTER TABLE experimento ADD CONSTRAINT ck_experimento_fechas CHECK ( fecha_fin IS NULL OR fecha_fin >= fecha_inicio );
+ALTER TABLE experimento ADD CONSTRAINT ck\_experimento\_tipo\_entrenamiento CHECK ( tipo\_entrenamiento IN ('Preentrenamiento', 'Fine-tuning', 'RLHF', 'Destilación') );
+ALTER TABLE experimento ADD CONSTRAINT ck\_experimento\_precision CHECK ( precision\_calculo IN ('FP32', 'FP16', 'BF16', 'INT8') );
+ALTER TABLE experimento ADD CONSTRAINT ck\_experimento\_num\_epocas CHECK ( num\_epocas > 0 );
+ALTER TABLE experimento ADD CONSTRAINT ck\_experimento\_tam\_batch CHECK ( tam\_batch > 0 );
+ALTER TABLE experimento ADD CONSTRAINT ck\_experimento\_tasa\_aprendizaje CHECK ( tasa\_aprendizaje > 0 );
+ALTER TABLE experimento ADD CONSTRAINT ck\_experimento\_estado CHECK ( estado\_ejecucion IN ('En ejecución', 'Finalizado', 'Error', 'Cancelado') );
+ALTER TABLE experimento ADD CONSTRAINT ck\_experimento\_loss\_final CHECK ( loss\_final >= 0 );
+ALTER TABLE experimento ADD CONSTRAINT ck\_experimento\_fechas CHECK ( fecha\_fin IS NULL OR fecha\_fin >= fecha\_inicio );
 
 -- GPU
-ALTER TABLE gpu ADD CONSTRAINT ck_gpu_memoria_vram CHECK ( memoria_vram > 0 );
-ALTER TABLE gpu ADD CONSTRAINT ck_gpu_num_nucleos CHECK ( num_nucleos > 0 );
-ALTER TABLE gpu ADD CONSTRAINT ck_gpu_costo_por_hora CHECK ( costo_por_hora >= 0 );
+ALTER TABLE gpu ADD CONSTRAINT ck\_gpu\_memoria\_vram CHECK ( memoria\_vram > 0 );
+ALTER TABLE gpu ADD CONSTRAINT ck\_gpu\_num\_nucleos CHECK ( num\_nucleos > 0 );
+ALTER TABLE gpu ADD CONSTRAINT ck\_gpu\_costo\_por\_hora CHECK ( costo\_por\_hora >= 0 );
 
 -- Benchmark
-ALTER TABLE benchmark ADD CONSTRAINT uq_benchmark_nombre_version UNIQUE ( nombre, version );
-ALTER TABLE benchmark ADD CONSTRAINT ck_benchmark_num_items CHECK ( num_items > 0 );
+ALTER TABLE benchmark ADD CONSTRAINT uq\_benchmark\_nombre\_version UNIQUE ( nombre, version );
+ALTER TABLE benchmark ADD CONSTRAINT ck\_benchmark\_num\_items CHECK ( num\_items > 0 );
 
 -- Evaluacion
-ALTER TABLE evaluacion ADD CONSTRAINT ck_evaluacion_resultado CHECK ( resultado_metrica >= 0 );
+ALTER TABLE evaluacion ADD CONSTRAINT ck\_evaluacion\_resultado CHECK ( resultado\_metrica >= 0 );
 
 -- ItemBenchmark
-ALTER TABLE item_benchmark ADD CONSTRAINT ck_item_benchmark_id_item CHECK ( id_item > 0 );
+ALTER TABLE item\_benchmark ADD CONSTRAINT ck\_item\_benchmark\_id\_item CHECK ( id\_item > 0 );
 
 -- RespuestaModelo
-ALTER TABLE respuesta_modelo ADD CONSTRAINT uq_respuesta_evaluacion_item UNIQUE ( id_evaluacion, id_item );
-ALTER TABLE respuesta_modelo ADD CONSTRAINT ck_respuesta_tokens_output CHECK ( tokens_output >= 0 );
-ALTER TABLE respuesta_modelo ADD CONSTRAINT ck_respuesta_latencia CHECK ( latencia >= 0 );
+ALTER TABLE respuesta\_modelo ADD CONSTRAINT uq\_respuesta\_evaluacion\_item UNIQUE ( id\_evaluacion, id\_item );
+ALTER TABLE respuesta\_modelo ADD CONSTRAINT ck\_respuesta\_tokens\_output CHECK ( tokens\_output >= 0 );
+ALTER TABLE respuesta\_modelo ADD CONSTRAINT ck\_respuesta\_latencia CHECK ( latencia >= 0 );
 
--- Experimento_Dataset
-ALTER TABLE experimento_dataset ADD CONSTRAINT ck_experimento_dataset_fase CHECK ( fase_uso IN ('Entrenamiento', 'Validación', 'Prueba', 'Fine-tuning') );
+-- Experimento\_Dataset
+ALTER TABLE experimento\_dataset ADD CONSTRAINT ck\_experimento\_dataset\_fase CHECK ( fase\_uso IN ('Entrenamiento', 'Validación', 'Prueba', 'Fine-tuning') );
 
--- Consumo_GPU
-ALTER TABLE consumo_gpu ADD CONSTRAINT ck_consumo_gpu_horas CHECK ( horas_uso > 0 );
-ALTER TABLE consumo_gpu ADD CONSTRAINT ck_consumo_gpu_energia CHECK ( consumo_energetico >= 0 );
-ALTER TABLE consumo_gpu ADD CONSTRAINT ck_consumo_gpu_unidades CHECK ( cantidad_unidades > 0 );
+-- Consumo\_GPU
+ALTER TABLE consumo\_gpu ADD CONSTRAINT ck\_consumo\_gpu\_horas CHECK ( horas\_uso > 0 );
+ALTER TABLE consumo\_gpu ADD CONSTRAINT ck\_consumo\_gpu\_energia CHECK ( consumo\_energetico >= 0 );
+ALTER TABLE consumo\_gpu ADD CONSTRAINT ck\_consumo\_gpu\_unidades CHECK ( cantidad\_unidades > 0 );
 
 
 -- Triggers (reglas de negocio no expresables con claves ni CHECK)
 
 -- Una organizacion de tipo Evaluador no puede crear modelos
-CREATE OR REPLACE FUNCTION fn_validar_organizacion_creadora ()
+CREATE OR REPLACE FUNCTION fn\_validar\_organizacion\_creadora ()
 RETURNS TRIGGER AS
 $$
 BEGIN
-    IF (SELECT tipo FROM organizacion WHERE id_organizacion = NEW.id_organizacion) = 'Evaluador' THEN
+    IF (SELECT tipo FROM organizacion WHERE id\_organizacion = NEW.id\_organizacion) = 'Evaluador' THEN
         RAISE EXCEPTION 'La organizacion % es de tipo Evaluador y no puede crear modelos',
-            NEW.id_organizacion;
+            NEW.id\_organizacion;
     END IF;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_validar_organizacion_creadora
-BEFORE INSERT OR UPDATE OF id_organizacion ON modelo_llm
-FOR EACH ROW EXECUTE FUNCTION fn_validar_organizacion_creadora ();
+CREATE TRIGGER trg\_validar\_organizacion\_creadora
+BEFORE INSERT OR UPDATE OF id\_organizacion ON modelo\_llm
+FOR EACH ROW EXECUTE FUNCTION fn\_validar\_organizacion\_creadora ();
 
 -- Una organizacion de tipo Creador no puede aplicar evaluaciones
-CREATE OR REPLACE FUNCTION fn_validar_organizacion_evaluadora ()
+CREATE OR REPLACE FUNCTION fn\_validar\_organizacion\_evaluadora ()
 RETURNS TRIGGER AS
 $$
 BEGIN
-    IF (SELECT tipo FROM organizacion WHERE id_organizacion = NEW.id_organizacion_evaluadora) = 'Creador' THEN
+    IF (SELECT tipo FROM organizacion WHERE id\_organizacion = NEW.id\_organizacion\_evaluadora) = 'Creador' THEN
         RAISE EXCEPTION 'La organizacion % es de tipo Creador y no puede aplicar evaluaciones',
-            NEW.id_organizacion_evaluadora;
+            NEW.id\_organizacion\_evaluadora;
     END IF;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_validar_organizacion_evaluadora
-BEFORE INSERT OR UPDATE OF id_organizacion_evaluadora ON evaluacion
-FOR EACH ROW EXECUTE FUNCTION fn_validar_organizacion_evaluadora ();
+CREATE TRIGGER trg\_validar\_organizacion\_evaluadora
+BEFORE INSERT OR UPDATE OF id\_organizacion\_evaluadora ON evaluacion
+FOR EACH ROW EXECUTE FUNCTION fn\_validar\_organizacion\_evaluadora ();
 
 -- La cadena de modelos base (relacion basado) no puede contener ciclos
-CREATE OR REPLACE FUNCTION fn_validar_ciclo_modelo_base ()
+CREATE OR REPLACE FUNCTION fn\_validar\_ciclo\_modelo\_base ()
 RETURNS TRIGGER AS
 $$
 BEGIN
-    IF NEW.id_modelo_base IS NOT NULL AND EXISTS (
+    IF NEW.id\_modelo\_base IS NOT NULL AND EXISTS (
         WITH RECURSIVE ancestros AS (
-            SELECT id_modelo, id_modelo_base
-            FROM modelo_llm
-            WHERE id_modelo = NEW.id_modelo_base
+            SELECT id\_modelo, id\_modelo\_base
+            FROM modelo\_llm
+            WHERE id\_modelo = NEW.id\_modelo\_base
             UNION
-            SELECT m.id_modelo, m.id_modelo_base
-            FROM modelo_llm m JOIN ancestros a ON m.id_modelo = a.id_modelo_base
+            SELECT m.id\_modelo, m.id\_modelo\_base
+            FROM modelo\_llm m JOIN ancestros a ON m.id\_modelo = a.id\_modelo\_base
         )
-        SELECT 1 FROM ancestros WHERE id_modelo = NEW.id_modelo
+        SELECT 1 FROM ancestros WHERE id\_modelo = NEW.id\_modelo
     ) THEN
         RAISE EXCEPTION 'El modelo base % genera un ciclo en la cadena de modelos',
-            NEW.id_modelo_base;
+            NEW.id\_modelo\_base;
     END IF;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_validar_ciclo_modelo_base
-BEFORE INSERT OR UPDATE OF id_modelo_base ON modelo_llm
-FOR EACH ROW EXECUTE FUNCTION fn_validar_ciclo_modelo_base ();
+CREATE TRIGGER trg\_validar\_ciclo\_modelo\_base
+BEFORE INSERT OR UPDATE OF id\_modelo\_base ON modelo\_llm
+FOR EACH ROW EXECUTE FUNCTION fn\_validar\_ciclo\_modelo\_base ();
 \end{lstlisting}
 
 \subsection{Carga de datos}
@@ -1443,12 +1443,12 @@ La carga de datos es el puente entre el modelo conceptual y la base de datos ope
 
 \subsubsection{Fuente de datos}
 
-Se utilizó el dataset público de Epoch (\texttt{all\_ai\_models.csv}), que contiene información de modelos de inteligencia artificial con campos como parámetros, compute, hardware, datasets, etc. Se filtraron únicamente los modelos de lenguaje (LLMs) usando la columna \texttt{Domain} (contiene ``Language''). Esto dio ~2.063 modelos reales que sirvieron como semilla.
+Se utilizó el dataset público de Epoch (\texttt{all\\_ai\\_models.csv}), que contiene información de modelos de inteligencia artificial con campos como parámetros, compute, hardware, datasets, etc. Se filtraron únicamente los modelos de lenguaje (LLMs) usando la columna \texttt{Domain} (contiene ``Language''). Esto dio ~2.063 modelos reales que sirvieron como semilla.
 
 \textbf{Problemas encontrados en la fuente:}
 \begin{itemize}
   \item Muchos campos numéricos vienen como texto (ej. ``1.5B'', ``N/A''), lo que obliga a limpiar y convertir antes de cargar.
-  \item ~60\% de los modelos no reportan tamaño del dataset, lo que genera valores NULL en \texttt{num\_registros}.
+  \item ~60\% de los modelos no reportan tamaño del dataset, lo que genera valores NULL en \texttt{num\\_registros}.
   \item ~57\% no reportan FLOP de entrenamiento, lo que impide calcular el costo exacto de entrenamiento.
   \item Los nombres de hardware son strings libres (``8x NVIDIA A100''), no canónicos, lo que dificulta la normalización.
   \item No existe una tabla de organizaciones separada: la organización está embebida en el modelo, lo que obliga a deduplicar.
@@ -1459,7 +1459,7 @@ Se utilizó el dataset público de Epoch (\texttt{all\_ai\_models.csv}), que con
   \item Se eligió Epoch porque es un dataset real y público de modelos de IA, con ~2.000 LLMs y campos ricos (parámetros, compute, hardware, etc.).
   \item Se usó \texttt{random.seed(42)} para que cualquier persona obtenga los mismos CSVs.
   \item Se escribió en streaming (\texttt{csv.DictWriter}) para escalar a 1M+ sin problemas de memoria.
-  \item Se separó la validación (\texttt{validate\_data.py}) de la generación para detectar errores antes de cargar.
+  \item Se separó la validación (\texttt{validate\\_data.py}) de la generación para detectar errores antes de cargar.
   \item Los campos faltantes se inventaron con valores plausibles del dominio LLM (version, arquitectura, optimizador, etc.).
 \end{itemize}
 
@@ -1490,16 +1490,16 @@ El pipeline se diseñó para ser \textbf{determinista}, \textbf{escalable} y \te
 \textbf{Tabla} & \textbf{Filas} \\
 \hline
 organizacion & 20 \\
-modelo\_llm & 1500 \\
+modelo\\_llm & 1500 \\
 dataset & 1500 \\
 experimento & 1500 \\
 gpu & 20 \\
 benchmark & 10 \\
 evaluacion & 750 \\
-item\_benchmark & 100 \\
-respuesta\_modelo & 1000 \\
-experimento\_dataset & 1500 \\
-consumo\_gpu & 1500 \\
+item\\_benchmark & 100 \\
+respuesta\\_modelo & 1000 \\
+experimento\\_dataset & 1500 \\
+consumo\\_gpu & 1500 \\
 \hline
 \textbf{Total} & \textbf{10000} \\
 \hline
@@ -1509,57 +1509,57 @@ consumo\_gpu & 1500 \\
 
 La distribución refleja el dominio: ~1 modelo por fila, ~1 dataset por modelo, ~1 experimento por modelo, y una muestra de evaluaciones/respuestas (no todos los items×modelos, para evitar explosión combinatoria).
 
-\subsubsection{Bloques del generador (generate\_data.py)}
+\subsubsection{Bloques del generador (generate\\_data.py)}
 
 \begin{lstlisting}
 # Bloque 1: Organizacion (deduplicacion + relleno)
-orgs_raw = []
+orgs\_raw = []
 seen = set()
-for r in seed_models:
-    o = r["organizacion_desarrolladora"].strip()
+for r in seed\_models:
+    o = r["organizacion\_desarrolladora"].strip()
     if o and o not in seen:
         seen.add(o)
-        orgs_raw.append(o)
-while len(orgs_raw) < 20:
-    orgs_raw.append(f"Org Sintetica {len(orgs_raw)+1}")
+        orgs\_raw.append(o)
+while len(orgs\_raw) < 20:
+    orgs\_raw.append(f"Org Sintetica {len(orgs\_raw)+1}")
 
 # Bloque 2: Modelo LLM (solo orgs Creador/Ambos, base < id para evitar ciclos)
-creator_orgs = [o["id_organizacion"] for o in org_rows if o["tipo"] in ("Creador","Ambos")]
-org_id = random.choice(creator_orgs)
+creator\_orgs = [o["id\_organizacion"] for o in org\_rows if o["tipo"] in ("Creador","Ambos")]
+org\_id = random.choice(creator\_orgs)
 base = None
 if random.random() < 0.3 and i > 1:
     base = random.randint(1, i-1)
 
-# Bloque 3: Dataset (sin id_modelo, licencias plural)
-dataset_rows.append({
-    "id_dataset": i,
+# Bloque 3: Dataset (sin id\_modelo, licencias plural)
+dataset\_rows.append({
+    "id\_dataset": i,
     "nombre": f"Dataset {i}",
     "version": f"v{random.randint(1,3)}.{random.randint(0,9)}",
     "dominio": dominio,
-    "formato_datos": random.choice(["Texto","JSON","Parquet","CSV"]),
+    "formato\_datos": random.choice(["Texto","JSON","Parquet","CSV"]),
     "tamanio": round(random.uniform(1.0, 500.0), 2),
-    "num_registros": random.randint(1000, 10000000),
+    "num\_registros": random.randint(1000, 10000000),
     "licencias": random.choice(["MIT","Apache-2.0","CC-BY-4.0","Propietaria","Desconocida"]),
-    "fuente_origen": random.choice(["Hugging Face","Kaggle","Propio","Web scrape","Sintetico"]),
+    "fuente\_origen": random.choice(["Hugging Face","Kaggle","Propio","Web scrape","Sintetico"]),
 })
 
 # Bloque 4: Experimento (sin segundos, CHECK de estado/fecha)
 estado = random.choice(["Finalizado","Finalizado","Finalizado","En ejecucion","Error","Cancelado"])
 if estado != "En ejecucion":
     dur = random.randint(3600, 30*86400)
-    fecha_fin = fecha_inicio + timedelta(seconds=dur)
+    fecha\_fin = fecha\_inicio + timedelta(seconds=dur)
     loss = round(random.uniform(0.5, 5.0), 6) if estado == "Finalizado" else round(random.uniform(0.5, 5.0), 6)
 
-# Bloque 5: RespuestaModelo (deduplicada por (id_evaluacion, id_item))
-seen_resp = set()
-while len(resp_rows) < N_RESP:
-    ev = random.choice(eval_rows)
-    bench_id = ev["id_benchmark"]
-    it = random.choice(items_by_bench[bench_id])
-    key = (ev["id_evaluacion"], it["id_item"])
-    if key in seen_resp: continue
-    seen_resp.add(key)
-    resp_rows.append({...})
+# Bloque 5: RespuestaModelo (deduplicada por (id\_evaluacion, id\_item))
+seen\_resp = set()
+while len(resp\_rows) < N\_RESP:
+    ev = random.choice(eval\_rows)
+    bench\_id = ev["id\_benchmark"]
+    it = random.choice(items\_by\_bench[bench\_id])
+    key = (ev["id\_evaluacion"], it["id\_item"])
+    if key in seen\_resp: continue
+    seen\_resp.add(key)
+    resp\_rows.append({...})
 \end{lstlisting}
 
 \textbf{Decisiones de diseño:}
@@ -1567,37 +1567,37 @@ while len(resp_rows) < N_RESP:
   \item Se eligió Epoch como fuente porque es un dataset real y público de modelos de IA, con ~2.000 LLMs y campos ricos (parámetros, compute, hardware, etc.).
   \item Se usa \texttt{random.seed(42)} para que cualquier persona obtenga los mismos CSVs.
   \item Se escribe en streaming para poder escalar a 1.000.000 de registros sin problemas de memoria.
-  \item Se separa la validación (\texttt{validate\_data.py}) de la generación para detectar errores antes de cargar.
-  \item \texttt{respuesta\_modelo} se deduplica por \texttt{(id\_evaluacion, id\_item)} para cumplir el UNIQUE del esquema.
-  \item \texttt{id\_modelo\_base} solo puede ser menor que \texttt{id\_modelo} para evitar ciclos (trigger \texttt{trg\_validar\_ciclo\_modelo\_base}).
+  \item Se separa la validación (\texttt{validate\\_data.py}) de la generación para detectar errores antes de cargar.
+  \item \texttt{respuesta\\_modelo} se deduplica por \texttt{(id\\_evaluacion, id\\_item)} para cumplir el UNIQUE del esquema.
+  \item \texttt{id\\_modelo\\_base} solo puede ser menor que \texttt{id\\_modelo} para evitar ciclos (trigger \texttt{trg\\_validar\\_ciclo\\_modelo\\_base}).
 \end{itemize}
 
-\subsubsection{Carga (load\_proyectobd.sql)}
+\subsubsection{Carga (load\\_proyectobd.sql)}
 
 \begin{lstlisting}
-TRUNCATE TABLE respuesta_modelo, experimento_dataset, consumo_gpu, evaluacion, item_benchmark, experimento, dataset, modelo_llm, organizacion, gpu, benchmark CASCADE;
+TRUNCATE TABLE respuesta\_modelo, experimento\_dataset, consumo\_gpu, evaluacion, item\_benchmark, experimento, dataset, modelo\_llm, organizacion, gpu, benchmark CASCADE;
 
-\copy organizacion(id_organizacion,nombre,pais,tipo,fecha_fundacion) FROM './data_out/csv/organizacion.csv' WITH (FORMAT csv, HEADER true, NULL '');
-\copy modelo_llm(id_modelo,nombre,version,arquitectura,tipo_modelo,num_param,longitud_token,tipo_token,estado,id_organizacion,id_modelo_base) FROM './data_out/csv/modelo_llm.csv' WITH (FORMAT csv, HEADER true, NULL '');
-\copy dataset(id_dataset,nombre,version,dominio,formato_datos,tamanio,num_registros,licencias,fuente_origen) FROM './data_out/csv/dataset.csv' WITH (FORMAT csv, HEADER true, NULL '');
-\copy experimento(id_run,nombre,id_modelo,tipo_entrenamiento,optimizador,precision_calculo,num_epocas,tam_batch,tasa_aprendizaje,estado_ejecucion,fecha_inicio,fecha_fin,loss_final) FROM './data_out/csv/experimento.csv' WITH (FORMAT csv, HEADER true, NULL '');
-\copy gpu(id_gpu,modelo_gpu,fabricante,proveedor_cloud,memoria_vram,num_nucleos,costo_por_hora) FROM './data_out/csv/gpu.csv' WITH (FORMAT csv, HEADER true, NULL '');
-\copy benchmark(id_benchmark,nombre,version,categoria,metodo,num_items,descripcion,autor) FROM './data_out/csv/benchmark.csv' WITH (FORMAT csv, HEADER true, NULL '');
-\copy evaluacion(id_evaluacion,id_modelo,id_benchmark,id_organizacion_evaluadora,fecha_evaluacion,resultado_metrica) FROM './data_out/csv/evaluacion.csv' WITH (FORMAT csv, HEADER true, NULL '');
-\copy item_benchmark(id_benchmark,id_item,prompt_pregunta,respuesta_esperada) FROM './data_out/csv/item_benchmark.csv' WITH (FORMAT csv, HEADER true, NULL '');
-\copy respuesta_modelo(id_respuesta,id_evaluacion,id_benchmark,id_item,output_generado,es_correcta,tokens_output,latencia) FROM './data_out/csv/respuesta_modelo.csv' WITH (FORMAT csv, HEADER true, NULL '');
-\copy experimento_dataset(id_run,id_dataset,fase_uso) FROM './data_out/csv/experimento_dataset.csv' WITH (FORMAT csv, HEADER true, NULL '');
-\copy consumo_gpu(id_run,id_gpu,horas_uso,consumo_energetico) FROM './data_out/csv/experimento_gpu.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy organizacion(id\_organizacion,nombre,pais,tipo,fecha\_fundacion) FROM './data\_out/csv/organizacion.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy modelo\_llm(id\_modelo,nombre,version,arquitectura,tipo\_modelo,num\_param,longitud\_token,tipo\_token,estado,id\_organizacion,id\_modelo\_base) FROM './data\_out/csv/modelo\_llm.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy dataset(id\_dataset,nombre,version,dominio,formato\_datos,tamanio,num\_registros,licencias,fuente\_origen) FROM './data\_out/csv/dataset.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy experimento(id\_run,nombre,id\_modelo,tipo\_entrenamiento,optimizador,precision\_calculo,num\_epocas,tam\_batch,tasa\_aprendizaje,estado\_ejecucion,fecha\_inicio,fecha\_fin,loss\_final) FROM './data\_out/csv/experimento.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy gpu(id\_gpu,modelo\_gpu,fabricante,proveedor\_cloud,memoria\_vram,num\_nucleos,costo\_por\_hora) FROM './data\_out/csv/gpu.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy benchmark(id\_benchmark,nombre,version,categoria,metodo,num\_items,descripcion,autor) FROM './data\_out/csv/benchmark.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy evaluacion(id\_evaluacion,id\_modelo,id\_benchmark,id\_organizacion\_evaluadora,fecha\_evaluacion,resultado\_metrica) FROM './data\_out/csv/evaluacion.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy item\_benchmark(id\_benchmark,id\_item,prompt\_pregunta,respuesta\_esperada) FROM './data\_out/csv/item\_benchmark.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy respuesta\_modelo(id\_respuesta,id\_evaluacion,id\_benchmark,id\_item,output\_generado,es\_correcta,tokens\_output,latencia) FROM './data\_out/csv/respuesta\_modelo.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy experimento\_dataset(id\_run,id\_dataset,fase\_uso) FROM './data\_out/csv/experimento\_dataset.csv' WITH (FORMAT csv, HEADER true, NULL '');
+\copy consumo\_gpu(id\_run,id\_gpu,horas\_uso,consumo\_energetico) FROM './data\_out/csv/experimento\_gpu.csv' WITH (FORMAT csv, HEADER true, NULL '');
 \end{lstlisting}
 
 \textbf{Orden de carga:} se respeta el orden de las FKs (organización → modelo → dataset/experimento → consumo → benchmark → evaluación → item → respuesta → relaciones M:N). Se usa \texttt{TRUNCATE ... CASCADE} para limpiar antes de cargar.
 
 \textbf{Orden de carga:} se respeta el orden de las FKs (organización → modelo → dataset/experimento → consumo → benchmark → evaluación → item → respuesta → relaciones M:N). Se usa \texttt{TRUNCATE ... CASCADE} para limpiar antes de cargar. No se desactiva ningún trigger porque el generador ya garantiza la integridad.
 
-\textbf{Validación:} \texttt{validate\_data.py} verifica PKs (simples y compuestas), FKs (simples y compuestas), UNIQUEs compuestos, CHECKs, rangos y fechas. Resultado: \textbf{0 errores} en 10.000 registros.
+\textbf{Validación:} \texttt{validate\\_data.py} verifica PKs (simples y compuestas), FKs (simples y compuestas), UNIQUEs compuestos, CHECKs, rangos y fechas. Resultado: \textbf{0 errores} en 10.000 registros.
 
 \subsubsection{Validación}
-\texttt{validate\_data.py} verifica PKs (simples y compuestas), FKs (simples y compuestas), UNIQUEs compuestos, CHECKs, rangos y fechas. Resultado: \textbf{0 errores} en 10.000 registros.
+\texttt{validate\\_data.py} verifica PKs (simples y compuestas), FKs (simples y compuestas), UNIQUEs compuestos, CHECKs, rangos y fechas. Resultado: \textbf{0 errores} en 10.000 registros.
 
 \subsection{Simulación de Datos Faltantes}
 
@@ -1607,50 +1607,50 @@ TRUNCATE TABLE respuesta_modelo, experimento_dataset, consumo_gpu, evaluacion, i
 
 \textbf{Por diseño (semánticos):}
 \begin{itemize}
-  \item \texttt{id\_modelo\_base} NULL para modelos base (~70\%): los modelos base no derivan de otro.
-  \item \texttt{fecha\_fin}, \texttt{loss\_final} NULL para experimentos no finalizados: un run en ejecución/error/cancelado no tiene fecha de fin.
-  \item \texttt{proveedor\_cloud} NULL para hardware propio (~30\%): on-premise no tiene proveedor cloud.
+  \item \texttt{id\\_modelo\\_base} NULL para modelos base (~70\%): los modelos base no derivan de otro.
+  \item \texttt{fecha\\_fin}, \texttt{loss\\_final} NULL para experimentos no finalizados: un run en ejecución/error/cancelado no tiene fecha de fin.
+  \item \texttt{proveedor\\_cloud} NULL para hardware propio (~30\%): on-premise no tiene proveedor cloud.
   \item \texttt{benchmark.descripcion} NULL (opcional): no todos los benchmarks tienen descripción detallada.
 \end{itemize}
 
 \textbf{Por falta de fuente (Epoch no reporta):}
 \begin{itemize}
-  \item \texttt{dataset.tamanio}, \texttt{num\_registros}: ~60\% nulos (Epoch no reporta tamaño en muchos modelos).
-  \item \texttt{experimento.computo\_pretraining\_flop}: ~57\% nulos (no todos reportan FLOP).
+  \item \texttt{dataset.tamanio}, \texttt{num\\_registros}: ~60\% nulos (Epoch no reporta tamaño en muchos modelos).
+  \item \texttt{experimento.computo\\_pretraining\\_flop}: ~57\% nulos (no todos reportan FLOP).
   \item \texttt{experimento.epocas}: ~74\% nulos (no siempre se reporta).
-  \item \texttt{consumo\_gpu.horas\_entrenamiento}: ~86\% nulos (no siempre se reporta).
+  \item \texttt{consumo\\_gpu.horas\\_entrenamiento}: ~86\% nulos (no siempre se reporta).
 \end{itemize}
 
 \subsubsection{Código que genera nulos}
 
 \begin{lstlisting}
-# id_modelo_base: NULL para modelos base (~70%)
+# id\_modelo\_base: NULL para modelos base (~70%)
 base = None
 if random.random() < 0.3 and i > 1:
     base = random.randint(1, i-1)
-'id_modelo_base': base if base is not None else "",
+'id\_modelo\_base': base if base is not None else "",
 
-# fecha_fin / loss_final: NULL para no finalizados
+# fecha\_fin / loss\_final: NULL para no finalizados
 if estado != "En ejecucion":
     dur = random.randint(3600, 30*86400)
-    fecha_fin = fecha_inicio + timedelta(seconds=dur)
+    fecha\_fin = fecha\_inicio + timedelta(seconds=dur)
     loss = round(random.uniform(0.5, 5.0), 6) if estado == "Finalizado" else round(random.uniform(0.5, 5.0), 6)
 else:
-    fecha_fin = ""
+    fecha\_fin = ""
     loss = ""
 
-# proveedor_cloud: NULL para on-premise (~30%)
-"proveedor_cloud": seed["proveedor_cloud"] if random.random() > 0.3 else "",
+# proveedor\_cloud: NULL para on-premise (~30%)
+"proveedor\_cloud": seed["proveedor\_cloud"] if random.random() > 0.3 else "",
 
-# tokens_totales: NULL si Epoch no reporta
-'tokens_totales': df_llm['Training dataset size (total)'].apply(lambda x: int(x) if pd.notnull(x) and x > 0 else None)
+# tokens\_totales: NULL si Epoch no reporta
+'tokens\_totales': df\_llm['Training dataset size (total)'].apply(lambda x: int(x) if pd.notnull(x) and x > 0 else None)
 \end{lstlisting}
 
 \textbf{Por qué se mantienen los nulos:} para probar la robustez de consultas y vistas frente a valores NULL (LEFT JOIN, COALESCE) y para reflejar la realidad de los datos (los datasets reales tienen missing values).
 
 \textbf{Propósito:} abstraer consultas frecuentes de investigadores y analistas. Las vistas permiten consultar datos complejos sin repetir JOINs y agregaciones. Se crearon 3 vistas: resumen de modelos, consumo por experimento y mejor resultado por benchmark.
 
-\textbf{Decisiones de diseño:} se usó LEFT JOIN en v_consumo_por_experimento para incluir experimentos sin GPU (num_gpus = 0). Se corrigió v_mejor_benchmark para usar evaluacion (resultado_benchmark no existe en el esquema corregido).
+\textbf{Decisiones de diseño:} se usó LEFT JOIN en v\_consumo\_por\_experimento para incluir experimentos sin GPU (num\_gpus = 0). Se corrigió v\_mejor\_benchmark para usar evaluacion (resultado\_benchmark no existe en el esquema corregido).
 
 \subsection{Views}
 
@@ -1658,112 +1658,112 @@ Se crearon 3 vistas de usuario para abstraer consultas frecuentes de investigado
 
 \textbf{Propósito:} abstraer consultas frecuentes de investigadores y analistas. Las vistas permiten consultar datos complejos sin repetir JOINs y agregaciones.
 
-\textbf{Correcciones aplicadas:} experimento_gpu -> consumo_gpu; resultado_benchmark -> evaluacion (tabla inexistente en el esquema corregido).
+\textbf{Correcciones aplicadas:} experimento\_gpu -> consumo\_gpu; resultado\_benchmark -> evaluacion (tabla inexistente en el esquema corregido).
 
 \begin{lstlisting}
-CREATE OR REPLACE VIEW v_modelo_resumen AS
-SELECT m.id_modelo, m.nombre, m.arquitectura, m.num_param, m.estado,
+CREATE OR REPLACE VIEW v\_modelo\_resumen AS
+SELECT m.id\_modelo, m.nombre, m.arquitectura, m.num\_param, m.estado,
        o.nombre AS organizacion, o.pais
-FROM modelo_llm m
-JOIN organizacion o ON o.id_organizacion = m.id_organizacion;
+FROM modelo\_llm m
+JOIN organizacion o ON o.id\_organizacion = m.id\_organizacion;
 
-CREATE OR REPLACE VIEW v_consumo_por_experimento AS
-SELECT e.id_run, e.nombre AS experimento, m.nombre AS modelo,
-       COUNT(cg.id_gpu) AS num_gpus,
-       SUM(cg.horas_uso) AS horas_totales,
-       SUM(cg.horas_uso * g.costo_por_hora) AS costo_estimado_usd,
-       SUM(cg.consumo_energetico) AS kwh_total
+CREATE OR REPLACE VIEW v\_consumo\_por\_experimento AS
+SELECT e.id\_run, e.nombre AS experimento, m.nombre AS modelo,
+       COUNT(cg.id\_gpu) AS num\_gpus,
+       SUM(cg.horas\_uso) AS horas\_totales,
+       SUM(cg.horas\_uso * g.costo\_por\_hora) AS costo\_estimado\_usd,
+       SUM(cg.consumo\_energetico) AS kwh\_total
 FROM experimento e
-JOIN modelo_llm m ON m.id_modelo = e.id_modelo
-LEFT JOIN consumo_gpu cg ON cg.id_run = e.id_run
-LEFT JOIN gpu g ON g.id_gpu = cg.id_gpu
-GROUP BY e.id_run, e.nombre, m.nombre;
+JOIN modelo\_llm m ON m.id\_modelo = e.id\_modelo
+LEFT JOIN consumo\_gpu cg ON cg.id\_run = e.id\_run
+LEFT JOIN gpu g ON g.id\_gpu = cg.id\_gpu
+GROUP BY e.id\_run, e.nombre, m.nombre;
 
-CREATE OR REPLACE VIEW v_mejor_benchmark AS
+CREATE OR REPLACE VIEW v\_mejor\_benchmark AS
 SELECT b.nombre AS benchmark, m.nombre AS modelo,
-       e.resultado_metrica AS valor, e.fecha_evaluacion AS fecha
+       e.resultado\_metrica AS valor, e.fecha\_evaluacion AS fecha
 FROM evaluacion e
-JOIN benchmark b ON b.id_benchmark = e.id_benchmark
-JOIN modelo_llm m ON m.id_modelo = e.id_modelo
-WHERE e.resultado_metrica = (
-    SELECT MAX(e2.resultado_metrica)
+JOIN benchmark b ON b.id\_benchmark = e.id\_benchmark
+JOIN modelo\_llm m ON m.id\_modelo = e.id\_modelo
+WHERE e.resultado\_metrica = (
+    SELECT MAX(e2.resultado\_metrica)
     FROM evaluacion e2
-    WHERE e2.id_benchmark = e.id_benchmark
+    WHERE e2.id\_benchmark = e.id\_benchmark
 );
 \end{lstlisting}
 
-\textbf{Correcciones aplicadas:} \texttt{experimento\_gpu} $\rightarrow$ \texttt{consumo\_gpu}; \texttt{resultado\_benchmark} $\rightarrow$ \texttt{evaluacion} (tabla inexistente en el esquema corregido).
+\textbf{Correcciones aplicadas:} \texttt{experimento\\_gpu} $\rightarrow$ \texttt{consumo\\_gpu}; \texttt{resultado\\_benchmark} $\rightarrow$ \texttt{evaluacion} (tabla inexistente en el esquema corregido).
 
 \textbf{Propósito:}
 \begin{itemize}
-  \item \texttt{v\_modelo\_resumen}: listado rápido de modelos con su organización creadora.
-  \item \texttt{v\_consumo\_por\_experimento}: análisis de recursos (horas, costo, kWh) por experimento.
-  \item \texttt{v\_mejor\_benchmark}: ranking de modelos por benchmark.
+  \item \texttt{v\\_modelo\\_resumen}: listado rápido de modelos con su organización creadora.
+  \item \texttt{v\\_consumo\\_por\\_experimento}: análisis de recursos (horas, costo, kWh) por experimento.
+  \item \texttt{v\\_mejor\\_benchmark}: ranking de modelos por benchmark.
 \end{itemize}
 
 \textbf{Propósito:} automatizar el ciclo de vida del experimento (registro y finalización). Los procedimientos encapsulan la lógica de negocio para que los investigadores no tengan que escribir INSERT/UPDATE manualmente.
 
-\textbf{Integración con triggers:} sp_finalizar_experimento actualiza fecha_fin, y el trigger trg_validar_organizacion_creadora valida la organización creadora antes de insertar.
+\textbf{Integración con triggers:} sp\_finalizar\_experimento actualiza fecha\_fin, y el trigger trg\_validar\_organizacion\_creadora valida la organización creadora antes de insertar.
 
 \subsection{Procedimientos Almacenados}
 
 \textbf{Propósito:} automatizar el ciclo de vida del experimento (registro y finalización). Los procedimientos encapsulan la lógica de negocio para que los investigadores no tengan que escribir INSERT/UPDATE manualmente.
 
-\textbf{Integración con triggers:} sp_finalizar_experimento actualiza fecha_fin, y el trigger trg_validar_organizacion_creadora valida la organización creadora antes de insertar.
+\textbf{Integración con triggers:} sp\_finalizar\_experimento actualiza fecha\_fin, y el trigger trg\_validar\_organizacion\_creadora valida la organización creadora antes de insertar.
 
 \begin{lstlisting}
-CREATE OR REPLACE PROCEDURE sp_registrar_experimento(
-    p_id_run INTEGER, p_nombre VARCHAR, p_id_modelo INTEGER,
-    p_tipo VARCHAR, p_opt VARCHAR, p_prec VARCHAR,
-    p_epocas INTEGER, p_batch INTEGER, p_lr NUMERIC
+CREATE OR REPLACE PROCEDURE sp\_registrar\_experimento(
+    p\_id\_run INTEGER, p\_nombre VARCHAR, p\_id\_modelo INTEGER,
+    p\_tipo VARCHAR, p\_opt VARCHAR, p\_prec VARCHAR,
+    p\_epocas INTEGER, p\_batch INTEGER, p\_lr NUMERIC
 )
 LANGUAGE plpgsql AS $$
 BEGIN
-    INSERT INTO experimento(id_run, nombre, id_modelo, tipo_entrenamiento, optimizador,
-        precision_calculo, num_epocas, tam_batch, tasa_aprendizaje, estado_ejecucion, fecha_inicio)
-    VALUES (p_id_run, p_nombre, p_id_modelo, p_tipo, p_opt, p_prec, p_epocas, p_batch, p_lr,
+    INSERT INTO experimento(id\_run, nombre, id\_modelo, tipo\_entrenamiento, optimizador,
+        precision\_calculo, num\_epocas, tam\_batch, tasa\_aprendizaje, estado\_ejecucion, fecha\_inicio)
+    VALUES (p\_id\_run, p\_nombre, p\_id\_modelo, p\_tipo, p\_opt, p\_prec, p\_epocas, p\_batch, p\_lr,
             'En ejecucion', NOW());
 END;
 $$;
 
-CREATE OR REPLACE PROCEDURE sp_finalizar_experimento(
-    p_id_run INTEGER, p_loss NUMERIC
+CREATE OR REPLACE PROCEDURE sp\_finalizar\_experimento(
+    p\_id\_run INTEGER, p\_loss NUMERIC
 )
 LANGUAGE plpgsql AS $$
 BEGIN
     UPDATE experimento
-    SET estado_ejecucion = 'Finalizado',
-        fecha_fin = NOW(),
-        loss_final = p_loss
-    WHERE id_run = p_id_run;
+    SET estado\_ejecucion = 'Finalizado',
+        fecha\_fin = NOW(),
+        loss\_final = p\_loss
+    WHERE id\_run = p\_id\_run;
 END;
 $$;
 \end{lstlisting}
 
-\textbf{Prueba realizada:} se registró un experimento (id\_run = 9999) con \texttt{sp\_registrar\_experimento}, se finalizó con \texttt{sp\_finalizar\_experimento(9999, 1.234)} (loss\_final = 1.234000, fecha\_fin asignada) y se eliminó el registro de prueba. Conteo final: 1500 experimentos (sin alteración).
+\textbf{Prueba realizada:} se registró un experimento (id\\_run = 9999) con \texttt{sp\\_registrar\\_experimento}, se finalizó con \texttt{sp\\_finalizar\\_experimento(9999, 1.234)} (loss\\_final = 1.234000, fecha\\_fin asignada) y se eliminó el registro de prueba. Conteo final: 1500 experimentos (sin alteración).
 
-\textbf{Integración con triggers:} \texttt{sp\_finalizar\_experimento} actualiza \texttt{fecha\_fin}, y el trigger \texttt{trg\_validar\_organizacion\_creadora} valida la organización creadora antes de insertar.
+\textbf{Integración con triggers:} \texttt{sp\\_finalizar\\_experimento} actualiza \texttt{fecha\\_fin}, y el trigger \texttt{trg\\_validar\\_organizacion\\_creadora} valida la organización creadora antes de insertar.
 
 \textbf{Reglas de negocio:} los triggers implementan validaciones que no se pueden expresar con CHECKs (roles de organizaciones, ciclos en modelos base, coherencia item-benchmark).
 
-\textbf{Por qué se desactiva trg_validar_respuesta en carga masiva:} hace 2 lecturas por fila, lo que ralentiza la carga de 1M registros. Se desactiva con DISABLE TRIGGER y se reactiva al final.
+\textbf{Por qué se desactiva trg\_validar\_respuesta en carga masiva:} hace 2 lecturas por fila, lo que ralentiza la carga de 1M registros. Se desactiva con DISABLE TRIGGER y se reactiva al final.
 
 \subsection{Triggers}
 
 \textbf{Reglas de negocio:} los triggers implementan validaciones que no se pueden expresar con CHECKs (roles de organizaciones, ciclos en modelos base, coherencia item-benchmark).
 
-\textbf{Por qué se desactiva trg_validar_respuesta en carga masiva:} hace 2 lecturas por fila, lo que ralentiza la carga. Se desactiva con DISABLE TRIGGER y se reactiva al final.
+\textbf{Por qué se desactiva trg\_validar\_respuesta en carga masiva:} hace 2 lecturas por fila, lo que ralentiza la carga. Se desactiva con DISABLE TRIGGER y se reactiva al final.
 
 Triggers implementados (según el esquema corregido):
 \begin{itemize}
-  \item \texttt{trg\_validar\_organizacion\_creadora}: una organización de tipo Evaluador no puede crear modelos.
-  \item \texttt{trg\_validar\_organizacion\_evaluadora}: una organización de tipo Creador no puede aplicar evaluaciones.
-  \item \texttt{trg\_validar\_ciclo\_modelo\_base}: la cadena de modelos base no puede contener ciclos.
+  \item \texttt{trg\\_validar\\_organizacion\\_creadora}: una organización de tipo Evaluador no puede crear modelos.
+  \item \texttt{trg\\_validar\\_organizacion\\_evaluadora}: una organización de tipo Creador no puede aplicar evaluaciones.
+  \item \texttt{trg\\_validar\\_ciclo\\_modelo\\_base}: la cadena de modelos base no puede contener ciclos.
 \end{itemize}
 
-Adicionalmente se incluye un trigger auxiliar \texttt{trg\_estado\_gpu} que valida que \texttt{consumo\_energetico >= 0}.
+Adicionalmente se incluye un trigger auxiliar \texttt{trg\\_estado\\_gpu} que valida que \texttt{consumo\\_energetico >= 0}.
 
-\textbf{Por qué se desactiva \texttt{trg\_validar\_respuesta} en carga masiva:} hace 2 lecturas por fila (item\_benchmark y evaluacion), lo que ralentiza la carga. Se desactiva con \texttt{DISABLE TRIGGER} y se reactiva al final. En el esquema corregido, este trigger no existe (se eliminó), pero la validación se mantiene en el generador.
+\textbf{Por qué se desactiva \texttt{trg\\_validar\\_respuesta} en carga masiva:} hace 2 lecturas por fila (item\\_benchmark y evaluacion), lo que ralentiza la carga. Se desactiva con \texttt{DISABLE TRIGGER} y se reactiva al final. En el esquema corregido, este trigger no existe (se eliminó), pero la validación se mantiene en el generador.
 
 \section{Optimización y Experimentación}
 
@@ -1781,9 +1781,9 @@ Adicionalmente se incluye un trigger auxiliar \texttt{trg\_estado\_gpu} que vali
 \hline
 Q1 & Modelo con mayor número de parámetros por arquitectura & RANK() OVER (PARTITION BY arquitectura) \\
 Q2 & Datasets más utilizados por dominio (top 5) & JOIN + GROUP BY + AVG + LIMIT \\
-Q3 & Experimentos con menor loss final por modelo (top 3) & ROW\_NUMBER() OVER (PARTITION BY id\_modelo) \\
+Q3 & Experimentos con menor loss final por modelo (top 3) & ROW\\_NUMBER() OVER (PARTITION BY id\\_modelo) \\
 Q4 & Consumo total de horas GPU y costo por experimento & JOIN múltiple + SUM + GROUP BY \\
-Q5 & Mejor resultado por benchmark y modelo (top 3) & RANK() OVER (PARTITION BY id\_benchmark) \\
+Q5 & Mejor resultado por benchmark y modelo (top 3) & RANK() OVER (PARTITION BY id\\_benchmark) \\
 \hline
 \end{tabular}
 \caption{Descripción de las 5 consultas intermedias}
@@ -1796,55 +1796,55 @@ Q5 & Mejor resultado por benchmark y modelo (top 3) & RANK() OVER (PARTITION BY 
 \begin{lstlisting}
 -- Q1: Modelo con mayor numero de parametros por arquitectura
 WITH ranked AS (
-  SELECT nombre, arquitectura, num_param,
-         RANK() OVER (PARTITION BY arquitectura ORDER BY num_param DESC) AS rnk
-  FROM modelo_llm
+  SELECT nombre, arquitectura, num\_param,
+         RANK() OVER (PARTITION BY arquitectura ORDER BY num\_param DESC) AS rnk
+  FROM modelo\_llm
 )
-SELECT arquitectura, nombre, num_param
+SELECT arquitectura, nombre, num\_param
 FROM ranked WHERE rnk = 1;
 
 -- Q2: Datasets mas utilizados por dominio (top 5)
-SELECT d.dominio, COUNT(ed.id_run) AS num_experimentos, AVG(d.num_registros) AS avg_registros
+SELECT d.dominio, COUNT(ed.id\_run) AS num\_experimentos, AVG(d.num\_registros) AS avg\_registros
 FROM dataset d
-JOIN experimento_dataset ed ON ed.id_dataset = d.id_dataset
+JOIN experimento\_dataset ed ON ed.id\_dataset = d.id\_dataset
 GROUP BY d.dominio
-ORDER BY num_experimentos DESC
+ORDER BY num\_experimentos DESC
 LIMIT 5;
 
 -- Q3: Experimentos con menor loss final por modelo (top 3)
 WITH ranked AS (
-  SELECT e.id_run, m.nombre AS modelo, e.loss_final, e.num_epocas, e.tasa_aprendizaje,
-         ROW_NUMBER() OVER (PARTITION BY e.id_modelo ORDER BY e.loss_final ASC NULLS LAST) AS rn
-  FROM experimento e JOIN modelo_llm m ON m.id_modelo=e.id_modelo
-  WHERE e.estado_ejecucion='Finalizado'
+  SELECT e.id\_run, m.nombre AS modelo, e.loss\_final, e.num\_epocas, e.tasa\_aprendizaje,
+         ROW\_NUMBER() OVER (PARTITION BY e.id\_modelo ORDER BY e.loss\_final ASC NULLS LAST) AS rn
+  FROM experimento e JOIN modelo\_llm m ON m.id\_modelo=e.id\_modelo
+  WHERE e.estado\_ejecucion='Finalizado'
 )
 SELECT * FROM ranked WHERE rn <= 3;
 
 -- Q4: Consumo total de horas GPU y costo por experimento
-SELECT e.id_run, m.nombre AS modelo, SUM(cg.horas_uso) AS horas_totales,
-       SUM(cg.horas_uso*g.costo_por_hora) AS costo_usd,
-       SUM(cg.consumo_energetico) AS kwh
+SELECT e.id\_run, m.nombre AS modelo, SUM(cg.horas\_uso) AS horas\_totales,
+       SUM(cg.horas\_uso*g.costo\_por\_hora) AS costo\_usd,
+       SUM(cg.consumo\_energetico) AS kwh
 FROM experimento e
-JOIN modelo_llm m ON m.id_modelo=e.id_modelo
-JOIN consumo_gpu cg ON cg.id_run=e.id_run
-JOIN gpu g ON g.id_gpu=cg.id_gpu
-GROUP BY e.id_run, m.nombre
-ORDER BY costo_usd DESC;
+JOIN modelo\_llm m ON m.id\_modelo=e.id\_modelo
+JOIN consumo\_gpu cg ON cg.id\_run=e.id\_run
+JOIN gpu g ON g.id\_gpu=cg.id\_gpu
+GROUP BY e.id\_run, m.nombre
+ORDER BY costo\_usd DESC;
 
 -- Q5: Mejor resultado por benchmark y modelo (top 3)
 WITH ranked AS (
-  SELECT b.nombre AS benchmark, m.nombre AS modelo, e.resultado_metrica AS valor,
-         e.fecha_evaluacion AS fecha,
-         RANK() OVER (PARTITION BY b.id_benchmark ORDER BY e.resultado_metrica DESC) AS rnk
+  SELECT b.nombre AS benchmark, m.nombre AS modelo, e.resultado\_metrica AS valor,
+         e.fecha\_evaluacion AS fecha,
+         RANK() OVER (PARTITION BY b.id\_benchmark ORDER BY e.resultado\_metrica DESC) AS rnk
   FROM evaluacion e
-  JOIN benchmark b ON b.id_benchmark=e.id_benchmark
-  JOIN modelo_llm m ON m.id_modelo=e.id_modelo
+  JOIN benchmark b ON b.id\_benchmark=e.id\_benchmark
+  JOIN modelo\_llm m ON m.id\_modelo=e.id\_modelo
 )
 SELECT benchmark, modelo, valor, fecha, rnk
 FROM ranked WHERE rnk <= 3;
 \end{lstlisting}
 
-\textbf{Evidencia de prueba:} las 5 consultas se probaron en los 4 volúmenes (1k/10k/100k/1M) sin errores (salidas guardadas en \texttt{1k\_output.txt}, \texttt{100k\_output.txt}, \texttt{1M\_output.txt}).
+\textbf{Evidencia de prueba:} las 5 consultas se probaron en los 4 volúmenes (1k/10k/100k/1M) sin errores (salidas guardadas en \texttt{1k\\_output.txt}, \texttt{100k\\_output.txt}, \texttt{1M\\_output.txt}).
 
 \subsection{Metodología del experimento}
 
@@ -1857,7 +1857,7 @@ FROM ranked WHERE rnk <= 3;
   \item \textbf{Métrica:} tiempo de ejecución (ms) reportado por \texttt{EXPLAIN (ANALYZE, TIMING)}.
   \item \textbf{Limpieza de caché:} \texttt{DISCARD ALL;} entre ejecuciones.
   \item \textbf{Orden:} aleatorio para evitar sesgo por caché.
-  \item \textbf{Escenarios:} sin índices (solo PKs) y con índices (script \texttt{5\_3\_0 indices.sql}).
+  \item \textbf{Escenarios:} sin índices (solo PKs) y con índices (script \texttt{5\\_3\\_0 indices.sql}).
 \end{enumerate}
 
 \textbf{Volúmenes probados:} 1.000, 10.000, 100.000 y 1.000.000 de registros.
@@ -1866,22 +1866,22 @@ FROM ranked WHERE rnk <= 3;
 
 \subsection{Optimización de consultas}
 
-\textbf{Í\textbf{Justificación de los índices:} se eligieron columnas que aparecen en WHERE, JOIN, ORDER BY y PARTITION BY. El índice parcial de Q3 (WHERE estado_ejecucion = 'Finalizado') reduce el tamaño del índice al excluir experimentos no finalizados.
+\textbf{Í\textbf{Justificación de los índices:} se eligieron columnas que aparecen en WHERE, JOIN, ORDER BY y PARTITION BY. El índice parcial de Q3 (WHERE estado\_ejecucion = 'Finalizado') reduce el tamaño del índice al excluir experimentos no finalizados.
 
 ndices creados:}
 \begin{lstlisting}
-CREATE INDEX idx_modelo_llm_arq_numparam ON modelo_llm (arquitectura, num_param DESC);
-CREATE INDEX idx_dataset_dominio ON dataset (dominio);
-CREATE INDEX idx_exp_dataset_dataset ON experimento_dataset (id_dataset);
-CREATE INDEX idx_experimento_modelo_loss ON experimento (id_modelo, loss_final) WHERE estado_ejecucion = 'Finalizado';
-CREATE INDEX idx_consumo_gpu_run ON consumo_gpu (id_run);
-CREATE INDEX idx_consumo_gpu_gpu ON consumo_gpu (id_gpu);
-CREATE INDEX idx_experimento_modelo ON experimento (id_modelo);
-CREATE INDEX idx_evaluacion_benchmark_score ON evaluacion (id_benchmark, resultado_metrica DESC);
-CREATE INDEX idx_evaluacion_modelo ON evaluacion (id_modelo);
+CREATE INDEX idx\_modelo\_llm\_arq\_numparam ON modelo\_llm (arquitectura, num\_param DESC);
+CREATE INDEX idx\_dataset\_dominio ON dataset (dominio);
+CREATE INDEX idx\_exp\_dataset\_dataset ON experimento\_dataset (id\_dataset);
+CREATE INDEX idx\_experimento\_modelo\_loss ON experimento (id\_modelo, loss\_final) WHERE estado\_ejecucion = 'Finalizado';
+CREATE INDEX idx\_consumo\_gpu\_run ON consumo\_gpu (id\_run);
+CREATE INDEX idx\_consumo\_gpu\_gpu ON consumo\_gpu (id\_gpu);
+CREATE INDEX idx\_experimento\_modelo ON experimento (id\_modelo);
+CREATE INDEX idx\_evaluacion\_benchmark\_score ON evaluacion (id\_benchmark, resultado\_metrica DESC);
+CREATE INDEX idx\_evaluacion\_modelo ON evaluacion (id\_modelo);
 \end{lstlisting}
 
-\textbf{Justificación de los índices:} se eligieron columnas que aparecen en \texttt{WHERE}, \texttt{JOIN}, \texttt{ORDER BY} y \texttt{PARTITION BY}. El índice parcial de Q3 (\texttt{WHERE estado\_ejecucion = 'Finalizado'}) reduce el tamaño del índice al excluir experimentos no finalizados.
+\textbf{Justificación de los índices:} se eligieron columnas que aparecen en \texttt{WHERE}, \texttt{JOIN}, \texttt{ORDER BY} y \texttt{PARTITION BY}. El índice parcial de Q3 (\texttt{WHERE estado\\_ejecucion = 'Finalizado'}) reduce el tamaño del índice al excluir experimentos no finalizados.
 
 \textbf{Planes observados:} En volúmenes pequeños (1k/10k) el planner usa Seq Scan. En volúmenes grandes (100k/1M), Q1 usa Index Scan (mejora ~2-3x). Q2–Q5 siguen usando Seq Scan porque son agregaciones sobre toda la tabla.
 
@@ -1893,9 +1893,9 @@ CREATE INDEX idx_evaluacion_modelo ON evaluacion (id_modelo);
   \item \textbf{CPU:} Intel Core i5-10400F @ 2.90GHz
   \item \textbf{RAM:} 16 GB
   \item \textbf{Disco:} SSD (D: 647 GB, 27 GB libres)
-  \item \textbf{PostgreSQL:} 18.6 (x86\_64-windows, msvc-19.44.35229, 64-bit)
+  \item \textbf{PostgreSQL:} 18.6 (x86\\_64-windows, msvc-19.44.35229, 64-bit)
   \item \textbf{OS:} Windows
-  \item \textbf{Configuración:} default (shared\_buffers, work\_mem, max\_connections)
+  \item \textbf{Configuración:} default (shared\\_buffers, work\\_mem, max\\_connections)
 \end{itemize}
 
 \textbf{Justificación:} se usó la configuración por defecto de PostgreSQL para que los resultados sean reproducibles en cualquier máquina con la misma versión.
@@ -1942,7 +1942,7 @@ CREATE INDEX idx_evaluacion_modelo ON evaluacion (id_modelo);
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{2 hito2/5 Optimización y Experimentación/5_6 Resultados/chart_tiempos.png}
+\includegraphics[width=0.9\textwidth]{2 hito2/5 Optimización y Experimentación/5\_6 Resultados/chart\_tiempos.png}
 \caption{Tiempos de ejecución de las 5 consultas vs. volumen de datos (sin/con índices)}
 \label{fig:tiempos}
 \end{figure}
@@ -1984,7 +1984,7 @@ CREATE INDEX idx_evaluacion_modelo ON evaluacion (id_modelo);
 \textbf{Bottlenecks identificados:}
 \begin{itemize}
   \item \textbf{Agregaciones (GROUP BY):} Q2, Q4 agregan toda la tabla $\rightarrow$ Seq Scan inevitable.
-  \item \textbf{Window functions (RANK/ROW\_NUMBER):} Q1, Q3, Q5 requieren ordenar/particionar $\rightarrow$ Sort costoso.
+  \item \textbf{Window functions (RANK/ROW\\_NUMBER):} Q1, Q3, Q5 requieren ordenar/particionar $\rightarrow$ Sort costoso.
   \item \textbf{Joins M:N:} Q4 une 4 tablas $\rightarrow$ Hash Join + Seq Scan.
 \end{itemize}
 
@@ -2009,6 +2009,6 @@ Los tiempos de ejecución crecen linealmente con el volumen de datos, lo que ind
 
 \section{Anexos}
 
-Se anexa la guía de grabación para la experimentación con 1.000.000 de registros con y sin índices (archivo \texttt{7\_1 Guia de grabacion del video.md}). El video se grabará siguiendo dicha guía, mostrando los comandos, planes y tiempos de las 5 consultas.
+Se anexa la guía de grabación para la experimentación con 1.000.000 de registros con y sin índices (archivo \texttt{7\\_1 Guia de grabacion del video.md}). El video se grabará siguiendo dicha guía, mostrando los comandos, planes y tiempos de las 5 consultas.
 
 \end{document}
