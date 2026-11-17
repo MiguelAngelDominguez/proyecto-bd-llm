@@ -428,7 +428,6 @@ El proyecto se enfocará en registrar y analizar información sobre modelos LLM,
 \subsection{Modelo Entidad-Relación}
 
 %% --- diagrama Entidad-Relacion en pagina horizontal ---
-\**Analisis de resultados:** solo Q1 se beneficia claramente de los indices (~2-3x en 100k/1M). Q2-Q5 no mejoran porque son agregaciones sobre toda la tabla (Seq Scan mas eficiente). El grafico muestra la tendencia lineal del tiempo vs. volumen.
 
 begin{figure}[H]
     \centering
@@ -1939,6 +1938,10 @@ CREATE INDEX idx\_evaluacion\_modelo ON evaluacion (id\_modelo);
 \end{table}
 
 \subsection{Resultados}
+
+\textbf{Análisis de resultados:} solo Q1 se beneficia claramente de los índices (~2-3x en 100k/1M). Q2–Q5 no mejoran porque son agregaciones sobre toda la tabla (Seq Scan más eficiente). El gráfico muestra la tendencia lineal del tiempo vs. volumen.
+
+\textbf{Análisis de resultados:} solo Q1 se beneficia claramente de los índices (~2-3x en 100k/1M). Q2–Q5 no mejoran porque son agregaciones sobre toda la tabla (Seq Scan más eficiente). El gráfico muestra la tendencia lineal del tiempo vs. volumen.
 
 \begin{figure}[H]
 \centering
